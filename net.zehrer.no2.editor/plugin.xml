@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="net.zehrer.no2.category"
+            name="NO2"/>
+      <wizard
+            category="net.zehrer.no2.category"
+            class="net.zehrer.no2.common.DataModelWizard"
+            icon="icons/full/obj16/ModelModelFile.gif"
+            id="net.zehrer.no2.model.editor.wizard"
+            name="New Data Model">
+         <description>
+            Create a new Data Model
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="net.zehrer.no2.DataEditorID"
+            name="%_UI_ModelEditor_label"
+            icon="icons/full/obj16/ModelModelFile.gif"
+            extensions="no2"
+            class="net.zehrer.no2.editor.ModelEditor"
+            contributorClass="net.zehrer.no2.editor.ModelActionBarContributor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="net.zehrer.no2.handler.OpenModelEditorHandler"
+            name="Open ECore Editor">
+      </command>
+      <category
+            id="net.zehrer.no2.category.main"
+            name="XData">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar
+               id="net.zehrer.no2.toolbar.main">
+            <command
+                  commandId="net.zehrer.no2.handler.OpenModelEditorHandler"
+                  icon="icons/full/obj16/EcoreModelFile.gif"
+                  style="push">
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:net.zehrer.no2.DataEditorID">
+         <command
+               commandId="net.zehrer.no2.handler.OpenModelEditorHandler"
+               icon="icons/full/obj16/EcoreModelFile.gif"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="popup:net.zehrer.no2.DataEditorID?after=additions">
+         <command
+               commandId="net.zehrer.no2.handler.OpenModelEditorHandler"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+
+</plugin>
