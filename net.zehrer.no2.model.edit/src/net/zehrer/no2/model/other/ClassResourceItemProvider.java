@@ -7,13 +7,14 @@
  * 
  * 
  */
-package net.zehrer.no2.model.provider;
+package net.zehrer.no2.model.other;
 
 
 import java.util.Collection;
 import java.util.List;
 
 import net.zehrer.no2.model.ClassResource;
+import net.zehrer.no2.model.ModelEditPlugin;
 import net.zehrer.no2.model.ModelPackage;
 
 import org.eclipse.emf.common.notify.AdapterFactory;

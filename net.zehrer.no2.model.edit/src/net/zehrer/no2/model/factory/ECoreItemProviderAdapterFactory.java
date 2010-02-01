@@ -11,11 +11,14 @@
 
 package net.zehrer.no2.model.factory;
 
-import net.zehrer.no2.model.provider.ECoreItemProvider;
+import net.zehrer.no2.model.provider.ENamedItemProvider;
+import net.zehrer.no2.model.provider.EPackageItemProvider;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IChangeNotifier;
@@ -37,15 +40,16 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=299887
 		supportedTypes.add(EcorePackage.eINSTANCE);
 	}
-	
+
 	// ---- AdapterFactory ----
 
 	/**
 	 * @see AdapterFactory#isFactoryForType
 	 */
 	@Override
-	public boolean isFactoryForType(Object type) {
-		return supportedTypes.contains(type);
+	public boolean isFactoryForType(Object object) {
+		// similar to the implementation of EcoreItemProviderAdapter
+		return supportedTypes.contains(object);
 	}
 
 	/**
@@ -62,25 +66,47 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 
 		return null;
 	}
-	
+
 	/**
-	 * TODO !!!
 	 * @see AdapterFactory#adapt(Notifier target, Object type);
 	 */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
-		if (isFactoryForType(notifier)) {
-		  return createECoreAdapter();
+		
+		if (notifier instanceof EPackage)
+			return createPackageAdapter();
+		
+		if (((EObject)notifier).eClass().getEPackage() == EcorePackage.eINSTANCE) {
+			return createECoreAdapter();
 		}
 		return null;
 	}
-	
-	// ---- ECoreItemProvider
+
+	// ---- EPackageItemProvider
 	
 	/**
 	 * This keeps track of the one adapter used for all instances.
 	 */
-	protected ECoreItemProvider eCoreItemProvider;
+	protected EPackageItemProvider ePackageItemProvider;
+	
+	/**
+	 * This creates an adapter for a EPackage instance
+	 */
+	public Adapter createPackageAdapter() {
+
+		if (ePackageItemProvider == null) {
+			ePackageItemProvider = new EPackageItemProvider(this);
+		}
+
+		return ePackageItemProvider;
+	}
+	
+	// ---- ECoreItemProvider
+
+	/**
+	 * This keeps track of the one adapter used for all instances.
+	 */
+	protected ENamedItemProvider eCoreItemProvider;
 	
 	/**
 	 * This creates an adapter for a meta model (Ecore??)
@@ -88,7 +114,7 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 	public Adapter createECoreAdapter() {
 
 		if (eCoreItemProvider == null) {
-			eCoreItemProvider = new ECoreItemProvider(this);
+			eCoreItemProvider = new ENamedItemProvider(this);
 		}
 
 		return eCoreItemProvider;
@@ -99,6 +125,7 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 	@Override
 	public void dispose() {
 		eCoreItemProvider = null;
+		ePackageItemProvider = null;
 	}
 
 }

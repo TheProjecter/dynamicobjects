@@ -7,7 +7,7 @@
  * 
  * 
  */
-package net.zehrer.no2.model.provider;
+package net.zehrer.no2.model;
 
 import org.eclipse.emf.common.EMFPlugin;
 

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package net.zehrer.no2.model.provider;
+package net.zehrer.no2.model.other;
 
 import java.util.Collection;
 import java.util.List;

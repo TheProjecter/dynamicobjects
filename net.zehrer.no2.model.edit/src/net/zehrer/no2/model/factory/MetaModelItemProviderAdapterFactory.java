@@ -11,7 +11,7 @@
 
 package net.zehrer.no2.model.factory;
 
-import net.zehrer.no2.model.provider.MetaModelItemProvider;
+import net.zehrer.no2.model.other.MetaModelItemProvider;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;

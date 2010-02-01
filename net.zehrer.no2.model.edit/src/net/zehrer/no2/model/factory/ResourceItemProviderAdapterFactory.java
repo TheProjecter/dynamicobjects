@@ -11,7 +11,7 @@
 
 package net.zehrer.no2.model.factory;
 
-import net.zehrer.no2.model.provider.ResourceItemProvider;
+import net.zehrer.no2.model.other.ResourceItemProvider;
 
 import org.eclipse.emf.common.notify.Adapter;
 

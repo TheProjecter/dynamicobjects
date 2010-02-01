@@ -12,7 +12,6 @@
 package net.zehrer.no2.model.provider;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 import net.zehrer.no2.model.DataModelEditPlugin;
 import net.zehrer.no2.model.ModelPackage;
@@ -20,12 +19,11 @@ import net.zehrer.no2.model.ModelPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 import org.eclipse.emf.edit.EMFEditPlugin;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -33,14 +31,14 @@ import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
-public class ECoreItemProvider extends ItemProviderAdapter implements ITreeItemContentProvider, IItemLabelProvider, IEditingDomainItemProvider {
+public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItemContentProvider, IItemLabelProvider, IEditingDomainItemProvider {
 
 	// implements 
 	// IStructuredItemContentProvider,
 	// IItemLabelProvider,IItemPropertySource
 	// extends ReflectiveItemProvider
 
-	public ECoreItemProvider(AdapterFactory adapterFactory) {
+	public ENamedItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 
 	}
@@ -104,40 +102,53 @@ public class ECoreItemProvider extends ItemProviderAdapter implements ITreeItemC
 	 */
 	@Override
 	public String getText(Object object) {
-
-		EClass eClass = (EClass) object;
+		
 		StringBuffer result = new StringBuffer();
-		if (eClass.getName() != null) {
-			result.append(eClass.getName());
+
+		if (object instanceof ENamedElement) {
+			ENamedElement eNamedObj = (ENamedElement) object;
+			
+			if (eNamedObj.getName() != null) {
+				result.append(eNamedObj.getName());
+			}
+			
+		}
+		
+		if (object instanceof EClassifier) {
+			EClassifier eClassifier = (EClassifier) object;
+		
+//			if (! eClassifier.getETypeParameters().isEmpty()) {
+//				result.append("<");
+//				for (Iterator<ETypeParameter> i = eClassifier.getETypeParameters().iterator(); i.hasNext();) {
+//					ETypeParameter eTypeParameter = i.next();
+//					result.append(ETypeParameterItemProvider.getText(eTypeParameter)); // BUG??
+//					if (i.hasNext()) {
+//						result.append(", ");
+//					}
+//				}
+//				result.append(">");
+//			}
+			
+			if (eClassifier.getInstanceTypeName() != null) {
+				result.append(" [");
+				result.append(eClassifier.getInstanceTypeName());
+				result.append("]");
+			}
 		}
 
-		if (!eClass.getETypeParameters().isEmpty()) {
-			result.append("<");
-			for (Iterator<ETypeParameter> i = eClass.getETypeParameters().iterator(); i.hasNext();) {
-				ETypeParameter eTypeParameter = i.next();
-				// result.append(ETypeParameterItemProvider.getText(eTypeParameter));
-				if (i.hasNext()) {
-					result.append(", ");
-				}
-			}
-			result.append(">");
-		}
 
-		if (!eClass.getEGenericSuperTypes().isEmpty()) {
-			result.append(" -> ");
-			for (Iterator<EGenericType> i = eClass.getEGenericSuperTypes().iterator(); i.hasNext();) {
-				EGenericType eGenericSuperType = i.next();
-				// result.append(EGenericTypeItemProvider.getText(eGenericSuperType));
-				if (i.hasNext()) {
-					result.append(", ");
-				}
-			}
-		}
-		if (eClass.getInstanceTypeName() != null) {
-			result.append(" [");
-			result.append(eClass.getInstanceTypeName());
-			result.append("]");
-		}
+
+//		if (!eClass.getEGenericSuperTypes().isEmpty()) {
+//			result.append(" -> ");
+//			for (Iterator<EGenericType> i = eClass.getEGenericSuperTypes().iterator(); i.hasNext();) {
+//				EGenericType eGenericSuperType = i.next();
+//				// result.append(EGenericTypeItemProvider.getText(eGenericSuperType));
+//				if (i.hasNext()) {
+//					result.append(", ");
+//				}
+//			}
+//		}
+
 
 		return result.toString();
 	}
@@ -147,11 +158,17 @@ public class ECoreItemProvider extends ItemProviderAdapter implements ITreeItemC
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, EcoreEditPlugin.INSTANCE.getImage("full/obj16/EClass"));
+		
+		if (object instanceof EClass) {
+			return overlayImage(object, EcoreEditPlugin.INSTANCE.getImage("full/obj16/EClass"));
+		}		
+		
+		return overlayImage(object, EcoreEditPlugin.INSTANCE.getImage("full/obj16/EObject"));
 	}
 
 	// ----- CreateChildCommand.Helper ----
 
+	
 	@Override
 	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
 

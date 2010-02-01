@@ -7,11 +7,13 @@
  * 
  * 
  */
-package net.zehrer.no2.model.provider;
+package net.zehrer.no2.model.factory;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import net.zehrer.no2.model.other.ClassResourceItemProvider;
+import net.zehrer.no2.model.other.NO2ModelItemProvider;
 import net.zehrer.no2.model.util.ModelAdapterFactory;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -39,7 +41,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ModelItemProviderAdapterFactory extends ModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class ModelItemProviderAdapterFactory2 extends ModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,7 +79,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelItemProviderAdapterFactory() {
+	public ModelItemProviderAdapterFactory2() {
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
