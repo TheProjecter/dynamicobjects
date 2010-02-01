@@ -24,8 +24,7 @@ import java.util.Map;
 import net.zehrer.no2.NO2EditorPlugin;
 import net.zehrer.no2.handler.OpenModelEditorHandler;
 import net.zehrer.no2.model.NO2Model;
-import net.zehrer.no2.model.factory.EClassItemProviderAdapterFactory;
-import net.zehrer.no2.model.factory.EClassItemProviderAdapterFactory2;
+import net.zehrer.no2.model.factory.ECoreItemProviderAdapterFactory;
 import net.zehrer.no2.model.factory.ModelItemProviderAdapterFactory;
 import net.zehrer.no2.model.impl.NO2ModelImpl;
 
@@ -573,9 +572,9 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 		// Create an adapter factory that yields item providers.
 		modelAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
-		modelAdapterFactory.addAdapterFactory(new EClassItemProviderAdapterFactory());
+		modelAdapterFactory.addAdapterFactory(new ECoreItemProviderAdapterFactory());
 
-		modelAdapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
+//		modelAdapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
 
 		
 //		modelAdapterFactory.addAdapterFactory(new ModelItemProviderAdapterFactory());
