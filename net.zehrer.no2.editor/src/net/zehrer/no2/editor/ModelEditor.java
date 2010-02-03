@@ -25,7 +25,6 @@ import net.zehrer.no2.NO2EditorPlugin;
 import net.zehrer.no2.handler.OpenModelEditorHandler;
 import net.zehrer.no2.model.NO2Model;
 import net.zehrer.no2.model.factory.ECoreItemProviderAdapterFactory;
-import net.zehrer.no2.model.factory.ModelItemProviderAdapterFactory;
 import net.zehrer.no2.model.impl.NO2ModelImpl;
 
 import org.eclipse.core.resources.IFile;
@@ -52,7 +51,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
