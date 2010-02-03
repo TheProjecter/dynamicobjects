@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
  * @generated
  */
 public final class NO2EditorPlugin extends EMFPlugin {
+	
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->

@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import net.zehrer.no2.NO2EditorPlugin;
+import net.zehrer.no2.edit.ui.action.CreateObjectAction;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.action.ControlAction;
-import org.eclipse.emf.edit.ui.action.CreateChildAction;
 import org.eclipse.emf.edit.ui.action.CreateSiblingAction;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
@@ -39,6 +39,7 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
+
 
 /**
  * This is the action bar contributor for the Model model editor.
@@ -297,9 +298,19 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	 */
 	protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
 		Collection<IAction> actions = new ArrayList<IAction>();
+		
+		IWorkbenchPart workbenchPart = (IWorkbenchPart)activeEditorPart;
+		EditingDomain editingDomain = null;
+		if (workbenchPart instanceof IEditingDomainProvider)
+			editingDomain = ((IEditingDomainProvider)workbenchPart).getEditingDomain();
+			
+		
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
-				actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
+				//actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
+				
+				if (editingDomain != null)
+				actions.add(new CreateObjectAction(editingDomain, selection, descriptor));
 			}
 		}
 		return actions;
@@ -378,7 +389,7 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	 * This populates the pop-up menu before it appears.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public void menuAboutToShow(IMenuManager menuManager) {
