@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: NO2 Edit UI
+Bundle-SymbolicName: net.zehrer.no2.edit.ui
+Bundle-Version: 1.0.0
+Bundle-Activator: net.zehrer.no2.edit.ui.NO2EditUIPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
