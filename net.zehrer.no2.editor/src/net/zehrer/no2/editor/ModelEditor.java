@@ -889,8 +889,9 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 
 	/**
 	 * This is the method called to load a resource into the editing domain's
-	 * resource set based on the editor's input. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * resource set based on the editor's input. 
+	 * <!-- begin-user-doc --> 
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
@@ -964,6 +965,13 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 		modelEditingDomain.getResourceSet().eAdapters().add(problemIndicationAdapter);
 	}
 
+	/**
+	 * Get current model instance
+	 */
+	public NO2Model getModel() {
+		return this.no2Model;
+	}
+	
 	/**
 	 * Instantiate any handlers specific to this view and activate them.
 	 */
