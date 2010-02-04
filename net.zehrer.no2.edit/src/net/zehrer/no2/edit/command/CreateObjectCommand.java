@@ -14,18 +14,19 @@ package net.zehrer.no2.edit.command;
 import java.util.Collection;
 import java.util.Collections;
 
-import net.zehrer.no2.edit.NO2EditPlugin;
+import net.zehrer.no2.model.ModelPackage;
+import net.zehrer.no2.model.NO2Model;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandWrapper;
 import org.eclipse.emf.common.command.UnexecutableCommand;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.CommandActionDelegate;
-import org.eclipse.emf.edit.command.CommandParameter;
 import org.eclipse.emf.edit.command.SetCommand;
-import org.eclipse.emf.edit.command.CreateChildCommand.Helper;
 import org.eclipse.emf.edit.domain.EditingDomain;
 
 /**
@@ -53,9 +54,9 @@ public class CreateObjectCommand extends CommandWrapper implements CommandAction
 	protected EditingDomain domain;
 
 	/**
-	 * This is the feature of the owner to which the child will be added.
+	 * This is the model which is managing the new object
 	 */
-	protected EStructuralFeature feature;
+	protected NO2Model model;
 
 	/**
 	 * This is the new object to be added.
@@ -74,27 +75,29 @@ public class CreateObjectCommand extends CommandWrapper implements CommandAction
 	 * was created. After an undo, these are considered the affected objects.
 	 */
 	protected Collection<?> selection;
-
-
+	
 	
 	/**
-	 * This constructor initializes an instance, as above, but the command
-	 * delegates functionality to the specified {@link Helper Helper}. If
-	 * <code>helper</code> is <code>null</code>, the internal default helper is
-	 * used.
+	 * This constructor initializes an instance
 	 */
-	public CreateObjectCommand(EditingDomain domain, EStructuralFeature feature, Object newObject, Collection<?> selection) {
+	public CreateObjectCommand(EditingDomain domain, NO2Model model,Collection<?> selection) {
 		super();
 		this.domain = domain;
-		this.feature = feature;
-		this.newObject = newObject;
+		this.model = model;
 		this.selection = selection == null ? Collections.EMPTY_LIST : selection;
 
-		setLabel(NO2EditPlugin.INSTANCE.getString("_UI_CreateObjectCommand_label"));
-		setDescription(NO2EditPlugin.INSTANCE.getString("_UI_CreateObjectCommand_description"));
-
+		// dynamic Object creation
+		if (selection.size() == 1) {	
+			EClass eClass = (EClass) selection.iterator().next();
+			EFactory eFactory = eClass.getEPackage().getEFactoryInstance();
+			this.newObject = eFactory.create(eClass);
+		}
+		
+		setLabel(Messages._UI_CreateObjectCommand_Label);
+		setDescription(Messages._UI_CreateObjectCommand_Description);
+		
 	}
-
+	
 	// ----- CommandWrapper ----
 	/**
 	 * This creates the wrapped {@link AddCommand} or {@link SetCommand} that
@@ -110,9 +113,7 @@ public class CreateObjectCommand extends CommandWrapper implements CommandAction
 			return UnexecutableCommand.INSTANCE;
 		}
 		
-		EClass owner = feature.getEContainingClass(); 
-
-		return AddCommand.create(domain, owner, feature, newObject);
+		return AddCommand.create(domain, model, ModelPackage.Literals.NO2_MODEL__CONTENTS, newObject);
 
 	}
 
@@ -166,18 +167,17 @@ public class CreateObjectCommand extends CommandWrapper implements CommandAction
 
 	// ---- CommandActionDelegate ---
 
-	@Override
+	//@Override  TODO: enable in Java SE6
 	public String getText() {
-		 return NO2EditPlugin.INSTANCE.getString("_UI_CreateObject_text");
+		 return Messages._UI_CreateObjectCommand_Text; 
 	}
-	
 
-	@Override
+	//@Override  TODO: enable in Java SE6
 	public String getToolTipText() {
-	      return NO2EditPlugin.INSTANCE.getString("_UI_CreateObject_tooltip");
+		return Messages._UI_CreateObjectCommand_ToolTip; 
 	}
 	
-	@Override
+	//@Override  TODO: enable in Java SE6
 	public Object getImage() {
 		return null;  // no image
 	}
