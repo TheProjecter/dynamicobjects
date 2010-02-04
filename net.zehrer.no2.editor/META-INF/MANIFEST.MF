@@ -17,4 +17,4 @@ Require-Bundle: net.zehrer.no2.model.edit;bundle-version="1.0.0";visibility:=ree
  org.eclipse.ui.ide;visibility:=reexport,
  org.eclipse.core.expressions;bundle-version="3.4.100"
 Bundle-ActivationPolicy: lazy
-Import-Package: net.zehrer.no2.edit.ui.action
+Import-Package: net.zehrer.no2.edit.command

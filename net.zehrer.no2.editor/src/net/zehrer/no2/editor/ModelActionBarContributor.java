@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import net.zehrer.no2.NO2EditorPlugin;
-import net.zehrer.no2.edit.ui.action.CreateObjectAction;
+import net.zehrer.no2.action.CreateObjectAction;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -299,18 +299,11 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	protected Collection<IAction> generateCreateChildActions(Collection<?> descriptors, ISelection selection) {
 		Collection<IAction> actions = new ArrayList<IAction>();
 		
-		IWorkbenchPart workbenchPart = (IWorkbenchPart)activeEditorPart;
-		EditingDomain editingDomain = null;
-		if (workbenchPart instanceof IEditingDomainProvider)
-			editingDomain = ((IEditingDomainProvider)workbenchPart).getEditingDomain();
-			
-		
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
 				//actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
-				
-				if (editingDomain != null)
-				actions.add(new CreateObjectAction(editingDomain, selection, descriptor));
+
+				actions.add(new CreateObjectAction(activeEditorPart, selection));
 			}
 		}
 		return actions;
