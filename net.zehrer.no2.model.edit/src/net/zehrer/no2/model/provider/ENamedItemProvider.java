@@ -42,16 +42,6 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 
 	// / ----- ItemProviderAdapter -----
 
-//	@Override
-//	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-//
-//		if (childrenFeatures == null) {
-//			super.getChildrenFeatures(object);
-//			childrenFeatures.add(ModelPackage.Literals.NO2_MODEL__CONTENTS);
-//		}
-//		return childrenFeatures;
-//	}
-
 	/**
 	 * Return the resource locator for the NEW item provider's resources in this
 	 * subclass
@@ -74,24 +64,11 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 		
 		if (object instanceof EClass) {
 
-//			// dynamic Object creation
-//			EClass eClass = (EClass) object;
-//			EFactory eFactory = eClass.getEPackage().getEFactoryInstance();
-//			EObject eObject = eFactory.create(eClass);
-
 			// add command
 			newChildDescriptors.add(createChildParameter(ModelPackage.Literals.NO2_MODEL__CONTENTS, null));
 		}
 	}
 	
-//	
-//	 @Override
-//	 protected EReference getChildFeature (Object object, Object child) {
-//		
-//	 return ModelPackage.Literals.NO2_MODEL__CONTENTS;
-//		
-//	 }
-//	
 
 	// ----- IItemLabelProvider ----
 
@@ -196,23 +173,3 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 	}
 
 }
-
-
-
-// /**
-// * Get a translated string from the resource locator, with substitutions.
-// */
-// public String getUntranslatedString(String key)
-// {
-// String result;
-// try {
-// result = getNewResourceLocator().getString(key);
-// } catch (MissingResourceException e1) {
-// try {
-// result = getResourceLocator().getString(key);
-// } catch (MissingResourceException e2) {
-// result = key + " (text not found)";
-// }
-// }
-// return result;
-// }

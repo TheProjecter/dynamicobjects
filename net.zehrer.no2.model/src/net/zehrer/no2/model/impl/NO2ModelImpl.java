@@ -314,7 +314,7 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 		
 		URI modelURI = URI.createURI("/" +formater.format(getClassResources().size()) + ".xmi");
 
-		// create and add ClassResouce
+		// create and add ClassResource
 		ClassResource classResource = createClassResouce(type, modelURI);
 		getClassResources().add(classResource);
 		

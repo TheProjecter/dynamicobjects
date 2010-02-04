@@ -65,9 +65,6 @@ public class CreateObjectAction extends StaticSelectionCommandAction {
 		if (collection.size() == 1 && model != null) {
 
 			return new CreateObjectCommand(editingDomain, model, collection);
-
-			// return CreateObjectCommand.create(editingDomain, descriptor,
-			// collection);
 		}
 
 		return UnexecutableCommand.INSTANCE;
