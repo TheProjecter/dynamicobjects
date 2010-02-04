@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_iUgBIdEGEd6R0oM3QCE-xA" name="ItemProvider">
+  <elementImport xmi:id="_iY3jwNEGEd6R0oM3QCE-xA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_iY_fkNEGEd6R0oM3QCE-xA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_iZAGoNEGEd6R0oM3QCE-xA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_iZAGodEGEd6R0oM3QCE-xA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_9WEUkNEHEd6R0oM3QCE-xA"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_70NxYNE1Ed6R0oM3QCE-xA" name="net.zehrer.no2.model.edit.provider"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_FKBDINE2Ed6R0oM3QCE-xA" name="Class"/>
+  <profileApplication xmi:id="_s8NxQNEHEd6R0oM3QCE-xA">
+    <eAnnotations xmi:id="_s8bMoNEHEd6R0oM3QCE-xA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
+    </eAnnotations>
+    <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+  </profileApplication>
+</uml:Model>

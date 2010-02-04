@@ -1,0 +1,38 @@
+
+
+		IDE.openEditor(page, new java.net.URI(editor.getMetaModelURI().toString()), true);
+
+
+		IWorkbench workbench = PlatformUI.getWorkbench();
+		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
+		IWorkbenchPage page = workbenchWindow.getActivePage();
+
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceRoot workspaceRoot = workspace.getRoot();
+		Shell shell = workbenchWindow.getShell();
+
+
+			// IFile file = workspaceRoot.getFile(new Path(modelPath));
+			// IFileStore fileStore = EFS.getStore(new java.net.URI(modelPath));
+
+			// MessageDialog.openInformation(shell, "Mode Name", "Name: " + );
+			
+			
+			
+					} catch (IOException e) {
+			exception = e;
+			//TODO: how to handle?
+			
+			
+			
+						// ---------- General Model ---------------------
+			
+			// create "NewClass" on file open when no inital class is found
+			
+			
+			// Create a resource of the model in the archive.
+			// create inital class and add to package
+//			EClass eClass = ecoreFactory.createEClass();
+//			eClass.setName("NewType");
+//			rootPackge.getEClassifiers().add(eClass);			
+			//Resource model = addClass(null); //TODO:  HERE is the bug !! NO class type 
