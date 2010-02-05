@@ -37,7 +37,6 @@ public class NO2ModelAdapter extends AdapterImpl {
 				if (notification.getEventType() == Notification.ADD) {
 					
 					EObject value = (EObject) notification.getNewValue();
-					// TODO: how to get the resource of the class?
 					Resource resource = model.addClass(value.eClass());  
 					resource.getContents().add(value);
 				}

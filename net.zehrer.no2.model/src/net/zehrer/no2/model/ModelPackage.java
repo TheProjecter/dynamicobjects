@@ -147,22 +147,22 @@ public interface ModelPackage extends EPackage {
 	int CLASS_RESOURCE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * The feature id for the '<em><b>Key</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_RESOURCE__VALUE = 0;
+	int CLASS_RESOURCE__KEY = 0;
 
 	/**
-	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_RESOURCE__KEY = 1;
+	int CLASS_RESOURCE__VALUE = 1;
 
 	/**
 	 * The number of structural features of the '<em>Class Resource</em>' class.
@@ -288,34 +288,33 @@ public interface ModelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Class Resource</em>'.
 	 * @see java.util.Map.Entry
-	 * @model features="value key" 
-	 *        valueType="org.eclipse.emf.ecore.EClass"
-	 *        keyDataType="org.eclipse.emf.ecore.EString"
+	 * @model keyType="org.eclipse.emf.ecore.EClass"
+	 *        valueDataType="org.eclipse.emf.ecore.EString"
 	 * @generated
 	 */
 	EClass getClassResource();
 
 	/**
-	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @return the meta object for the attribute '<em>Value</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getClassResource()
 	 * @generated
 	 */
-	EReference getClassResource_Value();
+	EAttribute getClassResource_Value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @return the meta object for the reference '<em>Key</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getClassResource()
 	 * @generated
 	 */
-	EAttribute getClassResource_Key();
+	EReference getClassResource_Key();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
@@ -444,20 +443,20 @@ public interface ModelPackage extends EPackage {
 		EClass CLASS_RESOURCE = eINSTANCE.getClassResource();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS_RESOURCE__VALUE = eINSTANCE.getClassResource_Value();
+		EAttribute CLASS_RESOURCE__VALUE = eINSTANCE.getClassResource_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CLASS_RESOURCE__KEY = eINSTANCE.getClassResource_Key();
+		EReference CLASS_RESOURCE__KEY = eINSTANCE.getClassResource_Key();
 
 		/**
 		 * The meta object literal for the '<em>URI</em>' data type.
