@@ -11,8 +11,6 @@
  */
 package net.zehrer.no2.model;
 
-import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
