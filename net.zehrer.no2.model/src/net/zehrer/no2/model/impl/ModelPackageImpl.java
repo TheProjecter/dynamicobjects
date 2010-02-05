@@ -218,8 +218,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClassResource_Value() {
-		return (EReference)classResourceEClass.getEStructuralFeatures().get(0);
+	public EAttribute getClassResource_Value() {
+		return (EAttribute)classResourceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -227,8 +227,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getClassResource_Key() {
-		return (EAttribute)classResourceEClass.getEStructuralFeatures().get(1);
+	public EReference getClassResource_Key() {
+		return (EReference)classResourceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -303,8 +303,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(no2ModelEClass, NO2_MODEL__CONTENTS);
 
 		classResourceEClass = createEClass(CLASS_RESOURCE);
-		createEReference(classResourceEClass, CLASS_RESOURCE__VALUE);
-		createEAttribute(classResourceEClass, CLASS_RESOURCE__KEY);
+		createEReference(classResourceEClass, CLASS_RESOURCE__KEY);
+		createEAttribute(classResourceEClass, CLASS_RESOURCE__VALUE);
 
 		// Create data types
 		uriEDataType = createEDataType(URI);
@@ -369,8 +369,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		addEParameter(op, this.getURI(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(classResourceEClass, Map.Entry.class, "ClassResource", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassResource_Value(), theEcorePackage.getEClass(), null, "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClassResource_Key(), theEcorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassResource_Key(), theEcorePackage.getEClass(), null, "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getClassResource_Value(), theEcorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

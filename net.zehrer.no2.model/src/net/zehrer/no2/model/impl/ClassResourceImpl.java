@@ -30,14 +30,14 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link net.zehrer.no2.model.impl.ClassResourceImpl#getTypedValue <em>Value</em>}</li>
  *   <li>{@link net.zehrer.no2.model.impl.ClassResourceImpl#getTypedKey <em>Key</em>}</li>
+ *   <li>{@link net.zehrer.no2.model.impl.ClassResourceImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<String,EClass> {
+public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EClass,String> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -46,34 +46,34 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
-	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' reference.
+	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypedKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected EClass key;
+
+	/**
+	 * The default value of the '{@link #getTypedValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected EClass value;
+	protected static final String VALUE_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
+	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypedKey()
+	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String KEY_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTypedKey()
-	 * @generated
-	 * @ordered
-	 */
-	protected String key = KEY_EDEFAULT;
+	protected String value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -99,15 +99,7 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTypedValue() {
-		if (value != null && value.eIsProxy()) {
-			InternalEObject oldValue = (InternalEObject)value;
-			value = (EClass)eResolveProxy(oldValue);
-			if (value != oldValue) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.CLASS_RESOURCE__VALUE, oldValue, value));
-			}
-		}
+	public String getTypedValue() {
 		return value;
 	}
 
@@ -116,17 +108,8 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass basicGetTypedValue() {
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTypedValue(EClass newValue) {
-		EClass oldValue = value;
+	public void setTypedValue(String newValue) {
+		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.CLASS_RESOURCE__VALUE, oldValue, value));
@@ -137,7 +120,15 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTypedKey() {
+	public EClass getTypedKey() {
+		if (key != null && key.eIsProxy()) {
+			InternalEObject oldKey = (InternalEObject)key;
+			key = (EClass)eResolveProxy(oldKey);
+			if (key != oldKey) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.CLASS_RESOURCE__KEY, oldKey, key));
+			}
+		}
 		return key;
 	}
 
@@ -146,8 +137,17 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTypedKey(String newKey) {
-		String oldKey = key;
+	public EClass basicGetTypedKey() {
+		return key;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypedKey(EClass newKey) {
+		EClass oldKey = key;
 		key = newKey;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.CLASS_RESOURCE__KEY, oldKey, key));
@@ -161,11 +161,11 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.CLASS_RESOURCE__VALUE:
-				if (resolve) return getTypedValue();
-				return basicGetTypedValue();
 			case ModelPackage.CLASS_RESOURCE__KEY:
-				return getTypedKey();
+				if (resolve) return getTypedKey();
+				return basicGetTypedKey();
+			case ModelPackage.CLASS_RESOURCE__VALUE:
+				return getTypedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -178,11 +178,11 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.CLASS_RESOURCE__VALUE:
-				setTypedValue((EClass)newValue);
-				return;
 			case ModelPackage.CLASS_RESOURCE__KEY:
-				setTypedKey((String)newValue);
+				setTypedKey((EClass)newValue);
+				return;
+			case ModelPackage.CLASS_RESOURCE__VALUE:
+				setTypedValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -196,11 +196,11 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.CLASS_RESOURCE__VALUE:
-				setTypedValue((EClass)null);
-				return;
 			case ModelPackage.CLASS_RESOURCE__KEY:
-				setTypedKey(KEY_EDEFAULT);
+				setTypedKey((EClass)null);
+				return;
+			case ModelPackage.CLASS_RESOURCE__VALUE:
+				setTypedValue(VALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -214,10 +214,10 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.CLASS_RESOURCE__VALUE:
-				return value != null;
 			case ModelPackage.CLASS_RESOURCE__KEY:
-				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
+				return key != null;
+			case ModelPackage.CLASS_RESOURCE__VALUE:
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -232,8 +232,8 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (key: ");
-		result.append(key);
+		result.append(" (value: ");
+		result.append(value);
 		result.append(')');
 		return result.toString();
 	}
@@ -272,7 +272,7 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getKey() {
+	public EClass getKey() {
 		return getTypedKey();
 	}
 
@@ -281,7 +281,7 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setKey(String key) {
+	public void setKey(EClass key) {
 		setTypedKey(key);
 	}
 
@@ -290,7 +290,7 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getValue() {
+	public String getValue() {
 		return getTypedValue();
 	}
 
@@ -299,8 +299,8 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass setValue(EClass value) {
-		EClass oldValue = getValue();
+	public String setValue(String value) {
+		String oldValue = getValue();
 		setTypedValue(value);
 		return oldValue;
 	}
@@ -311,9 +311,9 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<St
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
-	public EMap<String, EClass> getEMap() {
+	public EMap<EClass, String> getEMap() {
 		EObject container = eContainer();
-		return container == null ? null : (EMap<String, EClass>)container.eGet(eContainmentFeature());
+		return container == null ? null : (EMap<EClass, String>)container.eGet(eContainmentFeature());
 	}
 
 } //ClassResourceImpl

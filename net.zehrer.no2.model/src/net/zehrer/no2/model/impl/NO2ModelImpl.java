@@ -14,6 +14,7 @@ package net.zehrer.no2.model.impl;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Collection;
+import net.zehrer.no2.model.ModelFactory;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -66,6 +67,9 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 
 	private static String NS_URI = "http://no2.zehrer.net/";
 
+	// URI formater (well just the counter of the uri)
+	private static DecimalFormat URIformater = new DecimalFormat("0000"); // TODO: customize format
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -81,7 +85,7 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	 * @generated
 	 * @ordered
 	 */
-	protected EMap<String, EClass> classResources;
+	protected EMap<EClass, String> classResources;
 
 	/**
 	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
@@ -178,9 +182,9 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EMap<String, EClass> getClassResources() {
+	public EMap<EClass, String> getClassResources() {
 		if (classResources == null) {
-			classResources = new EcoreEMap<String,EClass>(ModelPackage.Literals.CLASS_RESOURCE, ClassResourceImpl.class, this, ModelPackage.NO2_MODEL__CLASS_RESOURCES);
+			classResources = new EcoreEMap<EClass,String>(ModelPackage.Literals.CLASS_RESOURCE, ClassResourceImpl.class, this, ModelPackage.NO2_MODEL__CLASS_RESOURCES);
 		}
 		return classResources;
 	}
@@ -306,25 +310,32 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	
 	/**
 	 * <!-- begin-user-doc --> 
+	 * Return either a new or an existing resource.
 	 * <!-- end-user-doc -->
-	 * 
+	 * @return The resource of the give class type
 	 * @generated NOT
 	 */
 	public Resource addClass(EClass type) {
-
-		// Geenerate URI
-		DecimalFormat formater = new DecimalFormat("0000"); // TODO: customize format
 		
-		URI modelURI = URI.createURI("/" +formater.format(getClassResources().size()) + ".xmi");
+		String URIstr = getClassResources().get(type);
+		Resource resource = null;
 
-		// create and add ClassResource
+		// check if class is alrady mapped
+		if (URIstr == null) {
+			// create a new resource for this type of class
+			
+			URI modelURI = URI.createURI("/" + URIformater.format(getClassResources().size()) + ".xmi");
+			// create and add ClassResource
 
-		BasicEMap.Entry<String,EClass> classResource =  createClassResouce(type, modelURI);
-		getClassResources().add(classResource);
+			BasicEMap.Entry<EClass,String> classResource =  createClassResouce(type, modelURI);
+			getClassResources().add(classResource);
+			resource  = createResource(modelURI);
 		
-		// create resouce
-		Resource resource = createResource(modelURI);
-
+		} else {
+			// get resource internal list
+			resource = getResource(URI.createURI(URIstr));
+		}
+		
 		return resource;
 	}
 
@@ -351,8 +362,8 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 		if (getClassResources().size() > 0) {
 			
 			// TODO: find a marker for head class
-			Entry<String, EClass> classResource = getClassResources().get(0);
-			return getResource(URI.createURI(classResource.getKey()));
+			Map.Entry<EClass,String>  classResource = getClassResources().get(0);
+			return getResource(URI.createURI(classResource.getValue()));
 		}	
 	
 		return null;  // usually should not occure, initalClass should exist.
@@ -497,13 +508,13 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	}	
 	
 	@SuppressWarnings("unchecked")
-	protected static BasicEMap.Entry<String,EClass> createClassResouce(EClass type, URI uri) {
+	protected static BasicEMap.Entry<EClass,String> createClassResouce(EClass type, URI uri) {
 
-		BasicEMap.Entry<String,EClass> classResource =
-			(BasicEMap.Entry<String,EClass>) EcoreUtil.create(ModelPackage.Literals.CLASS_RESOURCE ); 
+		BasicEMap.Entry<EClass,String> classResource =
+			(BasicEMap.Entry<EClass,String>) EcoreUtil.create(ModelPackage.Literals.CLASS_RESOURCE ); 
 		
-		classResource.setValue(type);
-		classResource.setKey(uri.toString());
+		classResource.setKey(type);
+		classResource.setValue(uri.toString());
 
 		return classResource;
 	}

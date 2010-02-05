@@ -90,7 +90,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createNO2ModelAdapter();
 			}
 			@Override
-			public Adapter caseClassResource(Map.Entry<String, EClass> object) {
+			public Adapter caseClassResource(Map.Entry<EClass, String> object) {
 				return createClassResourceAdapter();
 			}
 			@Override

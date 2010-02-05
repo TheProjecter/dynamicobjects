@@ -138,7 +138,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Map.Entry<String, EClass> createClassResource() {
+	public Map.Entry<EClass, String> createClassResource() {
 		ClassResourceImpl classResource = new ClassResourceImpl();
 		return classResource;
 	}

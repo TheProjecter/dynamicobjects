@@ -24,6 +24,7 @@ import java.util.Map;
 import net.zehrer.no2.NO2EditorPlugin;
 import net.zehrer.no2.handler.OpenModelEditorHandler;
 import net.zehrer.no2.model.NO2Model;
+import net.zehrer.no2.model.adapter.NO2ModelAdapter;
 import net.zehrer.no2.model.factory.ECoreItemProviderAdapterFactory;
 import net.zehrer.no2.model.impl.NO2ModelImpl;
 
@@ -61,6 +62,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.dnd.EditingDomainViewerDropAdapter;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
@@ -917,6 +919,9 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 			no2Resource.load(null);  //TODO: what is about params on load?
 			no2Model = (NO2Model) no2Resource.getEObject("/");
 			no2Model.setArchiveURI(archiveURI);  // TODO: do internal
+			
+			// function for adding new created objects into the correct resource
+			no2Model.eAdapters().add(new NO2ModelAdapter());
 			
 	    } catch (Exception e) {
 			exception = e;

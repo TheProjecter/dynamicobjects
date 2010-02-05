@@ -53,8 +53,8 @@ public interface NO2Model extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Class Resources</b></em>' map.
-	 * The key is of type {@link java.lang.String},
-	 * and the value is of type {@link org.eclipse.emf.ecore.EClass},
+	 * The key is of type {@link org.eclipse.emf.ecore.EClass},
+	 * and the value is of type {@link java.lang.String},
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Class Resources</em>' containment reference list isn't clear,
@@ -63,10 +63,10 @@ public interface NO2Model extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Class Resources</em>' map.
 	 * @see net.zehrer.no2.model.ModelPackage#getNO2Model_ClassResources()
-	 * @model mapType="net.zehrer.no2.model.ClassResource<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EClass>"
+	 * @model mapType="net.zehrer.no2.model.ClassResource<org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EString>"
 	 * @generated
 	 */
-	EMap<String, EClass> getClassResources();
+	EMap<EClass, String> getClassResources();
 
 	/**
 	 * Returns the value of the '<em><b>Resource Set</b></em>' attribute.

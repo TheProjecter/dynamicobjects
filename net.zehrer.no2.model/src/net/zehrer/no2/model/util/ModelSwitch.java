@@ -107,7 +107,7 @@ public class ModelSwitch<T> {
 				return result;
 			}
 			case ModelPackage.CLASS_RESOURCE: {
-				@SuppressWarnings("unchecked") Map.Entry<String, EClass> classResource = (Map.Entry<String, EClass>)theEObject;
+				@SuppressWarnings("unchecked") Map.Entry<EClass, String> classResource = (Map.Entry<EClass, String>)theEObject;
 				T result = caseClassResource(classResource);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -142,7 +142,7 @@ public class ModelSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClassResource(Map.Entry<String, EClass> object) {
+	public T caseClassResource(Map.Entry<EClass, String> object) {
 		return null;
 	}
 
