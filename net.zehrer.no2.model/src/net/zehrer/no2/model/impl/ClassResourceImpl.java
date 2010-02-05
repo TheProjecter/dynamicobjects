@@ -15,12 +15,8 @@ import net.zehrer.no2.model.ClassResource;
 import net.zehrer.no2.model.ModelPackage;
 
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 

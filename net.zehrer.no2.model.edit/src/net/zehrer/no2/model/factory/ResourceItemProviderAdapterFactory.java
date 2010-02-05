@@ -25,8 +25,9 @@ public class ResourceItemProviderAdapterFactory extends org.eclipse.emf.edit.pro
 	 * This creates an adapter for a
 	 * {@link org.eclipse.emf.ecore.resource.Resource}.
 	 * 
-	 * @generated
+	 * @generated NOT   // BUG missing override in template
 	 */
+	@Override
 	public Adapter createResourceAdapter() {
 		return new ResourceItemProvider(this);
 	}
