@@ -13,6 +13,7 @@ package net.zehrer.no2.model.util;
 
 import java.util.List;
 
+import java.util.Map;
 import net.zehrer.no2.model.*;
 
 import org.eclipse.emf.ecore.EClass;
@@ -106,7 +107,7 @@ public class ModelSwitch<T> {
 				return result;
 			}
 			case ModelPackage.CLASS_RESOURCE: {
-				ClassResource classResource = (ClassResource)theEObject;
+				@SuppressWarnings("unchecked") Map.Entry<String, EClass> classResource = (Map.Entry<String, EClass>)theEObject;
 				T result = caseClassResource(classResource);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -141,7 +142,7 @@ public class ModelSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClassResource(ClassResource object) {
+	public T caseClassResource(Map.Entry<String, EClass> object) {
 		return null;
 	}
 

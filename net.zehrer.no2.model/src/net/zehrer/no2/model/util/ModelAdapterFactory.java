@@ -11,6 +11,7 @@
  */
 package net.zehrer.no2.model.util;
 
+import java.util.Map;
 import net.zehrer.no2.model.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -18,6 +19,7 @@ import org.eclipse.emf.common.notify.Notifier;
 
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -88,7 +90,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createNO2ModelAdapter();
 			}
 			@Override
-			public Adapter caseClassResource(ClassResource object) {
+			public Adapter caseClassResource(Map.Entry<String, EClass> object) {
 				return createClassResourceAdapter();
 			}
 			@Override
@@ -126,13 +128,13 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link net.zehrer.no2.model.ClassResource <em>Class Resource</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Class Resource</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see net.zehrer.no2.model.ClassResource
+	 * @see java.util.Map.Entry
 	 * @generated
 	 */
 	public Adapter createClassResourceAdapter() {

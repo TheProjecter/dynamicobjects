@@ -11,6 +11,7 @@
  */
 package net.zehrer.no2.model.impl;
 
+import java.util.Map;
 import net.zehrer.no2.model.*;
 
 import org.eclipse.emf.common.util.URI;
@@ -78,7 +79,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ModelPackage.NO2_MODEL: return createNO2Model();
-			case ModelPackage.CLASS_RESOURCE: return createClassResource();
+			case ModelPackage.CLASS_RESOURCE: return (EObject)createClassResource();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -137,7 +138,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassResource createClassResource() {
+	public Map.Entry<String, EClass> createClassResource() {
 		ClassResourceImpl classResource = new ClassResourceImpl();
 		return classResource;
 	}

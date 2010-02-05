@@ -7,20 +7,24 @@
  * 
  * 
  */
-package net.zehrer.no2.model.other;
+package net.zehrer.no2.model.provider;
 
 
 import java.util.Collection;
 import java.util.List;
 
-import net.zehrer.no2.model.ClassResource;
-import net.zehrer.no2.model.ModelEditPlugin;
+import net.zehrer.no2.model.ModelFactory;
 import net.zehrer.no2.model.ModelPackage;
+import net.zehrer.no2.model.NO2Model;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
+
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -34,12 +38,12 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link net.zehrer.no2.model.ClassResource} object.
+ * This is the item provider adapter for a {@link net.zehrer.no2.model.NO2Model} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ClassResourceItemProvider
+public class NO2ModelItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -60,7 +64,7 @@ public class ClassResourceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassResourceItemProvider(AdapterFactory adapterFactory) {
+	public NO2ModelItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -75,48 +79,50 @@ public class ClassResourceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypePropertyDescriptor(object);
-			addUriPropertyDescriptor(object);
+			addResourceSetPropertyDescriptor(object);
+			addArchiveURIPropertyDescriptor(object);
+			addInitPropertyDescriptor(object);
+			addContentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature.
+	 * This adds a property descriptor for the Resource Set feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTypePropertyDescriptor(Object object) {
+	protected void addResourceSetPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ClassResource_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ClassResource_type_feature", "_UI_ClassResource_type"),
-				 ModelPackage.Literals.CLASS_RESOURCE__TYPE,
-				 true,
+				 getString("_UI_NO2Model_resourceSet_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NO2Model_resourceSet_feature", "_UI_NO2Model_type"),
+				 ModelPackage.Literals.NO2_MODEL__RESOURCE_SET,
 				 false,
-				 true,
-				 null,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Uri feature.
+	 * This adds a property descriptor for the Archive URI feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addUriPropertyDescriptor(Object object) {
+	protected void addArchiveURIPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ClassResource_uri_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ClassResource_uri_feature", "_UI_ClassResource_type"),
-				 ModelPackage.Literals.CLASS_RESOURCE__URI,
+				 getString("_UI_NO2Model_archiveURI_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NO2Model_archiveURI_feature", "_UI_NO2Model_type"),
+				 ModelPackage.Literals.NO2_MODEL__ARCHIVE_URI,
 				 true,
 				 false,
 				 false,
@@ -126,14 +132,88 @@ public class ClassResourceItemProvider
 	}
 
 	/**
-	 * This returns ClassResource.gif.
+	 * This adds a property descriptor for the Init feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInitPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NO2Model_init_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NO2Model_init_feature", "_UI_NO2Model_type"),
+				 ModelPackage.Literals.NO2_MODEL__INIT,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Contents feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addContentsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NO2Model_contents_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NO2Model_contents_feature", "_UI_NO2Model_type"),
+				 ModelPackage.Literals.NO2_MODEL__CONTENTS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(ModelPackage.Literals.NO2_MODEL__CLASS_RESOURCES);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
+	 * This returns NO2Model.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassResource"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/NO2Model"));
 	}
 
 	/**
@@ -144,10 +224,11 @@ public class ClassResourceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((ClassResource)object).getUri();
+		ResourceSet labelValue = ((NO2Model)object).getResourceSet();
+		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ?
-			getString("_UI_ClassResource_type") :
-			getString("_UI_ClassResource_type") + " " + label;
+			getString("_UI_NO2Model_type") :
+			getString("_UI_NO2Model_type") + " " + label;
 	}
 
 	/**
@@ -161,9 +242,14 @@ public class ClassResourceItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ClassResource.class)) {
-			case ModelPackage.CLASS_RESOURCE__URI:
+		switch (notification.getFeatureID(NO2Model.class)) {
+			case ModelPackage.NO2_MODEL__RESOURCE_SET:
+			case ModelPackage.NO2_MODEL__ARCHIVE_URI:
+			case ModelPackage.NO2_MODEL__INIT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case ModelPackage.NO2_MODEL__CLASS_RESOURCES:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -179,6 +265,11 @@ public class ClassResourceItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ModelPackage.Literals.NO2_MODEL__CLASS_RESOURCES,
+				 ModelFactory.eINSTANCE.create(ModelPackage.Literals.CLASS_RESOURCE)));
 	}
 
 	/**
