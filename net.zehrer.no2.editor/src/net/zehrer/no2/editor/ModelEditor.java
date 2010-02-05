@@ -27,6 +27,7 @@ import net.zehrer.no2.model.NO2Model;
 import net.zehrer.no2.model.adapter.NO2ModelAdapter;
 import net.zehrer.no2.model.factory.ECoreItemProviderAdapterFactory;
 import net.zehrer.no2.model.impl.NO2ModelImpl;
+import net.zehrer.no2.model.util.EClassResource;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -97,6 +98,7 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -767,6 +769,8 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 		}
 	}
 
+	// ---- IViewerProvider ----
+	
 	/**
 	 * This returns the viewer as required by the {@link IViewerProvider}
 	 * interface. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -827,41 +831,26 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 	 */
 	@Override
 	public void createPages() {
+		
+		
 		// Creates the model from the editor input
-		//
 		createModel();
 
 		// This is the page for the table viewer.
-		//
 		{
-			tableViewer = new TableViewer(getContainer());
-			Table table = tableViewer.getTable();
-			TableLayout layout = new TableLayout();
-			table.setLayout(layout);
-			table.setHeaderVisible(true);
-			table.setLinesVisible(true);
-
-			TableColumn objectColumn = new TableColumn(table, SWT.NONE);
-			layout.addColumnData(new ColumnWeightData(3, 100, true));
-			objectColumn.setText(getString("_UI_ObjectColumn_label"));
-			objectColumn.setResizable(true);
-
-			TableColumn selfColumn = new TableColumn(table, SWT.NONE);
-			layout.addColumnData(new ColumnWeightData(2, 100, true));
-			selfColumn.setText(getString("_UI_SelfColumn_label"));
-			selfColumn.setResizable(true);
-
-			// TODO: analyse class
-			// TODO: create extra class which covers a tab
-			tableViewer.setColumnProperties(new String[] { "a", "b" });
-			tableViewer.setContentProvider(new AdapterFactoryContentProvider(modelAdapterFactory));
-			tableViewer.setLabelProvider(new AdapterFactoryLabelProvider(modelAdapterFactory));
-
-			tableViewer.setInput(no2Model.getHeadModelResource());
+			ResourceSet resourceSet = no2Model.getResourceSet();
+			EClassResource classResource = new EClassResource(no2Model.getClassResources().get(0), resourceSet);
+			Page tablePage = new Page(getContainer(), this.modelAdapterFactory, classResource);
+			
+			Control table = tablePage.createPageControl();
+			tableViewer = tablePage.getTableView();
 
 			createContextMenuFor(tableViewer);
-			int pageIndex = addPage(table);
-			setPageText(pageIndex, getString("_UI_TablePage_label"));
+			int pageIndex = addPage(table);  // add tabel view as page.
+			
+			// TODO: write an adapter for updating the pageName; 
+			setPageText(pageIndex, tablePage.getPageName());  //getString("_UI_TablePage_label")
+			
 		}
 
 		// Ensures that this editor will only display the page's tab
@@ -874,7 +863,7 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 			public void controlResized(ControlEvent event) {
 				if (!guard) {
 					guard = true;
-					hideTabs();
+					//hideTabs();
 					guard = false;
 				}
 			}
@@ -987,24 +976,7 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 
 	}
 
-	/**
-	 * If there is just one page in the multi-page editor part, this hides the
-	 * single tab at the bottom. 
-	 * <!-- begin-user-doc --> 
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void hideTabs() {
-		if (getPageCount() <= 1) {
-			setPageText(0, "");
-			if (getContainer() instanceof CTabFolder) {
-				((CTabFolder) getContainer()).setTabHeight(1);
-				Point point = getContainer().getSize();
-				getContainer().setSize(point.x, point.y + 6);
-			}
-		}
-	}
+
 
 	/**
 	 * If there is more than one page in the multi-page editor part, this shows
@@ -1443,5 +1415,26 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 	 */
 	protected boolean showOutlineView() {
 		return true;
+	}
+	
+	// ---- method not longer used ---
+	
+	/**
+	 * If there is just one page in the multi-page editor part, this hides the
+	 * single tab at the bottom. 
+	 * <!-- begin-user-doc --> 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	protected void hideTabs() {
+		if (getPageCount() <= 1) {
+			setPageText(0, "");
+			if (getContainer() instanceof CTabFolder) {
+				((CTabFolder) getContainer()).setTabHeight(1);
+				Point point = getContainer().getSize();
+				getContainer().setSize(point.x, point.y + 6);
+			}
+		}
 	}
 }

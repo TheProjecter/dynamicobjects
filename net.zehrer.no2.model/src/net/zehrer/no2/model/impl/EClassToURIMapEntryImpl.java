@@ -1,5 +1,5 @@
 /**
- *  Copyright (c) 2009 - 2010 Stephan Zehrer and others.
+ *  Copyright (c) 2009 Stephan Zehrer and others.
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -25,25 +25,25 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Class Resource</b></em>'.
+ * An implementation of the model object '<em><b>EClass To URI Map Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link net.zehrer.no2.model.impl.ClassResourceImpl#getTypedKey <em>Key</em>}</li>
- *   <li>{@link net.zehrer.no2.model.impl.ClassResourceImpl#getTypedValue <em>Value</em>}</li>
+ *   <li>{@link net.zehrer.no2.model.impl.EClassToURIMapEntryImpl#getTypedKey <em>Key</em>}</li>
+ *   <li>{@link net.zehrer.no2.model.impl.EClassToURIMapEntryImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EClass,String> {
+public class EClassToURIMapEntryImpl extends EObjectImpl implements BasicEMap.Entry<EClass,String> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	public static final String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' reference.
@@ -80,7 +80,7 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ClassResourceImpl() {
+	protected EClassToURIMapEntryImpl() {
 		super();
 	}
 
@@ -91,28 +91,7 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EC
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.CLASS_RESOURCE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getTypedValue() {
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTypedValue(String newValue) {
-		String oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.CLASS_RESOURCE__VALUE, oldValue, value));
+		return ModelPackage.Literals.ECLASS_TO_URI_MAP_ENTRY;
 	}
 
 	/**
@@ -126,7 +105,7 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EC
 			key = (EClass)eResolveProxy(oldKey);
 			if (key != oldKey) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.CLASS_RESOURCE__KEY, oldKey, key));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.ECLASS_TO_URI_MAP_ENTRY__KEY, oldKey, key));
 			}
 		}
 		return key;
@@ -150,7 +129,28 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EC
 		EClass oldKey = key;
 		key = newKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.CLASS_RESOURCE__KEY, oldKey, key));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ECLASS_TO_URI_MAP_ENTRY__KEY, oldKey, key));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getTypedValue() {
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypedValue(String newValue) {
+		String oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ECLASS_TO_URI_MAP_ENTRY__VALUE, oldValue, value));
 	}
 
 	/**
@@ -161,10 +161,10 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.CLASS_RESOURCE__KEY:
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY__KEY:
 				if (resolve) return getTypedKey();
 				return basicGetTypedKey();
-			case ModelPackage.CLASS_RESOURCE__VALUE:
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY__VALUE:
 				return getTypedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -178,10 +178,10 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.CLASS_RESOURCE__KEY:
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY__KEY:
 				setTypedKey((EClass)newValue);
 				return;
-			case ModelPackage.CLASS_RESOURCE__VALUE:
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY__VALUE:
 				setTypedValue((String)newValue);
 				return;
 		}
@@ -196,10 +196,10 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.CLASS_RESOURCE__KEY:
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY__KEY:
 				setTypedKey((EClass)null);
 				return;
-			case ModelPackage.CLASS_RESOURCE__VALUE:
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY__VALUE:
 				setTypedValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -214,9 +214,9 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.CLASS_RESOURCE__KEY:
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY__KEY:
 				return key != null;
-			case ModelPackage.CLASS_RESOURCE__VALUE:
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
@@ -316,4 +316,4 @@ public class ClassResourceImpl extends EObjectImpl implements BasicEMap.Entry<EC
 		return container == null ? null : (EMap<EClass, String>)container.eGet(eContainmentFeature());
 	}
 
-} //ClassResourceImpl
+} //EClassToURIMapEntryImpl
