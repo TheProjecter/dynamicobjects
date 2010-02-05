@@ -38,7 +38,7 @@ public interface ModelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * The package name.
@@ -137,14 +137,14 @@ public interface ModelPackage extends EPackage {
 	int NO2_MODEL_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link net.zehrer.no2.model.impl.ClassResourceImpl <em>Class Resource</em>}' class.
+	 * The meta object id for the '{@link net.zehrer.no2.model.impl.EClassToURIMapEntryImpl <em>EClass To URI Map Entry</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see net.zehrer.no2.model.impl.ClassResourceImpl
-	 * @see net.zehrer.no2.model.impl.ModelPackageImpl#getClassResource()
+	 * @see net.zehrer.no2.model.impl.EClassToURIMapEntryImpl
+	 * @see net.zehrer.no2.model.impl.ModelPackageImpl#getEClassToURIMapEntry()
 	 * @generated
 	 */
-	int CLASS_RESOURCE = 1;
+	int ECLASS_TO_URI_MAP_ENTRY = 1;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' reference.
@@ -153,7 +153,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_RESOURCE__KEY = 0;
+	int ECLASS_TO_URI_MAP_ENTRY__KEY = 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -162,16 +162,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_RESOURCE__VALUE = 1;
+	int ECLASS_TO_URI_MAP_ENTRY__VALUE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Class Resource</em>' class.
+	 * The number of structural features of the '<em>EClass To URI Map Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_RESOURCE_FEATURE_COUNT = 2;
+	int ECLASS_TO_URI_MAP_ENTRY_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type.
@@ -283,27 +283,16 @@ public interface ModelPackage extends EPackage {
 	EReference getNO2Model_Contents();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Class Resource</em>}'.
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>EClass To URI Map Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Class Resource</em>'.
+	 * @return the meta object for class '<em>EClass To URI Map Entry</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyType="org.eclipse.emf.ecore.EClass"
 	 *        valueDataType="org.eclipse.emf.ecore.EString"
 	 * @generated
 	 */
-	EClass getClassResource();
-
-	/**
-	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see java.util.Map.Entry
-	 * @see #getClassResource()
-	 * @generated
-	 */
-	EAttribute getClassResource_Value();
+	EClass getEClassToURIMapEntry();
 
 	/**
 	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Key</em>}'.
@@ -311,10 +300,21 @@ public interface ModelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Key</em>'.
 	 * @see java.util.Map.Entry
-	 * @see #getClassResource()
+	 * @see #getEClassToURIMapEntry()
 	 * @generated
 	 */
-	EReference getClassResource_Key();
+	EReference getEClassToURIMapEntry_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getEClassToURIMapEntry()
+	 * @generated
+	 */
+	EAttribute getEClassToURIMapEntry_Value();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
@@ -433,22 +433,14 @@ public interface ModelPackage extends EPackage {
 		EReference NO2_MODEL__CONTENTS = eINSTANCE.getNO2Model_Contents();
 
 		/**
-		 * The meta object literal for the '{@link net.zehrer.no2.model.impl.ClassResourceImpl <em>Class Resource</em>}' class.
+		 * The meta object literal for the '{@link net.zehrer.no2.model.impl.EClassToURIMapEntryImpl <em>EClass To URI Map Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see net.zehrer.no2.model.impl.ClassResourceImpl
-		 * @see net.zehrer.no2.model.impl.ModelPackageImpl#getClassResource()
+		 * @see net.zehrer.no2.model.impl.EClassToURIMapEntryImpl
+		 * @see net.zehrer.no2.model.impl.ModelPackageImpl#getEClassToURIMapEntry()
 		 * @generated
 		 */
-		EClass CLASS_RESOURCE = eINSTANCE.getClassResource();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CLASS_RESOURCE__VALUE = eINSTANCE.getClassResource_Value();
+		EClass ECLASS_TO_URI_MAP_ENTRY = eINSTANCE.getEClassToURIMapEntry();
 
 		/**
 		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
@@ -456,7 +448,15 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS_RESOURCE__KEY = eINSTANCE.getClassResource_Key();
+		EReference ECLASS_TO_URI_MAP_ENTRY__KEY = eINSTANCE.getEClassToURIMapEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ECLASS_TO_URI_MAP_ENTRY__VALUE = eINSTANCE.getEClassToURIMapEntry_Value();
 
 		/**
 		 * The meta object literal for the '<em>URI</em>' data type.

@@ -28,11 +28,13 @@ import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -74,7 +76,7 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	public static final String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * The cached value of the '{@link #getClassResources()
@@ -184,7 +186,7 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	 */
 	public EMap<EClass, String> getClassResources() {
 		if (classResources == null) {
-			classResources = new EcoreEMap<EClass,String>(ModelPackage.Literals.CLASS_RESOURCE, ClassResourceImpl.class, this, ModelPackage.NO2_MODEL__CLASS_RESOURCES);
+			classResources = new EcoreEMap<EClass,String>(ModelPackage.Literals.ECLASS_TO_URI_MAP_ENTRY, EClassToURIMapEntryImpl.class, this, ModelPackage.NO2_MODEL__CLASS_RESOURCES);
 		}
 		return classResources;
 	}
@@ -192,9 +194,13 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	/**
 	 * <!-- begin-user-doc --> 
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public ResourceSet getResourceSet() {
+		
+		if (!isInit())
+			init();
+		
 		return resourceSet;
 	}
 
@@ -296,6 +302,9 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 		EClass eClass = createEmptyClass(rootPackage);
 		Resource modelResource = addClass(eClass);
 		
+		// Create default Name attribue 
+		createDefaultAttribut(eClass);
+		
 		// ---------- Save All ----------------
 
 		// Save the contents of the resource to the file system.
@@ -345,10 +354,7 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	 * @generated NOT
 	 */
 	public Resource getResource(URI uri) {
-		
-		if (!isInit())
-			init();
-		
+			
 		return getResourceSet().getResource(uri, true);
 	}
 
@@ -511,7 +517,7 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	protected static BasicEMap.Entry<EClass,String> createClassResouce(EClass type, URI uri) {
 
 		BasicEMap.Entry<EClass,String> classResource =
-			(BasicEMap.Entry<EClass,String>) EcoreUtil.create(ModelPackage.Literals.CLASS_RESOURCE ); 
+			(BasicEMap.Entry<EClass,String>) EcoreUtil.create(ModelPackage.Literals.ECLASS_TO_URI_MAP_ENTRY ); 
 		
 		classResource.setKey(type);
 		classResource.setValue(uri.toString());
@@ -544,4 +550,18 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 		return eClass;
 	}
 
+	protected static EAttribute createDefaultAttribut(EClass aClass) {
+
+		EcoreFactory ecoreFactory = EcoreFactory.eINSTANCE;
+
+		EAttribute eAttribute = ecoreFactory.createEAttribute();
+		eAttribute.setName("Name"); 
+		eAttribute.setEType(EcorePackage.Literals.ESTRING);
+		
+		if (aClass != null)
+			aClass.getEAttributes().add(eAttribute);
+
+		return eAttribute;
+	}
+	
 } // NO2ModelImpl

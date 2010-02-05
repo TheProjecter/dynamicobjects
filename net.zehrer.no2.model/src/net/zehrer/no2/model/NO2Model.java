@@ -49,7 +49,7 @@ public interface NO2Model extends EObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * Returns the value of the '<em><b>Class Resources</b></em>' map.
@@ -63,7 +63,7 @@ public interface NO2Model extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Class Resources</em>' map.
 	 * @see net.zehrer.no2.model.ModelPackage#getNO2Model_ClassResources()
-	 * @model mapType="net.zehrer.no2.model.ClassResource<org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EString>"
+	 * @model mapType="net.zehrer.no2.model.EClassToURIMapEntry<org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EString>"
 	 * @generated
 	 */
 	EMap<EClass, String> getClassResources();

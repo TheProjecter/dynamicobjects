@@ -56,7 +56,7 @@ public class NO2ModelItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	public static final String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -269,7 +269,7 @@ public class NO2ModelItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ModelPackage.Literals.NO2_MODEL__CLASS_RESOURCES,
-				 ModelFactory.eINSTANCE.create(ModelPackage.Literals.CLASS_RESOURCE)));
+				 ModelFactory.eINSTANCE.create(ModelPackage.Literals.ECLASS_TO_URI_MAP_ENTRY)));
 	}
 
 	/**

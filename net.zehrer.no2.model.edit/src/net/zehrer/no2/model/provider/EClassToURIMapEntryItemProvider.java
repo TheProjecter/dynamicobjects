@@ -1,5 +1,5 @@
 /**
- *  Copyright (c) 2009 Stephan Zehrer and others.
+ *  Copyright (c) 2009 - 2010 Stephan Zehrer and others.
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -38,7 +38,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ClassResourceItemProvider
+public class EClassToURIMapEntryItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -51,7 +51,7 @@ public class ClassResourceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	public static final String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -59,7 +59,7 @@ public class ClassResourceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassResourceItemProvider(AdapterFactory adapterFactory) {
+	public EClassToURIMapEntryItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -74,32 +74,10 @@ public class ClassResourceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addValuePropertyDescriptor(object);
 			addKeyPropertyDescriptor(object);
+			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Value feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ClassResource_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ClassResource_value_feature", "_UI_ClassResource_type"),
-				 ModelPackage.Literals.CLASS_RESOURCE__VALUE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -113,9 +91,31 @@ public class ClassResourceItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ClassResource_key_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ClassResource_key_feature", "_UI_ClassResource_type"),
-				 ModelPackage.Literals.CLASS_RESOURCE__KEY,
+				 getString("_UI_EClassToURIMapEntry_key_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EClassToURIMapEntry_key_feature", "_UI_EClassToURIMapEntry_type"),
+				 ModelPackage.Literals.ECLASS_TO_URI_MAP_ENTRY__KEY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Value feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addValuePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_EClassToURIMapEntry_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_EClassToURIMapEntry_value_feature", "_UI_EClassToURIMapEntry_type"),
+				 ModelPackage.Literals.ECLASS_TO_URI_MAP_ENTRY__VALUE,
 				 true,
 				 false,
 				 false,
@@ -125,14 +125,14 @@ public class ClassResourceItemProvider
 	}
 
 	/**
-	 * This returns ClassResource.gif.
+	 * This returns EClassToURIMapEntry.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassResource"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/EClassToURIMapEntry"));
 	}
 
 	/**
@@ -143,8 +143,8 @@ public class ClassResourceItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Map.Entry<?, ?> classResource = (Map.Entry<?, ?>)object;
-		return "" + classResource.getKey() + " -> " + classResource.getValue();
+		Map.Entry<?, ?> eClassToURIMapEntry = (Map.Entry<?, ?>)object;
+		return "" + eClassToURIMapEntry.getKey() + " -> " + eClassToURIMapEntry.getValue();
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class ClassResourceItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Map.Entry.class)) {
-			case ModelPackage.CLASS_RESOURCE__KEY:
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

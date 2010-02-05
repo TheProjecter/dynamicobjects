@@ -45,7 +45,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	public static final String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
@@ -114,7 +114,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ClassResourceItemProvider classResourceItemProvider;
+	protected EClassToURIMapEntryItemProvider eClassToURIMapEntryItemProvider;
 
 	/**
 	 * This creates an adapter for a {@link java.util.Map.Entry}.
@@ -123,12 +123,12 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 * @generated
 	 */
 	@Override
-	public Adapter createClassResourceAdapter() {
-		if (classResourceItemProvider == null) {
-			classResourceItemProvider = new ClassResourceItemProvider(this);
+	public Adapter createEClassToURIMapEntryAdapter() {
+		if (eClassToURIMapEntryItemProvider == null) {
+			eClassToURIMapEntryItemProvider = new EClassToURIMapEntryItemProvider(this);
 		}
 
-		return classResourceItemProvider;
+		return eClassToURIMapEntryItemProvider;
 	}
 
 	/**
@@ -231,7 +231,7 @@ public class ModelItemProviderAdapterFactory extends ModelAdapterFactory impleme
 	 */
 	public void dispose() {
 		if (no2ModelItemProvider != null) no2ModelItemProvider.dispose();
-		if (classResourceItemProvider != null) classResourceItemProvider.dispose();
+		if (eClassToURIMapEntryItemProvider != null) eClassToURIMapEntryItemProvider.dispose();
 	}
 
 }
