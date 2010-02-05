@@ -83,7 +83,7 @@ public interface ModelPackage extends EPackage {
 	int NO2_MODEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Class Resources</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Class Resources</b></em>' map.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -147,22 +147,22 @@ public interface ModelPackage extends EPackage {
 	int CLASS_RESOURCE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_RESOURCE__TYPE = 0;
+	int CLASS_RESOURCE__VALUE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_RESOURCE__URI = 1;
+	int CLASS_RESOURCE__KEY = 1;
 
 	/**
 	 * The number of structural features of the '<em>Class Resource</em>' class.
@@ -228,10 +228,10 @@ public interface ModelPackage extends EPackage {
 	EClass getNO2Model();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link net.zehrer.no2.model.NO2Model#getClassResources <em>Class Resources</em>}'.
+	 * Returns the meta object for the map '{@link net.zehrer.no2.model.NO2Model#getClassResources <em>Class Resources</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Class Resources</em>'.
+	 * @return the meta object for the map '<em>Class Resources</em>'.
 	 * @see net.zehrer.no2.model.NO2Model#getClassResources()
 	 * @see #getNO2Model()
 	 * @generated
@@ -283,36 +283,39 @@ public interface ModelPackage extends EPackage {
 	EReference getNO2Model_Contents();
 
 	/**
-	 * Returns the meta object for class '{@link net.zehrer.no2.model.ClassResource <em>Class Resource</em>}'.
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Class Resource</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Class Resource</em>'.
-	 * @see net.zehrer.no2.model.ClassResource
+	 * @see java.util.Map.Entry
+	 * @model features="value key" 
+	 *        valueType="org.eclipse.emf.ecore.EClass"
+	 *        keyDataType="org.eclipse.emf.ecore.EString"
 	 * @generated
 	 */
 	EClass getClassResource();
 
 	/**
-	 * Returns the meta object for the reference '{@link net.zehrer.no2.model.ClassResource#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see net.zehrer.no2.model.ClassResource#getType()
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see java.util.Map.Entry
 	 * @see #getClassResource()
 	 * @generated
 	 */
-	EReference getClassResource_Type();
+	EReference getClassResource_Value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link net.zehrer.no2.model.ClassResource#getUri <em>Uri</em>}'.
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Uri</em>'.
-	 * @see net.zehrer.no2.model.ClassResource#getUri()
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
 	 * @see #getClassResource()
 	 * @generated
 	 */
-	EAttribute getClassResource_Uri();
+	EAttribute getClassResource_Key();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
@@ -391,7 +394,7 @@ public interface ModelPackage extends EPackage {
 		EClass NO2_MODEL = eINSTANCE.getNO2Model();
 
 		/**
-		 * The meta object literal for the '<em><b>Class Resources</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Class Resources</b></em>' map feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -441,20 +444,20 @@ public interface ModelPackage extends EPackage {
 		EClass CLASS_RESOURCE = eINSTANCE.getClassResource();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CLASS_RESOURCE__TYPE = eINSTANCE.getClassResource_Type();
+		EReference CLASS_RESOURCE__VALUE = eINSTANCE.getClassResource_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CLASS_RESOURCE__URI = eINSTANCE.getClassResource_Uri();
+		EAttribute CLASS_RESOURCE__KEY = eINSTANCE.getClassResource_Key();
 
 		/**
 		 * The meta object literal for the '<em>URI</em>' data type.

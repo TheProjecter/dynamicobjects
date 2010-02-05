@@ -16,19 +16,21 @@ import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
-import net.zehrer.no2.model.ClassResource;
-import net.zehrer.no2.model.ModelFactory;
 import net.zehrer.no2.model.ModelPackage;
 import net.zehrer.no2.model.NO2Model;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -36,8 +38,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
@@ -78,7 +81,7 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ClassResource> classResources;
+	protected EMap<String, EClass> classResources;
 
 	/**
 	 * The default value of the '{@link #getResourceSet() <em>Resource Set</em>}' attribute.
@@ -175,9 +178,9 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ClassResource> getClassResources() {
+	public EMap<String, EClass> getClassResources() {
 		if (classResources == null) {
-			classResources = new EObjectContainmentEList<ClassResource>(ClassResource.class, this, ModelPackage.NO2_MODEL__CLASS_RESOURCES);
+			classResources = new EcoreEMap<String,EClass>(ModelPackage.Literals.CLASS_RESOURCE, ClassResourceImpl.class, this, ModelPackage.NO2_MODEL__CLASS_RESOURCES);
 		}
 		return classResources;
 	}
@@ -315,7 +318,8 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 		URI modelURI = URI.createURI("/" +formater.format(getClassResources().size()) + ".xmi");
 
 		// create and add ClassResource
-		ClassResource classResource = createClassResouce(type, modelURI);
+
+		BasicEMap.Entry<String,EClass> classResource =  createClassResouce(type, modelURI);
 		getClassResources().add(classResource);
 		
 		// create resouce
@@ -347,8 +351,8 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 		if (getClassResources().size() > 0) {
 			
 			// TODO: find a marker for head class
-			ClassResource classResource = getClassResources().get(0);
-			return getResource(URI.createURI(classResource.getUri()));
+			Entry<String, EClass> classResource = getClassResources().get(0);
+			return getResource(URI.createURI(classResource.getKey()));
 		}	
 	
 		return null;  // usually should not occure, initalClass should exist.
@@ -386,7 +390,8 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ModelPackage.NO2_MODEL__CLASS_RESOURCES:
-				return getClassResources();
+				if (coreType) return getClassResources();
+				else return getClassResources().map();
 			case ModelPackage.NO2_MODEL__RESOURCE_SET:
 				return getResourceSet();
 			case ModelPackage.NO2_MODEL__ARCHIVE_URI:
@@ -408,8 +413,7 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ModelPackage.NO2_MODEL__CLASS_RESOURCES:
-				getClassResources().clear();
-				getClassResources().addAll((Collection<? extends ClassResource>)newValue);
+				((EStructuralFeature.Setting)getClassResources()).set(newValue);
 				return;
 			case ModelPackage.NO2_MODEL__ARCHIVE_URI:
 				setArchiveURI((URI)newValue);
@@ -492,12 +496,14 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 		return getArchiveURI(URI.createPlatformResourceURI(fileName, true));
 	}	
 	
-	protected static ClassResource createClassResouce(EClass type, URI uri) {
+	@SuppressWarnings("unchecked")
+	protected static BasicEMap.Entry<String,EClass> createClassResouce(EClass type, URI uri) {
 
-		ClassResource classResource = ModelFactory.eINSTANCE.createClassResource();
-
-		classResource.setType(type);
-		classResource.setUri(uri.toString());
+		BasicEMap.Entry<String,EClass> classResource =
+			(BasicEMap.Entry<String,EClass>) EcoreUtil.create(ModelPackage.Literals.CLASS_RESOURCE ); 
+		
+		classResource.setValue(type);
+		classResource.setKey(uri.toString());
 
 		return classResource;
 	}

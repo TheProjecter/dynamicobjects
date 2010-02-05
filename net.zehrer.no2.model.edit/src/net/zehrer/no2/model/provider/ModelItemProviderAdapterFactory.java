@@ -7,13 +7,11 @@
  * 
  * 
  */
-package net.zehrer.no2.model.factory;
+package net.zehrer.no2.model.provider;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import net.zehrer.no2.model.other.ClassResourceItemProvider;
-import net.zehrer.no2.model.other.NO2ModelItemProvider;
 import net.zehrer.no2.model.util.ModelAdapterFactory;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -41,7 +39,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ModelItemProviderAdapterFactory2 extends ModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class ModelItemProviderAdapterFactory extends ModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,7 +77,7 @@ public class ModelItemProviderAdapterFactory2 extends ModelAdapterFactory implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelItemProviderAdapterFactory2() {
+	public ModelItemProviderAdapterFactory() {
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
@@ -111,7 +109,7 @@ public class ModelItemProviderAdapterFactory2 extends ModelAdapterFactory implem
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link net.zehrer.no2.model.ClassResource} instances.
+	 * This keeps track of the one adapter used for all {@link java.util.Map.Entry} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -119,7 +117,7 @@ public class ModelItemProviderAdapterFactory2 extends ModelAdapterFactory implem
 	protected ClassResourceItemProvider classResourceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link net.zehrer.no2.model.ClassResource}.
+	 * This creates an adapter for a {@link java.util.Map.Entry}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
