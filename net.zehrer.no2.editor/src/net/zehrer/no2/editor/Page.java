@@ -114,11 +114,6 @@ public class Page extends AdapterImpl {
 	public TableViewer getTableView() {
 		return this.tableViewer;
 	}
-		
-	//TODO: NLS
-	private static String getString(String key) {
-		return NO2EditorPlugin.INSTANCE.getString(key);
-	}
 	
 	// ---- Adapter ----
 	

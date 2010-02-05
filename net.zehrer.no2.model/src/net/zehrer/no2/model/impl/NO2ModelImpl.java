@@ -14,10 +14,8 @@ package net.zehrer.no2.model.impl;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Collection;
-import net.zehrer.no2.model.ModelFactory;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import net.zehrer.no2.model.ModelPackage;
 import net.zehrer.no2.model.NO2Model;
