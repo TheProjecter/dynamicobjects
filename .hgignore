@@ -5,3 +5,8 @@ syntax: glob
 .metadata/*
 .JETEmitters/*
 .DS_Store
+
+syntax: regexp
+/*/bin/
+
+
