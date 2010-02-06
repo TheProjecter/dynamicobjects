@@ -19,33 +19,21 @@ import net.zehrer.no2.model.provider.ResourceItemProvider;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IChangeNotifier;
 import org.eclipse.emf.edit.provider.IDisposable;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class DynamicItemProviderAdapterFactory extends AbstractModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 
-	public ECoreItemProviderAdapterFactory() {
+	public DynamicItemProviderAdapterFactory() {
 		super();
 
-		supportedTypes.add(ITreeItemContentProvider.class);
-		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IEditingDomainItemProvider.class);
-		supportedTypes.add(IStructuredItemContentProvider.class); //IStructuredContentProvider
 		supportedTypes.add(ITableItemLabelProvider.class);
-
-		// add Ecore package, a adatper has to support all classes of a package
-		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=299887
-		supportedTypes.add(EcorePackage.eINSTANCE);
+		supportedTypes.add(IItemPropertySource.class);
 	}
 
 	// ---- AdapterFactory ----
@@ -55,7 +43,11 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		// similar to the implementation of EcoreItemProviderAdapter
+		
+		// it doesn't matter wich kind of package, this factory is generic for any dynamic objects
+		if (object instanceof EPackage)  
+			return true; 
+
 		return supportedTypes.contains(object);
 	}
 
@@ -80,19 +72,10 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
 		
-		if (notifier instanceof EPackage)
-			return createPackageAdapter();
-		
-//		if (notifier instanceof Resource)
-//			return getResourceItemProvider();
-		
 		// TODO: find a nicer way to handel the dynamic instances e.g. create its own AdapterFactory for the pages.
 		if (notifier instanceof DynamicEObjectImpl)  
 			return getEObjectItemProvider();
 		
-		if (((EObject)notifier).eClass().getEPackage() == EcorePackage.eINSTANCE) {
-			return createECoreAdapter();
-		}
 		return null;
 	}
 
@@ -117,6 +100,9 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 	
 	// ---- ENamedItemProvider
 
+	
+	//TODO: how to handel this with injection
+	
 	/**
 	 * Singelton attribute for the related Item Provider
 	 */
