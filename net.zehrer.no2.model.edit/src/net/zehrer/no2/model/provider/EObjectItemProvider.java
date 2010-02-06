@@ -11,26 +11,20 @@
 
 package net.zehrer.no2.model.provider;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import net.zehrer.no2.model.DataModelEditPlugin;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.IItemPropertySource;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
-public class EObjectItemProvider extends ItemProviderAdapter implements  ITreeItemContentProvider, IItemLabelProvider, IEditingDomainItemProvider {
+public class EObjectItemProvider extends ItemProviderAdapter implements  ITableItemLabelProvider, IItemPropertySource {
 
 	
 	// IItemLabelProvider,IItemPropertySource
@@ -50,22 +44,24 @@ public class EObjectItemProvider extends ItemProviderAdapter implements  ITreeIt
 	 * {@link #createCommand createCommand}. If you override those methods, then
 	 * you don't need to implement this.
 	 */
-	@Override
-	protected Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		
-		// sync this methode with Page.generateTableColumns
-
-		childrenFeatures = new ArrayList<EStructuralFeature>();
-		EObject eObject = (EObject) object;
-		EClass eClass = eObject.eClass();
-		
-	    for (EAttribute eAttribute : eClass.getEAllAttributes()) {
-	    	// TODO: analyse the ReflectiveItemProvider cause it seems it handle some special cases e.g. FeatureMap
-	    	childrenFeatures.add(eAttribute);
-	    }
-	      
-		return childrenFeatures;
-	}
+//	@Override
+//	protected Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+//		
+//		// sync this methode with Page.generateTableColumns
+//
+//		childrenFeatures = new ArrayList<EStructuralFeature>();
+//		EObject eObject = (EObject) object;
+//		EClass eClass = eObject.eClass();
+//		
+//	    for (EAttribute eAttribute : eClass.getEAllAttributes()) {
+//	    	// TODO: analyse the ReflectiveItemProvider cause it seems it handle some special cases e.g. FeatureMap
+//	    	childrenFeatures.add(eAttribute);
+//	    }
+//	      
+//		return childrenFeatures;
+//	}
+	
+	
 
 	// / ----- ItemProviderAdapter -----
 
@@ -78,7 +74,23 @@ public class EObjectItemProvider extends ItemProviderAdapter implements  ITreeIt
 		return DataModelEditPlugin.INSTANCE;
 	}
 
+	// ----- ITableItemLabelProvider ------
+	
+	@Override
+	public String getColumnText(Object object, int columnIndex) {
+
+		EObject eObject = (EObject) object;
+		EAttribute eAttribute = eObject.eClass().getEAllAttributes().get(columnIndex);
+		
+		Object value =  eObject.eGet(eAttribute);
+	    if (value != null)
+	    	return value.toString();
+
+	    return "";
+	}
+	
 	// ----- IItemLabelProvider ----
+
 
 	/**
 	 * This does the same thing as ILabelProvider.getText, it fetches the label

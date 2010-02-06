@@ -25,6 +25,7 @@ import net.zehrer.no2.NO2EditorPlugin;
 import net.zehrer.no2.handler.OpenModelEditorHandler;
 import net.zehrer.no2.model.NO2Model;
 import net.zehrer.no2.model.adapter.NO2ModelAdapter;
+import net.zehrer.no2.model.factory.DynamicItemProviderAdapterFactory;
 import net.zehrer.no2.model.factory.ECoreItemProviderAdapterFactory;
 import net.zehrer.no2.model.impl.NO2ModelImpl;
 import net.zehrer.no2.model.util.EClassResource;
@@ -569,6 +570,8 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 		modelAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		modelAdapterFactory.addAdapterFactory(new ECoreItemProviderAdapterFactory());
+		
+		modelAdapterFactory.addAdapterFactory(new DynamicItemProviderAdapterFactory());
 
 //		modelAdapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
 

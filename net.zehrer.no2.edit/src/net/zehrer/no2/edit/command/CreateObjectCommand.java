@@ -22,6 +22,7 @@ import org.eclipse.emf.common.command.CommandWrapper;
 import org.eclipse.emf.common.command.UnexecutableCommand;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.CommandActionDelegate;
 import org.eclipse.emf.edit.command.SetCommand;
@@ -59,7 +60,7 @@ public class CreateObjectCommand extends CommandWrapper implements CommandAction
 	/**
 	 * This is the new object to be added.
 	 */
-	protected Object newObject;
+	protected EObject newObject;
 
 	/**
 	 * This is the value to be returned by {@link #getAffectedObjects}. The

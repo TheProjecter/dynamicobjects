@@ -11,14 +11,21 @@
 
 package net.zehrer.no2.model.provider;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
-public class ResourceItemProvider extends org.eclipse.emf.edit.provider.resource.ResourceItemProvider {
+public class ResourceItemProvider extends ItemProviderAdapter implements  ITreeItemContentProvider, IItemLabelProvider, IEditingDomainItemProvider {
 
 	public ResourceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
@@ -29,12 +36,29 @@ public class ResourceItemProvider extends org.eclipse.emf.edit.provider.resource
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
 	 * describing the children that can be created under this object.
 	 */
+//	@Override
+//	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+//		super.collectNewChildDescriptors(newChildDescriptors, object);
+//
+//		newChildDescriptors.add(createChildParameter(EcorePackage.Literals.EPACKAGE__ECLASSIFIERS, EcoreFactory.eINSTANCE.createEClass()));
+//
+//	}
+	
 	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
+	protected Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		
+		// sync this methode with Page.generateTableColumns
 
-		newChildDescriptors.add(createChildParameter(EcorePackage.Literals.EPACKAGE__ECLASSIFIERS, EcoreFactory.eINSTANCE.createEClass()));
-
+		childrenFeatures = new ArrayList<EStructuralFeature>();
+		Resource resource = (Resource) object;
+//		EClass eClass = eObject.eClass();
+//		
+//	    for (EAttribute eAttribute : eClass.getEAllAttributes()) {
+//	    	// TODO: analyse the ReflectiveItemProvider cause it seems it handle some special cases e.g. FeatureMap
+//	    	childrenFeatures.add(eAttribute);
+//	    }
+	      
+		return childrenFeatures;
 	}
 
 	/**
