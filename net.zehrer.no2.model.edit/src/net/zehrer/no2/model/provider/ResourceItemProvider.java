@@ -9,7 +9,7 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package net.zehrer.no2.model.other;
+package net.zehrer.no2.model.provider;
 
 import java.util.Collection;
 
