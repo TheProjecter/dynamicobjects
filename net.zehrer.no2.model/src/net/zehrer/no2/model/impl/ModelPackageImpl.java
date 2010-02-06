@@ -9,7 +9,7 @@
  */
 package net.zehrer.no2.model.impl;
 
-import static net.zehrer.no2.model.ModelPackage.RESOURCE;
+//import static net.zehrer.no2.model.ModelPackage.RESOURCE;
 
 import java.io.IOException;
 import java.util.Map;

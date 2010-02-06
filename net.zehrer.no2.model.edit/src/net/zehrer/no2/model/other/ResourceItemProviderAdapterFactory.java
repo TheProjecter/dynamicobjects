@@ -9,9 +9,9 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package net.zehrer.no2.model.factory;
+package net.zehrer.no2.model.other;
 
-import net.zehrer.no2.model.other.ResourceItemProvider;
+import net.zehrer.no2.model.provider.ResourceItemProvider;
 
 import org.eclipse.emf.common.notify.Adapter;
 

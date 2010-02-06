@@ -25,10 +25,11 @@ import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 import org.eclipse.emf.edit.EMFEditPlugin;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
-public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItemContentProvider, IItemLabelProvider, IEditingDomainItemProvider {
+public class ENamedItemProvider extends ItemProviderAdapter implements IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IEditingDomainItemProvider {
 
 	// implements 
 	// IStructuredItemContentProvider,
@@ -58,7 +59,7 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 
-		super.collectNewChildDescriptors(newChildDescriptors, object);
+		//super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		// TODO: move to general commands/actions
 		
@@ -67,6 +68,7 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 			// add command
 			newChildDescriptors.add(createChildParameter(ModelPackage.Literals.NO2_MODEL__CONTENTS, null));
 		}
+		
 	}
 	
 

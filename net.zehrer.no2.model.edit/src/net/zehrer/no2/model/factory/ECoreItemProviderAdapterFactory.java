@@ -12,7 +12,9 @@
 package net.zehrer.no2.model.factory;
 
 import net.zehrer.no2.model.provider.ENamedItemProvider;
+import net.zehrer.no2.model.provider.EObjectItemProvider;
 import net.zehrer.no2.model.provider.EPackageItemProvider;
+import net.zehrer.no2.model.provider.ResourceItemProvider;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -20,11 +22,14 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IChangeNotifier;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
@@ -35,6 +40,7 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
 		supportedTypes.add(IEditingDomainItemProvider.class);
+		supportedTypes.add(IStructuredItemContentProvider.class); //IStructuredContentProvider
 
 		// add Ecore package, a adatper has to support all classes of a package
 		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=299887
@@ -76,6 +82,13 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 		if (notifier instanceof EPackage)
 			return createPackageAdapter();
 		
+		if (notifier instanceof Resource)
+			return getResourceItemProvider();
+		
+		// TODO: find a nicer way to handel the dynamic instances e.g. create its own AdapterFactory for the pages.
+		if (notifier instanceof DynamicEObjectImpl)  
+			return getEObjectItemProvider();
+		
 		if (((EObject)notifier).eClass().getEPackage() == EcorePackage.eINSTANCE) {
 			return createECoreAdapter();
 		}
@@ -85,7 +98,7 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 	// ---- EPackageItemProvider
 	
 	/**
-	 * This keeps track of the one adapter used for all instances.
+	 * Singelton attribute for the related Item Provider
 	 */
 	protected EPackageItemProvider ePackageItemProvider;
 	
@@ -101,10 +114,10 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 		return ePackageItemProvider;
 	}
 	
-	// ---- ECoreItemProvider
+	// ---- ENamedItemProvider
 
 	/**
-	 * This keeps track of the one adapter used for all instances.
+	 * Singelton attribute for the related Item Provider
 	 */
 	protected ENamedItemProvider eCoreItemProvider;
 	
@@ -118,6 +131,42 @@ public class ECoreItemProviderAdapterFactory extends AbstractModelAdapterFactory
 		}
 
 		return eCoreItemProvider;
+	}
+	
+	/**
+	 * Singelton attribute for the related Item Provider
+	 */
+	protected ResourceItemProvider resourceItemProvider;
+	
+	/**
+	 * 
+	 */
+	public Adapter getResourceItemProvider() {
+
+		if (this.resourceItemProvider == null) {
+			this.resourceItemProvider = new ResourceItemProvider(this);
+		}
+
+		return this.resourceItemProvider;
+	}
+	
+	// ---- EObjectItemProvider
+
+	/**
+	 * Singelton attribute for the related Item Provider
+	 */
+	protected EObjectItemProvider eObjectItemProvider;
+	
+	/**
+	 * 
+	 */
+	public Adapter getEObjectItemProvider() {
+
+		if (this.eObjectItemProvider == null) {
+			this.eObjectItemProvider = new EObjectItemProvider(this);
+		}
+
+		return this.eObjectItemProvider;
 	}
 
 	// --- IDisposable ---

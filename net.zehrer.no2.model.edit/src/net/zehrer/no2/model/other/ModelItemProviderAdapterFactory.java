@@ -7,7 +7,7 @@
  * 
  * 
  */
-package net.zehrer.no2.model.provider;
+package net.zehrer.no2.model.other;
 
 import java.util.ArrayList;
 import java.util.Collection;

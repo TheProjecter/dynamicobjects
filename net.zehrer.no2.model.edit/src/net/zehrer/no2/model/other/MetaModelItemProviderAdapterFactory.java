@@ -9,9 +9,9 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package net.zehrer.no2.model.factory;
+package net.zehrer.no2.model.other;
 
-import net.zehrer.no2.model.other.MetaModelItemProvider;
+import net.zehrer.no2.model.factory.AbstractModelAdapterFactory;
 
 import org.eclipse.emf.common.notify.Adapter;
 

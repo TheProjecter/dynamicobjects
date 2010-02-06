@@ -11,7 +11,6 @@
 
 package net.zehrer.no2.editor;
 
-import net.zehrer.no2.NO2EditorPlugin;
 import net.zehrer.no2.model.util.EClassResource;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -76,7 +75,7 @@ public class Page extends AdapterImpl {
 		
 		// add this page as adapter for the class to :
 		// - name change -> TODO: how to handle from here?
-		// - attribute change -> TODO :)
+		// - attribute (name) change -> TODO :)
 		// - something else?
 		classResource.getType().eAdapters().add(this);
 		
