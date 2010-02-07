@@ -837,12 +837,15 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 		{
 			ResourceSet resourceSet = no2Model.getResourceSet();
 			EClassResource classResource = new EClassResource(no2Model.getClassResources().get(0), resourceSet);
-			Page tablePage = new Page(getContainer(), this.modelAdapterFactory, classResource);
 			
-			Control table = tablePage.createPageControl();
-			tableViewer = tablePage.getTableView();
+			// Create the table page
+			TabelEditorPage tablePage = new TabelEditorPage(this, this.modelAdapterFactory, classResource);
+			tablePage.createControl(getContainer());
+			Control table = tablePage.getControl();
+			
+			tableViewer = tablePage.getTableViewer();
 
-			createContextMenuFor(tableViewer);
+			
 			int pageIndex = addPage(table);  // add tabel view as page.
 			
 			// TODO: write an adapter for updating the pageName; 
