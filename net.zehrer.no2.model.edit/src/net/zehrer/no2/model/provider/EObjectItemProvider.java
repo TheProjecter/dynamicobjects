@@ -11,6 +11,9 @@
 
 package net.zehrer.no2.model.provider;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.zehrer.no2.model.DataModelEditPlugin;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -19,14 +22,18 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
-public class EObjectItemProvider extends ItemProviderAdapter implements  ITableItemLabelProvider, IItemPropertySource {
+public class EObjectItemProvider extends ItemProviderAdapter implements ITableItemLabelProvider, IItemPropertySource {
 
-	
 	// IItemLabelProvider,IItemPropertySource
 	// extends ReflectiveItemProvider
 
@@ -44,24 +51,24 @@ public class EObjectItemProvider extends ItemProviderAdapter implements  ITableI
 	 * {@link #createCommand createCommand}. If you override those methods, then
 	 * you don't need to implement this.
 	 */
-//	@Override
-//	protected Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-//		
-//		// sync this methode with Page.generateTableColumns
-//
-//		childrenFeatures = new ArrayList<EStructuralFeature>();
-//		EObject eObject = (EObject) object;
-//		EClass eClass = eObject.eClass();
-//		
-//	    for (EAttribute eAttribute : eClass.getEAllAttributes()) {
-//	    	// TODO: analyse the ReflectiveItemProvider cause it seems it handle some special cases e.g. FeatureMap
-//	    	childrenFeatures.add(eAttribute);
-//	    }
-//	      
-//		return childrenFeatures;
-//	}
-	
-	
+	// @Override
+	// protected Collection<? extends EStructuralFeature>
+	// getChildrenFeatures(Object object) {
+	//		
+	// // sync this methode with Page.generateTableColumns
+	//
+	// childrenFeatures = new ArrayList<EStructuralFeature>();
+	// EObject eObject = (EObject) object;
+	// EClass eClass = eObject.eClass();
+	//		
+	// for (EAttribute eAttribute : eClass.getEAllAttributes()) {
+	// // TODO: analyse the ReflectiveItemProvider cause it seems it handle some
+	// special cases e.g. FeatureMap
+	// childrenFeatures.add(eAttribute);
+	// }
+	//	      
+	// return childrenFeatures;
+	// }
 
 	// / ----- ItemProviderAdapter -----
 
@@ -75,22 +82,21 @@ public class EObjectItemProvider extends ItemProviderAdapter implements  ITableI
 	}
 
 	// ----- ITableItemLabelProvider ------
-	
+
 	@Override
 	public String getColumnText(Object object, int columnIndex) {
 
 		EObject eObject = (EObject) object;
 		EAttribute eAttribute = eObject.eClass().getEAllAttributes().get(columnIndex);
-		
-		Object value =  eObject.eGet(eAttribute);
-	    if (value != null)
-	    	return value.toString();
 
-	    return "";
+		Object value = eObject.eGet(eAttribute);
+		if (value != null)
+			return value.toString();
+
+		return "";
 	}
-	
-	// ----- IItemLabelProvider ----
 
+	// ----- IItemLabelProvider ----
 
 	/**
 	 * This does the same thing as ILabelProvider.getText, it fetches the label
@@ -157,6 +163,48 @@ public class EObjectItemProvider extends ItemProviderAdapter implements  ITableI
 	public Object getImage(Object object) {
 
 		return overlayImage(object, EcoreEditPlugin.INSTANCE.getImage("full/obj16/EObject"));
+	}
+
+	// ----- IItemPropertySource
+
+	@Override
+	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
+	    itemPropertyDescriptors = new ArrayList<IItemPropertyDescriptor>();  
+
+		for (EStructuralFeature eFeature : ((EObject) object).eClass().getEAllStructuralFeatures()) {
+			if (!(eFeature instanceof EReference) || !((EReference) eFeature).isContainment()) {
+				itemPropertyDescriptors.add(
+						new ItemPropertyDescriptor(
+								((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+								getFeatureText(eFeature),
+								"TODO Property Description",   // TODO How to handle feature description'?
+								eFeature, 
+								eFeature.isChangeable(), 
+								ItemPropertyDescriptor.GENERIC_VALUE_IMAGE));
+			}
+		}
+
+		return itemPropertyDescriptors;
+	}
+	
+	// ----- ItemProviderAdaper
+	
+	/**
+	 * Get a feature name of the given feature.
+	 * TODO: At the moment it handles only EStructualFeatures, this should be improved.
+	 */
+	@Override
+	protected String getFeatureText(Object feature) {
+		String featureName;
+		if (feature instanceof EStructuralFeature) {
+			EStructuralFeature eFeature = (EStructuralFeature) feature;
+			//TODO How to change this name? e.g. by an annotaion? -> define and add editor support
+			featureName = eFeature.getName(); 
+		} else {
+			featureName = "TODO";
+		}
+		return featureName;
 	}
 
 }
