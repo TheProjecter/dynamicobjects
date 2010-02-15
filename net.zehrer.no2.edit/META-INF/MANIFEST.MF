@@ -5,7 +5,7 @@ Bundle-SymbolicName: net.zehrer.no2.edit
 Bundle-Version: 1.0.0
 Bundle-Activator: net.zehrer.no2.edit.NO2EditPlugin
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.edit;bundle-version="2.6.0",
+ org.eclipse.emf.edit,
  net.zehrer.no2.model;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
