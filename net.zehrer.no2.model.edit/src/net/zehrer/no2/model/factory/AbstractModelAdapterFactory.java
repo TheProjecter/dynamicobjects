@@ -48,6 +48,7 @@ public abstract class AbstractModelAdapterFactory extends AdapterFactoryImpl imp
 
 	/**
 	 * @see AdapterFactory#isFactoryForType
+	 * @category AdapterFactoryImpl
 	 */
 	@Override
 	public boolean isFactoryForType(Object type) {
@@ -57,6 +58,7 @@ public abstract class AbstractModelAdapterFactory extends AdapterFactoryImpl imp
 
 	/**
 	 * @see AdapterFactory#adapt(Object object, Object type)
+	 * @category AdapterFactoryImpl
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
@@ -74,6 +76,7 @@ public abstract class AbstractModelAdapterFactory extends AdapterFactoryImpl imp
 	 * This implementation substitutes the factory itself as the key for the
 	 * adapter.
 	 * @see AdapterFactory#adapt(Notifier target, Object type);
+	 * @category AdapterFactoryImpl
 	 */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
@@ -90,15 +93,15 @@ public abstract class AbstractModelAdapterFactory extends AdapterFactoryImpl imp
 
 	/**
 	 * This adds a listener.
+	 * @category IChangeNotifier
 	 */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.addListener(notifyChangedListener);
 	}
 
 	/**
-	 * This removes a listener. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
+	 * This removes a listener.
+	 * @category IChangeNotifier
 	 */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
 		changeNotifier.removeListener(notifyChangedListener);

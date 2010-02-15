@@ -16,7 +16,7 @@ package net.zehrer.no2.action;
 
 import java.util.Collection;
 
-import net.zehrer.no2.edit.command.CreateObjectCommand;
+import net.zehrer.no2.command.CreateObjectCommand;
 import net.zehrer.no2.editor.ModelEditor;
 import net.zehrer.no2.model.NO2Model;
 
