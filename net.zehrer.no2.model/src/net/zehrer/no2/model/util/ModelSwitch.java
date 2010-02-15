@@ -13,6 +13,7 @@ package net.zehrer.no2.model.util;
 
 import java.util.List;
 
+import java.util.Map;
 import net.zehrer.no2.model.*;
 
 import org.eclipse.emf.ecore.EClass;
@@ -37,7 +38,7 @@ public class ModelSwitch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	public static final String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * The cached model package
@@ -105,9 +106,9 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.CLASS_RESOURCE: {
-				ClassResource classResource = (ClassResource)theEObject;
-				T result = caseClassResource(classResource);
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY: {
+				@SuppressWarnings("unchecked") Map.Entry<EClass, String> eClassToURIMapEntry = (Map.Entry<EClass, String>)theEObject;
+				T result = caseEClassToURIMapEntry(eClassToURIMapEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -131,17 +132,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Class Resource</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>EClass To URI Map Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Class Resource</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>EClass To URI Map Entry</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClassResource(ClassResource object) {
+	public T caseEClassToURIMapEntry(Map.Entry<EClass, String> object) {
 		return null;
 	}
 

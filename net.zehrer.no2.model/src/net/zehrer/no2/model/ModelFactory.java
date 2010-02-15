@@ -27,7 +27,7 @@ public interface ModelFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * The singleton instance of the factory.
@@ -45,15 +45,6 @@ public interface ModelFactory extends EFactory {
 	 * @generated
 	 */
 	NO2Model createNO2Model();
-
-	/**
-	 * Returns a new object of class '<em>Class Resource</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Class Resource</em>'.
-	 * @generated
-	 */
-	ClassResource createClassResource();
 
 	/**
 	 * Returns the package supported by this factory.

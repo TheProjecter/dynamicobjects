@@ -20,18 +20,16 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 import org.eclipse.emf.edit.EMFEditPlugin;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
-public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItemContentProvider, IItemLabelProvider, IEditingDomainItemProvider {
+public class ENamedItemProvider extends ItemProviderAdapter implements IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IEditingDomainItemProvider {
 
 	// implements 
 	// IStructuredItemContentProvider,
@@ -45,19 +43,10 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 
 	// / ----- ItemProviderAdapter -----
 
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(ModelPackage.Literals.NO2_MODEL__CONTENTS);
-		}
-		return childrenFeatures;
-	}
-
 	/**
 	 * Return the resource locator for the NEW item provider's resources in this
 	 * subclass
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
@@ -67,38 +56,29 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 	/**
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
 	 * describing the children that can be created under this object.
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 
-		super.collectNewChildDescriptors(newChildDescriptors, object);
+		//super.collectNewChildDescriptors(newChildDescriptors, object);
 
+		// TODO: move to general commands/actions
+		
 		if (object instanceof EClass) {
 
-			// dynamic Object creation
-			EClass eClass = (EClass) object;
-			EFactory eFactory = eClass.getEPackage().getEFactoryInstance();
-			EObject eObject = eFactory.create(eClass);
-
 			// add command
-			newChildDescriptors.add(createChildParameter(ModelPackage.Literals.NO2_MODEL__CONTENTS, eObject));
+			newChildDescriptors.add(createChildParameter(ModelPackage.Literals.NO2_MODEL__CONTENTS, null));
 		}
+		
 	}
 	
-//	
-//	 @Override
-//	 protected EReference getChildFeature (Object object, Object child) {
-//		
-//	 return ModelPackage.Literals.NO2_MODEL__CONTENTS;
-//		
-//	 }
-//	
-
 	// ----- IItemLabelProvider ----
 
 	/**
 	 * This does the same thing as ILabelProvider.getText, it fetches the label
 	 * text specific to this object instance.
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public String getText(Object object) {
@@ -155,6 +135,7 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 
 	/**
 	 * This returns EClass image from the EcoreEditPlugin
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public Object getImage(Object object) {
@@ -168,7 +149,9 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 
 	// ----- CreateChildCommand.Helper ----
 
-	
+	/**
+	 * @category ItemProviderAdapter
+	 */
 	@Override
 	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
 
@@ -185,6 +168,7 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 	/**
 	 * This returns the icon image for
 	 * {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public Object getCreateChildImage(Object owner, Object feature, Object child, Collection<?> selection) {
@@ -197,23 +181,3 @@ public class ENamedItemProvider extends ItemProviderAdapter implements ITreeItem
 	}
 
 }
-
-
-
-// /**
-// * Get a translated string from the resource locator, with substitutions.
-// */
-// public String getUntranslatedString(String key)
-// {
-// String result;
-// try {
-// result = getNewResourceLocator().getString(key);
-// } catch (MissingResourceException e1) {
-// try {
-// result = getResourceLocator().getString(key);
-// } catch (MissingResourceException e2) {
-// result = key + " (text not found)";
-// }
-// }
-// return result;
-// }

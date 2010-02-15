@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Stephan Zehrer and others.
+ * Copyright (c) 2009 - 2010 Stephan Zehrer and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,16 +9,11 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package net.zehrer.no2.model.factory;
+package net.zehrer.no2.model.other;
 
-import net.zehrer.no2.model.other.MetaModelItemProvider;
+import net.zehrer.no2.model.factory.AbstractModelAdapterFactory;
 
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support
