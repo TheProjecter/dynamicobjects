@@ -11,6 +11,7 @@
  */
 package net.zehrer.no2.model.util;
 
+import java.util.Map;
 import net.zehrer.no2.model.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -18,6 +19,7 @@ import org.eclipse.emf.common.notify.Notifier;
 
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -34,7 +36,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	public static final String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * The cached model package.
@@ -88,8 +90,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createNO2ModelAdapter();
 			}
 			@Override
-			public Adapter caseClassResource(ClassResource object) {
-				return createClassResourceAdapter();
+			public Adapter caseEClassToURIMapEntry(Map.Entry<EClass, String> object) {
+				return createEClassToURIMapEntryAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -126,16 +128,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link net.zehrer.no2.model.ClassResource <em>Class Resource</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>EClass To URI Map Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see net.zehrer.no2.model.ClassResource
+	 * @see java.util.Map.Entry
 	 * @generated
 	 */
-	public Adapter createClassResourceAdapter() {
+	public Adapter createEClassToURIMapEntryAdapter() {
 		return null;
 	}
 

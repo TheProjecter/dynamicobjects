@@ -11,6 +11,7 @@
  */
 package net.zehrer.no2.model.impl;
 
+import java.util.Map;
 import net.zehrer.no2.model.*;
 
 import org.eclipse.emf.common.util.URI;
@@ -38,7 +39,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	public static final String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * Creates the default factory implementation.
@@ -78,7 +79,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ModelPackage.NO2_MODEL: return createNO2Model();
-			case ModelPackage.CLASS_RESOURCE: return createClassResource();
+			case ModelPackage.ECLASS_TO_URI_MAP_ENTRY: return (EObject)createEClassToURIMapEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -137,9 +138,9 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassResource createClassResource() {
-		ClassResourceImpl classResource = new ClassResourceImpl();
-		return classResource;
+	public Map.Entry<EClass, String> createEClassToURIMapEntry() {
+		EClassToURIMapEntryImpl eClassToURIMapEntry = new EClassToURIMapEntryImpl();
+		return eClassToURIMapEntry;
 	}
 
 	/**

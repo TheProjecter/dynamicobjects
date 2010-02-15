@@ -63,12 +63,12 @@ public class DataContentOutlinePage extends ContentOutlinePage implements ISelec
 		// file content...
 		viewer.setInput(resourceSet);
 		
-		//viewer.setInput(modelEditor.getEditorInput());  // ORIGINAL for the generator
+		//viewer.setInput(modelEditor.getEditorInput());  // ORIGINAL form the generator
 
 		// Make sure our popups work.
 		modelEditor.createContextMenuFor(viewer);
 
-		// TODO: find officualECore extension
+		// TODO: find official ecore extension
 		Resource firstModel = findFirstResource(resourceSet, "ecore");
 		if (firstModel != null)
 			viewer.setSelection(new StructuredSelection(firstModel), true);

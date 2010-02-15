@@ -1,13 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: NO2 Edit
+Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: net.zehrer.no2.edit
 Bundle-Version: 1.0.0
-Bundle-Activator: net.zehrer.no2.edit.NO2EditPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit,
  net.zehrer.no2.model;bundle-version="1.0.0"
-Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: org.eclipse.emf.ecore.provider
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: javax.inject,
+ org.eclipse.emf.ecore.provider
 Export-Package: net.zehrer.no2.edit.command

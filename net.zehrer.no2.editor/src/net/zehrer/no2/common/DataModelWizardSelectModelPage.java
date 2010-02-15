@@ -291,10 +291,11 @@ public class DataModelWizardSelectModelPage extends WizardResourceImportPage {
 				| SWT.SINGLE);
 		fileDialog.setFilterExtensions(getFilterExtensions());
 
-		URI modelURI = null; // getModelImporter().getFirstModelLocationURI(true);
-		if (modelURI != null) {
-			fileDialog.setFileName(modelURI.toFileString());
-		}
+		// Eclipse provide a warning for "Dead code" :)
+//		URI modelURI = null; // getModelImporter().getFirstModelLocationURI(true);
+//		if (modelURI != null) {
+//			fileDialog.setFileName(modelURI.toFileString());
+//		}
 
 		if (fileDialog.open() != null && fileDialog.getFileNames().length > 0) {
 			String[] fileNames = fileDialog.getFileNames();

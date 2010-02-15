@@ -7,13 +7,11 @@
  * 
  * 
  */
-package net.zehrer.no2.model.factory;
+package net.zehrer.no2.model.other;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import net.zehrer.no2.model.other.ClassResourceItemProvider;
-import net.zehrer.no2.model.other.NO2ModelItemProvider;
 import net.zehrer.no2.model.util.ModelAdapterFactory;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -41,13 +39,13 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ModelItemProviderAdapterFactory2 extends ModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class ModelItemProviderAdapterFactory extends ModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	public static final String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
@@ -79,7 +77,7 @@ public class ModelItemProviderAdapterFactory2 extends ModelAdapterFactory implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModelItemProviderAdapterFactory2() {
+	public ModelItemProviderAdapterFactory() {
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
@@ -111,26 +109,26 @@ public class ModelItemProviderAdapterFactory2 extends ModelAdapterFactory implem
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link net.zehrer.no2.model.ClassResource} instances.
+	 * This keeps track of the one adapter used for all {@link java.util.Map.Entry} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ClassResourceItemProvider classResourceItemProvider;
+	protected EClassToURIMapEntryItemProvider eClassToURIMapEntryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link net.zehrer.no2.model.ClassResource}.
+	 * This creates an adapter for a {@link java.util.Map.Entry}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createClassResourceAdapter() {
-		if (classResourceItemProvider == null) {
-			classResourceItemProvider = new ClassResourceItemProvider(this);
+	public Adapter createEClassToURIMapEntryAdapter() {
+		if (eClassToURIMapEntryItemProvider == null) {
+			eClassToURIMapEntryItemProvider = new EClassToURIMapEntryItemProvider(this);
 		}
 
-		return classResourceItemProvider;
+		return eClassToURIMapEntryItemProvider;
 	}
 
 	/**
@@ -233,7 +231,7 @@ public class ModelItemProviderAdapterFactory2 extends ModelAdapterFactory implem
 	 */
 	public void dispose() {
 		if (no2ModelItemProvider != null) no2ModelItemProvider.dispose();
-		if (classResourceItemProvider != null) classResourceItemProvider.dispose();
+		if (eClassToURIMapEntryItemProvider != null) eClassToURIMapEntryItemProvider.dispose();
 	}
 
 }

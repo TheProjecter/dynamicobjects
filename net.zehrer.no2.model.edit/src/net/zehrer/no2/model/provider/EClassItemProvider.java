@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
@@ -114,7 +113,7 @@ public class EClassItemProvider extends ItemProviderAdapter implements ITreeItem
 		if (!eClass.getETypeParameters().isEmpty()) {
 			result.append("<");
 			for (Iterator<ETypeParameter> i = eClass.getETypeParameters().iterator(); i.hasNext();) {
-				ETypeParameter eTypeParameter = i.next();
+				i.next();
 				// result.append(ETypeParameterItemProvider.getText(eTypeParameter));
 				if (i.hasNext()) {
 					result.append(", ");
@@ -126,7 +125,7 @@ public class EClassItemProvider extends ItemProviderAdapter implements ITreeItem
 		if (!eClass.getEGenericSuperTypes().isEmpty()) {
 			result.append(" -> ");
 			for (Iterator<EGenericType> i = eClass.getEGenericSuperTypes().iterator(); i.hasNext();) {
-				EGenericType eGenericSuperType = i.next();
+				i.next();
 				// result.append(EGenericTypeItemProvider.getText(eGenericSuperType));
 				if (i.hasNext()) {
 					result.append(", ");

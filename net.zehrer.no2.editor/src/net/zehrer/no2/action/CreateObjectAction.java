@@ -12,19 +12,20 @@
 /**
  * 
  */
-package net.zehrer.no2.edit.ui.action;
+package net.zehrer.no2.action;
 
 import java.util.Collection;
 
 import net.zehrer.no2.edit.command.CreateObjectCommand;
+import net.zehrer.no2.editor.ModelEditor;
+import net.zehrer.no2.model.NO2Model;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.UnexecutableCommand;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.command.CommandParameter;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.action.StaticSelectionCommandAction;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.IEditorPart;
 
 /**
  * A object creation action is implemented by the CreateObjectCommand.
@@ -37,16 +38,20 @@ public class CreateObjectAction extends StaticSelectionCommandAction {
 	/**
 	 * This describes the child to be created.
 	 */
-	protected Object descriptor;
+	protected NO2Model model;
 
 	/**
 	 * This constructs an instance of an action that uses the given editing
 	 * domain to create a object instance specified by <code>descriptor</code>
 	 * for the single EClass in the <code>selection</code>.
 	 */
-	public CreateObjectAction(EditingDomain editingDomain, ISelection selection, Object descriptor) {
-		super(editingDomain);
-		this.descriptor = descriptor;
+	public CreateObjectAction(IEditorPart editorPart, ISelection selection) {
+		super(editorPart);
+		
+		if (editorPart instanceof ModelEditor) {
+			this.model = ((ModelEditor)editorPart).getModel();
+		}
+		
 		configureAction(selection);
 	}
 
@@ -57,14 +62,9 @@ public class CreateObjectAction extends StaticSelectionCommandAction {
 	@Override
 	protected Command createActionCommand(EditingDomain editingDomain, Collection<?> collection) {
 
-		if (collection.size() == 1) {
+		if (collection.size() == 1 && model != null) {
 
-			CommandParameter parameter = (CommandParameter) descriptor;
-
-			return new CreateObjectCommand(editingDomain, (EStructuralFeature) parameter.feature, parameter.value, collection);
-
-			// return CreateObjectCommand.create(editingDomain, descriptor,
-			// collection);
+			return new CreateObjectCommand(editingDomain, model, collection);
 		}
 
 		return UnexecutableCommand.INSTANCE;

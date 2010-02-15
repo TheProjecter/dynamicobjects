@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -48,23 +49,24 @@ public interface NO2Model extends EObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
-	 * Returns the value of the '<em><b>Class Resources</b></em>' containment reference list.
-	 * The list contents are of type {@link net.zehrer.no2.model.ClassResource}.
+	 * Returns the value of the '<em><b>Class Resources</b></em>' map.
+	 * The key is of type {@link org.eclipse.emf.ecore.EClass},
+	 * and the value is of type {@link java.lang.String},
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Class Resources</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class Resources</em>' containment reference list.
+	 * @return the value of the '<em>Class Resources</em>' map.
 	 * @see net.zehrer.no2.model.ModelPackage#getNO2Model_ClassResources()
-	 * @model containment="true"
+	 * @model mapType="net.zehrer.no2.model.EClassToURIMapEntry<org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EString>"
 	 * @generated
 	 */
-	EList<ClassResource> getClassResources();
+	EMap<EClass, String> getClassResources();
 
 	/**
 	 * Returns the value of the '<em><b>Resource Set</b></em>' attribute.

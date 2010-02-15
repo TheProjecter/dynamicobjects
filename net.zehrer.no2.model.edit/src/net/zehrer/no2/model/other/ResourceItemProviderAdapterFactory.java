@@ -9,9 +9,9 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package net.zehrer.no2.model.factory;
+package net.zehrer.no2.model.other;
 
-import net.zehrer.no2.model.other.ResourceItemProvider;
+import net.zehrer.no2.model.provider.ResourceItemProvider;
 
 import org.eclipse.emf.common.notify.Adapter;
 
@@ -25,8 +25,9 @@ public class ResourceItemProviderAdapterFactory extends org.eclipse.emf.edit.pro
 	 * This creates an adapter for a
 	 * {@link org.eclipse.emf.ecore.resource.Resource}.
 	 * 
-	 * @generated
+	 * @generated NOT   // BUG missing override in template
 	 */
+	@Override
 	public Adapter createResourceAdapter() {
 		return new ResourceItemProvider(this);
 	}

@@ -6,13 +6,14 @@
  *  http://www.eclipse.org/legal/epl-v10.html
  * 
  * 
- *
- * $Id$
  */
 package net.zehrer.no2.model.impl;
 
+//import static net.zehrer.no2.model.ModelPackage.RESOURCE;
+
 import java.io.IOException;
-import net.zehrer.no2.model.ClassResource;
+import java.util.Map;
+
 import net.zehrer.no2.model.ModelFactory;
 import net.zehrer.no2.model.ModelPackage;
 import net.zehrer.no2.model.NO2Model;
@@ -24,7 +25,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -41,7 +41,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = " Copyright (c) 2009 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
+	public static final String copyright = " Copyright (c) 2009 - 2010 Stephan Zehrer and others.\n All rights reserved. This program and the accompanying materials\n are made available under the terms of the Eclipse Public License v1.0\n which accompanies this distribution, and is available at\n http://www.eclipse.org/legal/epl-v10.html\n\n";
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -55,7 +55,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass classResourceEClass = null;
+	private EClass eClassToURIMapEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -208,8 +208,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getClassResource() {
-		return classResourceEClass;
+	public EClass getEClassToURIMapEntry() {
+		return eClassToURIMapEntryEClass;
 	}
 
 	/**
@@ -217,8 +217,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getClassResource_Type() {
-		return (EReference)classResourceEClass.getEStructuralFeatures().get(0);
+	public EReference getEClassToURIMapEntry_Key() {
+		return (EReference)eClassToURIMapEntryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -226,8 +226,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getClassResource_Uri() {
-		return (EAttribute)classResourceEClass.getEStructuralFeatures().get(1);
+	public EAttribute getEClassToURIMapEntry_Value() {
+		return (EAttribute)eClassToURIMapEntryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -301,9 +301,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(no2ModelEClass, NO2_MODEL__INIT);
 		createEReference(no2ModelEClass, NO2_MODEL__CONTENTS);
 
-		classResourceEClass = createEClass(CLASS_RESOURCE);
-		createEReference(classResourceEClass, CLASS_RESOURCE__TYPE);
-		createEAttribute(classResourceEClass, CLASS_RESOURCE__URI);
+		eClassToURIMapEntryEClass = createEClass(ECLASS_TO_URI_MAP_ENTRY);
+		createEReference(eClassToURIMapEntryEClass, ECLASS_TO_URI_MAP_ENTRY__KEY);
+		createEAttribute(eClassToURIMapEntryEClass, ECLASS_TO_URI_MAP_ENTRY__VALUE);
 
 		// Create data types
 		uriEDataType = createEDataType(URI);
@@ -346,7 +346,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(no2ModelEClass, NO2Model.class, "NO2Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getNO2Model_ClassResources(), this.getClassResource(), null, "classResources", null, 0, -1, NO2Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNO2Model_ClassResources(), this.getEClassToURIMapEntry(), null, "classResources", null, 0, -1, NO2Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNO2Model_ResourceSet(), this.getResourceSet(), "resourceSet", "", 0, 1, NO2Model.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNO2Model_ArchiveURI(), this.getURI(), "archiveURI", "", 0, 1, NO2Model.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNO2Model_Init(), theEcorePackage.getEBoolean(), "init", null, 0, 1, NO2Model.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -367,9 +367,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		op = addEOperation(no2ModelEClass, this.getResource(), "createResource", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getURI(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(classResourceEClass, ClassResource.class, "ClassResource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getClassResource_Type(), theEcorePackage.getEClass(), null, "type", null, 0, 1, ClassResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getClassResource_Uri(), theEcorePackage.getEString(), "uri", null, 0, 1, ClassResource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(eClassToURIMapEntryEClass, Map.Entry.class, "EClassToURIMapEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEClassToURIMapEntry_Key(), theEcorePackage.getEClass(), null, "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEClassToURIMapEntry_Value(), theEcorePackage.getEString(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

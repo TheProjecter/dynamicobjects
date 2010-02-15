@@ -7,14 +7,12 @@ Bundle-ClassPath: .
 Bundle-Activator: net.zehrer.no2.model.DataModelEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: net.zehrer.no2.model,
  net.zehrer.no2.model.factory,
  net.zehrer.no2.model.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit;visibility:=reexport,
  org.eclipse.emf.ecore.edit;bundle-version="2.5.0";visibility:=reexport,
- net.zehrer.no2.model;bundle-version="1.0.0";visibility:=reexport,
- net.zehrer.no2.edit.ui;bundle-version="1.0.0"
+ net.zehrer.no2.model;bundle-version="1.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Import-Package: net.zehrer.no2.edit.ui.action
