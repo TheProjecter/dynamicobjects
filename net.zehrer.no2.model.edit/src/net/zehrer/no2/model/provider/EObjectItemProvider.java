@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Stephan Zehrer and others.
+ * Copyright (c) 2009 - 2010 Stephan Zehrer and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -26,8 +26,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.edit.provider.IChangeNotifier;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
@@ -35,7 +35,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-public class EObjectItemProvider extends ItemProviderAdapter implements ITableItemLabelProvider, IItemPropertySource {
+public class EObjectItemProvider extends ItemProviderAdapter implements ITableItemLabelProvider, IItemPropertySource , IChangeNotifier{
 
 	// IItemLabelProvider,IItemPropertySource
 	// extends ReflectiveItemProvider
@@ -230,7 +230,13 @@ public class EObjectItemProvider extends ItemProviderAdapter implements ITableIt
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-		super.notifyChanged(notification);
+		updateChildren(notification);
+		
+		fireNotifyChanged(new ViewerNotification (
+				notification,notification.getNotifier(),false,true));
+		
+		// TODO: handle containment references different as attributes
+		//super.notifyChanged(notification);  // disable as long just adapter impl
 	}
 
 }
