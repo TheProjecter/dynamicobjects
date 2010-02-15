@@ -17,6 +17,7 @@ import java.util.List;
 import net.zehrer.no2.model.DataModelEditPlugin;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClassifier;
@@ -25,12 +26,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 public class EObjectItemProvider extends ItemProviderAdapter implements ITableItemLabelProvider, IItemPropertySource {
 
@@ -75,6 +78,8 @@ public class EObjectItemProvider extends ItemProviderAdapter implements ITableIt
 	/**
 	 * Return the resource locator for the NEW item provider's resources in this
 	 * subclass
+	 * 
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
@@ -83,6 +88,9 @@ public class EObjectItemProvider extends ItemProviderAdapter implements ITableIt
 
 	// ----- ITableItemLabelProvider ------
 
+	/**
+	 * @category ItemProviderAdapter
+	 */
 	@Override
 	public String getColumnText(Object object, int columnIndex) {
 
@@ -101,6 +109,8 @@ public class EObjectItemProvider extends ItemProviderAdapter implements ITableIt
 	/**
 	 * This does the same thing as ILabelProvider.getText, it fetches the label
 	 * text specific to this object instance.
+	 * 
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public String getText(Object object) {
@@ -158,6 +168,8 @@ public class EObjectItemProvider extends ItemProviderAdapter implements ITableIt
 
 	/**
 	 * This returns EClass image from the EcoreEditPlugin
+	 * 
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public Object getImage(Object object) {
@@ -167,44 +179,58 @@ public class EObjectItemProvider extends ItemProviderAdapter implements ITableIt
 
 	// ----- IItemPropertySource
 
+	/**
+	 * @category ItemProviderAdapter
+	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
 
-	    itemPropertyDescriptors = new ArrayList<IItemPropertyDescriptor>();  
+		itemPropertyDescriptors = new ArrayList<IItemPropertyDescriptor>();
 
 		for (EStructuralFeature eFeature : ((EObject) object).eClass().getEAllStructuralFeatures()) {
 			if (!(eFeature instanceof EReference) || !((EReference) eFeature).isContainment()) {
-				itemPropertyDescriptors.add(
-						new ItemPropertyDescriptor(
-								((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-								getFeatureText(eFeature),
-								"TODO Property Description",   // TODO How to handle feature description'?
-								eFeature, 
-								eFeature.isChangeable(), 
-								ItemPropertyDescriptor.GENERIC_VALUE_IMAGE));
+				itemPropertyDescriptors.add(new ItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getFeatureText(eFeature),
+						"TODO Property Description", // TODO How to handle
+														// feature description'?
+						eFeature, eFeature.isChangeable(), ItemPropertyDescriptor.GENERIC_VALUE_IMAGE));
 			}
 		}
 
 		return itemPropertyDescriptors;
 	}
-	
+
 	// ----- ItemProviderAdaper
-	
+
 	/**
-	 * Get a feature name of the given feature.
-	 * TODO: At the moment it handles only EStructualFeatures, this should be improved.
+	 * Get a feature name of the given feature. TODO: At the moment it handles
+	 * only EStructualFeatures, this should be improved.
+	 * 
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	protected String getFeatureText(Object feature) {
 		String featureName;
 		if (feature instanceof EStructuralFeature) {
 			EStructuralFeature eFeature = (EStructuralFeature) feature;
-			//TODO How to change this name? e.g. by an annotaion? -> define and add editor support
-			featureName = eFeature.getName(); 
+			// TODO How to change this name? e.g. by an annotaion? -> define and
+			// add editor support
+			featureName = eFeature.getName();
 		} else {
 			featureName = "TODO";
 		}
 		return featureName;
+	}
+
+	// 
+
+	/**
+	 * This handles notification by calling
+	 * {@link #fireNotifyChanged(Notification) fireNotifyChanged}.
+	 * @category AdapterImpl
+	 */
+	@Override
+	public void notifyChanged(Notification notification) {
+		super.notifyChanged(notification);
 	}
 
 }

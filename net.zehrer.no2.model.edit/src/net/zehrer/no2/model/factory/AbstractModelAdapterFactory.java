@@ -80,8 +80,6 @@ public abstract class AbstractModelAdapterFactory extends AdapterFactoryImpl imp
 		return super.adapt(notifier, this);
 	}
 
-
-
 	// / ----- IChangeNotifier
 
 	/**
@@ -130,15 +128,13 @@ public abstract class AbstractModelAdapterFactory extends AdapterFactoryImpl imp
 
 	/**
 	 * This returns the root adapter factory that contains this factory.
-	 * <!--begin-user-doc --> <!-- end-user-doc -->
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
 		return this.parentAdapterFactory == null ? this : this.parentAdapterFactory.getRootAdapterFactory();
 	}
 
 	/**
-	 * This sets the composed adapter factory that contains this factory. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This sets the composed adapter factory that contains this factory.
 	 */
 	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
 		this.parentAdapterFactory = parentAdapterFactory;
