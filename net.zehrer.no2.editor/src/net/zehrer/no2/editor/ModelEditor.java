@@ -610,7 +610,7 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 	 * @generated
 	 * @category MultiPageEditorPart
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Object getAdapter(Class key) {
 		if (IContentOutlinePage.class.equals(key)) {
