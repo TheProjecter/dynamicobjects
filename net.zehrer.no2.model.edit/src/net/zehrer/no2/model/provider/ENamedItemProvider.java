@@ -46,6 +46,7 @@ public class ENamedItemProvider extends ItemProviderAdapter implements IStructur
 	/**
 	 * Return the resource locator for the NEW item provider's resources in this
 	 * subclass
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
@@ -55,6 +56,7 @@ public class ENamedItemProvider extends ItemProviderAdapter implements IStructur
 	/**
 	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
 	 * describing the children that can be created under this object.
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
@@ -71,12 +73,12 @@ public class ENamedItemProvider extends ItemProviderAdapter implements IStructur
 		
 	}
 	
-
 	// ----- IItemLabelProvider ----
 
 	/**
 	 * This does the same thing as ILabelProvider.getText, it fetches the label
 	 * text specific to this object instance.
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public String getText(Object object) {
@@ -133,6 +135,7 @@ public class ENamedItemProvider extends ItemProviderAdapter implements IStructur
 
 	/**
 	 * This returns EClass image from the EcoreEditPlugin
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public Object getImage(Object object) {
@@ -146,7 +149,9 @@ public class ENamedItemProvider extends ItemProviderAdapter implements IStructur
 
 	// ----- CreateChildCommand.Helper ----
 
-	
+	/**
+	 * @category ItemProviderAdapter
+	 */
 	@Override
 	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
 
@@ -163,6 +168,7 @@ public class ENamedItemProvider extends ItemProviderAdapter implements IStructur
 	/**
 	 * This returns the icon image for
 	 * {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * @category ItemProviderAdapter
 	 */
 	@Override
 	public Object getCreateChildImage(Object owner, Object feature, Object child, Collection<?> selection) {

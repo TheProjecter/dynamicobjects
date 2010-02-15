@@ -530,7 +530,7 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 		setSite(site);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
-		site.setSelectionProvider(this);
+		site.setSelectionProvider(this);  // TODO: still required?
 		site.getPage().addPartListener(partListener);
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
 	}
