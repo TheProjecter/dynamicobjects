@@ -11,23 +11,21 @@
 
 package net.zehrer.no2.model.factory;
 
-import net.zehrer.no2.model.provider.ENamedItemProvider;
 import net.zehrer.no2.model.provider.EObjectItemProvider;
-import net.zehrer.no2.model.provider.EPackageItemProvider;
-import net.zehrer.no2.model.provider.ResourceItemProvider;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IChangeNotifier;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 
-public class DynamicItemProviderAdapterFactory extends AbstractModelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class DynamicItemProviderAdapterFactory extends
+		AbstractModelAdapterFactory implements ComposeableAdapterFactory,
+		IChangeNotifier, IDisposable {
 
 	public DynamicItemProviderAdapterFactory() {
 		super();
@@ -44,112 +42,27 @@ public class DynamicItemProviderAdapterFactory extends AbstractModelAdapterFacto
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		
-		// it doesn't matter wich kind of package, this factory is generic for any dynamic objects
-		if (object instanceof EPackage)  
-			return true; 
+
+		// it doesn't matter which kind of package, this factory is generic for
+		// any dynamic objects
+		if (object instanceof EPackage)
+			return true;
 
 		return supportedTypes.contains(object);
 	}
 
 	/**
-	 * @see AdapterFactory#adapt(Object object, Object type)
-	 */
-	@Override
-	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
-			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>) type).isInstance(adapter))) {
-				return adapter;
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * @see AdapterFactory#adapt(Notifier target, Object type);
-	 */
-	@Override
-	public Adapter adapt(Notifier notifier, Object type) {
-		
-		// TODO: find a nicer way to handel the dynamic instances e.g. create its own AdapterFactory for the pages.
-		if (notifier instanceof DynamicEObjectImpl)  
-			return getEObjectItemProvider();
-		
-		return null;
-	}
-
-	// ---- EPackageItemProvider
-	
-	/**
-	 * Singelton attribute for the related Item Provider
-	 */
-	protected EPackageItemProvider ePackageItemProvider;
-	
-	/**
-	 * This creates an adapter for a EPackage instance
-	 */
-	public Adapter createPackageAdapter() {
-
-		if (ePackageItemProvider == null) {
-			ePackageItemProvider = new EPackageItemProvider(this);
-		}
-
-		return ePackageItemProvider;
-	}
-	
-	// ---- ENamedItemProvider
-
-	
-	//TODO: how to handel this with injection
-	
-	/**
-	 * Singelton attribute for the related Item Provider
-	 */
-	protected ENamedItemProvider eCoreItemProvider;
-	
-	/**
-	 * This creates an adapter for a meta model (Ecore??)
-	 */
-	public Adapter createECoreAdapter() {
-
-		if (eCoreItemProvider == null) {
-			eCoreItemProvider = new ENamedItemProvider(this);
-		}
-
-		return eCoreItemProvider;
-	}
-	
-	/**
-	 * Singelton attribute for the related Item Provider
-	 */
-	protected ResourceItemProvider resourceItemProvider;
-	
-	/**
-	 * 
-	 */
-	public Adapter getResourceItemProvider() {
-
-		if (this.resourceItemProvider == null) {
-			this.resourceItemProvider = new ResourceItemProvider(this);
-		}
-
-		return this.resourceItemProvider;
-	}
-	
-	// ---- EObjectItemProvider
-
-	/**
-	 * Singelton attribute for the related Item Provider
+	 * Singleton attribute for the related Item Provider
 	 */
 	protected EObjectItemProvider eObjectItemProvider;
-	
-	/**
-	 * 
-	 */
-	public Adapter getEObjectItemProvider() {
 
+	/**
+	 * @category AdapterFactoryImpl
+	 */
+	@Override
+	protected Adapter createAdapter(Notifier target) {
+
+		
 		if (this.eObjectItemProvider == null) {
 			this.eObjectItemProvider = new EObjectItemProvider(this);
 		}
@@ -158,11 +71,12 @@ public class DynamicItemProviderAdapterFactory extends AbstractModelAdapterFacto
 	}
 
 	// --- IDisposable ---
-
+	/**
+	 * @category AbstractModelAdapterFactory
+	 */
 	@Override
 	public void dispose() {
-		eCoreItemProvider = null;
-		ePackageItemProvider = null;
+		this.eObjectItemProvider = null;
 	}
 
 }
