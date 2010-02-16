@@ -59,6 +59,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -426,18 +427,17 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 //	}
 
 	/**
-	 * This is for implementing {@link IEditorPart} and simply saves the model
-	 * file. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
+	 * This is for implementing {@link IEditorPart} and simply saves the model file.
 	 * @category EditorPart
 	 */
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		// Save only resources that have actually changed.
-		//
+		
 		final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
 		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); // initialObjectCreationPage.getEncoding()
+		saveOptions.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE); // <--- !!!!!! TODO: test	
 	
 		// Do the work within an operation because this is a long running
 		// activity that modifies the workbench.
@@ -1056,12 +1056,16 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 			
 			// Get resouce set and setup URI mapping
 			ResourceSet resourceSet =  modelEditingDomain.getResourceSet();
-	//		resourceSet.getURIConverter().getURIMap().put(
-	//				URI.createURI("/"), archiveURI);
+			
+			// URI MAP TEST
+			resourceSet.getURIConverter().getURIMap().put(
+					URI.createURI("/"),archiveURI);
+
 	
 			// ------- load NO2Model ------------
 			
-			URI no2URI = URI.createURI(archiveURI + "no2.xmi");    //TODO: use central name
+			URI no2URI = URI.createURI("/no2.xmi"); // URI MAP TEST
+			//URI no2URI = URI.createURI(archiveURI + "no2.xmi");    //TODO: use central name
 		
 			try {
 				// Load the resource 		
@@ -1327,25 +1331,18 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 			modelEditingDomain = new AdapterFactoryEditingDomain(modelAdapterFactory, commandStack, new HashMap<Resource, Boolean>());
 		}
 
-
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
+	/** 
 	 * @category ModelEdit
 	 */
 	protected void doSaveAs(URI uri, IEditorInput editorInput) {
 	
-		// TODO: will not work any more with xdata file format!!!
+		// TODO: will not work any more with no2 file format!!!
 		(modelEditingDomain.getResourceSet().getResources().get(0)).setURI(uri);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
 		IProgressMonitor progressMonitor = getActionBars().getStatusLineManager() != null ? getActionBars().getStatusLineManager().getProgressMonitor() : new NullProgressMonitor();
 		doSave(progressMonitor);
 	}
-
-
 
 	/**
 	 * Instantiate any handlers specific to this view and activate them.

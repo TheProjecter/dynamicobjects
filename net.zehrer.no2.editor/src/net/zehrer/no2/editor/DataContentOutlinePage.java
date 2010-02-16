@@ -61,7 +61,7 @@ public class DataContentOutlinePage extends ContentOutlinePage implements ISelec
 		ResourceSet resourceSet = modelEditor.getEditingDomain().getResourceSet();
 		// set the outline to resource set. Resource set represent the complete
 		// file content...
-		viewer.setInput(resourceSet);
+		viewer.setInput(modelEditor.getMetaModelResource().getEObject("/"));
 		
 		//viewer.setInput(modelEditor.getEditorInput());  // ORIGINAL form the generator
 
@@ -69,9 +69,9 @@ public class DataContentOutlinePage extends ContentOutlinePage implements ISelec
 		modelEditor.createContextMenuFor(viewer);
 
 		// TODO: find official ecore extension
-		Resource firstModel = findFirstResource(resourceSet, "ecore");
-		if (firstModel != null)
-			viewer.setSelection(new StructuredSelection(firstModel), true);
+//		Resource firstModel = findFirstResource(resourceSet, "ecore");
+//		if (firstModel != null)
+//			viewer.setSelection(new StructuredSelection(firstModel), true);
 		
 		// TODO: cleanup after testing
 		//viewer.addSelectionChangedListener(this);

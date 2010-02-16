@@ -158,8 +158,7 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 			Resource aResouce = this.eResource();
 			this.setResourceSet(aResouce.getResourceSet());
 			
-			
-			// TODO: get archiveURI from resource
+			// TODO: if working on original file  -> get archiveURI from resource 
 			//URI resourceURI = aResouce.getURI();
 
 		} else {
@@ -328,7 +327,7 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 		String URIstr = getClassResources().get(type);
 		Resource resource = null;
 
-		// check if class is alrady mapped
+		// check if class is already mapped
 		if (URIstr == null) {
 			// create a new resource for this type of class
 			
@@ -381,8 +380,8 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	 */
 	public Resource createResource(URI uri) {
 
-		URI resourceURI = resourceSet.getURIConverter().normalize(uri);
-		return resourceSet.createResource(resourceURI);
+		//URI resourceURI = resourceSet.getURIConverter().normalize(uri);
+		return resourceSet.createResource(uri);
 	}
 
 	/**
