@@ -9,12 +9,15 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package net.zehrer.no2.command;
+package net.zehrer.no2;
 
 import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
-	private static final String BUNDLE_NAME = "net.zehrer.no2.edit.command.messages"; //$NON-NLS-1$
+
+	// BUNDLE_NAME = package name -> TODO: get from class information?
+	private static final String BUNDLE_NAME = "net.zehrer.no2.messages"; //$NON-NLS-1$
+	
 	public static String _UI_CreateObjectCommand_Description;
 	public static String _UI_CreateObjectCommand_Label;
 	public static String _UI_CreateObjectCommand_Text;

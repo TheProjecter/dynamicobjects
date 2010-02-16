@@ -149,7 +149,10 @@ public class TabelEditorPage extends Page implements IPage, ISelectionChangedLis
 	 * @category TabelEditorPage
 	 */
 	public String getPageName() {
-		return this.classResource.getType().getName(); // TODO use an other name
+		
+		EClass type = this.classResource.getType();
+		
+		return type.getName(); // TODO use an other name
 	}
 
 	/**

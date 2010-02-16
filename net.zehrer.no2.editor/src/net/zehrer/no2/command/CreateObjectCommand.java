@@ -14,6 +14,7 @@ package net.zehrer.no2.command;
 import java.util.Collection;
 import java.util.Collections;
 
+import net.zehrer.no2.Messages;
 import net.zehrer.no2.model.ModelPackage;
 import net.zehrer.no2.model.NO2Model;
 
