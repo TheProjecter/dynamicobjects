@@ -12,6 +12,7 @@
 package net.zehrer.no2.model.provider;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import net.zehrer.no2.model.DataModelEditPlugin;
@@ -37,11 +38,19 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 public class EObjectItemProvider extends ItemProviderAdapter implements ITableItemLabelProvider, IItemPropertySource , IChangeNotifier{
 
-	// IItemLabelProvider,IItemPropertySource
-	// extends ReflectiveItemProvider
-
+	/**
+	 * This keeps track of all the supported types checked by
+	 * {@link #isFactoryForType isFactoryForType}.
+	 */
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
+	
 	public EObjectItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
+		
+		supportedTypes.add(ITableItemLabelProvider.class);
+		supportedTypes.add(IItemPropertySource.class);
+		supportedTypes.add(IChangeNotifier.class);
+		
 
 	}
 
@@ -221,7 +230,12 @@ public class EObjectItemProvider extends ItemProviderAdapter implements ITableIt
 		return featureName;
 	}
 
-	// 
+
+	@Override
+	public boolean isAdapterForType(Object type) {
+
+		return  supportedTypes.contains(type) || super.isAdapterForType(type);
+	}
 
 	/**
 	 * This handles notification by calling
