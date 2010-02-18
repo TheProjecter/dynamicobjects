@@ -14,6 +14,7 @@ package net.zehrer.no2.model.impl;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Collection;
+import net.zehrer.no2.model.ModelFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +44,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
 /**
@@ -56,6 +58,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
  *   <li>{@link net.zehrer.no2.model.impl.NO2ModelImpl#getArchiveURI <em>Archive URI</em>}</li>
  *   <li>{@link net.zehrer.no2.model.impl.NO2ModelImpl#isInit <em>Init</em>}</li>
  *   <li>{@link net.zehrer.no2.model.impl.NO2ModelImpl#getContents <em>Contents</em>}</li>
+ *   <li>{@link net.zehrer.no2.model.impl.NO2ModelImpl#getEditingDomainProvider <em>Editing Domain Provider</em>}</li>
  * </ul>
  * </p>
  *
@@ -142,6 +145,27 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 	 * @ordered
 	 */
 	protected EList<EObject> contents;
+
+	/**
+	 * The default value of the '{@link #getEditingDomainProvider() <em>Editing Domain Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEditingDomainProvider()
+	 * TODO: analyze bug ... lead to an error in the createFromString method because the meta object id not handeld, why?
+	 * @generated NOT
+	 * @ordered
+	 */
+	protected static final IEditingDomainProvider EDITING_DOMAIN_PROVIDER_EDEFAULT = null; // (IEditingDomainProvider)ModelFactory.eINSTANCE.createFromString(ModelPackage.eINSTANCE.getIEditingDomainProvider(), "");
+
+	/**
+	 * The cached value of the '{@link #getEditingDomainProvider() <em>Editing Domain Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEditingDomainProvider()
+	 * @generated
+	 * @ordered
+	 */
+	protected IEditingDomainProvider editingDomainProvider = EDITING_DOMAIN_PROVIDER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -264,6 +288,27 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 			contents = new EObjectResolvingEList<EObject>(EObject.class, this, ModelPackage.NO2_MODEL__CONTENTS);
 		}
 		return contents;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IEditingDomainProvider getEditingDomainProvider() {
+		return editingDomainProvider;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEditingDomainProvider(IEditingDomainProvider newEditingDomainProvider) {
+		IEditingDomainProvider oldEditingDomainProvider = editingDomainProvider;
+		editingDomainProvider = newEditingDomainProvider;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.NO2_MODEL__EDITING_DOMAIN_PROVIDER, oldEditingDomainProvider, editingDomainProvider));
 	}
 
 	/**
@@ -415,6 +460,8 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 				return isInit();
 			case ModelPackage.NO2_MODEL__CONTENTS:
 				return getContents();
+			case ModelPackage.NO2_MODEL__EDITING_DOMAIN_PROVIDER:
+				return getEditingDomainProvider();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -437,6 +484,9 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 				getContents().clear();
 				getContents().addAll((Collection<? extends EObject>)newValue);
 				return;
+			case ModelPackage.NO2_MODEL__EDITING_DOMAIN_PROVIDER:
+				setEditingDomainProvider((IEditingDomainProvider)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -456,6 +506,9 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 				return;
 			case ModelPackage.NO2_MODEL__CONTENTS:
 				getContents().clear();
+				return;
+			case ModelPackage.NO2_MODEL__EDITING_DOMAIN_PROVIDER:
+				setEditingDomainProvider(EDITING_DOMAIN_PROVIDER_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -478,6 +531,8 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 				return isInit() != INIT_EDEFAULT;
 			case ModelPackage.NO2_MODEL__CONTENTS:
 				return contents != null && !contents.isEmpty();
+			case ModelPackage.NO2_MODEL__EDITING_DOMAIN_PROVIDER:
+				return EDITING_DOMAIN_PROVIDER_EDEFAULT == null ? editingDomainProvider != null : !EDITING_DOMAIN_PROVIDER_EDEFAULT.equals(editingDomainProvider);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -495,6 +550,8 @@ public class NO2ModelImpl extends EObjectImpl implements NO2Model {
 		result.append(resourceSet);
 		result.append(", archiveURI: ");
 		result.append(archiveURI);
+		result.append(", editingDomainProvider: ");
+		result.append(editingDomainProvider);
 		result.append(')');
 		return result.toString();
 	}

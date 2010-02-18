@@ -11,17 +11,17 @@ import java.util.Collection;
 import java.util.Collections;
 
 import net.zehrer.no2.NO2EditorPlugin;
-import net.zehrer.no2.action.CreateObjectAction;
+import net.zehrer.no2.action.RefreshViewerAction;
+import net.zehrer.no2.action.ShowPropertiesViewerAction;
 
-import org.eclipse.emf.common.ui.viewer.IViewerProvider;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.action.ControlAction;
+import org.eclipse.emf.edit.ui.action.CreateChildAction;
 import org.eclipse.emf.edit.ui.action.CreateSiblingAction;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.action.ValidateAction;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
@@ -34,12 +34,10 @@ import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.action.SubContributionItem;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PartInitException;
 
 /**
  * This is the action bar contributor for the Model model editor. <!--
@@ -73,16 +71,17 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	 * 
 	 * @generated
 	 */
-	protected IAction showPropertiesViewAction = new Action(NO2EditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
-		@Override
-		public void run() {
-			try {
-				getPage().showView("org.eclipse.ui.views.PropertySheet");
-			} catch (PartInitException exception) {
-				NO2EditorPlugin.INSTANCE.log(exception);
-			}
-		}
-	};
+	protected IAction showPropertiesViewAction = new ShowPropertiesViewerAction(this);
+//	= new Action(NO2EditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
+//		@Override
+//		public void run() {
+//			try {
+//				getPage().showView("org.eclipse.ui.views.PropertySheet");
+//			} catch (PartInitException exception) {
+//				NO2EditorPlugin.INSTANCE.log(exception);
+//			}
+//		}
+//	};
 
 	/**
 	 * This action refreshes the viewer of the current editor if the editor
@@ -91,22 +90,23 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	 * 
 	 * @generated
 	 */
-	protected IAction refreshViewerAction = new Action(NO2EditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
-		@Override
-		public boolean isEnabled() {
-			return activeEditorPart instanceof IViewerProvider;
-		}
-
-		@Override
-		public void run() {
-			if (activeEditorPart instanceof IViewerProvider) {
-				Viewer viewer = ((IViewerProvider) activeEditorPart).getViewer();
-				if (viewer != null) {
-					viewer.refresh();
-				}
-			}
-		}
-	};
+	protected IAction refreshViewerAction = new RefreshViewerAction(this);
+//	= new Action(NO2EditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
+//		@Override
+//		public boolean isEnabled() {
+//			return activeEditorPart instanceof IViewerProvider;
+//		}
+//
+//		@Override
+//		public void run() {
+//			if (activeEditorPart instanceof IViewerProvider) {
+//				Viewer viewer = ((IViewerProvider) activeEditorPart).getViewer();
+//				if (viewer != null) {
+//					viewer.refresh();
+//				}
+//			}
+//		}
+//	};
 
 	/**
 	 * This will contain one
@@ -272,9 +272,9 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 
 			EditingDomain domain = null;  
 
-			// TODO: clarify BUG: nullPointer Exception -> therefor this workaround
+			// TODO: clarify BUG: nullPointer Exception -> therefore this workaround
 			// on closing editor and open it again
-			if (activeEditorPart != null)  
+			if (activeEditorPart != null && activeEditorPart instanceof IEditingDomainProvider)  
 				domain = ((IEditingDomainProvider) activeEditorPart).getEditingDomain();
 
 			if (domain != null) {
@@ -311,11 +311,7 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
 				
-				//TODO: chang back to old implememtatiom
-				// actions.add(new CreateChildAction(activeEditorPart,
-				// selection, descriptor));
-
-				actions.add(new CreateObjectAction(activeEditorPart, selection));
+				 actions.add(new CreateChildAction(activeEditorPart, selection, descriptor));
 			}
 		}
 		return actions;
@@ -428,6 +424,7 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	protected void addGlobalActions(IMenuManager menuManager) {
 		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
+//		menuManager.insertAfter("ui-actions", new);
 
 		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());
 		menuManager.insertAfter("ui-actions", refreshViewerAction);

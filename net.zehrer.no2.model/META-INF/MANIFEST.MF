@@ -12,6 +12,7 @@ Export-Package: net.zehrer.no2.model,
  net.zehrer.no2.model.impl,
  net.zehrer.no2.model.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;bundle-version="2.5.0"
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.emf.edit
 Bundle-ActivationPolicy: lazy

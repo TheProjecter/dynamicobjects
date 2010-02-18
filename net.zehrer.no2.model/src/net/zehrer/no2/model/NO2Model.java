@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +37,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  *   <li>{@link net.zehrer.no2.model.NO2Model#getArchiveURI <em>Archive URI</em>}</li>
  *   <li>{@link net.zehrer.no2.model.NO2Model#isInit <em>Init</em>}</li>
  *   <li>{@link net.zehrer.no2.model.NO2Model#getContents <em>Contents</em>}</li>
+ *   <li>{@link net.zehrer.no2.model.NO2Model#getEditingDomainProvider <em>Editing Domain Provider</em>}</li>
  * </ul>
  * </p>
  *
@@ -142,6 +144,33 @@ public interface NO2Model extends EObject {
 	 * @generated
 	 */
 	EList<EObject> getContents();
+
+	/**
+	 * Returns the value of the '<em><b>Editing Domain Provider</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Editing Domain Provider</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Editing Domain Provider</em>' attribute.
+	 * @see #setEditingDomainProvider(IEditingDomainProvider)
+	 * @see net.zehrer.no2.model.ModelPackage#getNO2Model_EditingDomainProvider()
+	 * @model default="" dataType="net.zehrer.no2.model.IEditingDomainProvider" transient="true"
+	 * @generated
+	 */
+	IEditingDomainProvider getEditingDomainProvider();
+
+	/**
+	 * Sets the value of the '{@link net.zehrer.no2.model.NO2Model#getEditingDomainProvider <em>Editing Domain Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Editing Domain Provider</em>' attribute.
+	 * @see #getEditingDomainProvider()
+	 * @generated
+	 */
+	void setEditingDomainProvider(IEditingDomainProvider value);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,6 +85,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EDataType resourceSetEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType iEditingDomainProviderEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -208,6 +216,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getNO2Model_EditingDomainProvider() {
+		return (EAttribute)no2ModelEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEClassToURIMapEntry() {
 		return eClassToURIMapEntryEClass;
 	}
@@ -271,6 +288,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getIEditingDomainProvider() {
+		return iEditingDomainProviderEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -300,6 +326,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(no2ModelEClass, NO2_MODEL__ARCHIVE_URI);
 		createEAttribute(no2ModelEClass, NO2_MODEL__INIT);
 		createEReference(no2ModelEClass, NO2_MODEL__CONTENTS);
+		createEAttribute(no2ModelEClass, NO2_MODEL__EDITING_DOMAIN_PROVIDER);
 
 		eClassToURIMapEntryEClass = createEClass(ECLASS_TO_URI_MAP_ENTRY);
 		createEReference(eClassToURIMapEntryEClass, ECLASS_TO_URI_MAP_ENTRY__KEY);
@@ -310,6 +337,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		ioExceptionEDataType = createEDataType(IO_EXCEPTION);
 		resourceEDataType = createEDataType(RESOURCE);
 		resourceSetEDataType = createEDataType(RESOURCE_SET);
+		iEditingDomainProviderEDataType = createEDataType(IEDITING_DOMAIN_PROVIDER);
 	}
 
 	/**
@@ -351,6 +379,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getNO2Model_ArchiveURI(), this.getURI(), "archiveURI", "", 0, 1, NO2Model.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNO2Model_Init(), theEcorePackage.getEBoolean(), "init", null, 0, 1, NO2Model.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getNO2Model_Contents(), ecorePackage.getEObject(), null, "contents", null, 0, -1, NO2Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getNO2Model_EditingDomainProvider(), this.getIEditingDomainProvider(), "editingDomainProvider", "", 0, 1, NO2Model.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(no2ModelEClass, null, "createModelResource", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theEcorePackage.getEString(), "fileName", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -376,6 +405,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEDataType(ioExceptionEDataType, IOException.class, "IOException", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(resourceEDataType, Resource.class, "Resource", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(resourceSetEDataType, ResourceSet.class, "ResourceSet", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iEditingDomainProviderEDataType, IEditingDomainProvider.class, "IEditingDomainProvider", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -128,13 +128,22 @@ public interface ModelPackage extends EPackage {
 	int NO2_MODEL__CONTENTS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Editing Domain Provider</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NO2_MODEL__EDITING_DOMAIN_PROVIDER = 5;
+
+	/**
 	 * The number of structural features of the '<em>NO2 Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NO2_MODEL_FEATURE_COUNT = 5;
+	int NO2_MODEL_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link net.zehrer.no2.model.impl.EClassToURIMapEntryImpl <em>EClass To URI Map Entry</em>}' class.
@@ -218,6 +227,16 @@ public interface ModelPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>IEditing Domain Provider</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.edit.domain.IEditingDomainProvider
+	 * @see net.zehrer.no2.model.impl.ModelPackageImpl#getIEditingDomainProvider()
+	 * @generated
+	 */
+	int IEDITING_DOMAIN_PROVIDER = 6;
+
+	/**
 	 * Returns the meta object for class '{@link net.zehrer.no2.model.NO2Model <em>NO2 Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -281,6 +300,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNO2Model_Contents();
+
+	/**
+	 * Returns the meta object for the attribute '{@link net.zehrer.no2.model.NO2Model#getEditingDomainProvider <em>Editing Domain Provider</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Editing Domain Provider</em>'.
+	 * @see net.zehrer.no2.model.NO2Model#getEditingDomainProvider()
+	 * @see #getNO2Model()
+	 * @generated
+	 */
+	EAttribute getNO2Model_EditingDomainProvider();
 
 	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>EClass To URI Map Entry</em>}'.
@@ -361,6 +391,17 @@ public interface ModelPackage extends EPackage {
 	EDataType getResourceSet();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipse.emf.edit.domain.IEditingDomainProvider <em>IEditing Domain Provider</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IEditing Domain Provider</em>'.
+	 * @see org.eclipse.emf.edit.domain.IEditingDomainProvider
+	 * @model instanceClass="org.eclipse.emf.edit.domain.IEditingDomainProvider" serializeable="false"
+	 * @generated
+	 */
+	EDataType getIEditingDomainProvider();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -433,6 +474,14 @@ public interface ModelPackage extends EPackage {
 		EReference NO2_MODEL__CONTENTS = eINSTANCE.getNO2Model_Contents();
 
 		/**
+		 * The meta object literal for the '<em><b>Editing Domain Provider</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NO2_MODEL__EDITING_DOMAIN_PROVIDER = eINSTANCE.getNO2Model_EditingDomainProvider();
+
+		/**
 		 * The meta object literal for the '{@link net.zehrer.no2.model.impl.EClassToURIMapEntryImpl <em>EClass To URI Map Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -497,6 +546,16 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType RESOURCE_SET = eINSTANCE.getResourceSet();
+
+		/**
+		 * The meta object literal for the '<em>IEditing Domain Provider</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.emf.edit.domain.IEditingDomainProvider
+		 * @see net.zehrer.no2.model.impl.ModelPackageImpl#getIEditingDomainProvider()
+		 * @generated
+		 */
+		EDataType IEDITING_DOMAIN_PROVIDER = eINSTANCE.getIEditingDomainProvider();
 
 	}
 
