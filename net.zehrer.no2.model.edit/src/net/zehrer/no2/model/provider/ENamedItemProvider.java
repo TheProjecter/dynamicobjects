@@ -65,11 +65,11 @@ public class ENamedItemProvider extends ItemProviderAdapter implements IStructur
 
 		// TODO: move to general commands/actions
 		
-		if (object instanceof EClass) {
-
-			// add command
-			newChildDescriptors.add(createChildParameter(ModelPackage.Literals.NO2_MODEL__CONTENTS, null));
-		}
+//		if (object instanceof EClass) {
+//
+//			// add command
+//			newChildDescriptors.add(createChildParameter(ModelPackage.Literals.NO2_MODEL__CONTENTS, null));
+//		}
 		
 	}
 	

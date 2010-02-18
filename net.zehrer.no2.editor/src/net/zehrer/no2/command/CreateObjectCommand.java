@@ -11,6 +11,7 @@
 
 package net.zehrer.no2.command;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -74,7 +75,7 @@ public class CreateObjectCommand extends CommandWrapper implements CommandAction
 	 * This is the collection of objects that were selected when this command
 	 * was created. After an undo, these are considered the affected objects.
 	 */
-	protected Collection<?> selection;
+	protected  Collection<?> selection;
 	
 	
 	/**
@@ -97,6 +98,35 @@ public class CreateObjectCommand extends CommandWrapper implements CommandAction
 		setDescription(Messages._UI_CreateObjectCommand_Description);
 		
 	}
+	
+	
+	
+	/**
+	 * This constructor initializes an instance
+	 * TODO: merge to one constructor later on
+	 */
+	public CreateObjectCommand(EditingDomain domain, NO2Model model, EClass eClass) {
+		super();
+		this.domain = domain;
+		this.model = model;
+		
+		
+		Collection<EClass> list = new ArrayList<EClass>();
+		list.add(eClass);
+		this.selection = list;
+	
+		
+		// dynamic Object creation
+		EFactory eFactory = eClass.getEPackage().getEFactoryInstance();
+		this.newObject = eFactory.create(eClass);
+		
+		
+		
+		setLabel(Messages._UI_CreateObjectCommand_Label);
+		setDescription(Messages._UI_CreateObjectCommand_Description);
+		
+	}
+	
 	
 	// ----- CommandWrapper ----
 	/**

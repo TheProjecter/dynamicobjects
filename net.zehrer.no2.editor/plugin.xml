@@ -79,5 +79,20 @@
          </command>
       </menuContribution>
    </extension>
+   
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="net.zehrer.no2.actionCreateDynamicObject"
+            objectClass="org.eclipse.emf.ecore.EClass">
+         <action
+               class="net.zehrer.no2.action.CreateDynamicObjectAction"
+               enablesFor="1"
+               id="net.zehrer.no2.actionCreateDynamicObjectAction"
+               label="Create Dynamic Object">
+         </action>
+      </objectContribution>
+   </extension>
 
 </plugin>

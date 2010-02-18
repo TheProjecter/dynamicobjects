@@ -1057,22 +1057,23 @@ public class ModelEditor extends MultiPageEditorPart implements IEditingDomainPr
 			// Get resouce set and setup URI mapping
 			ResourceSet resourceSet =  modelEditingDomain.getResourceSet();
 			
-			// URI MAP TEST
+			// configure the URI map
+			// TODO : move all load / save 
 			resourceSet.getURIConverter().getURIMap().put(
 					URI.createURI("/"),archiveURI);
 
 	
 			// ------- load NO2Model ------------
 			
-			URI no2URI = URI.createURI("/no2.xmi"); // URI MAP TEST
-			//URI no2URI = URI.createURI(archiveURI + "no2.xmi");    //TODO: use central name
-		
+			URI no2URI = URI.createURI("/no2.xmi"); //TODO: use central name
+
 			try {
 				// Load the resource 		
 				no2Resource = resourceSet.getResource(no2URI, true);
 				no2Resource.load(null);  //TODO: what is about params on load?
 				no2Model = (NO2Model) no2Resource.getEObject("/");
 				no2Model.setArchiveURI(archiveURI);  // TODO: do internal
+				no2Model.setEditingDomainProvider(this);
 				
 				// function for adding new created objects into the correct resource
 				no2Model.eAdapters().add(new NO2ModelAdapter());

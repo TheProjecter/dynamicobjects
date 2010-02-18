@@ -20,10 +20,7 @@ import net.zehrer.no2.model.ModelPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.provider.EcoreEditPlugin;
 import org.eclipse.emf.edit.EMFEditPlugin;
@@ -32,6 +29,10 @@ import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
+
+/*
+ * NOT IN USE !!!
+ */
 public class EClassItemProvider extends ItemProviderAdapter implements ITreeItemContentProvider, IItemLabelProvider, IEditingDomainItemProvider {
 
 	// implements 
@@ -46,15 +47,15 @@ public class EClassItemProvider extends ItemProviderAdapter implements ITreeItem
 
 	// / ----- ItemProviderAdapter -----
 
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(ModelPackage.Literals.NO2_MODEL__CONTENTS);
-		}
-		return childrenFeatures;
-	}
+//	@Override
+//	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+//
+//		if (childrenFeatures == null) {
+//			super.getChildrenFeatures(object);
+//			childrenFeatures.add(ModelPackage.Literals.NO2_MODEL__CONTENTS);
+//		}
+//		return childrenFeatures;
+//	}
 
 	/**
 	 * Return the resource locator for the NEW item provider's resources in this
@@ -74,16 +75,16 @@ public class EClassItemProvider extends ItemProviderAdapter implements ITreeItem
 
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		if (object instanceof EClass) {
-
-			// dynamic Object creation
-			EClass eClass = (EClass) object;
-			EFactory eFactory = eClass.getEPackage().getEFactoryInstance();
-			EObject eObject = eFactory.create(eClass);
-
-			// add command
-			newChildDescriptors.add(createChildParameter(ModelPackage.Literals.NO2_MODEL__CONTENTS, eObject));
-		}
+//		if (object instanceof EClass) {
+//
+//			// dynamic Object creation
+//			EClass eClass = (EClass) object;
+//			EFactory eFactory = eClass.getEPackage().getEFactoryInstance();
+//			EObject eObject = eFactory.create(eClass);
+//
+//			// add command
+//			newChildDescriptors.add(createChildParameter(ModelPackage.Literals.NO2_MODEL__CONTENTS, eObject));
+//		}
 	}
 	
 //	
