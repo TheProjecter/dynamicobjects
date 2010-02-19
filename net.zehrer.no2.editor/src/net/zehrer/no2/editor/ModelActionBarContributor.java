@@ -1,9 +1,14 @@
-/**
- * <copyright>
- * </copyright>
+/*******************************************************************************
+ * Copyright (c) 2009 - 2010 Stephan Zehrer and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- * $Id$
- */
+ * Contributors:
+ *     Stephan Zehrer - initial API and implementation
+ *******************************************************************************/
+
 package net.zehrer.no2.editor;
 
 import java.util.ArrayList;
@@ -40,25 +45,21 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 
 /**
- * This is the action bar contributor for the Model model editor. <!--
- * begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the action bar contributor for the Model model editor. 
  * @generated
  */
 public class ModelActionBarContributor extends EditingDomainActionBarContributor implements ISelectionListener {
 	// ISelectionChangedListener
 
 	/**
-	 * This keeps track of the active editor. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This keeps track of the active editor. 
 	 * 
 	 * @generated
 	 */
 	protected IEditorPart activeEditorPart;
 
 	/**
-	 * This keeps track of the current page. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This keeps track of the current page.
 	 * 
 	 * @generated NOT
 	 */
@@ -66,53 +67,26 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	protected IWorkbenchPage activePage = null;
 
 	/**
-	 * This action opens the Properties view. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This action opens the Properties view. 
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	protected IAction showPropertiesViewAction = new ShowPropertiesViewerAction(this);
-//	= new Action(NO2EditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
-//		@Override
-//		public void run() {
-//			try {
-//				getPage().showView("org.eclipse.ui.views.PropertySheet");
-//			} catch (PartInitException exception) {
-//				NO2EditorPlugin.INSTANCE.log(exception);
-//			}
-//		}
-//	};
+
 
 	/**
 	 * This action refreshes the viewer of the current editor if the editor
-	 * implements {@link org.eclipse.emf.common.ui.viewer.IViewerProvider}. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * implements {@link org.eclipse.emf.common.ui.viewer.IViewerProvider}.
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	protected IAction refreshViewerAction = new RefreshViewerAction(this);
-//	= new Action(NO2EditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
-//		@Override
-//		public boolean isEnabled() {
-//			return activeEditorPart instanceof IViewerProvider;
-//		}
-//
-//		@Override
-//		public void run() {
-//			if (activeEditorPart instanceof IViewerProvider) {
-//				Viewer viewer = ((IViewerProvider) activeEditorPart).getViewer();
-//				if (viewer != null) {
-//					viewer.refresh();
-//				}
-//			}
-//		}
-//	};
+
 
 	/**
 	 * This will contain one
 	 * {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to
 	 * each descriptor generated for the current selection by the item provider.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -120,8 +94,7 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 
 	/**
 	 * This is the menu manager into which menu contribution items should be
-	 * added for CreateChild actions. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * added for CreateChild actions. 
 	 * 
 	 * @generated
 	 */
@@ -131,25 +104,21 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	 * This will contain one
 	 * {@link org.eclipse.emf.edit.ui.action.CreateSiblingAction} corresponding
 	 * to each descriptor generated for the current selection by the item
-	 * provider. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * provider. 
 	 * @generated
 	 */
 	protected Collection<IAction> createSiblingActions;
 
 	/**
 	 * This is the menu manager into which menu contribution items should be
-	 * added for CreateSibling actions. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * added for CreateSibling actions. 
 	 * 
 	 * @generated
 	 */
 	protected IMenuManager createSiblingMenuManager;
 
 	/**
-	 * This creates an instance of the contributor. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
+	 * This creates an instance of the contributor. 
 	 * @generated
 	 */
 	public ModelActionBarContributor() {
@@ -160,8 +129,7 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	}
 
 	/**
-	 * This adds Separators for editor additions to the tool bar. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This adds Separators for editor additions to the tool bar.
 	 * 
 	 * @generated
 	 */
@@ -173,9 +141,7 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 
 	/**
 	 * This adds to the menu bar a menu and some separators for editor
-	 * additions, as well as the sub-menus for object creation items. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * additions, as well as the sub-menus for object creation items.
 	 * @generated
 	 */
 	@Override
@@ -212,9 +178,7 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 
 	/**
 	 * When the active editor changes, this remembers the change and registers
-	 * with it as a selection provider. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
+	 * with it as a selection provider. 
 	 * @generated NOT
 	 */
 	@Override
@@ -391,17 +355,12 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	}
 
 	/**
-	 * This populates the pop-up menu before it appears. <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
+	 * This populates the pop-up menu before it appears. 
 	 * @generated NOT
 	 */
 	@Override
 	public void menuAboutToShow(IMenuManager menuManager) {
 		super.menuAboutToShow(menuManager);
-
-		// TODO: remove
-		// menuManager.add(new Action("XXXXXX") {});
 
 		MenuManager submenuManager = null;
 
@@ -424,7 +383,6 @@ public class ModelActionBarContributor extends EditingDomainActionBarContributor
 	protected void addGlobalActions(IMenuManager menuManager) {
 		menuManager.insertAfter("additions-end", new Separator("ui-actions"));
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction);
-//		menuManager.insertAfter("ui-actions", new);
 
 		refreshViewerAction.setEnabled(refreshViewerAction.isEnabled());
 		menuManager.insertAfter("ui-actions", refreshViewerAction);

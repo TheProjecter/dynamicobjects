@@ -27,10 +27,6 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 public class EPackageItemProvider extends ItemProviderAdapter implements ITreeItemContentProvider, IItemLabelProvider {
 
-	// implements
-	// IStructuredItemContentProvider,
-	// IItemLabelProvider,IItemPropertySource
-	// extends ReflectiveItemProvider
 
 	public EPackageItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
