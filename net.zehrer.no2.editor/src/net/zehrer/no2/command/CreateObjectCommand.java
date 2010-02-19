@@ -77,33 +77,8 @@ public class CreateObjectCommand extends CommandWrapper implements CommandAction
 	 */
 	protected  Collection<?> selection;
 	
-	
 	/**
 	 * This constructor initializes an instance
-	 */
-	public CreateObjectCommand(EditingDomain domain, NO2Model model,Collection<?> selection) {
-		super();
-		this.domain = domain;
-		this.model = model;
-		this.selection = selection == null ? Collections.EMPTY_LIST : selection;
-
-		// dynamic Object creation
-		if (selection.size() == 1) {	
-			EClass eClass = (EClass) selection.iterator().next();
-			EFactory eFactory = eClass.getEPackage().getEFactoryInstance();
-			this.newObject = eFactory.create(eClass);
-		}
-		
-		setLabel(Messages._UI_CreateObjectCommand_Label);
-		setDescription(Messages._UI_CreateObjectCommand_Description);
-		
-	}
-	
-	
-	
-	/**
-	 * This constructor initializes an instance
-	 * TODO: merge to one constructor later on
 	 */
 	public CreateObjectCommand(EditingDomain domain, NO2Model model, EClass eClass) {
 		super();

@@ -90,7 +90,8 @@
                class="net.zehrer.no2.action.CreateDynamicObjectAction"
                enablesFor="1"
                id="net.zehrer.no2.actionCreateDynamicObjectAction"
-               label="Create Dynamic Object">
+               label="Create Dynamic Object"
+               menubarPath="additions-end">
          </action>
       </objectContribution>
    </extension>
