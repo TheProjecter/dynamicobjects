@@ -22,6 +22,9 @@ public class Messages extends NLS {
 	public static String _UI_CreateObjectCommand_Label;
 	public static String _UI_CreateObjectCommand_Text;
 	public static String _UI_CreateObjectCommand_ToolTip;
+	public static String _UI_CreateModelError_message;
+
+	
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

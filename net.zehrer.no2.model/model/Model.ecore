@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model"
-    nsURI="http://no2.zehrer.net/model.ecore" nsPrefix="no2">
+    nsURI="http://no2.zehrer.net/model" nsPrefix="no2">
   <eClassifiers xsi:type="ecore:EClass" name="NO2Model">
     <eOperations name="createModelResource" eExceptions="#//IOException">
       <eParameters name="fileName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>

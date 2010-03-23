@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.eclipse.emf.cdo.common.model.CDOPackageInfo;
 import org.eclipse.emf.cdo.common.model.CDOPackageRegistry;
-import org.eclipse.emf.cdo.internal.common.model.CDOPackageRegistryImpl;
 import org.eclipse.emf.cdo.session.CDOSession;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;

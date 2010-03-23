@@ -4,6 +4,7 @@ import net.zehrer.no2.cdo.CDOServerPlugin;
 import net.zehrer.no2.ui.provider.EPackageContentProvider;
 
 import org.eclipse.emf.cdo.internal.ui.SharedIcons;
+import org.eclipse.emf.cdo.internal.ui.dialogs.PackageRegistryDialog;
 import org.eclipse.emf.cdo.session.CDOSession;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -27,7 +28,6 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.DrillDownAdapter;
 import org.eclipse.ui.part.ViewPart;
 
 /**
@@ -53,7 +53,6 @@ public class PackageView extends ViewPart {
 	public static final String ID = "net.zehrer.no2.ui.views.PackageView";
 
 	private TreeViewer viewer;
-//	private DrillDownAdapter drillDownAdapter;
 	private Action action1;
 	private Action action2;
 	private Action doubleClickAction;
@@ -77,32 +76,40 @@ public class PackageView extends ViewPart {
 
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 
-//		drillDownAdapter = new DrillDownAdapter(viewer);
 		viewer.setContentProvider(new EPackageContentProvider(this.session));
 
 		viewer.setLabelProvider(new ViewLabelProvider());
-		// viewer.setSorter(new NameSorter());
 		viewer.setInput(this.session); // getViewSite()
 
 		// Create the help context id for the viewer's control
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "net.zehrer.no2.ui.views.viewer");
-		// makeActions();
+		makeActions();
 		hookContextMenu();
-		hookDoubleClickAction();
+		// hookDoubleClickAction();
 		contributeToActionBars();
 	}
 
 	private void hookContextMenu() {
 		MenuManager menuMgr = new MenuManager("#PopupMenu");
 		menuMgr.setRemoveAllWhenShown(true);
+
 		menuMgr.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
 				PackageView.this.fillContextMenu(manager);
 			}
 		});
+
 		Menu menu = menuMgr.createContextMenu(viewer.getControl());
 		viewer.getControl().setMenu(menu);
 		getSite().registerContextMenu(menuMgr, viewer);
+	}
+
+	private void hookDoubleClickAction() {
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent event) {
+				doubleClickAction.run();
+			}
+		});
 	}
 
 	private void contributeToActionBars() {
@@ -112,33 +119,23 @@ public class PackageView extends ViewPart {
 	}
 
 	private void fillLocalPullDown(IMenuManager manager) {
-		// manager.add(action1);
-		manager.add(new Separator());
-		// manager.add(action2);
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
 		// manager.add(action1);
 		// manager.add(action2);
 		manager.add(new Separator());
-//		drillDownAdapter.addNavigationActions(manager);
+		// drillDownAdapter.addNavigationActions(manager);
+
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
 	private void fillLocalToolBar(IToolBarManager manager) {
-		// manager.add(action1);
+		manager.add(action1);
 		// manager.add(action2);
 		manager.add(new Separator());
-//		drillDownAdapter.addNavigationActions(manager);
-	}
-
-	private void hookDoubleClickAction() {
-		viewer.addDoubleClickListener(new IDoubleClickListener() {
-			public void doubleClick(DoubleClickEvent event) {
-				doubleClickAction.run();
-			}
-		});
+		// drillDownAdapter.addNavigationActions(manager);
 	}
 
 	/**
@@ -151,10 +148,10 @@ public class PackageView extends ViewPart {
 	class ViewLabelProvider extends LabelProvider {
 
 		public String getText(Object obj) {
-			
+
 			if (obj instanceof ENamedElement)
-				return ((ENamedElement)obj).getName();
-				
+				return ((ENamedElement) obj).getName();
+
 			return obj.toString();
 		}
 
@@ -162,18 +159,28 @@ public class PackageView extends ViewPart {
 			String imageKey = ISharedImages.IMG_OBJ_ELEMENT;
 			if (obj instanceof EPackage)
 				return SharedIcons.getDescriptor(SharedIcons.OBJ_EPACKAGE_DYNAMIC).createImage();
-			
+
 			if (obj instanceof EClass)
 				return SharedIcons.getDescriptor(SharedIcons.OBJ_ECLASS).createImage();
-			
+
 			return null;
 		}
 	}
 
+	private void makeActions() {
+		action1 = new Action() {
+			public void run() {
+				PackageRegistryDialog dialog = new PackageRegistryDialog(getSite().getPage(), session);
+				dialog.open();
+			}
+		};
+
+		action1.setText("Package Registry");
+		action1.setToolTipText("Open the Package Registry Dialog");
+		action1.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJ_ELEMENT));
+	}
 
 }
-
-
 
 // --- from example
 
@@ -213,62 +220,8 @@ public class PackageView extends ViewPart {
 // };
 // }
 
-// /*
-// * The content provider class is responsible for
-// * providing objects to the view. It can wrap
-// * existing objects in adapters or simply return
-// * objects as-is. These objects may be sensitive
-// * to the current input of the view, or ignore
-// * it and always show the same content
-// * (like Task List, for example).
-// */
-// 
-// class TreeObject implements IAdaptable {
-// private String name;
-// private TreeParent parent;
-//	
-// public TreeObject(String name) {
-// this.name = name;
-// }
-// public String getName() {
-// return name;
-// }
-// public void setParent(TreeParent parent) {
-// this.parent = parent;
-// }
-// public TreeParent getParent() {
-// return parent;
-// }
-// public String toString() {
-// return getName();
-// }
-// public Object getAdapter(Class key) {
-// return null;
-// }
-// }
 //
-// class TreeParent extends TreeObject {
-// private ArrayList children;
-// public TreeParent(String name) {
-// super(name);
-// children = new ArrayList();
-// }
-// public void addChild(TreeObject child) {
-// children.add(child);
-// child.setParent(this);
-// }
-// public void removeChild(TreeObject child) {
-// children.remove(child);
-// child.setParent(null);
-// }
-// public TreeObject [] getChildren() {
-// return (TreeObject [])children.toArray(new TreeObject[children.size()]);
-// }
-// public boolean hasChildren() {
-// return children.size()>0;
-// }
-// }
-//
+
 // class ViewContentProvider implements IStructuredContentProvider,
 // ITreeContentProvider {
 // private TreeParent invisibleRoot;
@@ -301,12 +254,4 @@ public class PackageView extends ViewPart {
 // return ((TreeParent)parent).hasChildren();
 // return false;
 // }
-// /*
-// * We will set up a dummy model to initialize tree heararchy.
-// * In a real code, you will connect to a real model and
-// * expose its hierarchy.
-// */
 
-//
-// class NameSorter extends ViewerSorter {
-// }
