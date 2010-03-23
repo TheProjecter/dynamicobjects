@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CDO Test
+Bundle-SymbolicName: net.zehrer.no2.cdo.test; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.emf,
+ org.eclipse.emf.cdo.common,
+ org.eclipse.emf.cdo.ui,
+ net.zehrer.no2.ui;bundle-version="1.0.0",
+ net.zehrer.no2.cdo;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -38,8 +38,9 @@ import org.eclipse.ui.part.IPage;
 import org.eclipse.ui.part.Page;
 
 /**
- * This page class covers several things: - generate the page content, in this
- * case a table - act as adapter of the corresponding EClass (TODO) for - update
+ * This page class covers several things: 
+ * - generate the page content, in this case a table 
+ * - act as adapter of the corresponding EClass (TODO) for - update
  * ...
  * 
  */
@@ -133,27 +134,8 @@ public class TabelEditorPage extends Page implements IPage, ISelectionChangedLis
 			// Why again?
 		}
 
-		//		
-		// TableColumn objectColumn = new TableColumn(table, SWT.NONE);
-		// layout.addColumnData(new ColumnWeightData(3, 100, true));
-		// objectColumn.setText(getString("_UI_ObjectColumn_label"));
-		// objectColumn.setResizable(true);
-
-		// TableColumn selfColumn = new TableColumn(table, SWT.NONE);
-		// layout.addColumnData(new ColumnWeightData(2, 100, true));
-		// selfColumn.setText(getString("_UI_SelfColumn_label"));
-		// selfColumn.setResizable(true);
 	}
 
-	/**
-	 * @category TabelEditorPage
-	 */
-	public String getPageName() {
-		
-		EClass type = this.classResource.getType();
-		
-		return type.getName(); // TODO use an other name
-	}
 
 	/**
 	 * @category TabelEditorPage

@@ -54,7 +54,7 @@ public interface ModelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://no2.zehrer.net/model.ecore";
+	String eNS_URI = "http://no2.zehrer.net/model";
 
 	/**
 	 * The package namespace name.

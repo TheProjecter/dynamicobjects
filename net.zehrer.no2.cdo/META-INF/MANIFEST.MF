@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CDO Container
+Bundle-SymbolicName: net.zehrer.no2.cdo
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: net.zehrer.no2.cdo.CDOServerPlugin
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0",
+ org.h2.jdbc;bundle-version="1.1.114",
+ org.eclipse.emf.cdo;visibility:=reexport,
+ org.eclipse.emf.cdo.net4j,
+ org.eclipse.emf.cdo.server,
+ org.eclipse.emf.cdo.server.net4j;bundle-version="3.0.0",
+ org.eclipse.emf.cdo.server.db,
+ org.eclipse.net4j,
+ org.eclipse.net4j.jvm,
+ org.eclipse.net4j.db.h2
+Export-Package: net.zehrer.no2.cdo

@@ -12,7 +12,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://no2.zehrer.net/model.ecore"
+            uri="http://no2.zehrer.net/model"
             class="net.zehrer.no2.model.ModelPackage"
             genModel="model/DataModel.genmodel"/>
    </extension>

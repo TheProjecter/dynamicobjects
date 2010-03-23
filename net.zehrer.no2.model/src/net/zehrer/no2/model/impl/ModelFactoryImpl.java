@@ -49,7 +49,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 */
 	public static ModelFactory init() {
 		try {
-			ModelFactory theModelFactory = (ModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://no2.zehrer.net/model.ecore"); 
+			ModelFactory theModelFactory = (ModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://no2.zehrer.net/model"); 
 			if (theModelFactory != null) {
 				return theModelFactory;
 			}
