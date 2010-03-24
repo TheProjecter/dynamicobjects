@@ -11,7 +11,6 @@
 
 package net.zehrer.no2.editor;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -27,14 +26,11 @@ import net.zehrer.no2.model.factory.DynamicItemProviderAdapterFactory;
 import net.zehrer.no2.model.factory.ECoreItemProviderAdapterFactory;
 import net.zehrer.no2.model.impl.NO2ModelImpl;
 import net.zehrer.no2.model.util.EClassResource;
-import net.zehrer.no2.util.ProblemIndication;
 import net.zehrer.no2.util.ResourceUtil;
 import net.zehrer.no2.util.Session;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -70,7 +66,6 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -119,7 +114,6 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	
 	protected PropertySheetPage propertySheetPage;
 
-
 	/**
 	 * This keeps track of the active content viewer, which may be either one of
 	 * the viewers in the pages or the content outline viewer.
@@ -136,8 +130,7 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	/**
 	 * This keeps track of all the
 	 * {@link org.eclipse.jface.viewers.ISelectionChangedListener}s that are
-	 * listening to this editor. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * listening to this editor. 
 	 * @generated
 	 */
 	protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
@@ -150,7 +143,6 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	 */
 	protected ISelection editorSelection = StructuredSelection.EMPTY;
 
-	
 	/**
 	 * The MarkerHelper is responsible for creating workspace resource markers
 	 * presented in Eclipse's Problems View. 
@@ -214,23 +206,7 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 		}
 	};
 
-	/**
-	 * Resources that have been removed since last activation. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected Collection<Resource> removedResources = new ArrayList<Resource>();
 
-	/**
-	 * Resources that have been changed since last activation. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected Collection<Resource> changedResources = new ArrayList<Resource>();
-
-	protected Collection<Resource> savedResources = new ArrayList<Resource>();
 	
 	/**
 	 * Map to store the diagnostic associated with a resource. <!--
@@ -252,43 +228,8 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	 * 
 	 * @generated
 	 */
-	protected IResourceChangeListener resourceChangeListener = new IResourceChangeListener() {
-		public void resourceChanged(IResourceChangeEvent event) {
-			IResourceDelta delta = event.getDelta();
-			try {
-
-				final ResourceDeltaVisitor visitor = new ResourceDeltaVisitor(modelEditingDomain.getResourceSet());
-				visitor.setSavedResources(savedResources);
-
-				delta.accept(visitor);
-
-				if (!visitor.getRemovedResources().isEmpty()) {
-					getSite().getShell().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							removedResources.addAll(visitor.getRemovedResources());
-							if (!isDirty()) {
-								getSite().getPage().closeEditor(ModelEditor.this, false);
-							}
-						}
-					});
-				}
-
-				if (!visitor.getChangedResources().isEmpty()) {
-					getSite().getShell().getDisplay().asyncExec(new Runnable() {
-						public void run() {
-							changedResources.addAll(visitor.getChangedResources());
-							if (getSite().getPage().getActiveEditor() == ModelEditor.this) {
-								handleActivate();
-							}
-						}
-					});
-				}
-			} catch (CoreException exception) {
-				NO2EditorPlugin.INSTANCE.log(exception);
-			}
-		}
-	};
-
+	protected WorkspaceResourceManager resourceManager = new WorkspaceResourceManager(this);
+	
 	/**
 	 * This creates a model editor. 
 	 * 
@@ -309,12 +250,14 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 
+		//TODO: check to merge Resource Manager and "Session"
+		
 		// Do the work within an operation because this is a long running
 		// activity that modifies the workbench.
-		//
+
 		Session operation = new Session(this.modelEditingDomain);
 		operation.setProblemIndication(problemIndication);
-		operation.setSavedResources(savedResources);
+		operation.setSavedResources(resourceManager.getSavedResources());
 		
 		problemIndication.setState(false);
 		try {
@@ -356,9 +299,13 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 		setSite(site);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
+		
 		site.setSelectionProvider(this); // TODO: still required?
+		
 		site.getPage().addPartListener(partListener);
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
+		
+		resourceManager.setProblemIndication(problemIndication);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceManager, IResourceChangeEvent.POST_CHANGE);
 	}
 
 	/**
@@ -438,7 +385,7 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	public void dispose() {
 		problemIndication.setState(false);
 
-		ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
+		ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceManager);
 
 		getSite().getPage().removePartListener(partListener);
 
@@ -916,87 +863,9 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 		return converter.normalize(metaModelURI);
 	}
 
-	/**
-	 * Handles activation of the editor or it's associated views. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @category ModelEdit
-	 */
-	protected void handleActivate() {
-		// Recompute the read only state.
-		//
-		if (modelEditingDomain.getResourceToReadOnlyMap() != null) {
-			modelEditingDomain.getResourceToReadOnlyMap().clear();
-
-			// Refresh any actions that may become enabled or disabled.
-			//
-			setSelection(getSelection());
-		}
-
-		if (!removedResources.isEmpty()) {
-			if (handleDirtyConflict()) {
-				getSite().getPage().closeEditor(ModelEditor.this, false);
-			} else {
-				removedResources.clear();
-				changedResources.clear();
-				savedResources.clear();
-			}
-		} else if (!changedResources.isEmpty()) {
-			changedResources.removeAll(savedResources);
-			handleChangedResources();
-			changedResources.clear();
-			savedResources.clear();
-		}
-	}
-
-	/**
-	 * Handles what to do with changed resources on activation. 
-	 * 
-	 * @category ModelEdit
-	 */
-	protected void handleChangedResources() {
-		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
-			if (isDirty()) {
-				changedResources.addAll(modelEditingDomain.getResourceSet().getResources());
-			}
-			modelEditingDomain.getCommandStack().flush();
-
-			problemIndication.setState(false);
-			for (Resource resource : changedResources) {
-				if (resource.isLoaded()) {
-					resource.unload();
-					try {
-						resource.load(Collections.EMPTY_MAP);
-					} catch (IOException exception) {
-						if (!problemIndication.containsKey(resource)) {
-							problemIndication.put(resource, ResourceUtil.analyzeResourceProblems(resource, exception));
-						}
-					}
-				}
-			}
-
-			if (AdapterFactoryEditingDomain.isStale(editorSelection)) {
-				setSelection(StructuredSelection.EMPTY);
-			}
-
-			problemIndication.setState(true);
-			problemIndication.update();
-		}
-	}
 
 
 
-	/**
-	 * Shows a dialog that asks if conflicting changes should be discarded. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @category ModelEdit
-	 */
-	protected boolean handleDirtyConflict() {
-		return MessageDialog.openQuestion(getSite().getShell(), getString("_UI_FileConflict_label"), getString("_WARN_FileConflict"));
-	}
 
 	/**
 	 * This sets up the editing domain for the model editor. <!-- begin-user-doc
@@ -1029,8 +898,6 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 		// Add a listener to set the most recent command's affected objects to
 		// be the selection of the viewer with focus.
 		//
-		
-		
 		
 		commandStack.addCommandStackListener(new CommandStackListener() {
 			
@@ -1099,7 +966,12 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 		viewer.addDropSupport(dndOperations, transfers, new EditingDomainViewerDropAdapter(modelEditingDomain, viewer));
 	}
 
-
+	
+	public void handleActivate() {
+		this.resourceManager.handleActivate();
+	}
+	
+	
 	/**
 	 * Returns whether the outline view should be presented to the user. 
 	 * @generated

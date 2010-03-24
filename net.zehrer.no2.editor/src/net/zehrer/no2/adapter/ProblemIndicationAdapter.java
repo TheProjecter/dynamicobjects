@@ -11,7 +11,7 @@
 
 package net.zehrer.no2.adapter;
 
-import net.zehrer.no2.util.ProblemIndication;
+import net.zehrer.no2.editor.ProblemIndication;
 import net.zehrer.no2.util.ResourceUtil;
 
 import org.eclipse.emf.common.notify.Notification;

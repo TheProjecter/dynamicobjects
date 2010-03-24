@@ -9,7 +9,7 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package net.zehrer.no2.util;
+package net.zehrer.no2.editor;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
