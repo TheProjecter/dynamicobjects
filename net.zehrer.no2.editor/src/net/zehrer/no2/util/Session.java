@@ -19,6 +19,8 @@ import java.util.Map;
 
 
 
+import net.zehrer.no2.editor.ProblemIndication;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.command.BasicCommandStack;

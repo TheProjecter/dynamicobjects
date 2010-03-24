@@ -23,6 +23,8 @@ public class Messages extends NLS {
 	public static String _UI_CreateObjectCommand_Text;
 	public static String _UI_CreateObjectCommand_ToolTip;
 	public static String _UI_CreateModelError_message;
+	public static String _UI_FileConflict_label;
+	public static String _WARN_FileConflict;
 
 	
 	static {
