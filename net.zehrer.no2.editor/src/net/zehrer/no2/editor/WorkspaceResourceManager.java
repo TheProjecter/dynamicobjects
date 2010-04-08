@@ -11,198 +11,208 @@
 
 package net.zehrer.no2.editor;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.zehrer.no2.Messages;
-import net.zehrer.no2.NO2EditorPlugin;
+import net.zehrer.no2.common.AbstractWorkspaceResourceManager;
+import net.zehrer.no2.common.IEMFResourceEditor;
+import net.zehrer.no2.model.NO2Model;
+import net.zehrer.no2.model.adapter.NO2ModelAdapter;
+import net.zehrer.no2.model.impl.NO2ModelImpl;
+import net.zehrer.no2.model.util.EClassResource;
 import net.zehrer.no2.util.ResourceUtil;
 
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IWorkbenchPartSite;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.edit.ui.util.EditUIUtil;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.ui.IEditorInput;
 
-public class WorkspaceResourceManager implements IResourceChangeListener {
+public class WorkspaceResourceManager extends AbstractWorkspaceResourceManager {
 	
-	protected ModelEditor editor;
-
-	protected ProblemIndication problemIndication;
+	final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
 	
 	
 	/**
-	 * Resources that have been removed since last activation.
+	 * TODO: add comment 
+	 * TODO: add multi metaModel support.
 	 */
-	protected Collection<Resource> removedResources = new ArrayList<Resource>();
+	private NO2Model no2Model;
 
-	/**
-	 * Resources that have been changed since last activation.
-	 */
-	protected Collection<Resource> changedResources = new ArrayList<Resource>();
+	private Resource no2Resource;
+	private Resource metaModelResource; // TODO support several metaModel's
 
-	/**
-	 * Resources that have been saved since last activation.
-	 */
-	protected Collection<Resource> savedResources = new ArrayList<Resource>();
+	private URI archiveURI;
+	private URI metaModelURI;
 	
-	public WorkspaceResourceManager (ModelEditor editor) {
-		this.editor = editor;
 
-	}
-
-	public void resourceChanged(IResourceChangeEvent event) {
-		IResourceDelta delta = event.getDelta();
-		try {
-
-			final ResourceDeltaVisitor visitor = new ResourceDeltaVisitor(getEditingDomain().getResourceSet());
-			visitor.setSavedResources(savedResources);
-
-			delta.accept(visitor);
-
-			if (!visitor.getRemovedResources().isEmpty()) {
-				getDisplay().asyncExec(new Runnable() {
-					public void run() {
-						removedResources.addAll(visitor.getRemovedResources());
-						if (!isDirty()) {
-							getSite().getPage().closeEditor(getEditor(), false);
-						}
-					}
-				});
-			}
-
-			if (!visitor.getChangedResources().isEmpty()) {
-				getDisplay().asyncExec(new Runnable() {
-					public void run() {
-						changedResources.addAll(visitor.getChangedResources());
-						if (getSite().getPage().getActiveEditor() == getEditor() ) {
-							handleActivate();
-						}
-					}
-				});
-			}
-		} catch (CoreException exception) {
-			NO2EditorPlugin.INSTANCE.log(exception);
-		}
-	}
+	public WorkspaceResourceManager (IEMFResourceEditor editor) {
+		super();
 		
-	public void handleActivate() {
-		// Recompute the read only state.
+		setEditor(editor);
+
+		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); // initialObjectCreationPage.getEncoding()
+		saveOptions.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE); // <---
+		
+	}
+
+	
+	/**
+	 * (Default) operation implementation for "doSave".
+	 */
+	@Override
+	protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+		// Save the resources to the file system.
 		//
-		if (getEditingDomain().getResourceToReadOnlyMap() != null) {
-			getEditingDomain().getResourceToReadOnlyMap().clear();
-
-			// Refresh any actions that may become enabled or disabled.
-			// TODO: understand :)
-			getEditor().setSelection(getEditor().getSelection());
-		}
-
-		if (!removedResources.isEmpty()) {
-			if (handleDirtyConflict()) {
-				getSite().getPage().closeEditor(getEditor(), false);
-			} else {
-				removedResources.clear();
-				changedResources.clear();
-				savedResources.clear();
-			}
-		} else if (!changedResources.isEmpty()) {
-			changedResources.removeAll(savedResources);
-			handleChangedResources();
-			changedResources.clear();
-			savedResources.clear();
-		}
-	}
-	
-	/**
-	 * Handles what to do with changed resources on activation. 
-	 * 
-	 * @category ModelEdit
-	 */
-	protected void handleChangedResources() {
-		if (!changedResources.isEmpty() && (!isDirty() || handleDirtyConflict())) {
-			if (isDirty()) {
-				changedResources.addAll(getEditingDomain().getResourceSet().getResources());
-			}
-			getEditingDomain().getCommandStack().flush();
-
-			problemIndication.setState(false);
-			for (Resource resource : changedResources) {
-				if (resource.isLoaded()) {
-					resource.unload();
-					try {
-						resource.load(Collections.EMPTY_MAP);
-					} catch (IOException exception) {
-						if (!problemIndication.containsKey(resource)) {
-							problemIndication.put(resource, ResourceUtil.analyzeResourceProblems(resource, exception));
-						}
+		boolean first = true;
+		for (Resource resource : getEditingDomain().getResourceSet().getResources()) {
+			if ((first || !resource.getContents().isEmpty() || ResourceUtil.isPersisted(resource, getEditingDomain().getResourceSet())) && !getEditingDomain().isReadOnly(resource)) {
+				try {
+					long timeStamp = resource.getTimeStamp();
+					resource.save(saveOptions);
+					if (resource.getTimeStamp() != timeStamp) {
+						savedResources.add(resource);
 					}
+				} catch (Exception exception) {
+					this.problemIndication.put(resource, ResourceUtil.analyzeResourceProblems(resource, exception));
 				}
+				first = false;
 			}
-
-			if (AdapterFactoryEditingDomain.isStale(getEditor().getSelection())) {
-				getEditor().setSelection(StructuredSelection.EMPTY);
-			}
-
-			problemIndication.setState(true);
-			problemIndication.update();
 		}
 	}
 	
 	
-	public void doSave(IProgressMonitor progressMonitor) {
-		
+	public EClassResource getEClassResource() {
+		ResourceSet resourceSet = no2Model.getResourceSet();
+		return new EClassResource(no2Model.getClassResources().get(0), resourceSet);
 	}
-	
-	// ---- some getter / setter 
-	
-	public Collection<Resource> getSavedResources() {
-		return this.savedResources;
-	}
-	
-	public void setProblemIndication (ProblemIndication problemIndication) {
-		this.problemIndication = problemIndication;
-	}	
-	
-	// ----- protected
 	
 	/**
-	 * Shows a dialog that asks if conflicting changes should be discarded. 
+	 * Return the resource of the meta model.
 	 * 
-	 * @generated
+	 * @return
 	 * @category ModelEdit
 	 */
-	protected boolean handleDirtyConflict() {
-		return MessageDialog.openQuestion(getSite().getShell(), Messages._UI_FileConflict_label, Messages._UI_FileConflict_label);
+	public Resource getMetaModelResource() {
+		return this.metaModelResource;
 	}
 	
-	protected IWorkbenchPartSite getSite() {
-		return this.editor.getSite();
+	/**
+	 * Return the absolute URI of the meta model. e.g. used to open the ECore
+	 * default editor.
+	 * 
+	 * @return
+	 * @category ModelEdit
+	 */
+	public URI getMetaModelURI() {
+		URIConverter converter = no2Model.getResourceSet().getURIConverter();
+		return converter.normalize(metaModelURI);
 	}
 	
-	protected ModelEditor getEditor() {
-		return this.editor;
+	/**
+	 * Get current model instance
+	 * 
+	 * @category ModelEdit
+	 */
+	public NO2Model getModel() {
+		return this.no2Model;
+	}
+	
+	public Object getOutlinePageInput() {
+		return getMetaModelResource().getEObject("/");
 	}
 
-	protected Display getDisplay() {
-		return PlatformUI.getWorkbench().getDisplay();
+	/**
+	 * This is the method called to load a resource into the editing domain's
+	 * resource set based on the editor's input. 
+	 * @generated NOT
+	 */
+	public void createModel(IEditorInput editorInput) {
+
+		archiveURI = NO2ModelImpl.getArchiveURI(EditUIUtil.getURI(editorInput));
+
+		Diagnostic diagnostic = null;
+		Exception exception = null;
+
+		// Get resource set and setup URI mapping
+		ResourceSet resourceSet = getEditingDomain().getResourceSet();
+
+		// configure the URI map
+		// TODO : move all load / save
+		resourceSet.getURIConverter().getURIMap().put(URI.createURI("/"), archiveURI);
+
+		// ------- load NO2Model ------------
+
+		URI no2URI = URI.createURI("/no2.xmi"); // TODO: use central name
+
+		try {
+			// Load the resource
+			no2Resource = resourceSet.getResource(no2URI, true);
+			no2Resource.load(null); // TODO: what is about params on load?
+			no2Model = (NO2Model) no2Resource.getEObject("/");
+			no2Model.setArchiveURI(archiveURI); // TODO: do internal
+			no2Model.setEditingDomainProvider(getEditor());
+
+			// function for adding new created objects into the correct resource
+			no2Model.eAdapters().add(new NO2ModelAdapter());
+
+		} catch (Exception e) {
+			exception = e;
+		}
+
+		if (no2Resource != null) {
+			diagnostic = ResourceUtil.analyzeResourceProblems(no2Resource, exception);
+		} else {
+			diagnostic = new BasicDiagnostic(Diagnostic.ERROR, "net.zehrer.no2.model.editor", 0, Messages._UI_CreateModelError_message , new Object[] { exception }); // TODO: getString("_UI_CreateModelError_message", no2URI)
+		}
+
+		if (diagnostic.getSeverity() != Diagnostic.OK) {
+			problemIndication.put(no2Resource, diagnostic); // TODO check
+																	// again
+																	// orignial
+																	// code!
+
+			// TODO: what happens when exception occurs? What are possible
+			// problems?
+			// - Wrong format
+			// - other error
+		}
+
+		// ------- load ECore Model (MetaModel) ------------
+
+		metaModelURI = URI.createURI("/metamodel.ecore"); // TODO: use central
+															// name
+
+		try {
+			// Load the resource through the editing domain.
+			// TODO: BUG in no2Model.getResouces (cause resourceSet is not set
+			// after load!!!!)
+			metaModelResource = no2Model.getResource(metaModelURI);
+
+		} catch (Exception e) {
+			exception = e;
+		}
+
+		if (metaModelResource != null) {
+			diagnostic = ResourceUtil.analyzeResourceProblems(metaModelResource, exception);
+		} else {
+			diagnostic = new BasicDiagnostic(Diagnostic.ERROR, "net.zehrer.no2.model.editor", 0, Messages._UI_CreateModelError_message,
+					new Object[] { exception }); // TODO:getString("_UI_CreateModelError_message", metaModelURI)
+		}
+		if (diagnostic.getSeverity() != Diagnostic.OK) {
+			problemIndication.put(metaModelResource, diagnostic);
+		}
+
+
 	}
-	
-	protected boolean isDirty() {
-		return this.editor.isDirty();
-	}
-	
-	protected AdapterFactoryEditingDomain getEditingDomain() {
-		return (AdapterFactoryEditingDomain) getEditor().getEditingDomain();
-	}
-	
-	
 }

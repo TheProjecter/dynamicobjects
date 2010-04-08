@@ -13,7 +13,7 @@
  *     ModelImporterDetailPage.java
  *******************************************************************************/
 
-package net.zehrer.no2.common;
+package net.zehrer.no2.wizard;
 
 import java.io.File;
 import java.util.ArrayList;

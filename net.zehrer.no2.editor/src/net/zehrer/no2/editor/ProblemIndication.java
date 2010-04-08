@@ -20,6 +20,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ui.PlatformUI;
 
 public class ProblemIndication implements Runnable {
+	
+	/**
+	 * The MarkerHelper is responsible for creating workspace resource markers
+	 * presented in Eclipse's Problems View. 
+	 */
+//	protected MarkerHelper markerHelper = new EditUIMarkerHelper();
 
 	protected Object source;
 	protected boolean enabled = true; // TODO: syncronized??
@@ -76,29 +82,7 @@ public class ProblemIndication implements Runnable {
 				}
 			}
 
-			// int lastEditorPage = getPageCount() - 1;
-			// if (lastEditorPage >= 0 && getEditor(lastEditorPage) instanceof
-			// ProblemEditorPart) {
-			// ((ProblemEditorPart)
-			// getEditor(lastEditorPage)).setDiagnostic(diagnostic);
-			// if (diagnostic.getSeverity() != Diagnostic.OK) {
-			// setActivePage(lastEditorPage);
-			// }
-			// } else
 
-			// if (diagnostic.getSeverity() != Diagnostic.OK) {
-			// ProblemEditorPart problemEditorPart = new ProblemEditorPart();
-			// problemEditorPart.setDiagnostic(diagnostic);
-			// problemEditorPart.setMarkerHelper(markerHelper);
-			// try {
-			// addPage(++lastEditorPage, problemEditorPart, getEditorInput());
-			// setPageText(lastEditorPage, problemEditorPart.getPartName());
-			// setActivePage(lastEditorPage);
-			// // showTabs();
-			// } catch (PartInitException exception) {
-			// NO2EditorPlugin.INSTANCE.log(exception);
-			// }
-			// }
 
 			// if (markerHelper.hasMarkers(modelEditingDomain.getResourceSet()))
 			// {

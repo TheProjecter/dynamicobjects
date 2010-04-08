@@ -11,7 +11,6 @@
 
 package net.zehrer.no2.editor;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EventObject;
@@ -19,6 +18,8 @@ import java.util.HashMap;
 
 import net.zehrer.no2.NO2EditorPlugin;
 import net.zehrer.no2.adapter.ProblemIndicationAdapter;
+import net.zehrer.no2.common.IEMFResourceEditor;
+import net.zehrer.no2.common.SelectionProviderEditorPart;
 import net.zehrer.no2.handler.OpenModelEditorHandler;
 import net.zehrer.no2.model.NO2Model;
 import net.zehrer.no2.model.adapter.NO2ModelAdapter;
@@ -27,7 +28,6 @@ import net.zehrer.no2.model.factory.ECoreItemProviderAdapterFactory;
 import net.zehrer.no2.model.impl.NO2ModelImpl;
 import net.zehrer.no2.model.util.EClassResource;
 import net.zehrer.no2.util.ResourceUtil;
-import net.zehrer.no2.util.Session;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -69,7 +69,6 @@ import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -85,13 +84,9 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IPartListener;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.ide.IGotoMarker;
-import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
-import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
 /**
@@ -100,7 +95,7 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
  * 
  * @generated
  */
-public class ModelEditor extends EditorPart implements IEditingDomainProvider, ISelectionProvider, IMenuListener,  IGotoMarker {
+public class ModelEditor extends SelectionProviderEditorPart implements IEMFResourceEditor, IMenuListener,  IGotoMarker {
 
 	// IViewerProvider,
 
@@ -120,120 +115,75 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	 */
 	protected Viewer currentViewer; // TODO check regarding OUTLINE?
 
-	/**
-	 * This listens to which ever viewer is active.
-	 * 
-	 * @generated
-	 */
-	protected ISelectionChangedListener selectionChangedListener;
-
-	/**
-	 * This keeps track of all the
-	 * {@link org.eclipse.jface.viewers.ISelectionChangedListener}s that are
-	 * listening to this editor. 
-	 * @generated
-	 */
-	protected Collection<ISelectionChangedListener> selectionChangedListeners = new ArrayList<ISelectionChangedListener>();
-
-	/**
-	 * This keeps track of the selection of the editor as a whole. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected ISelection editorSelection = StructuredSelection.EMPTY;
-
-	/**
-	 * The MarkerHelper is responsible for creating workspace resource markers
-	 * presented in Eclipse's Problems View. 
-	 * 
-	 * @generated
-	 */
-//	protected MarkerHelper markerHelper = new EditUIMarkerHelper();
-
-	/**
-	 * TODO: add comment 
-	 * TODO: add multi metaModel support.
-	 */
-	private NO2Model no2Model;
-
-	private Resource no2Resource;
-	private Resource metaModelResource; // TODO support several metaModel's
-
-	private URI archiveURI;
-	private URI metaModelURI;
 
 	/**
 	 * This listens for when the outline becomes active
 	 * 
 	 * @generated
 	 */
-	protected IPartListener partListener = new IPartListener() {
+//	protected IPartListener partListener = new IPartListener() {
+//
+//		public void partActivated(IWorkbenchPart p) {
+//			// if (p instanceof ContentOutline) {
+//			// if (((ContentOutline) p).getCurrentPage() == contentOutlinePage)
+//			// {
+//			// getActionBarContributor().setActiveEditor(ModelEditor.this);
+//			//
+//			// setCurrentViewer(contentOutlineViewer);
+//			// }
+//			// } else
+//			if (p instanceof PropertySheet) {
+//				if (((PropertySheet) p).getCurrentPage() == propertySheetPage) {
+//					getActionBarContributor().setActiveEditor(ModelEditor.this);
+//					handleActivate();
+//				}
+//			} else if (p == ModelEditor.this) {
+//				handleActivate();
+//			}
+//		}
+//
+//		public void partBroughtToTop(IWorkbenchPart p) {
+//			// Ignore.
+//		}
+//
+//		public void partClosed(IWorkbenchPart p) {
+//			// Ignore.
+//		}
+//
+//		public void partDeactivated(IWorkbenchPart p) {
+//			// Ignore.
+//		}
+//
+//		public void partOpened(IWorkbenchPart p) {
+//			// Ignore.
+//		}
+//	};
 
-		public void partActivated(IWorkbenchPart p) {
-			// if (p instanceof ContentOutline) {
-			// if (((ContentOutline) p).getCurrentPage() == contentOutlinePage)
-			// {
-			// getActionBarContributor().setActiveEditor(ModelEditor.this);
-			//
-			// setCurrentViewer(contentOutlineViewer);
-			// }
-			// } else
-			if (p instanceof PropertySheet) {
-				if (((PropertySheet) p).getCurrentPage() == propertySheetPage) {
-					getActionBarContributor().setActiveEditor(ModelEditor.this);
-					handleActivate();
-				}
-			} else if (p == ModelEditor.this) {
-				handleActivate();
-			}
-		}
 
-		public void partBroughtToTop(IWorkbenchPart p) {
-			// Ignore.
-		}
-
-		public void partClosed(IWorkbenchPart p) {
-			// Ignore.
-		}
-
-		public void partDeactivated(IWorkbenchPart p) {
-			// Ignore.
-		}
-
-		public void partOpened(IWorkbenchPart p) {
-			// Ignore.
-		}
-	};
-
-
-	
 	/**
-	 * Map to store the diagnostic associated with a resource. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
+	 * Map to store the diagnostic associated with a resource.
 	 */
-	
 	protected ProblemIndication problemIndication = new ProblemIndication();
+	
 	
 	/**
 	 * Adapter used to update the problem indication when resources are demanded
-	 * loaded. TODO: extract class
+	 * loaded.
+	 * 
+	 *  
+	 * TODO: move into a NO2 project
 	 */
 	protected EContentAdapter problemIndicationAdapter = new ProblemIndicationAdapter(problemIndication);
 
 	/**
-	 * This listens for workspace changes. 
+	 * This listens for workspace changes.
 	 * 
-	 * @generated
+	 * 
 	 */
 	protected WorkspaceResourceManager resourceManager = new WorkspaceResourceManager(this);
 	
 	/**
 	 * This creates a model editor. 
-	 * 
-	 * @generated
 	 * @category ModelEdit
 	 */
 	public ModelEditor() {
@@ -249,20 +199,14 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	 */
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
-
-		//TODO: check to merge Resource Manager and "Session"
 		
 		// Do the work within an operation because this is a long running
 		// activity that modifies the workbench.
 
-		Session operation = new Session(this.modelEditingDomain);
-		operation.setProblemIndication(problemIndication);
-		operation.setSavedResources(resourceManager.getSavedResources());
-		
 		problemIndication.setState(false);
 		try {
 			// This runs the options, and shows progress.
-			new ProgressMonitorDialog(getSite().getShell()).run(true, false, operation);
+			new ProgressMonitorDialog(getSite().getShell()).run(true, false, this.resourceManager);
 
 			// Refresh the necessary state.
 			((BasicCommandStack) modelEditingDomain.getCommandStack()).saveIsDone();
@@ -296,13 +240,15 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	 */
 	@Override
 	public void init(IEditorSite site, IEditorInput editorInput) {
+
 		setSite(site);
 		setInputWithNotify(editorInput);
 		setPartName(editorInput.getName());
 		
 		site.setSelectionProvider(this); // TODO: still required?
 		
-		site.getPage().addPartListener(partListener);
+		//TODO: for what is the part listener required?
+//		site.getPage().addPartListener(partListener);
 		
 		resourceManager.setProblemIndication(problemIndication);
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceManager, IResourceChangeEvent.POST_CHANGE);
@@ -318,19 +264,20 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	public void createPartControl(Composite parent) {
 
 		// Creates the model from the editor input
-		createModel();
+		resourceManager.createModel(getEditorInput());
+
+		// --------- problemIndicationAdapter ------------
+
+		problemIndication.setSource(getEditingDomain().getResourceSet()); 
+		modelEditingDomain.getResourceSet().eAdapters().add(problemIndicationAdapter);
 
 		// This is the page for the table viewer.
-		{
-			ResourceSet resourceSet = no2Model.getResourceSet();
-			EClassResource classResource = new EClassResource(no2Model.getClassResources().get(0), resourceSet);
 
-			// Create the table page
-			tablePage = new TabelEditorPage(this, this.modelAdapterFactory, classResource);
+		// Create the table page
+		// TODO Move Adapter Factory in Page?
+		tablePage = new TabelEditorPage(this, this.modelAdapterFactory, resourceManager.getEClassResource());
 			tablePage.createControl(parent);
 			Control table = tablePage.getControl();
-
-		}
 				
 		problemIndication.update();
 
@@ -387,7 +334,8 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceManager);
 
-		getSite().getPage().removePartListener(partListener);
+		// TODO: PartListener
+//		getSite().getPage().removePartListener(partListener);
 
 		modelAdapterFactory.dispose();
 
@@ -462,61 +410,6 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 			NO2EditorPlugin.INSTANCE.log(exception);
 		}
 	}
-
-	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @category ISelectionProvider
-	 */
-	public void addSelectionChangedListener(ISelectionChangedListener listener) {
-		selectionChangedListeners.add(listener);
-	}
-
-	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 * @category ISelectionProvider
-	 */
-	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
-		selectionChangedListeners.remove(listener);
-	}
-
-	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to
-	 * set this editor's overall selection. Calling this result will notify the
-	 * listeners. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 * @category ISelectionProvider
-	 */
-	public void setSelection(ISelection selection) {
-		editorSelection = selection;
-
-		for (ISelectionChangedListener listener : selectionChangedListeners) {
-			listener.selectionChanged(new SelectionChangedEvent(this, selection));
-		}
-
-		// TODO: why is status line not an usual listener?
-		setStatusLineManager(selection);
-	}
-
-	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to
-	 * return this editor's overall selection. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @generated
-	 * @category ISelectionProvider
-	 */
-	public ISelection getSelection() {
-		return editorSelection;
-	}
-
-
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> TODO: extract class
@@ -651,7 +544,6 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @category ModelEdit
@@ -695,7 +587,7 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	public IContentOutlinePage getContentOutlinePage() {
 
 		if (contentOutlinePage == null) {
-			contentOutlinePage = new DataContentOutlinePage(getModelAdapterFactory(), this);
+			contentOutlinePage = new DataContentOutlinePage (this, this.resourceManager);
 		}
 
 		return contentOutlinePage;
@@ -714,16 +606,6 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 		}
 
 		return propertySheetPage;
-	}
-
-	/**
-	 * Return the resource of the meta model.
-	 * 
-	 * @return
-	 * @category ModelEdit
-	 */
-	public Resource getMetaModelResource() {
-		return this.metaModelResource;
 	}
 
 	/**
@@ -749,122 +631,6 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 	public AdapterFactory getModelAdapterFactory() {
 		return modelAdapterFactory;
 	}
-
-	/**
-	 * Get current model instance
-	 * 
-	 * @category ModelEdit
-	 */
-	public NO2Model getModel() {
-		return this.no2Model;
-	}
-
-	// ---- IDisposable
-
-	/**
-	 * This is the method called to load a resource into the editing domain's
-	 * resource set based on the editor's input. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @generated NOT
-	 * @category ModelEdit
-	 */
-	public void createModel() {
-
-		archiveURI = NO2ModelImpl.getArchiveURI(EditUIUtil.getURI(getEditorInput()));
-
-		Diagnostic diagnostic = null;
-		Exception exception = null;
-
-		// Get resouce set and setup URI mapping
-		ResourceSet resourceSet = modelEditingDomain.getResourceSet();
-
-		// configure the URI map
-		// TODO : move all load / save
-		resourceSet.getURIConverter().getURIMap().put(URI.createURI("/"), archiveURI);
-
-		// ------- load NO2Model ------------
-
-		URI no2URI = URI.createURI("/no2.xmi"); // TODO: use central name
-
-		try {
-			// Load the resource
-			no2Resource = resourceSet.getResource(no2URI, true);
-			no2Resource.load(null); // TODO: what is about params on load?
-			no2Model = (NO2Model) no2Resource.getEObject("/");
-			no2Model.setArchiveURI(archiveURI); // TODO: do internal
-			no2Model.setEditingDomainProvider(this);
-
-			// function for adding new created objects into the correct resource
-			no2Model.eAdapters().add(new NO2ModelAdapter());
-
-		} catch (Exception e) {
-			exception = e;
-		}
-
-		if (no2Resource != null) {
-			diagnostic = ResourceUtil.analyzeResourceProblems(no2Resource, exception);
-		} else {
-			diagnostic = new BasicDiagnostic(Diagnostic.ERROR, "net.zehrer.no2.model.editor", 0, getString("_UI_CreateModelError_message", no2URI), new Object[] { exception });
-		}
-
-		if (diagnostic.getSeverity() != Diagnostic.OK) {
-			problemIndication.put(no2Resource, diagnostic); // TODO check
-																	// again
-																	// orignial
-																	// code!
-
-			// TODO: what happens when exception occures? What are possible
-			// problems?
-			// - Wrong format
-			// - other error
-		}
-
-		// ------- load ECore Modle (MetaModel) ------------
-
-		metaModelURI = URI.createURI("/metamodel.ecore"); // TODO: use central
-															// name
-
-		try {
-			// Load the resource through the editing domain.
-			// TODO: BUG in no2Model.getResouces (cause resourceSet is not set
-			// after load!!!!)
-			metaModelResource = no2Model.getResource(metaModelURI);
-
-		} catch (Exception e) {
-			exception = e;
-		}
-
-		if (metaModelResource != null) {
-			diagnostic = ResourceUtil.analyzeResourceProblems(metaModelResource, exception);
-		} else {
-			diagnostic = new BasicDiagnostic(Diagnostic.ERROR, "net.zehrer.no2.model.editor", 0, getString("_UI_CreateModelError_message", metaModelURI),
-					new Object[] { exception });
-		}
-		if (diagnostic.getSeverity() != Diagnostic.OK) {
-			problemIndication.put(metaModelResource, diagnostic);
-		}
-
-		// --------- problemIndicationAdapter ------------
-
-		problemIndication.setSource(resourceSet);  // will change??
-		modelEditingDomain.getResourceSet().eAdapters().add(problemIndicationAdapter);
-	}
-
-	/**
-	 * Return the absolute URI of the meta model. e.g. used to open the ECore
-	 * default editor.
-	 * 
-	 * @return
-	 * @category ModelEdit
-	 */
-	public URI getMetaModelURI() {
-		URIConverter converter = no2Model.getResourceSet().getURIConverter();
-		return converter.normalize(metaModelURI);
-	}
-
-
-
 
 
 	/**
@@ -1005,11 +771,23 @@ public class ModelEditor extends EditorPart implements IEditingDomainProvider, I
 
 	@Override
 	public void doSaveAs() {
-		// TODO Auto-generated method stub
-		
+		// NOT SUPPORTED !!
 	}
 
 
+	/**
+	 * @see SelectionProviderEditorPart#setSelection(ISelection)
+	 * @category ISelectionProvider
+	 */
+	@Override
+	public void setSelection(ISelection selection) {
+		super.setSelection(selection);
+
+		// TODO: why is status line not an usual listener?
+		setStatusLineManager(selection);
+	}
+
+	
 
 
 

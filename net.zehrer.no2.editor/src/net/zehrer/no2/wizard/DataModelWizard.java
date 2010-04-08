@@ -9,7 +9,7 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package net.zehrer.no2.common;
+package net.zehrer.no2.wizard;
 
 import java.io.IOException;
 
