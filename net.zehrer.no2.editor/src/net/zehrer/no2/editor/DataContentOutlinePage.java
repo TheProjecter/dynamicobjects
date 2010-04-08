@@ -11,7 +11,10 @@
 
 package net.zehrer.no2.editor;
 
-import org.eclipse.emf.common.notify.AdapterFactory;
+import net.zehrer.no2.model.factory.DynamicItemProviderAdapterFactory;
+import net.zehrer.no2.model.factory.ECoreItemProviderAdapterFactory;
+
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.IMenuManager;
@@ -27,34 +30,40 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 //
 public class DataContentOutlinePage extends ContentOutlinePage implements ISelectionChangedListener {
 
-	protected AdapterFactory adapterFactory;
-	protected ModelEditor modelEditor;
-
+	protected ComposedAdapterFactory adapterFactory;
 	protected IStatusLineManager contentOutlineStatusLineManager;
 	
+	protected WorkspaceResourceManager resourceManager;
+	protected ModelEditor editor;
+	
 
-	public DataContentOutlinePage(AdapterFactory adapterFactory, ModelEditor modelEditor) {
-
-		this.adapterFactory = adapterFactory;
-		this.modelEditor = modelEditor;
-		
+	public DataContentOutlinePage(ModelEditor editor, WorkspaceResourceManager resourceManager) {
+		this.editor = editor;
+		this.resourceManager = resourceManager;
 	}
 
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
 		
+		// ----
+		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		adapterFactory.addAdapterFactory(new ECoreItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new DynamicItemProviderAdapterFactory());
+		
+		
+		// ---- 
 		TreeViewer viewer = getTreeViewer();
 
 		// Set up the tree viewer.
 		viewer.setContentProvider(new AdapterFactoryContentProvider(adapterFactory));
 		viewer.setLabelProvider(new AdapterFactoryLabelProvider(adapterFactory));
 
-		viewer.setInput(modelEditor.getMetaModelResource().getEObject("/"));		
+		viewer.setInput(resourceManager.getOutlinePageInput());		
 		//viewer.setInput(modelEditor.getEditorInput());  // ORIGINAL form the generator
 
 		// Make sure our popups work.
-		modelEditor.createContextMenuFor(viewer);
+		editor.createContextMenuFor(viewer);
 
 		// TODO: set the selection ?
 //		Resource firstModel = findFirstResource(resourceSet, "ecore");  // official ecore extension?
@@ -75,7 +84,7 @@ public class DataContentOutlinePage extends ContentOutlinePage implements ISelec
 	public void setActionBars(IActionBars actionBars) {
 		super.setActionBars(actionBars);
 		
-		modelEditor.getActionBarContributor().shareGlobalActions(this, actionBars);
+		editor.getActionBarContributor().shareGlobalActions(this, actionBars);
 	}
 	
 }

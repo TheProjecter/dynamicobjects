@@ -16,7 +16,7 @@
             name="NO2"/>
       <wizard
             category="net.zehrer.no2.category"
-            class="net.zehrer.no2.common.DataModelWizard"
+            class="net.zehrer.no2.wizard.DataModelWizard"
             icon="icons/full/obj16/ModelModelFile.gif"
             id="net.zehrer.no2.model.editor.wizard"
             name="New Data Model">
@@ -41,10 +41,6 @@
    </extension>
    <extension
          point="org.eclipse.ui.commands">
-      <command
-            id="net.zehrer.no2.handler.OpenModelEditorHandler"
-            name="Open ECore Editor">
-      </command>
       <category
             id="net.zehrer.no2.category.main"
             name="XData">

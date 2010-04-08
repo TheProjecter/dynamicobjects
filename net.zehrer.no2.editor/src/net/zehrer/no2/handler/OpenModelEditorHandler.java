@@ -17,18 +17,16 @@ import net.zehrer.no2.editor.ModelEditor;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.common.ui.URIEditorInput;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IEditorDescriptor;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.IHandlerService;
-import org.eclipse.ui.ide.IDE;
 
+
+/**
+ * 
+ * Command disabled because of interface changes 
+ * TODO: new solution of editing packages.
+ *
+ */
 public class OpenModelEditorHandler extends AbstractHandler {
 
 	public static final String COMMAND_ID = OpenModelEditorHandler.class.getName();
@@ -47,29 +45,31 @@ public class OpenModelEditorHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
-		IWorkbenchPage page = workbenchWindow.getActivePage();
-
-		Shell shell = workbenchWindow.getShell();
-
-		// URI uri = URI.createPlatformPluginURI(modelPath, true);
-
-		// Open an editor on the new file.
-
-		try {
-			URIEditorInput editorInput = new URIEditorInput(editor.getMetaModelURI());
-
-			// TODO: update status if no editor is available
-			IEditorDescriptor desc = workbench.getEditorRegistry().getDefaultEditor(".ecore");
-			if (desc != null) {
-				IDE.openEditor(page, editorInput, desc.getId());				
-			}
-
-		} catch (PartInitException exception) {
-			MessageDialog.openError(shell, getString("_UI_OpenEditorError_label"), exception.getMessage());
-			return false;
-		}
+//		IWorkbench workbench = PlatformUI.getWorkbench();
+//		IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
+//		IWorkbenchPage page = workbenchWindow.getActivePage();
+//
+//		Shell shell = workbenchWindow.getShell();
+//
+//		// URI uri = URI.createPlatformPluginURI(modelPath, true);
+//
+//		// Open an editor on the new file.
+//
+//		try {
+////			URIEditorInput editorInput = new URIEditorInput(editor.getMetaModelURI());
+//
+//			// TODO: update status if no editor is available
+////			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(".ecore");
+//
+//			IEditorDescriptor desc = workbench.getEditorRegistry().getDefaultEditor(".ecore");
+//			if (desc != null) {
+//				IDE.openEditor(page, editorInput, desc.getId());				
+//			}
+//
+//		} catch (PartInitException exception) {
+//			MessageDialog.openError(shell, getString("_UI_OpenEditorError_label"), exception.getMessage());
+//			return false;
+//		}
 
 		return null;
 
