@@ -6,9 +6,14 @@ import net.zehrer.no2.ui.provider.EPackageContentProvider;
 import org.eclipse.emf.cdo.internal.ui.SharedIcons;
 import org.eclipse.emf.cdo.internal.ui.dialogs.PackageRegistryDialog;
 import org.eclipse.emf.cdo.session.CDOSession;
+import org.eclipse.emf.common.ui.URIEditorInput;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.edit.ui.util.EditUIUtil;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -17,6 +22,8 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -24,10 +31,14 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.Page;
 import org.eclipse.ui.part.ViewPart;
 
 /**
@@ -85,8 +96,9 @@ public class PackageView extends ViewPart {
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "net.zehrer.no2.ui.views.viewer");
 		makeActions();
 		hookContextMenu();
-		// hookDoubleClickAction();
+		 hookDoubleClickAction();
 		contributeToActionBars();
+
 	}
 
 	private void hookContextMenu() {
@@ -168,6 +180,7 @@ public class PackageView extends ViewPart {
 	}
 
 	private void makeActions() {
+
 		action1 = new Action() {
 			public void run() {
 				PackageRegistryDialog dialog = new PackageRegistryDialog(getSite().getPage(), session);
@@ -178,8 +191,39 @@ public class PackageView extends ViewPart {
 		action1.setText("Package Registry");
 		action1.setToolTipText("Open the Package Registry Dialog");
 		action1.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJ_ELEMENT));
+
+		doubleClickAction = new Action() {
+			public void run() {
+				ISelection selection = viewer.getSelection();
+				Object obj = ((IStructuredSelection) selection).getFirstElement();
+				if (obj instanceof EObject)
+					openEditor((EObject) obj);
+			}
+		};
+
 	}
 
+	protected void openEditor(EObject eObject) {
+		
+		if (eObject instanceof EClass) {
+			
+		}
+			
+		if (eObject instanceof EPackage) {
+			Resource resource = eObject.eResource();	
+			URI uri =  resource.getURI();
+			IEditorInput editorInput = new URIEditorInput(uri);
+			
+			// requires the emf.ecore.editor plug-in
+			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(".ecore");
+			try {
+				getSite().getPage().openEditor(editorInput, desc.getId() );
+			} catch (PartInitException e) {
+				e.printStackTrace();
+			}
+		}		
+
+	}
 }
 
 // --- from example
