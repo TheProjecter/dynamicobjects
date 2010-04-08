@@ -148,7 +148,6 @@ public class WorkspaceResourceManager extends AbstractWorkspaceResourceManager {
 		ResourceSet resourceSet = getEditingDomain().getResourceSet();
 
 		// configure the URI map
-		// TODO : move all load / save
 		resourceSet.getURIConverter().getURIMap().put(URI.createURI("/"), archiveURI);
 
 		// ------- load NO2Model ------------

@@ -84,9 +84,13 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IPartListener;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.ide.IGotoMarker;
+import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
+import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
 /**
@@ -121,43 +125,43 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	 * 
 	 * @generated
 	 */
-//	protected IPartListener partListener = new IPartListener() {
-//
-//		public void partActivated(IWorkbenchPart p) {
-//			// if (p instanceof ContentOutline) {
-//			// if (((ContentOutline) p).getCurrentPage() == contentOutlinePage)
-//			// {
-//			// getActionBarContributor().setActiveEditor(ModelEditor.this);
-//			//
-//			// setCurrentViewer(contentOutlineViewer);
-//			// }
-//			// } else
-//			if (p instanceof PropertySheet) {
-//				if (((PropertySheet) p).getCurrentPage() == propertySheetPage) {
-//					getActionBarContributor().setActiveEditor(ModelEditor.this);
-//					handleActivate();
-//				}
-//			} else if (p == ModelEditor.this) {
-//				handleActivate();
-//			}
-//		}
-//
-//		public void partBroughtToTop(IWorkbenchPart p) {
-//			// Ignore.
-//		}
-//
-//		public void partClosed(IWorkbenchPart p) {
-//			// Ignore.
-//		}
-//
-//		public void partDeactivated(IWorkbenchPart p) {
-//			// Ignore.
-//		}
-//
-//		public void partOpened(IWorkbenchPart p) {
-//			// Ignore.
-//		}
-//	};
+	protected IPartListener partListener = new IPartListener() {
+
+		public void partActivated(IWorkbenchPart p) {
+//			 if (p instanceof ContentOutline) {
+//			 if (((ContentOutline) p).getCurrentPage() == contentOutlinePage)
+//			 {
+//			 getActionBarContributor().setActiveEditor(ModelEditor.this);
+//			
+//			 setCurrentViewer(contentOutlineViewer);
+//			 }
+//			 } else
+			if (p instanceof PropertySheet) {
+				if (((PropertySheet) p).getCurrentPage() == propertySheetPage) {
+					getActionBarContributor().setActiveEditor(ModelEditor.this);
+					handleActivate();
+				}
+			} else if (p == ModelEditor.this) {
+				handleActivate();
+			}
+		}
+
+		public void partBroughtToTop(IWorkbenchPart p) {
+			// Ignore.
+		}
+
+		public void partClosed(IWorkbenchPart p) {
+			// Ignore.
+		}
+
+		public void partDeactivated(IWorkbenchPart p) {
+			// Ignore.
+		}
+
+		public void partOpened(IWorkbenchPart p) {
+			// Ignore.
+		}
+	};
 
 
 	/**
@@ -744,7 +748,7 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	 * @category ModelEdit
 	 */
 	protected boolean showOutlineView() {
-		return false;
+		return true;
 	}
 
 	// ---- method not longer used ---
