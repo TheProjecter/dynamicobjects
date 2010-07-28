@@ -1,6 +1,6 @@
 package net.zehrer.no2.ui.views;
 
-import net.zehrer.no2.cdo.CDOServerPlugin;
+//import net.zehrer.no2.cdo.CDOServerPlugin;
 import net.zehrer.no2.ui.provider.EPackageContentProvider;
 
 import org.eclipse.emf.cdo.internal.ui.SharedIcons;
@@ -81,23 +81,23 @@ public class PackageView extends ViewPart {
 	 */
 	public void createPartControl(Composite parent) {
 
-		CDOServerPlugin cdoServer = CDOServerPlugin.getDefault();
+//		CDOServerPlugin cdoServer = CDOServerPlugin.getDefault();
 
-		this.session = cdoServer.getSession();
-
-		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
-
-		viewer.setContentProvider(new EPackageContentProvider(this.session));
-
-		viewer.setLabelProvider(new ViewLabelProvider());
-		viewer.setInput(this.session); // getViewSite()
-
-		// Create the help context id for the viewer's control
-		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "net.zehrer.no2.ui.views.viewer");
-		makeActions();
-		hookContextMenu();
-		 hookDoubleClickAction();
-		contributeToActionBars();
+//		this.session = cdoServer.getSession();
+//
+//		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+//
+//		viewer.setContentProvider(new EPackageContentProvider(this.session));
+//
+//		viewer.setLabelProvider(new ViewLabelProvider());
+//		viewer.setInput(this.session); // getViewSite()
+//
+//		// Create the help context id for the viewer's control
+//		PlatformUI.getWorkbench().getHelpSystem().setHelp(viewer.getControl(), "net.zehrer.no2.ui.views.viewer");
+//		makeActions();
+//		hookContextMenu();
+//		 hookDoubleClickAction();
+//		contributeToActionBars();
 
 	}
 
