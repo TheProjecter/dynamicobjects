@@ -1,0 +1,16 @@
+grammar net.zehrer.xtext.Words with org.eclipse.xtext.common.Terminals
+
+generate words "http://www.zehrer.net/xtext/Words"
+
+Model :
+  (elements+=Object)*;
+  
+ Object: 
+  Word | Defintion;
+  
+Word: 
+  name=ID;
+  
+Defintion:
+  'def' name=STRING
+  'end';
