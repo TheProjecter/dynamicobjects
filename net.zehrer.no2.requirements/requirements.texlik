@@ -1,6 +1,10 @@
 .
-
 The editor shall allow to choose a 
 object if more as one instances exists.
 
 The editor shall allow to add a word to a word model.
+
+The editor shall support 
+
+The editor should support rich text.
+
