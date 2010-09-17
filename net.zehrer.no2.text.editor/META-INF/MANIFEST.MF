@@ -12,6 +12,19 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
  com.ibm.icu;resolution:=optional,
- org.eclipse.xtext.xtend;resolution:=optional
+ org.eclipse.xtext.xtend;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: net.zehrer.no2,
+ net.zehrer.no2.services,
+ net.zehrer.no2.texlik,
+ net.zehrer.no2.texlik.impl,
+ net.zehrer.no2.texlik.util,
+ net.zehrer.no2.parseTreeConstruction,
+ net.zehrer.no2.parser.antlr,
+ net.zehrer.no2.parser.antlr.internal,
+ net.zehrer.no2.validation
