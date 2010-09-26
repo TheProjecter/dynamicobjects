@@ -11,3 +11,8 @@ syntax: regexp
 /*/bin/
 
 
+
+syntax: glob
+src-gen/*
+syntax: glob
+src-gen/*
