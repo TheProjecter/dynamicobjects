@@ -3,7 +3,10 @@
 */
 package net.zehrer.no2.ui.labeling;
 
+import net.zehrer.no2.texlik.Model;
+
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 import com.google.inject.Inject;
@@ -26,9 +29,11 @@ public class TexlikLabelProvider extends DefaultEObjectLabelProvider {
 	String text(MyModel ele) {
 	  return "my "+ele.getName();
 	}
-	 
-    String image(MyModel ele) {
+*/	 
+    String image(Model ele) {
+    	CompositeNode node = null;
+    	
       return "MyModel.gif";
     }
-*/
+
 }
