@@ -1,0 +1,20 @@
+
+// net.zehrer.no2.text.editor
+grammar net.zehrer.no2.Texlik with org.eclipse.xtext.common.Terminals
+
+generate text "http://www.zehrer.net/no2/Texlik"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Model :
+  (elements+=Sentence)*;
+  
+terminal SE	: ('.'|'!'|'?');  
+
+ // Text Part: Sentence & WordRefs
+  
+Sentence:
+  {Sentence} content+=WordRef* SE;
+    
+WordRef:
+  name=[ecore::EObject];  // Ref to Word
