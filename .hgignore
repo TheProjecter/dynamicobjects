@@ -7,6 +7,8 @@ syntax: glob
 .DS_Store
 .manager/*
 
+.antlr-generator-3.0.1.jar
+
 syntax: regexp
 /*/bin/
 
