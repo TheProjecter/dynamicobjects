@@ -2,7 +2,7 @@ package net.zehrer.no2.semantic.editor;
 
 import net.zehrer.no2.semantic.editor.coloring.ColorManager;
 import net.zehrer.no2.semantic.editor.outline.DebugContentOutlinePage;
-import net.zehrer.no2.semantic.editor.provider.ResourceDocumentProvider;
+import net.zehrer.no2.semantic.editor.provider.SemanticDocumentProvider;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
@@ -32,7 +32,8 @@ public class SemanticEditor extends TextEditor {
 		
 		initializeEditingDomain();
 		
-		setDocumentProvider(new ResourceDocumentProvider());
+		// TODO: inject?
+		setDocumentProvider(new SemanticDocumentProvider());
 	}
 
 	public void dispose() {
