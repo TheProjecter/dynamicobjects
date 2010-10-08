@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext/emf-gen"
-    modelPluginID="org.eclipse.xtext" modelName="Parsetree" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
-  <foreignModel>parsetree.ecore</foreignModel>
-  <genPackages prefix="Parsetree" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
-      ecorePackage="parsetree.ecore#/">
-    <genClasses ecoreClass="parsetree.ecore#//CompositeNode">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//CompositeNode/children"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//CompositeNode/lookaheadLeafNodes"/>
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/net.zehrer.no2.semantic.editor/src"
+    editDirectory="" editorDirectory="" modelPluginID="" runtimeJar="true" modelName="Editor"
+    modelPluginClass="" editPluginClass="" editorPluginClass="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    rootImplementsInterface="" testsDirectory="" testSuiteClass="" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="" editorPluginID=""
+    testsPluginID="" operationReflection="true">
+  <foreignModel>editor.ecore</foreignModel>
+  <genPackages prefix="Editor" basePackage="net.zehrer.no2.semantic.editor" disposableProviderFactory="true"
+      ecorePackage="editor.ecore#/">
+    <genClasses ecoreClass="editor.ecore#//CompositeNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference editor.ecore#//CompositeNode/children"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference editor.ecore#//CompositeNode/lookaheadLeafNodes"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="parsetree.ecore#//AbstractNode">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//AbstractNode/parent"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//AbstractNode/grammarElement"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference parsetree.ecore#//AbstractNode/element"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference parsetree.ecore#//AbstractNode/syntaxError"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//AbstractNode/totalOffset"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//AbstractNode/totalLine"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//AbstractNode/totalLength"/>
-      <genOperations ecoreOperation="parsetree.ecore#//AbstractNode/serialize"/>
-      <genOperations ecoreOperation="parsetree.ecore#//AbstractNode/getLeafNodes"/>
-      <genOperations ecoreOperation="parsetree.ecore#//AbstractNode/getLeafNodes.1">
-        <genParameters ecoreParameter="parsetree.ecore#//AbstractNode/getLeafNodes.1/to"/>
+    <genClasses image="false" ecoreClass="editor.ecore#//AbstractNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference editor.ecore#//AbstractNode/parent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference editor.ecore#//AbstractNode/grammarElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference editor.ecore#//AbstractNode/element"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference editor.ecore#//AbstractNode/syntaxError"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//AbstractNode/totalOffset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//AbstractNode/totalLine"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//AbstractNode/totalLength"/>
+      <genOperations ecoreOperation="editor.ecore#//AbstractNode/serialize"/>
+      <genOperations ecoreOperation="editor.ecore#//AbstractNode/getLeafNodes"/>
+      <genOperations ecoreOperation="editor.ecore#//AbstractNode/getLeafNodes.1">
+        <genParameters ecoreParameter="editor.ecore#//AbstractNode/getLeafNodes.1/to"/>
       </genOperations>
-      <genOperations ecoreOperation="parsetree.ecore#//AbstractNode/allSyntaxErrors"/>
-      <genOperations ecoreOperation="parsetree.ecore#//AbstractNode/totalEndLine"/>
-      <genOperations ecoreOperation="parsetree.ecore#//AbstractNode/getOffset"/>
-      <genOperations ecoreOperation="parsetree.ecore#//AbstractNode/getLine"/>
-      <genOperations ecoreOperation="parsetree.ecore#//AbstractNode/getLength"/>
-      <genOperations ecoreOperation="parsetree.ecore#//AbstractNode/endLine"/>
+      <genOperations ecoreOperation="editor.ecore#//AbstractNode/allSyntaxErrors"/>
+      <genOperations ecoreOperation="editor.ecore#//AbstractNode/totalEndLine"/>
+      <genOperations ecoreOperation="editor.ecore#//AbstractNode/getOffset"/>
+      <genOperations ecoreOperation="editor.ecore#//AbstractNode/getLine"/>
+      <genOperations ecoreOperation="editor.ecore#//AbstractNode/getLength"/>
+      <genOperations ecoreOperation="editor.ecore#//AbstractNode/endLine"/>
     </genClasses>
-    <genClasses ecoreClass="parsetree.ecore#//LeafNode">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//LeafNode/text"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//LeafNode/feature"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//LeafNode/hidden"/>
+    <genClasses ecoreClass="editor.ecore#//LeafNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//LeafNode/text"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//LeafNode/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//LeafNode/hidden"/>
     </genClasses>
-    <genClasses ecoreClass="parsetree.ecore#//SyntaxError">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//SyntaxError/message"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference parsetree.ecore#//SyntaxError/node"/>
+    <genClasses ecoreClass="editor.ecore#//Error">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//Error/message"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference editor.ecore#//Error/node"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//Error/issueCode"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
