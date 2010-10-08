@@ -33,7 +33,7 @@ public class SemanticEditor extends TextEditor {
 		initializeEditingDomain();
 		
 		// TODO: inject?
-		setDocumentProvider(new SemanticDocumentProvider());
+		setDocumentProvider(new SemanticDocumentProvider(this.editingDomain));
 	}
 
 	public void dispose() {
