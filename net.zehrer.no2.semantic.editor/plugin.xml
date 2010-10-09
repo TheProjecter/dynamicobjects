@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            name="Sematic Edior"
+            name="Sematic Test Edior"
             extensions="xdoc"
             icon="icons/sample.gif"
             contributorClass="net.zehrer.no2.semantic.editor.SematicEditorContributor"
