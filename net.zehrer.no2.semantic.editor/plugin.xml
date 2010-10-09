@@ -6,7 +6,7 @@
          point="org.eclipse.ui.editors">
       <editor
             name="Sematic Test Edior"
-            extensions="xdoc"
+            extensions="stxt"
             icon="icons/sample.gif"
             contributorClass="net.zehrer.no2.semantic.editor.SematicEditorContributor"
             class="net.zehrer.no2.semantic.editor.SematicEditor"

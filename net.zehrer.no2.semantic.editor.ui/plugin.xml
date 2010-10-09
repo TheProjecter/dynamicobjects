@@ -6,12 +6,26 @@
          point="org.eclipse.ui.editors">
       <editor
             name="Semantic Editor"
-            extensions="stxt"
+            extensions="xdoc"
             icon="icons/sample.gif"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             class="net.zehrer.no2.semantic.editor.SemanticEditor"
             id="net.zehrer.no2.semantic.editor.SemanticEditor">
       </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="net.zehrer.no2.wizard"
+            name="NO2 Wizards">
+      </category>
+      <wizard
+            category="net.zehrer.no2.wizard"
+            class="net.zehrer.no2.semantic.editor.wizards.SemanticTextNewWizard"
+            icon="icons/sample.gif"
+            id="net.zehrer.no2.semantic.editor.ui.SemanticTextNewWizard"
+            name="Semtaic Text Wizard">
+      </wizard>
    </extension>
 
 </plugin>
