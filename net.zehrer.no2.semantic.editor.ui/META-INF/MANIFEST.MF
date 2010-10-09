@@ -4,15 +4,15 @@ Bundle-Name: Semantic Editor
 Bundle-SymbolicName: net.zehrer.no2.semantic.editor.ui; singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: net.zehrer.no2.semantic.editor.ui.Activator
-Require-Bundle: org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.jface.text,
+ org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.ui.editors,
- org.eclipse.jface.text,
  org.eclipse.ui.views,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide,
  org.eclipse.emf.edit,
  org.eclipse.emf.ecore.edit,
- org.eclipse.ui.ide,
- org.eclipse.core.resources,
- net.zehrer.no2.semantic.editor;bundle-version="1.0.0"
+ net.zehrer.no2.semantic.editor
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
