@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="net.zehrer.no2.category"
+            name="NO2"/>
+      <wizard
+            category="net.zehrer.no2.category"
+            class="net.zehrer.no2.wizard.DataModelWizard"
+            icon="icons/full/obj16/ModelModelFile.gif"
+            id="net.zehrer.no2.model.editor.wizard"
+            name="New Data Model">
+         <description>
+            Create a new Data Model
+         </description>
+         <selection
+               class="org.eclipse.core.resources.IResource">
+         </selection>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="net.zehrer.no2.DataEditorID"
+            name="%_UI_ModelEditor_label"
+            icon="icons/full/obj16/ModelModelFile.gif"
+            extensions="no2"
+            class="net.zehrer.no2.editor.ModelEditor"
+            contributorClass="net.zehrer.no2.editor.ModelActionBarContributor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="net.zehrer.no2.category.main"
+            name="XData">
+      </category>
+   </extension>
+   
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="net.zehrer.no2.actionCreateDynamicObject"
+            objectClass="org.eclipse.emf.ecore.EClass">
+         <action
+               class="net.zehrer.no2.action.CreateDynamicObjectAction"
+               enablesFor="1"
+               id="net.zehrer.no2.actionCreateDynamicObjectAction"
+               label="Create Dynamic Object"
+               menubarPath="additions-end">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

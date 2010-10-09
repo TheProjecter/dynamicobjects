@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model"
+    nsURI="http://no2.zehrer.net/model" nsPrefix="no2">
+  <eClassifiers xsi:type="ecore:EClass" name="NO2Model">
+    <eOperations name="createModelResource" eExceptions="#//IOException">
+      <eParameters name="fileName" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eOperations>
+    <eOperations name="addClass" eType="#//Resource">
+      <eParameters name="type" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    </eOperations>
+    <eOperations name="getResource" eType="#//Resource">
+      <eParameters name="uri" eType="#//URI"/>
+    </eOperations>
+    <eOperations name="getHeadModelResource" eType="#//Resource"/>
+    <eOperations name="createResource" eType="#//Resource">
+      <eParameters name="uri" eType="#//URI"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classResources" upperBound="-1"
+        eType="#//EClassToURIMapEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceSet" eType="#//ResourceSet"
+        changeable="false" transient="true" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="archiveURI" eType="#//URI"
+        transient="true" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="init" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="editingDomainProvider"
+        eType="#//IEditingDomainProvider" transient="true" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IOException" instanceClassName="java.io.IOException"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Resource" instanceClassName="org.eclipse.emf.ecore.resource.Resource"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ResourceSet" instanceClassName="org.eclipse.emf.ecore.resource.ResourceSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EClassToURIMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IEditingDomainProvider" instanceClassName="org.eclipse.emf.edit.domain.IEditingDomainProvider"
+      serializable="false"/>
+</ecore:EPackage>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Sematic Edior"
+            extensions="xdoc"
+            icon="icons/sample.gif"
+            contributorClass="net.zehrer.no2.semantic.editor.SematicEditorContributor"
+            class="net.zehrer.no2.semantic.editor.SematicEditor"
+            id="net.zehrer.no2.semantic.editor.SematicEditor">
+      </editor>
+   </extension>
+
+</plugin>

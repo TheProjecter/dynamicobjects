@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdoServer>
+
+    <!-- 
+	<acceptor type="tcp" listenAddr="0.0.0.0" port="2036">
+	</acceptor>
+ 	--> 
+ 
+ 	<acceptor type="jvm"/>
+ 
+	<repository name="no2">
+		
+		<property name="supportingAudits" value="true"/>
+		<property name="supportingBranches" value="true"/>
+		<property name="currentLRUCapacity" value="10000"/>
+		<property name="revisedLRUCapacity" value="100"/>
+ 
+		<store type="db">
+			<mappingStrategy type="horizontal">
+				<property name="qualifiedNames" value="false"/>
+				<property name="toManyReferences" value="ONE_TABLE_PER_REFERENCE"/>
+				<property name="toOneReferences" value="LIKE_ATTRIBUTES"/>
+			</mappingStrategy>
+ 
+			
+			<dbAdapter name="h2"/>
+			<dataSource class="org.h2.jdbcx.JdbcDataSource"
+				uRL="jdbc:h2:_database/cdodb3"/>
+			
+		</store>
+	</repository>
+ 
+</cdoServer>
