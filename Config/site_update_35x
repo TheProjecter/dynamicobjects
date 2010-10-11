@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookmarks>
+   <site url="http://hge.javaforge.com/mercurialeclipse-beta" selected="true" name="MercurialEclipse"/>
+   <site url="http://download.eclipse.org/modeling/emft/eef/updates/milestones/" selected="true" name="modeling.emf.eef Update Site"/>
+   <site url="http://www.scala-lang.org/scala-eclipse-plugin" selected="true" name="Scala Update Site"/>
+</bookmarks>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Semantic Editor"
+            extensions="xdoc"
+            icon="icons/sample.gif"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="net.zehrer.no2.semantic.editor.SemanticEditor"
+            id="net.zehrer.no2.semantic.editor.SemanticEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="net.zehrer.no2.wizard"
+            class="net.zehrer.no2.semantic.editor.wizards.SemanticTextNewWizard"
+            icon="icons/sample.gif"
+            id="net.zehrer.no2.semantic.editor.ui.SemanticTextNewWizard"
+            name="Semtaic Text Wizard">
+      </wizard>
+   </extension>
+
+</plugin>

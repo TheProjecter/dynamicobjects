@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Sematic Test Edior"
+            extensions="stxt"
+            icon="icons/sample.gif"
+            contributorClass="net.zehrer.no2.semantic.editor.SematicEditorContributor"
+            class="net.zehrer.no2.semantic.editor.SematicEditor"
+            id="net.zehrer.no2.semantic.editor.SematicEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="net.zehrer.no2.semantic.editor.model.EditorPackage"
+            genModel="metamodel/editor.genmodel"
+            uri="http://no2.zehrer.net/editor/1.0">
+      </package>
+   </extension>
+
+</plugin>

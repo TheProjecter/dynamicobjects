@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText=" Copyright (c) 2009 - 2010 Stephan Zehrer and others.&#xA; All rights reserved. This program and the accompanying materials&#xA; are made available under the terms of the Eclipse Public License v1.0&#xA; which accompanies this distribution, and is available at&#xA; http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;"
+    modelDirectory="/net.zehrer.no2.model/src" creationSubmenus="true" editorDirectory="/net.zehrer.no2.test.editor/src"
+    modelPluginID="net.zehrer.no2.model" modelName="Model" editorPluginClass="net.zehrer.no2.test.presentation.ModelEditorPlugin"
+    featureMapWrapperInterface="" booleanFlagsField="" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" editorPluginID="net.zehrer.no2.test.editor" language="en"
+    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <foreignModel>Model.ecore</foreignModel>
+  <genPackages prefix="Model" basePackage="net.zehrer.no2" disposableProviderFactory="true"
+      generateExampleClass="false" multipleEditorPages="false" generateModelWizard="false"
+      ecorePackage="Model.ecore#/">
+    <genDataTypes ecoreDataType="Model.ecore#//URI"/>
+    <genDataTypes ecoreDataType="Model.ecore#//IOException"/>
+    <genDataTypes ecoreDataType="Model.ecore#//Resource"/>
+    <genDataTypes ecoreDataType="Model.ecore#//ResourceSet"/>
+    <genDataTypes ecoreDataType="Model.ecore#//IEditingDomainProvider"/>
+    <genClasses ecoreClass="Model.ecore#//NO2Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Model.ecore#//NO2Model/classResources"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Model.ecore#//NO2Model/resourceSet"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Model.ecore#//NO2Model/archiveURI"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute Model.ecore#//NO2Model/init"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Model.ecore#//NO2Model/contents"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Model.ecore#//NO2Model/editingDomainProvider"/>
+      <genOperations ecoreOperation="Model.ecore#//NO2Model/createModelResource">
+        <genParameters ecoreParameter="Model.ecore#//NO2Model/createModelResource/fileName"/>
+      </genOperations>
+      <genOperations ecoreOperation="Model.ecore#//NO2Model/addClass">
+        <genParameters ecoreParameter="Model.ecore#//NO2Model/addClass/type"/>
+      </genOperations>
+      <genOperations ecoreOperation="Model.ecore#//NO2Model/getResource">
+        <genParameters ecoreParameter="Model.ecore#//NO2Model/getResource/uri"/>
+      </genOperations>
+      <genOperations ecoreOperation="Model.ecore#//NO2Model/getHeadModelResource"/>
+      <genOperations ecoreOperation="Model.ecore#//NO2Model/createResource">
+        <genParameters ecoreParameter="Model.ecore#//NO2Model/createResource/uri"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="Model.ecore#//EClassToURIMapEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Model.ecore#//EClassToURIMapEntry/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Model.ecore#//EClassToURIMapEntry/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
