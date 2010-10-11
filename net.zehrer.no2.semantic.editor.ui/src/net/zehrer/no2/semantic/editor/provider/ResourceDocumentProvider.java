@@ -14,8 +14,11 @@ package net.zehrer.no2.semantic.editor.provider;
 //import net.zehrer.no2.semantic.editor.partitioner.DebugPartitioner;
 //import javax.inject.Inject;  // how to solve in e4/SDK4.0?
 
+import net.zehrer.no2.manager.NO2ResourceManager;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -58,7 +61,7 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 	protected IDocument createDocument(Object element) throws CoreException {
 
 		if (element instanceof IFileEditorInput) {
-			IDocument document= createEmptyDocument();
+			IDocument document = createEmptyDocument();
 			
 			IFileEditorInput fileInput = (IFileEditorInput) element;
 			
@@ -73,6 +76,16 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 		return null;
 	}
 	
+	/*
+	 * @see AbstractDocumentProvider#doSaveDocument(IProgressMonitor, Object, IDocument, boolean)
+	 */
+	@Override
+	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite) throws CoreException {
+		
+		// TODO SAVE
+			
+	}
+	
 
 	abstract protected boolean setDocumentContent(IDocument document, IFileEditorInput editorInput) throws CoreException;
 
@@ -81,19 +94,14 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 	protected boolean initializeResourceObject(IEditorInput editorInput) {
 		IFileEditorInput input = (FileEditorInput) editorInput;
 		
-		IFile inputFile = input.getFile();
+		IFile file = input.getFile();
+		ResourceSet resourceSet = editingDomain.getResourceSet();		
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		Resource loadedResource = resourceSet.getResource(uri, false);
 		
 		//TODO
 		//net.zehrer.emftext.test.resource.test.mopp.TestNature.activate(inputFile.getProject());
-		
-		// create URI from file path
-		String path = inputFile.getFullPath().toString();
-		URI uri = URI.createPlatformResourceURI(path, true);
-		
-		ResourceSet resourceSet = editingDomain.getResourceSet();
-	
-		Resource loadedResource = resourceSet.getResource(uri, false);
-		
+			
 		if (loadedResource == null) {
 			try {
 				Resource demandLoadedResource = null;

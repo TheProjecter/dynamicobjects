@@ -15,10 +15,6 @@
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">
-      <category
-            id="net.zehrer.no2.wizard"
-            name="NO2 Wizards">
-      </category>
       <wizard
             category="net.zehrer.no2.wizard"
             class="net.zehrer.no2.semantic.editor.wizards.SemanticTextNewWizard"
