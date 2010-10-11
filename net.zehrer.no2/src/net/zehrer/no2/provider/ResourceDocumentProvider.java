@@ -9,7 +9,7 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package net.zehrer.no2.semantic.editor.provider;
+package net.zehrer.no2.provider;
 
 //import net.zehrer.no2.semantic.editor.partitioner.DebugPartitioner;
 //import javax.inject.Inject;  // how to solve in e4/SDK4.0?
@@ -30,6 +30,12 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.ui.part.FileEditorInput;
 
+
+/**
+ * Abstracted document provider specialized for a EMF resource.
+ * This implementation does not support sharing any more !!!
+ * TODO: analysis the missing support sharing lead to a problem.
+ */
 public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 	
 	//@Inject 
@@ -76,19 +82,48 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 		return null;
 	}
 	
+	protected boolean setDocumentContent(IDocument document, IEditorInput editorInput, String encoding) throws CoreException {
+		if (editorInput instanceof IFileEditorInput) {
+		  return setDocumentContent (document, (IFileEditorInput) editorInput);
+		}  
+		
+		return super.setDocumentContent( document,  editorInput,  encoding);
+	}
+	
+	
+	/**
+	 * Abstract subtask of the {@link #createDocument(Object)}.
+	 * @param document
+	 * @param editorInput
+	 * @return true - if document content is set.
+	 * @throws CoreException
+	 */
+	abstract protected boolean setDocumentContent(IDocument document, IFileEditorInput editorInput) throws CoreException;
+	
+	
 	/*
 	 * @see AbstractDocumentProvider#doSaveDocument(IProgressMonitor, Object, IDocument, boolean)
 	 */
 	@Override
 	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite) throws CoreException {
 		
-		// TODO SAVE
+		if (element instanceof IFileEditorInput) {
+
+			monitor.beginTask("Save Document", 1);
+//			IFileEditorInput input = (IFileEditorInput) element;
 			
+			NO2ResourceManager.saveModel(getResource(), monitor);
+			
+			
+		} else {
+			super.doSaveDocument(monitor, element, document, overwrite);
+		}	
 	}
+
 	
 
-	abstract protected boolean setDocumentContent(IDocument document, IFileEditorInput editorInput) throws CoreException;
 
+	
 	
 	// Initial source EMFText generated editor code
 	protected boolean initializeResourceObject(IEditorInput editorInput) {

@@ -3,6 +3,7 @@ package net.zehrer.no2.semantic.editor.provider;
 //import javax.annotation.PostConstruct;
 //import javax.inject.Inject;
 
+import net.zehrer.no2.provider.ResourceDocumentProvider;
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.partitioner.SemanticTextPartitionScanner;
 
@@ -61,40 +62,6 @@ public class SemanticDocumentProvider extends ResourceDocumentProvider {
 		
 		return false;
 		
-		
-
-		
-//		Reader in= null;
-//
-//		try {
-//
-//			if (encoding == null)
-//				encoding= getDefaultEncoding();
-//
-//			in= new BufferedReader(new InputStreamReader(contentStream, encoding), DEFAULT_FILE_SIZE);
-//			StringBuffer buffer= new StringBuffer(DEFAULT_FILE_SIZE);
-//			char[] readBuffer= new char[2048];
-//			int n= in.read(readBuffer);
-//			while (n > 0) {
-//				buffer.append(readBuffer, 0, n);
-//				n= in.read(readBuffer);
-//			}
-//
-//			document.set(buffer.toString());
-//
-//		} catch (IOException x) {
-//			String message= (x.getMessage() != null ? x.getMessage() : ""); //$NON-NLS-1$
-//			IStatus s= new Status(IStatus.ERROR, PlatformUI.PLUGIN_ID, IStatus.OK, message, x);
-//			throw new CoreException(s);
-//		} finally {
-//			try {
-//				if (in != null)
-//					in.close();
-//				else
-//					contentStream.close();
-//			} catch (IOException x) {
-//			}
-//		}
 	}
 
 	protected void setTextModel(AbstractNode model) {
