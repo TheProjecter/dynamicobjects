@@ -3,6 +3,7 @@ package net.zehrer.no2.semantic.editor;
 import org.eclipse.jface.text.*;
 
 public class XMLDoubleClickStrategy implements ITextDoubleClickStrategy {
+	
 	protected ITextViewer fText;
 
 	public void doubleClicked(ITextViewer part) {

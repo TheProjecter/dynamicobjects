@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 
 public class TextModelUtil {
+	
 	private static final char[] separator = System.getProperty("line.separator").toCharArray();
 
 	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
