@@ -9,7 +9,7 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package net.zehrer.no2.provider;
+package net.zehrer.no2.text;
 
 //import net.zehrer.no2.semantic.editor.partitioner.DebugPartitioner;
 //import javax.inject.Inject;  // how to solve in e4/SDK4.0?
@@ -18,60 +18,54 @@ import net.zehrer.no2.manager.NO2ResourceManager;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
+import org.eclipse.ui.editors.text.StorageDocumentProvider;
 import org.eclipse.ui.part.FileEditorInput;
-
 
 /**
  * Abstracted document provider specialized for a EMF resource.
- * This implementation does not support sharing any more !!!
- * TODO: analysis the missing support sharing lead to a problem.
+ * TODO: analysis if support of sharing is complete.
  */
 public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 	
 	//@Inject 
-	protected EditingDomain editingDomain;
+	protected ResourceSet resourceSet;
 
-	private Resource resource;
 	
-	public  ResourceDocumentProvider (EditingDomain editingDomain) {
-		this.editingDomain = editingDomain;
+	public  ResourceDocumentProvider (ResourceSet resourceSet) {
+		this.resourceSet = resourceSet;
 	}
 	
-	protected void setResource(Resource resource) {
-		assert resource != null;
-		this.resource = resource;
-		if (this.resource.getErrors().isEmpty()) {
-			EcoreUtil.resolveAll(this.resource);
-		}
+	/**
+	 * @see StorageDocumentProvider#createEmptyDocument()
+	 */
+	@Override
+	protected IResourceDocument createEmptyDocument() {
+		return new ResourceDocument();
 	}
-
-	public Resource getResource() {
-		return this.resource;
-	}
-	
 	
 	/*
 	 * @see AbstractDocumentProvider#createDocument(Object)
 	 */
 	@Override
-	protected IDocument createDocument(Object element) throws CoreException {
+	protected IResourceDocument createDocument(Object element) throws CoreException {
+		
+		// similar implementation as in the super class
 
 		if (element instanceof IFileEditorInput) {
-			IDocument document = createEmptyDocument();
+			IResourceDocument document = createEmptyDocument();
 			
 			IFileEditorInput fileInput = (IFileEditorInput) element;
 			
-			if (initializeResourceObject (fileInput) &&
+			if (initializeResourceObject (document, fileInput) &&
 				setDocumentContent(document, fileInput)) {
 				
 				setupDocument(element, document);
@@ -82,7 +76,7 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 		return null;
 	}
 	
-	protected boolean setDocumentContent(IDocument document, IEditorInput editorInput, String encoding) throws CoreException {
+	protected boolean setDocumentContent(IResourceDocument document, IEditorInput editorInput, String encoding) throws CoreException {
 		if (editorInput instanceof IFileEditorInput) {
 		  return setDocumentContent (document, (IFileEditorInput) editorInput);
 		}  
@@ -90,15 +84,47 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 		return super.setDocumentContent( document,  editorInput,  encoding);
 	}
 	
+	/*
+	 * @see FileDocumentProvider#disposeElementInfo(Object, AbstractDocumentProvider.ElementInfo)
+	 */
+	@Override
+	protected void disposeElementInfo(Object element, ElementInfo info) {
+		if (info.fDocument instanceof IResourceDocument) {
+			IResourceDocument document = (IResourceDocument) info.fDocument;
+			document.disposeResource();
+		}
+		super.disposeElementInfo(element, info);
+	}
+	
+	/*
+	 * Copy of the XtextDocumentProvider implementation
+	 * @see FileDocumentProvider#isDeleted(Object)
+	 */
+	@Override
+	public boolean isDeleted(Object element) {
+		if (element instanceof IFileEditorInput) {
+			final IFileEditorInput input = (IFileEditorInput) element;
+
+			final IPath path = input.getFile().getLocation();
+			if (path == null) {
+				// return true;
+				return !input.getFile().exists(); // fixed for EFS compatibility
+			}
+			return !path.toFile().exists();
+		}
+		return super.isDeleted(element);
+	}
+	
 	
 	/**
-	 * Abstract subtask of the {@link #createDocument(Object)}.
+	 * Abstract subtask of  {@link #createDocument(Object)}.
+	 * Set the text content of the document based on the model specific document provider
 	 * @param document
 	 * @param editorInput
 	 * @return true - if document content is set.
 	 * @throws CoreException
 	 */
-	abstract protected boolean setDocumentContent(IDocument document, IFileEditorInput editorInput) throws CoreException;
+	abstract protected boolean setDocumentContent(IResourceDocument document, IFileEditorInput editorInput) throws CoreException;
 	
 	
 	/*
@@ -107,32 +133,27 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 	@Override
 	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite) throws CoreException {
 		
-		if (element instanceof IFileEditorInput) {
+		if (element instanceof IFileEditorInput && document instanceof IResourceDocument) {
 
 			monitor.beginTask("Save Document", 1);
-//			IFileEditorInput input = (IFileEditorInput) element;
-			
-			NO2ResourceManager.saveModel(getResource(), monitor);
-			
-			
+
+			NO2ResourceManager.saveModel(((IResourceDocument)document).getResource(), monitor);
+						
 		} else {
 			super.doSaveDocument(monitor, element, document, overwrite);
 		}	
 	}
 
 	
-
-
-	
-	
 	// Initial source EMFText generated editor code
-	protected boolean initializeResourceObject(IEditorInput editorInput) {
+	protected boolean initializeResourceObject(IResourceDocument document, IEditorInput editorInput) {
+		
 		IFileEditorInput input = (FileEditorInput) editorInput;
 		
 		IFile file = input.getFile();
-		ResourceSet resourceSet = editingDomain.getResourceSet();		
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-		Resource loadedResource = resourceSet.getResource(uri, false);
+		Resource loadedResource = this.resourceSet.getResource(uri, false);
+		
 		
 		//TODO
 		//net.zehrer.emftext.test.resource.test.mopp.TestNature.activate(inputFile.getProject());
@@ -140,9 +161,9 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 		if (loadedResource == null) {
 			try {
 				Resource demandLoadedResource = null;
-				// here we do not use getResource(), because 'resource' might be null, which is ok
-				// when initializing the resource object
-				Resource currentResource = this.resource;
+
+				Resource currentResource = document.getResource();
+				
 				if (currentResource != null && !currentResource.getURI().fileExtension().equals(uri.fileExtension())) {
 					// do not attempt to load if file extension has changed in a 'save as' operation	
 				}
@@ -150,7 +171,7 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 					demandLoadedResource = resourceSet.getResource(uri, true);
 				}
 				
-				setResource(demandLoadedResource);
+				document.setResource(demandLoadedResource);
 				return true;
 
 				//TODO ERROR HANDLING (e.g. check for correct model content )
@@ -163,7 +184,7 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 				return false;
 			}
 		} else {
-			setResource(loadedResource);
+			document.setResource(loadedResource);
 			return true;
 		}
 	}

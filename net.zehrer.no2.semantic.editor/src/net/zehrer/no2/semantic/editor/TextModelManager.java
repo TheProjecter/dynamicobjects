@@ -21,16 +21,17 @@ public class TextModelManager {
 
 	static public void modelInit(Resource resource) {
 		
+		resource.getContents().add(modelInit("Hallo World!"));
+	}
+	
+	static public CompositeNode modelInit(String text) {
 		CompositeNode cNode = EditorFactory.eINSTANCE.createCompositeNode();
 		
 		LeafNode  lNode = EditorFactory.eINSTANCE.createLeafNode();
 	
 		cNode.getChildren().add(lNode);
-		
-		lNode.setText("Hallo World!");
+		lNode.setText(text);
 		//lNode.setHidden(false);
-	
-		resource.getContents().add(cNode);
+		return cNode;
 	}
-	
 }
