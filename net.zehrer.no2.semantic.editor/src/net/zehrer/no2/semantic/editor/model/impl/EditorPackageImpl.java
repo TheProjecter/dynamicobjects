@@ -15,11 +15,13 @@ import net.zehrer.no2.semantic.editor.model.SyntaxError;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.jface.text.DocumentEvent;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,6 +57,13 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * @generated
 	 */
 	private EClass syntaxErrorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType documentEventEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -302,6 +311,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getAbstractNode__Update__DocumentEvent() {
+		return abstractNodeEClass.getEOperations().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLeafNode() {
 		return leafNodeEClass;
 	}
@@ -374,6 +392,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getDocumentEvent() {
+		return documentEventEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EditorFactory getEditorFactory() {
 		return (EditorFactory)getEFactoryInstance();
 	}
@@ -418,6 +445,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_LINE);
 		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_LENGTH);
 		createEOperation(abstractNodeEClass, ABSTRACT_NODE___END_LINE);
+		createEOperation(abstractNodeEClass, ABSTRACT_NODE___UPDATE__DOCUMENTEVENT);
 
 		leafNodeEClass = createEClass(LEAF_NODE);
 		createEAttribute(leafNodeEClass, LEAF_NODE__TEXT);
@@ -428,6 +456,9 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		createEAttribute(syntaxErrorEClass, SYNTAX_ERROR__MESSAGE);
 		createEReference(syntaxErrorEClass, SYNTAX_ERROR__NODE);
 		createEAttribute(syntaxErrorEClass, SYNTAX_ERROR__ISSUE_CODE);
+
+		// Create data types
+		documentEventEDataType = createEDataType(DOCUMENT_EVENT);
 	}
 
 	/**
@@ -494,6 +525,9 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		initEOperation(getAbstractNode__EndLine(), ecorePackage.getEInt(), "endLine", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = initEOperation(getAbstractNode__Update__DocumentEvent(), null, "update", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getDocumentEvent(), "event", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(leafNodeEClass, LeafNode.class, "LeafNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLeafNode_Text(), ecorePackage.getEString(), "text", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLeafNode_Feature(), ecorePackage.getEString(), "feature", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -503,6 +537,9 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		initEAttribute(getSyntaxError_Message(), ecorePackage.getEString(), "message", null, 0, 1, SyntaxError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSyntaxError_Node(), this.getAbstractNode(), this.getAbstractNode_SyntaxError(), "node", null, 0, 1, SyntaxError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSyntaxError_IssueCode(), ecorePackage.getEString(), "issueCode", null, 0, 1, SyntaxError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize data types
+		initEDataType(documentEventEDataType, DocumentEvent.class, "DocumentEvent", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

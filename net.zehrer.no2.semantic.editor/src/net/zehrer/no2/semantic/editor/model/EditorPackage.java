@@ -8,6 +8,7 @@ package net.zehrer.no2.semantic.editor.model;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -225,13 +226,22 @@ public interface EditorPackage extends EPackage {
 	int ABSTRACT_NODE___END_LINE = 8;
 
 	/**
+	 * The operation id for the '<em>Update</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE___UPDATE__DOCUMENTEVENT = 9;
+
+	/**
 	 * The number of operations of the '<em>Abstract Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE_OPERATION_COUNT = 9;
+	int ABSTRACT_NODE_OPERATION_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link net.zehrer.no2.semantic.editor.model.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
@@ -413,6 +423,15 @@ public interface EditorPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_NODE___END_LINE = ABSTRACT_NODE___END_LINE;
+
+	/**
+	 * The operation id for the '<em>Update</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE___UPDATE__DOCUMENTEVENT = ABSTRACT_NODE___UPDATE__DOCUMENTEVENT;
 
 	/**
 	 * The number of operations of the '<em>Composite Node</em>' class.
@@ -614,6 +633,15 @@ public interface EditorPackage extends EPackage {
 	int LEAF_NODE___END_LINE = ABSTRACT_NODE___END_LINE;
 
 	/**
+	 * The operation id for the '<em>Update</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE___UPDATE__DOCUMENTEVENT = ABSTRACT_NODE___UPDATE__DOCUMENTEVENT;
+
+	/**
 	 * The number of operations of the '<em>Leaf Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -676,6 +704,17 @@ public interface EditorPackage extends EPackage {
 	 * @ordered
 	 */
 	int SYNTAX_ERROR_OPERATION_COUNT = 0;
+
+
+	/**
+	 * The meta object id for the '<em>Document Event</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.jface.text.DocumentEvent
+	 * @see net.zehrer.no2.semantic.editor.model.impl.EditorPackageImpl#getDocumentEvent()
+	 * @generated
+	 */
+	int DOCUMENT_EVENT = 4;
 
 
 	/**
@@ -888,6 +927,16 @@ public interface EditorPackage extends EPackage {
 	EOperation getAbstractNode__EndLine();
 
 	/**
+	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#update(org.eclipse.jface.text.DocumentEvent) <em>Update</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Update</em>' operation.
+	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#update(org.eclipse.jface.text.DocumentEvent)
+	 * @generated
+	 */
+	EOperation getAbstractNode__Update__DocumentEvent();
+
+	/**
 	 * Returns the meta object for class '{@link net.zehrer.no2.semantic.editor.model.LeafNode <em>Leaf Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -972,6 +1021,17 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSyntaxError_IssueCode();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipse.jface.text.DocumentEvent <em>Document Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Document Event</em>'.
+	 * @see org.eclipse.jface.text.DocumentEvent
+	 * @model instanceClass="org.eclipse.jface.text.DocumentEvent" serializeable="false"
+	 * @generated
+	 */
+	EDataType getDocumentEvent();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1161,6 +1221,14 @@ public interface EditorPackage extends EPackage {
 		EOperation ABSTRACT_NODE___END_LINE = eINSTANCE.getAbstractNode__EndLine();
 
 		/**
+		 * The meta object literal for the '<em><b>Update</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ABSTRACT_NODE___UPDATE__DOCUMENTEVENT = eINSTANCE.getAbstractNode__Update__DocumentEvent();
+
+		/**
 		 * The meta object literal for the '{@link net.zehrer.no2.semantic.editor.model.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1227,6 +1295,16 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SYNTAX_ERROR__ISSUE_CODE = eINSTANCE.getSyntaxError_IssueCode();
+
+		/**
+		 * The meta object literal for the '<em>Document Event</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.jface.text.DocumentEvent
+		 * @see net.zehrer.no2.semantic.editor.model.impl.EditorPackageImpl#getDocumentEvent()
+		 * @generated
+		 */
+		EDataType DOCUMENT_EVENT = eINSTANCE.getDocumentEvent();
 
 	}
 

@@ -9,6 +9,7 @@ package net.zehrer.no2.semantic.editor.model;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.DocumentEvent;
 
 /**
  * <!-- begin-user-doc -->
@@ -223,7 +224,7 @@ public interface AbstractNode extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='ParsetreeUtil.serialize(this)'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.serialize(this);'"
 	 * @generated
 	 */
 	String serialize();
@@ -232,7 +233,7 @@ public interface AbstractNode extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ParsetreeUtil.getLeafNodes(this)'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.getLeafNodes(this);'"
 	 * @generated
 	 */
 	EList<LeafNode> getLeafNodes();
@@ -241,7 +242,7 @@ public interface AbstractNode extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model toRequired="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='ParsetreeUtil.getLeafNodes(this, to)'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.getLeafNodes(this, to);'"
 	 * @generated
 	 */
 	EList<LeafNode> getLeafNodes(AbstractNode to);
@@ -249,7 +250,7 @@ public interface AbstractNode extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.allSyntaxErrors((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.allSyntaxErrors((LeafNodeImpl) this);} else {return ParsetreeUtil.allSyntaxErrors((AbstractNodeImpl) this);}'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { \nreturn TextModelUtil.allSyntaxErrors((CompositeNodeImpl) this);\n} else if (this instanceof LeafNodeImpl) { \nreturn TextModelUtil.allSyntaxErrors((LeafNodeImpl) this);\n} else {\nreturn TextModelUtil.allSyntaxErrors((AbstractNodeImpl) this);\n}'"
 	 * @generated
 	 */
 	EList<SyntaxError> allSyntaxErrors();
@@ -257,7 +258,7 @@ public interface AbstractNode extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='ParsetreeUtil.totalEndLine(this)'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.totalEndLine(this);'"
 	 * @generated
 	 */
 	int totalEndLine();
@@ -266,7 +267,7 @@ public interface AbstractNode extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ParsetreeUtil.getOffset(this);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.getOffset(this);'"
 	 * @generated
 	 */
 	int getOffset();
@@ -275,7 +276,7 @@ public interface AbstractNode extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ParsetreeUtil.getLine(this);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.getLine(this);'"
 	 * @generated
 	 */
 	int getLine();
@@ -284,7 +285,7 @@ public interface AbstractNode extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ParsetreeUtil.getLength(this);'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.getLength(this);'"
 	 * @generated
 	 */
 	int getLength();
@@ -292,9 +293,18 @@ public interface AbstractNode extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return ParsetreeUtil.endLine(this);'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.endLine(this);'"
 	 * @generated
 	 */
 	int endLine();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model eventDataType="net.zehrer.no2.semantic.editor.model.DocumentEvent"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='TextModelUtil.update(this, event);'"
+	 * @generated
+	 */
+	void update(DocumentEvent event);
 
 } // AbstractNode

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.text.DocumentEvent;
 
 /**
  * <!-- begin-user-doc -->
@@ -414,11 +415,11 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 */
 	public EList<SyntaxError> allSyntaxErrors() {
 		if (this instanceof CompositeNodeImpl) { 
-			return TextModelUtil.allSyntaxErrors((CompositeNodeImpl) this);} 
-		else if (this instanceof LeafNodeImpl) { 
-			return TextModelUtil.allSyntaxErrors((LeafNodeImpl) this);} 
-		else {
-			return TextModelUtil.allSyntaxErrors((AbstractNodeImpl) this);
+		return TextModelUtil.allSyntaxErrors((CompositeNodeImpl) this);
+		} else if (this instanceof LeafNodeImpl) { 
+		return TextModelUtil.allSyntaxErrors((LeafNodeImpl) this);
+		} else {
+		return TextModelUtil.allSyntaxErrors((AbstractNodeImpl) this);
 		}
 	}
 
@@ -465,6 +466,15 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 */
 	public int endLine() {
 		return TextModelUtil.endLine(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void update(DocumentEvent event) {
+		TextModelUtil.update(this, event);
 	}
 
 	/**
@@ -663,6 +673,9 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 				return getLength();
 			case EditorPackage.ABSTRACT_NODE___END_LINE:
 				return endLine();
+			case EditorPackage.ABSTRACT_NODE___UPDATE__DOCUMENTEVENT:
+				update((DocumentEvent)arguments.get(0));
+				return null;
 		}
 		return super.eInvoke(operationID, arguments);
 	}
