@@ -48,7 +48,6 @@ public class ResourceDocument extends Document implements IResourceDocument {
 		return this.texModel;
 	}
 
-
 }
 
 
