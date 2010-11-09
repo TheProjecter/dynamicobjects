@@ -14,6 +14,8 @@ package net.zehrer.no2.semantic.editor.text;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.zehrer.no2.semantic.editor.adapter.NodeContentAdapter;
+import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.text.IResourceDocument;
 
 import org.eclipse.core.runtime.Assert;
@@ -21,18 +23,15 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.DefaultPositionUpdater;
 import org.eclipse.jface.text.DocumentEvent;
-import org.eclipse.jface.text.DocumentRewriteSession;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.IDocumentPartitionerExtension;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Position;
-import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.TypedPosition;
 import org.eclipse.jface.text.TypedRegion;
-import org.eclipse.jface.text.rules.IToken;
 
 
 public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPartitionerExtension
@@ -56,6 +55,9 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	
 	/** The partitioner's document */
 	protected IResourceDocument fDocument;
+
+	/** The model root */
+	protected CompositeNode fRootNode;
 	
 	/** The document length before a document change occurred */
 	protected int fPreviousDocumentLength;
@@ -76,6 +78,8 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	/** Debug option for cache consistency checking. */
 	private static final boolean CHECK_CACHE_CONSISTENCY = false;
 	
+	private PartitionUtil fPartitionUtil = null;
+	
 	/** The active document rewrite session.*/
 //	private DocumentRewriteSession fActiveRewriteSession;
 	
@@ -88,8 +92,9 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	
 	public SemanticTextPartition() {
 
-		fPositionCategory= CONTENT_TYPES_CATEGORY + hashCode();
-		fPositionUpdater= new DefaultPositionUpdater(fPositionCategory);
+		fPositionCategory = CONTENT_TYPES_CATEGORY + hashCode();
+		fPositionUpdater = new DefaultPositionUpdater(fPositionCategory);
+		fPartitionUtil = new PartitionUtil(fPositionCategory, TEXT);
 	}
 	
 	/**
@@ -104,7 +109,8 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 		document.addPositionCategory(fPositionCategory);
 		
 		Assert.isTrue(document instanceof IResourceDocument);
-		fDocument = (IResourceDocument) document;
+		this.fDocument = (IResourceDocument) document;	
+		this.fRootNode = (CompositeNode) fDocument.getTextModel();
 		
 		initialize();
 	}
@@ -305,119 +311,36 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 
 		try {
 			Assert.isTrue(e.getDocument() == fDocument);
-
-			Position[] category= getPositions();
-			IRegion line= fDocument.getLineInformationOfOffset(e.getOffset());
-			int reparseStart= line.getOffset();
-			int partitionStart= -1;
-			String contentType= null;
-			int newLength= e.getText() == null ? 0 : e.getText().length();
-
-			int first= fDocument.computeIndexInCategory(fPositionCategory, reparseStart);
-			if (first > 0)	{
-				TypedPosition partition= (TypedPosition) category[first - 1];
-				if (partition.includes(reparseStart)) {
-					partitionStart= partition.getOffset();
-					contentType= partition.getType();
-					if (e.getOffset() == partition.getOffset() + partition.getLength())
-						reparseStart= partitionStart;
-					-- first;
-				} else if (reparseStart == e.getOffset() && reparseStart == partition.getOffset() + partition.getLength()) {
-					partitionStart= partition.getOffset();
-					contentType= partition.getType();
-					reparseStart= partitionStart;
-					-- first;
-				} else {
-					partitionStart= partition.getOffset() + partition.getLength();
-					contentType= IDocument.DEFAULT_CONTENT_TYPE;
-				}
-			}
-
+			
+			this.fRootNode.update(e);
+						
 			fPositionUpdater.update(e);
-			for (int i= first; i < category.length; i++) {
-				Position p= category[i];
-				if (p.isDeleted) {
-					rememberDeletedOffset(e.getOffset());
-					break;
-				}
-			}
+			
 			clearPositionCache();
-			category= getPositions();
 
-//			fScanner.setPartialRange(fDocument, reparseStart, fDocument.getLength() - reparseStart, contentType, partitionStart);
+//			fPartitionUtil.partitionDocment(fDocument);
+			
+//			ITypedRegion partition = fDocument.getPartition(e.getOffset());
 
-			int behindLastScannedPosition= reparseStart;
-//			IToken token= fScanner.nextToken();
 
-//			while (!token.isEOF()) {
+			
+//			IRegion line = fDocument.getLineInformationOfOffset(e.getOffset());
+//			int reparseStart= line.getOffset();
+//			int partitionStart= -1;
+//			int newLength= e.getText() == null ? 0 : e.getText().length();
 
-//				contentType= getTokenContentType(token);
 
-//				if (!isSupportedContentType(contentType)) {
-//					token= fScanner.nextToken();
-//					continue;
-//				}
 
-//				int start= fScanner.getTokenOffset();
-//				int length= fScanner.getTokenLength();
-
-//				behindLastScannedPosition= start + length;
-//				int lastScannedPosition= behindLastScannedPosition - 1;
-
-				// remove all affected positions
-//				while (first < category.length) {
-//					TypedPosition p= (TypedPosition) category[first];
-//					if (lastScannedPosition >= p.offset + p.length ||
-//							(p.overlapsWith(start, length) &&
-//							 	(!fDocument.containsPosition(fPositionCategory, start, length) ||
-//							 	 !contentType.equals(p.getType())))) {
 //
-//						rememberRegion(p.offset, p.length);
-//						fDocument.removePosition(fPositionCategory, p);
-//						++ first;
-//
-//					} else
-//						break;
-//				}
-
-				// if position already exists and we have scanned at least the
-				// area covered by the event, we are done
-//				if (fDocument.containsPosition(fPositionCategory, start, length)) {
-//					if (lastScannedPosition >= e.getOffset() + newLength)
-//						return createRegion();
-//					++ first;
-//				} else {
-//					// insert the new type position
-//					try {
-//						fDocument.addPosition(fPositionCategory, new TypedPosition(start, length, contentType));
-//						rememberRegion(start, length);
-//					} catch (BadPositionCategoryException x) {
-//					} catch (BadLocationException x) {
-//					}
-//				}
-
-//				token= fScanner.nextToken();
-//			}
-
-			first= fDocument.computeIndexInCategory(fPositionCategory, behindLastScannedPosition);
-
-			clearPositionCache();
-			category= getPositions();
-			TypedPosition p;
-			while (first < category.length) {
-				p= (TypedPosition) category[first++];
-				fDocument.removePosition(fPositionCategory, p);
-				rememberRegion(p.offset, p.length);
-			}
-
-		} catch (BadPositionCategoryException x) {
-			// should never happen on connected documents
-		} catch (BadLocationException x) {
+//		} catch (BadPositionCategoryException x) {
+//			// should never happen on connected documents
+//		} catch (BadLocationException x) {
 		} finally {
 			clearPositionCache();
 		}
 
-		return createRegion();
+		return null; //createRegion();
+
 	}
 	
 	
@@ -437,17 +360,17 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	protected void initialize() {
 
 		clearPositionCache();
-//		fScanner.setRange(fDocument, 0, fDocument.getLength());
-
+		
+		NodeContentAdapter.createAdapterAndAddToNode(this.fRootNode);
+				
 		try {
-			
-//			TypedPosition p = new TypedPosition(fScanner.getTokenOffset(), fScanner.getTokenLength(), contentType);
-			fDocument.addPosition(fPositionCategory, null);
+			fPartitionUtil.partitionDocment(fDocument);
 
 		} catch (BadLocationException x) {
-			// cannot happen as offsets come from scanner
+			// cannot happen as offsets come from model
 		} catch (BadPositionCategoryException x) {
-			// cannot happen if document has been connected before
+			// TODO: understand 
+			// cannot happen if document has been connected before 
 		}
 	}
 
@@ -532,70 +455,6 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	
 	// ----- private helper methods
 	
-	/**
-	 * Helper method for tracking the minimal region containing all partition changes.
-	 * If <code>offset</code> is smaller than the remembered offset, <code>offset</code>
-	 * will from now on be remembered. If <code>offset  + length</code> is greater than
-	 * the remembered end offset, it will be remembered from now on.
-	 *
-	 * @param offset the offset
-	 * @param length the length
-	 */
-	private void rememberRegion(int offset, int length) {
-		// remember start offset
-		if (fStartOffset == -1)
-			fStartOffset= offset;
-		else if (offset < fStartOffset)
-			fStartOffset= offset;
-
-		// remember end offset
-		int endOffset= offset + length;
-		if (fEndOffset == -1)
-			fEndOffset= endOffset;
-		else if (endOffset > fEndOffset)
-			fEndOffset= endOffset;
-	}
-
-	/**
-	 * Remembers the given offset as the deletion offset.
-	 *
-	 * @param offset the offset
-	 */
-	private void rememberDeletedOffset(int offset) {
-		fDeleteOffset= offset;
-	}
-
-	/**
-	 * Creates the minimal region containing all partition changes using the
-	 * remembered offset, end offset, and deletion offset.
-	 *
-	 * @return the minimal region containing all the partition changes
-	 */
-	private IRegion createRegion() {
-		if (fDeleteOffset == -1) {
-			if (fStartOffset == -1 || fEndOffset == -1)
-				return null;
-			return new Region(fStartOffset, fEndOffset - fStartOffset);
-		} else if (fStartOffset == -1 || fEndOffset == -1) {
-			return new Region(fDeleteOffset, 0);
-		} else {
-			int offset= Math.min(fDeleteOffset, fStartOffset);
-			int endOffset= Math.max(fDeleteOffset, fEndOffset);
-			return new Region(offset, endOffset - offset);
-		}
-	}
-
-	/**
-	 * Returns <code>true</code> if the given ranges overlap with or touch each other.
-	 *
-	 * @param gap the first range
-	 * @param offset the offset of the second range
-	 * @param length the length of the second range
-	 * @return <code>true</code> if the given ranges overlap with or touch each other
-	 */
-	private boolean overlapsOrTouches(Position gap, int offset, int length) {
-		return gap.getOffset() <= offset + length && offset <= gap.getOffset() + gap.getLength();
-	}
 
 	/**
 	 * Returns the index of the first position which ends after the given offset.

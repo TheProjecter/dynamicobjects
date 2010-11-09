@@ -37,7 +37,6 @@ public class SemanticDocumentProvider extends ResourceDocumentProvider {
 		return document;
 	}
 	
-	
 	/*
 	 * @see ResourceDocumentProvider#setDocumentContent(IResourceDocument, IFileEditorInput)
 	 */
