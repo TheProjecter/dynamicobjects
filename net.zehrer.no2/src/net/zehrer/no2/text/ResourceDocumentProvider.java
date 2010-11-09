@@ -76,12 +76,17 @@ public abstract class ResourceDocumentProvider extends FileDocumentProvider {
 		return null;
 	}
 	
-	protected boolean setDocumentContent(IResourceDocument document, IEditorInput editorInput, String encoding) throws CoreException {
-		if (editorInput instanceof IFileEditorInput) {
-		  return setDocumentContent (document, (IFileEditorInput) editorInput);
+	/**
+	 * @see StorageDocumentProvider#setDocumentContent(IDocument, java.io.InputStream, String)
+	 */
+	@Override
+	protected boolean setDocumentContent(IDocument document, IEditorInput editorInput, String encoding) throws CoreException {
+		if ((editorInput instanceof IFileEditorInput) &&
+			(document instanceof IResourceDocument )) {
+		  return setDocumentContent ((IResourceDocument)document, (IFileEditorInput) editorInput);
 		}  
 		
-		return super.setDocumentContent( document,  editorInput,  encoding);
+		return false;
 	}
 	
 	/*
