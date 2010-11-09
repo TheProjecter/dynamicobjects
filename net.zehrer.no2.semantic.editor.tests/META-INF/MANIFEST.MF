@@ -10,5 +10,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  net.zehrer.no2.semantic.editor;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
- org.junit;visibility:=reexport
+ org.junit;visibility:=reexport,
+ org.eclipse.jface,
+ org.eclipse.jface.text
 Bundle-ActivationPolicy: lazy

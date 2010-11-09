@@ -15,17 +15,15 @@ import junit.framework.TestCase;
 import net.zehrer.no2.semantic.editor.TextModelManager;
 import net.zehrer.no2.semantic.editor.adapter.NodeContentAdapter;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
-import net.zehrer.no2.semantic.editor.model.EditorFactory;
-import net.zehrer.no2.semantic.editor.model.LeafNode;
+import net.zehrer.no2.semantic.editor.model.impl.TextModelUtil;
 
+import org.eclipse.emf.ecore.EObject;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
-/**
- * @author Stephan Zehrer
- */
-public class TestModelUseCases extends TestCase {
-	
+public class TestTextModelUtil extends TestCase{
+
 	final static String testText = "Hello World";
 	
 	/**
@@ -36,7 +34,7 @@ public class TestModelUseCases extends TestCase {
 	/**
 	 * Constructs a new test case with the given name.
 	 */
-	public TestModelUseCases(String name) {
+	public TestTextModelUtil(String name) {
 		super(name);
 	}
 
@@ -64,6 +62,8 @@ public class TestModelUseCases extends TestCase {
 		NodeContentAdapter.createAdapterAndAddToNode(node);
 		
 		setFixture(node);
+		
+		//System.out.println(EditorUtil.logGraph(getFixture()));
 	}
 
 	/**
@@ -73,37 +73,37 @@ public class TestModelUseCases extends TestCase {
 	public void tearDown() throws Exception {
 		setFixture(null);
 	}
-
 	
-	// ------- TEST CODE ------
+	@Test
+	public void testCheckNode00() {
 	
-	public void testSerialize() {
+		assertTrue(TextModelUtil.checkNodeOffset(getFixture(), 5));
+	}
 
-		CompositeNode node = getFixture();
-		
-		assertEquals(testText, node.serialize());
-		
+	@Test
+	public void testCheckNode01() {
+	
+		assertTrue(TextModelUtil.checkNodeOffset(getFixture(), 0));
 	}
 
 	
-	public void testAdd() {
+	@Test
+	public void testCheckNode02() {
+	
+		assertTrue(TextModelUtil.checkNodeOffset(getFixture(), 11));
 
-		CompositeNode node = getFixture();
-		
-		LeafNode leafNode = EditorUtil.getNode("12345");
-		
-		System.out.println(EditorUtil.logGraph(node));
-		
-		node.getChildren().add(leafNode);
-		
-		System.out.println(EditorUtil.logGraph(node));
-		
-		leafNode = EditorUtil.getNode("Test");
-		
-		node.getChildren().add(1, leafNode);
-		
-		System.out.println(EditorUtil.logGraph(node));
-		
-		//System.out.printf(node.serialize());
+	}
+	
+	@Test
+	public void testCheckNode03() {
+	
+		assertTrue(!TextModelUtil.checkNodeOffset(getFixture(), 12));
+
+	}
+	
+	@Test
+	public void testCheckNode04() {
+	
+		assertTrue(!TextModelUtil.checkNodeOffset(getFixture(), -1));
 	}
 }
