@@ -22,16 +22,23 @@ public class TextModelManager {
 	static public void modelInit(Resource resource) {
 		
 		resource.getContents().add(modelInit("Hallo World!"));
+		
 	}
 	
 	static public CompositeNode modelInit(String text) {
 		CompositeNode cNode = EditorFactory.eINSTANCE.createCompositeNode();
 		
-		LeafNode  lNode = EditorFactory.eINSTANCE.createLeafNode();
-	
-		cNode.getChildren().add(lNode);
-		lNode.setText(text);
+		createLeafeNode (text, cNode);
+		
 		//lNode.setHidden(false);
 		return cNode;
+	}
+	
+	static public void createLeafeNode (String text, CompositeNode cNode ) {
+		
+		LeafNode  lNode = EditorFactory.eINSTANCE.createLeafNode();
+		lNode.setText(text);
+		
+		cNode.getChildren().add(lNode);
 	}
 }

@@ -17,6 +17,7 @@ import java.util.List;
 
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
+import net.zehrer.no2.semantic.editor.model.EditorFactory;
 import net.zehrer.no2.semantic.editor.model.EditorPackage;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
 import net.zehrer.no2.semantic.editor.model.SyntaxError;
@@ -26,6 +27,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.text.DocumentEvent;
 
 
 public class TextModelUtil {
@@ -259,5 +261,123 @@ public class TextModelUtil {
 		// every child node is a hidden node, return total endLine
 		return abstractNode.totalEndLine();
 	}
+	
+	/**
+	 * Return the related leaf node 
+	 * @param _this
+	 * @param offset
+	 * @return
+	 */
+	public static LeafNode getLeafNode(AbstractNode _this, int offset) {
+		if (_this instanceof LeafNode) {
+			return getLeafNode ((LeafNode) _this, offset);
+		} else {
+			CompositeNode parent = (CompositeNode) _this;
+			EList<AbstractNode> children = parent.getChildren();
+			for (AbstractNode abstractNode : children) {
+				
+			}
+			
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Return the related leaf node 
+	 * @param _this
+	 * @param offset
+	 * @return
+	 */
+	public static LeafNode getLeafNode(LeafNode _this, int offset) {
+		
+		
+		return null;
+	}
+	
+	public static boolean checkNodeOffset (AbstractNode _this, int offset) {
+		
+		int fOffset = _this.getOffset();
+		int fLength = _this.getLength();
+		
+		// fOffset <= offset <= (fOffset + fLength)
+		
+		if ((fOffset <= offset)) {
+			if (offset <= fOffset + fLength ) {
+				return true;
+			}
+		} 
+		
+		return false;
+	}
+
+	
+	public static void update ( AbstractNode _this, DocumentEvent update) {
+		updateModel (_this,update, null);
+	}
+	
+	public static DocumentEvent updateModel ( AbstractNode _this, DocumentEvent event, CompositeNode parent) {
+
+		// 1st: check of event starts in this node
+		if (!checkNodeOffset(_this, event.getOffset()))
+			return event;
+		
+		DocumentEvent result = event;
+		
+		// 2nd: distinguish type
+		if (_this instanceof LeafNode) {
+			result = updateModel ((LeafNode) _this, result, parent);
+		} else {
+			CompositeNode fParent = (CompositeNode) _this;
+			
+			EList<AbstractNode> children = fParent.getChildren();
+			for (AbstractNode abstractNode : children) {
+				result = updateModel (abstractNode, result, fParent);
+				
+				if (result == null) break;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param _this
+	 * @param event
+	 * @return either null if even full covered in this node or 
+	 */
+	public static DocumentEvent updateModel ( LeafNode _this, DocumentEvent event, CompositeNode parent) {
+		
+		DocumentEvent result = null;
+		
+		int fOffset = _this.getOffset();
+		int fLength = _this.getLength();
+		
+		int startIndex = event.getOffset() - fOffset;  
+		int endIndex = startIndex + event.getLength(); 
+		 
+		if (endIndex > fOffset + fLength) {
+			// TODO fix SPLIT event
+			
+			int sOffset = fOffset + fLength;
+			int sLength = endIndex - fOffset + fLength;
+			
+			result = new DocumentEvent(event.getDocument(),sOffset,sLength,"");
+			
+			endIndex = fOffset + fLength;
+		}
+				
+		StringBuffer buffer = new StringBuffer(_this.getText());
+		buffer.replace(startIndex, endIndex, event.getText());
+	
+		// TODO: or update the NodeContentAdapter
+		LeafNode leafNode = EditorFactory.eINSTANCE.createLeafNode();
+		leafNode.setText(buffer.toString());
+		int index = parent.getChildren().indexOf(_this);
+		 parent.getChildren().set(index, leafNode);
+		
+		return result;
+	}	
+
 
 }
