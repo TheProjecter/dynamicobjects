@@ -14,18 +14,19 @@ package net.zehrer.no2.sematic.editor.model;
 import junit.framework.TestCase;
 import net.zehrer.no2.semantic.editor.TextModelManager;
 import net.zehrer.no2.semantic.editor.adapter.NodeContentAdapter;
+import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
+import net.zehrer.no2.semantic.editor.model.LeafNode;
 import net.zehrer.no2.semantic.editor.model.impl.TextModelUtil;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.EList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TestTextModelUtil extends TestCase{
 
-	final static String testText = "Hello World";
-	
+
 	/**
 	 * The fixture for this model test case.
 	 */
@@ -57,11 +58,23 @@ public class TestTextModelUtil extends TestCase{
 	 */
 	@Before
 	public void setUp() throws Exception {
-		CompositeNode node = TextModelManager.modelInit(testText);
 		
-		NodeContentAdapter.createAdapterAndAddToNode(node);
+		// 01234567890
+		// 01        890   <- node1
+		//   23 45 67      <- node2 
 		
-		setFixture(node);
+		CompositeNode node1 = TextModelManager.createCompositeNode("01");
+		
+		CompositeNode node2 = TextModelManager.createCompositeNode("23");
+		node1.getChildren().add(node2);
+		
+		TextModelManager.createLeafeNode("45",node2);
+		TextModelManager.createLeafeNode("67",node2);
+		
+		TextModelManager.createLeafeNode("890",node1);
+		
+		NodeContentAdapter.createAdapterAndAddToNode(node1);
+		setFixture(node1);
 		
 		//System.out.println(EditorUtil.logGraph(getFixture()));
 	}
@@ -74,12 +87,42 @@ public class TestTextModelUtil extends TestCase{
 		setFixture(null);
 	}
 	
-	@Test
-	public void testCheckNode00() {
+
+	// --------------------
 	
-		assertTrue(TextModelUtil.checkNodeOffset(getFixture(), 5));
+	@Test
+	public void testCheckLeafNode01() {
+		
+		CompositeNode node = TextModelManager.createCompositeNode("012345");
+		NodeContentAdapter.createAdapterAndAddToNode(node);
+
+		LeafNode leafNode =  (LeafNode) node.getChildren().get(0);
+	
+		assertTrue(TextModelUtil.checkNodeOffset(leafNode, 0));
 	}
 
+	
+	@Test
+	public void testCheckLeafNode02() {
+		
+		CompositeNode node = TextModelManager.createCompositeNode("012345");
+		NodeContentAdapter.createAdapterAndAddToNode(node);
+
+		LeafNode leafNode =  (LeafNode) node.getChildren().get(0);
+	
+		assertFalse(TextModelUtil.checkNodeOffset(leafNode, 6));
+
+	}
+	
+	// --------------------
+	
+	
+	@Test
+	public void testCheckNode00() {
+		
+		assertTrue(TextModelUtil.checkNodeOffset(getFixture(), 5));
+	}
+	
 	@Test
 	public void testCheckNode01() {
 	
@@ -90,20 +133,94 @@ public class TestTextModelUtil extends TestCase{
 	@Test
 	public void testCheckNode02() {
 	
-		assertTrue(TextModelUtil.checkNodeOffset(getFixture(), 11));
+		assertFalse(TextModelUtil.checkNodeOffset(getFixture(), 11));
 
 	}
 	
 	@Test
 	public void testCheckNode03() {
 	
-		assertTrue(!TextModelUtil.checkNodeOffset(getFixture(), 12));
-
+		assertFalse(TextModelUtil.checkNodeOffset(getFixture(), -1));
+	}
+	
+	// ------------- 
+	
+	@Test
+	public void testgetLeafNode01() {
+		
+		CompositeNode node = getFixture();
+		
+		
+		LeafNode lNode = TextModelUtil.getLeafNode(node,3);
+		
+		assertEquals("23", lNode.getText());
 	}
 	
 	@Test
-	public void testCheckNode04() {
-	
-		assertTrue(!TextModelUtil.checkNodeOffset(getFixture(), -1));
+	public void testgetLeafNode02() {
+		
+		CompositeNode node = getFixture();
+		
+		
+		LeafNode lNode = TextModelUtil.getLeafNode(node,8);
+		
+		assertEquals("890", lNode.getText());
 	}
+	
+	// ------------- 
+	
+	@Test
+	public void testgetLeafNodes01() {
+		
+		CompositeNode node = getFixture();
+		
+		EList<LeafNode> result = TextModelUtil.getLeafNodes(node, 1, 9);
+		
+		assertEquals(5, result.size());
+	}
+	
+	@Test
+	public void testgetLeafNodes02() {
+		
+		CompositeNode node = getFixture();
+		
+		EList<LeafNode> result = TextModelUtil.getLeafNodes(node, 0, 3);
+		
+		assertEquals(2, result.size());
+	}
+
+
+	@Test
+	public void testgetLeafNodes03() {
+		
+		CompositeNode node = getFixture();
+		
+		EList<LeafNode> result = TextModelUtil.getLeafNodes(node, 4, 5);
+		
+		assertEquals(1, result.size());
+	}
+
+	@Test
+	public void testgetLeafNodes04() {
+		
+		CompositeNode node = getFixture();
+		
+		EList<LeafNode> result = TextModelUtil.getLeafNodes(node, 6, 9);
+		
+		assertEquals(2, result.size());
+	}
+	
+	@Test
+	public void testgetLeafNodes05() {
+		
+		CompositeNode node = getFixture();
+		
+		EList<LeafNode> result = TextModelUtil.getLeafNodes(node, 6, 11);  // no error
+		
+		assertEquals(2, result.size());
+	}
+	
+	// 01234567890
+	// 01        890   <- node1
+	//   23 45 67      <- node2 
 }

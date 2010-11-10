@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.DocumentEvent;
+import org.eclipse.jface.text.TypedRegion;
 
 
 public class TextModelUtil {
@@ -269,31 +270,84 @@ public class TextModelUtil {
 	 * @return
 	 */
 	public static LeafNode getLeafNode(AbstractNode _this, int offset) {
+		
+		LeafNode result = null;
+		
+		// 1st: check of offset starts in this node
+		if (!checkNodeOffset(_this, offset))
+			return null;  // exit condition
+		
+		// 2nd: in yes analyze deeper
 		if (_this instanceof LeafNode) {
-			return getLeafNode ((LeafNode) _this, offset);
+			result =  (LeafNode) _this;
 		} else {
 			CompositeNode parent = (CompositeNode) _this;
+			
 			EList<AbstractNode> children = parent.getChildren();
 			for (AbstractNode abstractNode : children) {
-				
-			}
-			
+				result = getLeafNode (abstractNode, offset);
+				if (result != null) break;
+			}	
 		}
 		
-		return null;
+		return result;
 	}
 	
+
+	/**
+	 * Return a list of leaf nodes beginning with "start offset" and end with "end offset" including all leaf nodes in between 
+	 * @param _this starting composite node
+	 * @param sOffset - is the start offset
+	 * @param eOffset - is the end offset
+	 * @return the list of leaf nodes
+	 */
+	public static EList<LeafNode> getLeafNodes(AbstractNode _this, int sOffset, int eOffset ) {
+	
+		BasicEList<LeafNode> result = new BasicEList<LeafNode>();
+		
+		addLeafNodes(_this, sOffset, eOffset, result);
+		
+		return result;
+	}
+
 	/**
 	 * Return the related leaf node 
 	 * @param _this
 	 * @param offset
 	 * @return
 	 */
-	public static LeafNode getLeafNode(LeafNode _this, int offset) {
+	public static int addLeafNodes(AbstractNode _this, int indexOffset, int endOffset, EList<LeafNode> list ) {
 		
+		// 1st: check the offset for start and end in this node
+		if (!checkNodeOffset(_this, indexOffset)) {
+			  return indexOffset;  // search for start
+		}
 		
-		return null;
+		int result = indexOffset; 
+		
+		// 2nd: in yes analyze deeper
+		if (_this instanceof LeafNode) {
+			LeafNode leafNode = (LeafNode) _this;
+			list.add(leafNode);
+			
+			result = leafNode.getOffset() + leafNode.getLength();
+			if (result > endOffset)
+				 result = -1;   // exit condition
+		 
+		} else {
+			CompositeNode parent = (CompositeNode) _this;
+			
+			EList<AbstractNode> children = parent.getChildren();
+			for (AbstractNode abstractNode : children) {
+				result = addLeafNodes (abstractNode, result , endOffset , list);
+				if (result == -1) break;
+			}	
+		}
+		
+		return result;  
 	}
+
+	
 	
 	public static boolean checkNodeOffset (AbstractNode _this, int offset) {
 		
@@ -303,7 +357,7 @@ public class TextModelUtil {
 		// fOffset <= offset <= (fOffset + fLength)
 		
 		if ((fOffset <= offset)) {
-			if (offset <= fOffset + fLength ) {
+			if (offset < fOffset + fLength ) {
 				return true;
 			}
 		} 
@@ -355,21 +409,26 @@ public class TextModelUtil {
 		
 		int startIndex = event.getOffset() - fOffset;  
 		int endIndex = startIndex + event.getLength(); 
-		 
+		
+		// if the change range bigger as the current LeafNode?
 		if (endIndex > fOffset + fLength) {
-			// TODO fix SPLIT event
 			
 			int sOffset = fOffset + fLength;
 			int sLength = endIndex - fOffset + fLength;
+			
+			// TODO fix SPLIT event
+			// BUG !!!
 			
 			result = new DocumentEvent(event.getDocument(),sOffset,sLength,"");
 			
 			endIndex = fOffset + fLength;
 		}
-				
+		
+		// replace text
 		StringBuffer buffer = new StringBuffer(_this.getText());
 		buffer.replace(startIndex, endIndex, event.getText());
 	
+		// replace leafNode to init a supported notification
 		// TODO: or update the NodeContentAdapter
 		LeafNode leafNode = EditorFactory.eINSTANCE.createLeafNode();
 		leafNode.setText(buffer.toString());
@@ -379,5 +438,8 @@ public class TextModelUtil {
 		return result;
 	}	
 
-
+	public static TypedRegion createTypedRegion(AbstractNode _this, String type) {
+		return new TypedRegion(_this.getOffset(), _this.getLength(), type);
+	}
+	
 }

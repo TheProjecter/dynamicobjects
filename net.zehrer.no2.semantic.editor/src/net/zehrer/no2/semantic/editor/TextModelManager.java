@@ -21,11 +21,11 @@ public class TextModelManager {
 
 	static public void modelInit(Resource resource) {
 		
-		resource.getContents().add(modelInit("Hallo World!"));
+		resource.getContents().add(createCompositeNode("Hallo World!"));
 		
 	}
 	
-	static public CompositeNode modelInit(String text) {
+	static public CompositeNode createCompositeNode(String text) {
 		CompositeNode cNode = EditorFactory.eINSTANCE.createCompositeNode();
 		
 		createLeafeNode (text, cNode);
@@ -36,9 +36,15 @@ public class TextModelManager {
 	
 	static public void createLeafeNode (String text, CompositeNode cNode ) {
 		
+		LeafNode lNode = createLeafeNode (text);
+		cNode.getChildren().add(lNode);
+	}
+	
+	static public LeafNode createLeafeNode (String text) {
+		
 		LeafNode  lNode = EditorFactory.eINSTANCE.createLeafNode();
 		lNode.setText(text);
 		
-		cNode.getChildren().add(lNode);
+		return lNode;
 	}
 }
