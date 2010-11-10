@@ -57,7 +57,7 @@ public class TestTextModelUtilUpdate extends TestCase{
 	@Before
 	public void setUp() throws Exception {
 		
-		CompositeNode node = TextModelManager.modelInit("0123456");
+		CompositeNode node = TextModelManager.createCompositeNode("0123456");
 		TextModelManager.createLeafeNode("789", node);
 		
 		NodeContentAdapter.createAdapterAndAddToNode(node);

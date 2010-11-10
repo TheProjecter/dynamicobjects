@@ -59,7 +59,7 @@ public class TestModelUseCases extends TestCase {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		CompositeNode node = TextModelManager.modelInit(testText);
+		CompositeNode node = TextModelManager.createCompositeNode(testText);
 		
 		NodeContentAdapter.createAdapterAndAddToNode(node);
 		

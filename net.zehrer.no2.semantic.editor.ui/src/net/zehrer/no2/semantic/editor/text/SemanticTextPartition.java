@@ -13,12 +13,16 @@ package net.zehrer.no2.semantic.editor.text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import net.zehrer.no2.semantic.editor.adapter.NodeContentAdapter;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
+import net.zehrer.no2.semantic.editor.model.LeafNode;
+import net.zehrer.no2.semantic.editor.model.impl.TextModelUtil;
 import net.zehrer.no2.text.IResourceDocument;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.DefaultPositionUpdater;
@@ -34,11 +38,9 @@ import org.eclipse.jface.text.TypedPosition;
 import org.eclipse.jface.text.TypedRegion;
 
 
-public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPartitionerExtension
-
+public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPartitionerExtension {
+	
 //IDocumentPartitionerExtension, IDocumentPartitionerExtension2, IDocumentPartitionerExtension3
-
-{
 	
 	public final static String TEXT = "__text";
 	
@@ -74,10 +76,7 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	
 	/**The offset at which a partition has been deleted */
 	protected int fDeleteOffset;
-	
-	/** Debug option for cache consistency checking. */
-	private static final boolean CHECK_CACHE_CONSISTENCY = false;
-	
+
 	private PartitionUtil fPartitionUtil = null;
 	
 	/** The active document rewrite session.*/
@@ -185,30 +184,50 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	@Override
 	public ITypedRegion[] computePartitioning(int offset, int length) {
 
-		List<TypedRegion> list= new ArrayList<TypedRegion>();
-
+		List<TypedRegion> list = new ArrayList<TypedRegion>();
+		int endOffset = offset + length;
+//		
+//		LeafNode startNode = TextModelUtil.getLeafNode(this.fRootNode, offset);
+//		list.add( TextModelUtil.createTypedRegion(startNode, TEXT));
+//		
+//		LeafNode endNode = TextModelUtil.getLeafNode(this.fRootNode, endOffset);
+//		
+//
+//		if  ( startNode != endNode  ) {
+//			
+//			EList<LeafNode> eList = this.fRootNode.getLeafNodes(endNode);
+//			int index = eList.indexOf(startNode);
+//			ListIterator<LeafNode> iterator = eList.listIterator(index+1);
+//			
+//			// TODO !!!!
+//		}
+			
+		
+		
 		try {
 
-			int endOffset= offset + length;
+			
 
-			Position[] category= getPositions();
+			Position[] category = getPositions();
 
 			TypedPosition previous= null, current= null;
 			int start, end, gapOffset;
-			Position gap= new Position(0);
+			Position gap = new Position(0);
 
 			int startIndex= getFirstIndexEndingAfterOffset(category, offset);
 			int endIndex= getFirstIndexStartingAfterOffset(category, endOffset);
+			
 			for (int i= startIndex; i < endIndex; i++) {
 
-				current= (TypedPosition) category[i];
+				current = (TypedPosition) category[i];
 
 				gapOffset= (previous != null) ? previous.getOffset() + previous.getLength() : 0;
 				gap.setOffset(gapOffset);
 				gap.setLength(current.getOffset() - gapOffset);
+				
 				if ((gap.getLength() > 0 && gap.overlapsWith(offset, length))) {
-					start= Math.max(offset, gapOffset);
-					end= Math.min(endOffset, gap.getOffset() + gap.getLength());
+					start = Math.max(offset, gapOffset);
+					end = Math.min(endOffset, gap.getOffset() + gap.getLength());
 					list.add(new TypedRegion(start, end - start, IDocument.DEFAULT_CONTENT_TYPE));
 				}
 
@@ -396,19 +415,9 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	 */
 	protected final Position[] getPositions() throws BadPositionCategoryException {
 		if (fCachedPositions == null) {
-			fCachedPositions= fDocument.getPositions(fPositionCategory);
-		} else if (CHECK_CACHE_CONSISTENCY) {
-			Position[] positions= fDocument.getPositions(fPositionCategory);
-			int len= Math.min(positions.length, fCachedPositions.length);
-			for (int i= 0; i < len; i++) {
-				if (!positions[i].equals(fCachedPositions[i]))
-					System.err.println("FastPartitioner.getPositions(): cached position is not up to date: from document: " + toString(positions[i]) + " in cache: " + toString(fCachedPositions[i])); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			for (int i= len; i < positions.length; i++)
-				System.err.println("FastPartitioner.getPositions(): new position in document: " + toString(positions[i])); //$NON-NLS-1$
-			for (int i= len; i < fCachedPositions.length; i++)
-				System.err.println("FastPartitioner.getPositions(): stale position in cache: " + toString(fCachedPositions[i])); //$NON-NLS-1$
-		}
+			fCachedPositions = fDocument.getPositions(fPositionCategory);
+		} 
+		
 		return fCachedPositions;
 	}
 	
@@ -496,15 +505,5 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 		return j;
 	}
 	
-	/**
-	 * Pretty print a <code>Position</code>.
-	 *
-	 * @param position the position to format
-	 * @return a formatted string
-	 */
-	private String toString(Position position) {
-		return "P[" + position.getOffset() + "+" + position.getLength() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-	}
-
 	
 }
