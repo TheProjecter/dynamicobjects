@@ -48,6 +48,7 @@ public class EditorContentOutlinePage extends ContentOutlinePage {
 
 		viewer.setContentProvider(this.fContentProvider);
 		viewer.setLabelProvider(new OutlineLabelProvider());
+		
 		viewer.addSelectionChangedListener(this);
 
 		viewer.setInput(getDocument());

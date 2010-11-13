@@ -13,9 +13,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.views,
  org.eclipse.ui.ide,
  org.eclipse.emf.edit,
+ org.eclipse.emf.edit.ui;bundle-version="2.6.0",
  org.eclipse.emf.ecore.edit,
  org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
  net.zehrer.no2;bundle-version="0.1.0",
- net.zehrer.no2.semantic.editor;bundle-version="1.0.0"
+ net.zehrer.no2.semantic.editor;bundle-version="1.0.0",
+ net.zehrer.no2.ui;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
