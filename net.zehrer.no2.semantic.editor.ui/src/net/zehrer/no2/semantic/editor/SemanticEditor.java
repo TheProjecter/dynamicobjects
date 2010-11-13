@@ -75,7 +75,7 @@ public class SemanticEditor extends AbstractDecoratedTextEditor implements IEdit
 		IEditorInput input = getEditorInput();
 		if (input != null) {
 			// Get the input by the DocumentProvider 
-			fOutlinePage.setInput(getDocumentProvider().getDocument(input));
+			outlinePage.setInput(getDocumentProvider().getDocument(input));
 		}
 		
 		return outlinePage;
