@@ -428,12 +428,11 @@ public class TextModelUtil {
 		StringBuffer buffer = new StringBuffer(_this.getText());
 		buffer.replace(startIndex, endIndex, event.getText());
 	
-		// replace leafNode to init a supported notification
-		// TODO: or update the NodeContentAdapter
-		LeafNode leafNode = EditorFactory.eINSTANCE.createLeafNode();
-		leafNode.setText(buffer.toString());
+		// replace leafNode to notify the adapter
+		// TODO: or update the NodeContentAdapter;
+		_this.setText(buffer.toString());
 		int index = parent.getChildren().indexOf(_this);
-		 parent.getChildren().set(index, leafNode);
+		parent.getChildren().set(index, _this);
 		
 		return result;
 	}	
