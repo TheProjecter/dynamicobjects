@@ -12,9 +12,10 @@
 package net.zehrer.no2.model.factory;
 
 import net.zehrer.no2.model.provider.ENamedItemProvider;
-import net.zehrer.no2.model.provider.EObjectItemProvider;
-import net.zehrer.no2.model.provider.EPackageItemProvider;
 import net.zehrer.no2.model.provider.ResourceItemProvider;
+import net.zehrer.no2.ui.edit.AbstractModelAdapterFactory;
+import net.zehrer.no2.ui.edit.EObjectItemProvider;
+import net.zehrer.no2.ui.edit.EPackageItemProvider;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;

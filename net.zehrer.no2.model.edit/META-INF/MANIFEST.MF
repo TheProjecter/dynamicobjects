@@ -14,5 +14,6 @@ Export-Package: net.zehrer.no2.model,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit,
  org.eclipse.emf.ecore.edit,
- net.zehrer.no2.model;bundle-version="1.0.0"
+ net.zehrer.no2.model;bundle-version="1.0.0",
+ net.zehrer.no2.ui;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
