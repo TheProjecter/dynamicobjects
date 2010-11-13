@@ -17,18 +17,20 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.net4j.util.ui.UIUtil;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
 
 public abstract class AbstractEMFDialog extends TitleAreaDialog {
 
-	protected static final Color GRAY = UIUtil.getDisplay().getSystemColor(SWT.COLOR_GRAY);
+	protected static final Color GRAY = getDisplay().getSystemColor(SWT.COLOR_GRAY);
 
 	protected IWorkbenchPage page;
 	// protected String title;
@@ -51,7 +53,7 @@ public abstract class AbstractEMFDialog extends TitleAreaDialog {
 		Table table = viewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(false);
-		table.setLayoutData(UIUtil.createGridData());
+		table.setLayoutData(createGridData());
 
 		return composite;
 	}
@@ -102,4 +104,33 @@ public abstract class AbstractEMFDialog extends TitleAreaDialog {
 	// newShell.setText(title);
 	// }
 
+	/**
+	 * Original source for org.eclipse.net4j.util.ui.UIUtil
+	 */
+	public static Display getDisplay() {
+		Display display = Display.getCurrent();
+		if (display == null) {
+			try {
+				display = PlatformUI.getWorkbench().getDisplay();
+			} catch (RuntimeException ignore) {
+			}
+		}
+
+		if (display == null) {
+			display = Display.getDefault();
+		}
+
+		if (display == null) {
+			display = new Display();
+		}
+
+		return display;
+	}
+
+	/**
+	 * Original source for org.eclipse.net4j.util.ui.UIUtil
+	 */
+	public static GridData createGridData() {
+		return new GridData(SWT.FILL, SWT.FILL, true, true);
+	}
 }

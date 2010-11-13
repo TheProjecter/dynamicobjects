@@ -1,20 +1,18 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: NO2 UI
+Bundle-Name: %pluginName
 Bundle-SymbolicName: net.zehrer.no2.ui;singleton:=true
-Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: Stephan Zehrer
+Bundle-Version: 1.0.0
+Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
- org.eclipse.help,
- org.eclipse.emf.ecore.edit,
- org.eclipse.emf.edit.ui,
- org.eclipse.emf.cdo.common,
- org.eclipse.net4j,
- org.eclipse.emf.cdo.ui
+ org.eclipse.emf.ecore;bundle-version="2.6.1",
+ org.eclipse.emf.edit;bundle-version="2.6.0",
+ org.eclipse.emf.edit.ui;bundle-version="2.6.0",
+ org.eclipse.emf.ecore.edit
 Export-Package: net.zehrer.no2.ui.dialogs,
+ net.zehrer.no2.ui.edit,
+ net.zehrer.no2.ui.outline,
  net.zehrer.no2.ui.provider
-Import-Package: org.eclipse.emf.cdo.common.model,
- org.eclipse.emf.cdo.session,
- org.eclipse.net4j.util.ui
+Bundle-Activator: net.zehrer.no2.ui.NO2UiPlugin$Implementation
