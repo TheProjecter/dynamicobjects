@@ -23,6 +23,7 @@ import org.eclipse.emf.cdo.server.db.mapping.IMappingStrategy;
 import org.eclipse.emf.cdo.server.net4j.CDONet4jServerUtil;
 import org.eclipse.emf.cdo.session.CDOSession;
 import org.eclipse.emf.cdo.transaction.CDOTransaction;
+import org.eclipse.emf.cdo.util.CommitException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -92,7 +93,12 @@ public class StandaloneCDODynamic {
 
 		EObject eObject = EcoreUtil.create(eClass);
 		cdoResource.getContents().add(eObject);
-		transaction.commit();
+		try {
+			transaction.commit();
+		} catch (CommitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		// Cleanup
 		cdoSession.close();
@@ -122,8 +128,8 @@ public class StandaloneCDODynamic {
 		props.put(IRepository.Props.OVERRIDE_UUID, DEFAULT_REPOSITORY_NAME);
 	    props.put(IRepository.Props.SUPPORTING_AUDITS, "true");
 	    props.put(IRepository.Props.SUPPORTING_BRANCHES, "false");	
-		props.put(IRepository.Props.CURRENT_LRU_CAPACITY, "100000");
-		props.put(IRepository.Props.REVISED_LRU_CAPACITY, "10000");
+//		props.put(IRepository.Props.CURRENT_LRU_CAPACITY, "100000");
+//		props.put(IRepository.Props.REVISED_LRU_CAPACITY, "10000");
 		return CDOServerUtil.createRepository(DEFAULT_REPOSITORY_NAME, store, props);
 	}
 

@@ -1,7 +1,7 @@
 package net.zehrer.no2.semantic.editor;
 
 import net.zehrer.no2.semantic.editor.coloring.ColorManager;
-import net.zehrer.no2.semantic.editor.outline.DebugContentOutlinePage;
+import net.zehrer.no2.semantic.editor.outline.EditorContentOutlinePage;
 import net.zehrer.no2.semantic.editor.text.SemanticDocumentProvider;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -19,7 +19,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 public class SemanticEditor extends TextEditor {
 
 	private ColorManager colorManager;
-	private DebugContentOutlinePage fOutlinePage;
+	private EditorContentOutlinePage fOutlinePage;
 	
 	private EditingDomain editingDomain;
 	private ComposedAdapterFactory adapterFactory;
@@ -53,7 +53,7 @@ public class SemanticEditor extends TextEditor {
 	public Object getAdapter(Class required) {
 		if (IContentOutlinePage.class.equals(required)) {
 			if (fOutlinePage == null) {
-				fOutlinePage= new DebugContentOutlinePage(getDocumentProvider(), this);
+				fOutlinePage= new EditorContentOutlinePage(getDocumentProvider(), this);
 				if (getEditorInput() != null)
 					fOutlinePage.setInput(getEditorInput());
 			}

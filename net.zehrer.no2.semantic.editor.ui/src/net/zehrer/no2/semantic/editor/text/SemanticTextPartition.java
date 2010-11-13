@@ -13,7 +13,6 @@ package net.zehrer.no2.semantic.editor.text;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import net.zehrer.no2.semantic.editor.adapter.NodeContentAdapter;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
@@ -33,6 +32,7 @@ import org.eclipse.jface.text.IDocumentPartitionerExtension;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Position;
+import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.TypedPosition;
 import org.eclipse.jface.text.TypedRegion;
@@ -169,10 +169,6 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	 */
 	@Override
 	public String getContentType(int offset) {
-		
-		TypedPosition p = findClosestPosition(offset);
-		if (p != null && p.includes(offset))
-			return p.getType();
 
 		return IDocument.DEFAULT_CONTENT_TYPE;
 	}
@@ -184,87 +180,17 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	@Override
 	public ITypedRegion[] computePartitioning(int offset, int length) {
 
-		List<TypedRegion> list = new ArrayList<TypedRegion>();
+		List<TypedRegion> regionList = new ArrayList<TypedRegion>();
 		int endOffset = offset + length;
-//		
-//		LeafNode startNode = TextModelUtil.getLeafNode(this.fRootNode, offset);
-//		list.add( TextModelUtil.createTypedRegion(startNode, TEXT));
-//		
-//		LeafNode endNode = TextModelUtil.getLeafNode(this.fRootNode, endOffset);
-//		
-//
-//		if  ( startNode != endNode  ) {
-//			
-//			EList<LeafNode> eList = this.fRootNode.getLeafNodes(endNode);
-//			int index = eList.indexOf(startNode);
-//			ListIterator<LeafNode> iterator = eList.listIterator(index+1);
-//			
-//			// TODO !!!!
-//		}
-			
 		
-		
-		try {
+		EList<LeafNode> leafNodeList  = TextModelUtil.getLeafNodes (this.fRootNode,offset, endOffset-1);
 
-			
-
-			Position[] category = getPositions();
-
-			TypedPosition previous= null, current= null;
-			int start, end, gapOffset;
-			Position gap = new Position(0);
-
-			int startIndex= getFirstIndexEndingAfterOffset(category, offset);
-			int endIndex= getFirstIndexStartingAfterOffset(category, endOffset);
-			
-			for (int i= startIndex; i < endIndex; i++) {
-
-				current = (TypedPosition) category[i];
-
-				gapOffset= (previous != null) ? previous.getOffset() + previous.getLength() : 0;
-				gap.setOffset(gapOffset);
-				gap.setLength(current.getOffset() - gapOffset);
-				
-				if ((gap.getLength() > 0 && gap.overlapsWith(offset, length))) {
-					start = Math.max(offset, gapOffset);
-					end = Math.min(endOffset, gap.getOffset() + gap.getLength());
-					list.add(new TypedRegion(start, end - start, IDocument.DEFAULT_CONTENT_TYPE));
-				}
-
-				if (current.overlapsWith(offset, length)) {
-					start= Math.max(offset, current.getOffset());
-					end= Math.min(endOffset, current.getOffset() + current.getLength());
-					list.add(new TypedRegion(start, end - start, current.getType()));
-				}
-
-				previous= current;
-			}
-
-			if (previous != null) {
-				gapOffset= previous.getOffset() + previous.getLength();
-				gap.setOffset(gapOffset);
-				gap.setLength(fDocument.getLength() - gapOffset);
-				if ((gap.getLength() > 0 && gap.overlapsWith(offset, length))) {
-					start= Math.max(offset, gapOffset);
-					end= Math.min(endOffset, fDocument.getLength());
-					list.add(new TypedRegion(start, end - start, IDocument.DEFAULT_CONTENT_TYPE));
-				}
-			}
-
-			if (list.isEmpty())
-				list.add(new TypedRegion(offset, length, IDocument.DEFAULT_CONTENT_TYPE));
-
-		} catch (BadPositionCategoryException ex) {
-			// Make sure we clear the cache
-			clearPositionCache();
-		} catch (RuntimeException ex) {
-			// Make sure we clear the cache
-			clearPositionCache();
-			throw ex;
+		for (LeafNode leafNode : leafNodeList) {
+			regionList.add( TextModelUtil.createTypedRegion(leafNode, TEXT));
 		}
-
-		TypedRegion[] result= new TypedRegion[list.size()];
-		list.toArray(result);
+		
+		TypedRegion[] result= new TypedRegion[regionList.size()];
+		regionList.toArray(result);
 		return result;
 	}
 
@@ -323,43 +249,19 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	 * IDocumentPartitionerExtension#documentChanged2(DocumentEvent)
 	 */
 	@Override
-	public IRegion documentChanged2(DocumentEvent e) {
+	public Region documentChanged2(DocumentEvent e) {
 
 		if (fDocument == null)
 			return null;
 
-		try {
-			Assert.isTrue(e.getDocument() == fDocument);
-			
-			this.fRootNode.update(e);
-						
-			fPositionUpdater.update(e);
-			
-			clearPositionCache();
+		Assert.isTrue(e.getDocument() == fDocument);
+		
+		this.fRootNode.update(e);					
+		fPositionUpdater.update(e);
+		clearPositionCache();
 
-//			fPartitionUtil.partitionDocment(fDocument);
-			
-//			ITypedRegion partition = fDocument.getPartition(e.getOffset());
-
-
-			
-//			IRegion line = fDocument.getLineInformationOfOffset(e.getOffset());
-//			int reparseStart= line.getOffset();
-//			int partitionStart= -1;
-//			int newLength= e.getText() == null ? 0 : e.getText().length();
-
-
-
-//
-//		} catch (BadPositionCategoryException x) {
-//			// should never happen on connected documents
-//		} catch (BadLocationException x) {
-		} finally {
-			clearPositionCache();
-		}
-
-		return null; //createRegion();
-
+		// TODO: will changed with word generation
+		return new Region(e.getOffset(), e.getLength());
 	}
 	
 	
@@ -462,48 +364,7 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	}
 	
 	
-	// ----- private helper methods
-	
 
-	/**
-	 * Returns the index of the first position which ends after the given offset.
-	 *
-	 * @param positions the positions in linear order
-	 * @param offset the offset
-	 * @return the index of the first position which ends after the offset
-	 */
-	private int getFirstIndexEndingAfterOffset(Position[] positions, int offset) {
-		int i= -1, j= positions.length;
-		while (j - i > 1) {
-			int k= (i + j) >> 1;
-			Position p= positions[k];
-			if (p.getOffset() + p.getLength() > offset)
-				j= k;
-			else
-				i= k;
-		}
-		return j;
-	}
-
-	/**
-	 * Returns the index of the first position which starts at or after the given offset.
-	 *
-	 * @param positions the positions in linear order
-	 * @param offset the offset
-	 * @return the index of the first position which starts after the offset
-	 */
-	private int getFirstIndexStartingAfterOffset(Position[] positions, int offset) {
-		int i= -1, j= positions.length;
-		while (j - i > 1) {
-			int k= (i + j) >> 1;
-			Position p= positions[k];
-			if (p.getOffset() >= offset)
-				j= k;
-			else
-				i= k;
-		}
-		return j;
-	}
 	
 	
 }

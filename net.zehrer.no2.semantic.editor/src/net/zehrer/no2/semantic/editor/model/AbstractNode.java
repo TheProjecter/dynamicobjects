@@ -26,6 +26,7 @@ import org.eclipse.jface.text.DocumentEvent;
  *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalOffset <em>Total Offset</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalLine <em>Total Line</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalLength <em>Total Length</em>}</li>
+ *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -220,6 +221,33 @@ public interface AbstractNode extends EObject {
 	 * @generated
 	 */
 	void setTotalLength(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see net.zehrer.no2.semantic.editor.model.EditorPackage#getAbstractNode_Name()
+	 * @model default=""
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 	/**
 	 * <!-- begin-user-doc -->
