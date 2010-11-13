@@ -230,6 +230,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAbstractNode_Name() {
+		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getAbstractNode__Serialize() {
 		return abstractNodeEClass.getEOperations().get(0);
 	}
@@ -436,6 +445,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_OFFSET);
 		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_LINE);
 		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_LENGTH);
+		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__NAME);
 		createEOperation(abstractNodeEClass, ABSTRACT_NODE___SERIALIZE);
 		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_LEAF_NODES);
 		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_LEAF_NODES__ABSTRACTNODE);
@@ -505,6 +515,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		initEAttribute(getAbstractNode_TotalOffset(), ecorePackage.getEInt(), "totalOffset", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractNode_TotalLine(), ecorePackage.getEInt(), "totalLine", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractNode_TotalLength(), ecorePackage.getEInt(), "totalLength", "-1", 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getAbstractNode_Name(), ecorePackage.getEString(), "Name", "", 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAbstractNode__Serialize(), ecorePackage.getEString(), "serialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 

@@ -27,6 +27,7 @@ public class TextModelManager {
 	
 	static public CompositeNode createCompositeNode(String text) {
 		CompositeNode cNode = EditorFactory.eINSTANCE.createCompositeNode();
+		cNode.setName("Document");
 		
 		createLeafeNode (text, cNode);
 		
@@ -43,6 +44,7 @@ public class TextModelManager {
 	static public LeafNode createLeafeNode (String text) {
 		
 		LeafNode  lNode = EditorFactory.eINSTANCE.createLeafNode();
+		lNode.setName("Content");
 		lNode.setText(text);
 		
 		return lNode;

@@ -43,6 +43,7 @@ import org.eclipse.jface.text.DocumentEvent;
  *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getTotalOffset <em>Total Offset</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getTotalLine <em>Total Line</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getTotalLength <em>Total Length</em>}</li>
+ *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -138,6 +139,26 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * @ordered
 	 */
 	protected int totalLength = TOTAL_LENGTH_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -386,6 +407,27 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ABSTRACT_NODE__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String serialize() {
 		return TextModelUtil.serialize(this);
 	}
@@ -551,6 +593,8 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 				return getTotalLine();
 			case EditorPackage.ABSTRACT_NODE__TOTAL_LENGTH:
 				return getTotalLength();
+			case EditorPackage.ABSTRACT_NODE__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -583,6 +627,9 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 				return;
 			case EditorPackage.ABSTRACT_NODE__TOTAL_LENGTH:
 				setTotalLength((Integer)newValue);
+				return;
+			case EditorPackage.ABSTRACT_NODE__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -617,6 +664,9 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 			case EditorPackage.ABSTRACT_NODE__TOTAL_LENGTH:
 				setTotalLength(TOTAL_LENGTH_EDEFAULT);
 				return;
+			case EditorPackage.ABSTRACT_NODE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -643,6 +693,8 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 				return totalLine != TOTAL_LINE_EDEFAULT;
 			case EditorPackage.ABSTRACT_NODE__TOTAL_LENGTH:
 				return totalLength != TOTAL_LENGTH_EDEFAULT;
+			case EditorPackage.ABSTRACT_NODE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -683,21 +735,13 @@ public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container impl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (totalOffset: ");
-		result.append(totalOffset);
-		result.append(", totalLine: ");
-		result.append(totalLine);
-		result.append(", totalLength: ");
-		result.append(totalLength);
-		result.append(')');
-		return result.toString();
+		return name;
 	}
 
 } //AbstractNodeImpl

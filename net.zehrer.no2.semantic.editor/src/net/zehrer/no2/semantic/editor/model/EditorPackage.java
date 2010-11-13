@@ -136,13 +136,22 @@ public interface EditorPackage extends EPackage {
 	int ABSTRACT_NODE__TOTAL_LENGTH = 6;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__NAME = 7;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE_FEATURE_COUNT = 7;
+	int ABSTRACT_NODE_FEATURE_COUNT = 8;
 
 	/**
 	 * The operation id for the '<em>Serialize</em>' operation.
@@ -315,6 +324,15 @@ public interface EditorPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_NODE__TOTAL_LENGTH = ABSTRACT_NODE__TOTAL_LENGTH;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__NAME = ABSTRACT_NODE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -514,6 +532,15 @@ public interface EditorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LEAF_NODE__TOTAL_LENGTH = ABSTRACT_NODE__TOTAL_LENGTH;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE__NAME = ABSTRACT_NODE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -837,6 +864,17 @@ public interface EditorPackage extends EPackage {
 	EAttribute getAbstractNode_TotalLength();
 
 	/**
+	 * Returns the meta object for the attribute '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getName()
+	 * @see #getAbstractNode()
+	 * @generated
+	 */
+	EAttribute getAbstractNode_Name();
+
+	/**
 	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#serialize() <em>Serialize</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1147,6 +1185,14 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACT_NODE__TOTAL_LENGTH = eINSTANCE.getAbstractNode_TotalLength();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_NODE__NAME = eINSTANCE.getAbstractNode_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Serialize</b></em>' operation.
