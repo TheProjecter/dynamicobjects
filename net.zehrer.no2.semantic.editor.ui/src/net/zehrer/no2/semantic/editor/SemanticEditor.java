@@ -13,10 +13,10 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
-import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
-public class SemanticEditor extends TextEditor {
+public class SemanticEditor extends AbstractDecoratedTextEditor { // extends TextEditor {
 
 	private ColorManager colorManager;
 	private EditorContentOutlinePage fOutlinePage;

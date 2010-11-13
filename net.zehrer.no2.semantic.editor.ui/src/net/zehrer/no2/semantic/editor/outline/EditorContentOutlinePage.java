@@ -44,13 +44,13 @@ public class EditorContentOutlinePage extends ContentOutlinePage {
 		super.createControl(parent);
 		TreeViewer viewer = getTreeViewer();
 		
-		this.fContentProvider = new OutlineContentProvider(fDocumentProvider);
+		this.fContentProvider = new OutlineContentProvider();
 
 		viewer.setContentProvider(this.fContentProvider);
 		viewer.setLabelProvider(new OutlineLabelProvider());
 		viewer.addSelectionChangedListener(this);
 
-		viewer.setInput(fInput);
+		viewer.setInput(getDocument());
 	}
 
 	
@@ -78,6 +78,14 @@ public class EditorContentOutlinePage extends ContentOutlinePage {
 		update();
 	}
 	
+	protected Object getDocument() {
+		if (fInput != null) {
+			return fDocumentProvider.getDocument(fInput);
+		}
+		
+		return null;
+	}
+	
 
 	
 	/**
@@ -90,7 +98,7 @@ public class EditorContentOutlinePage extends ContentOutlinePage {
 			Control control= viewer.getControl();
 			if (control != null && !control.isDisposed()) {
 				control.setRedraw(false);
-				viewer.setInput(fInput);
+				viewer.setInput(getDocument());
 				viewer.expandAll();
 				control.setRedraw(true);
 			}
