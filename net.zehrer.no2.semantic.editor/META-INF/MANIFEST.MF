@@ -20,4 +20,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: net.zehrer.no2.semantic.editor,
  net.zehrer.no2.semantic.editor.adapter,
  net.zehrer.no2.semantic.editor.model;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
- net.zehrer.no2.semantic.editor.model.impl
+ net.zehrer.no2.semantic.editor.model.impl,
+ net.zehrer.no2.semantic.editor.model.util
