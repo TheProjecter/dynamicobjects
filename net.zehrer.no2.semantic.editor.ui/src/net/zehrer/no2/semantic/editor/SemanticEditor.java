@@ -5,19 +5,20 @@ import net.zehrer.no2.semantic.editor.outline.OutlineContentProvider;
 import net.zehrer.no2.semantic.editor.outline.OutlineLabelProvider;
 import net.zehrer.no2.semantic.editor.outline.OutlineSelectionListener;
 import net.zehrer.no2.semantic.editor.text.SemanticDocumentProvider;
-import net.zehrer.no2.ui.outline.GenericContentOutlinePage;
-import net.zehrer.no2.ui.outline.IEditor;
+import net.zehrer.no2.ui.editor.GeneriContentPropertySheetPage;
+import net.zehrer.no2.ui.editor.GenericContentOutlinePage;
+import net.zehrer.no2.ui.editor.IEditor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
@@ -29,11 +30,13 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 public class SemanticEditor extends TextEditor implements IEditor { // extends TextEditor {
 
 	private ColorManager colorManager;
+	
 	private GenericContentOutlinePage fOutlinePage;
+	private GeneriContentPropertySheetPage fPropertyPage;
 	
 	private OutlineSelectionListener outlineSelectionListener;
 	
-	private EditingDomain editingDomain;
+	private AdapterFactoryEditingDomain editingDomain;
 	private ComposedAdapterFactory adapterFactory;
 
 	public SemanticEditor() {
@@ -95,10 +98,17 @@ public class SemanticEditor extends TextEditor implements IEditor { // extends T
 	}
 	
 	private IPropertySheetPage getPropertySheetPage() {
-		return null;
+		
+		if (fPropertyPage == null) { 
+			fPropertyPage = new GeneriContentPropertySheetPage(editingDomain, this);
+			fPropertyPage.setPropertySourceProvider(new AdapterFactoryContentProvider(adapterFactory));
+		}
+		
+		return fPropertyPage;
 	}
 	
 	private void initializeEditingDomain() {
+		
 		adapterFactory = new ComposedAdapterFactory(Registry.INSTANCE);
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
