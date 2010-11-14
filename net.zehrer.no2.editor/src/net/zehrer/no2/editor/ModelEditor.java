@@ -111,8 +111,8 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 
 	/**
 	 * This listens for when the outline becomes active
-	 * 
-	 * @generated
+	 *
+	 * @generated NOT
 	 */
 	protected IPartListener partListener = new IPartListener() {
 
@@ -162,16 +162,12 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	/**
 	 * Adapter used to update the problem indication when resources are demanded
 	 * loaded.
-	 * 
-	 *  
 	 * TODO: move into a NO2 project
 	 */
 	protected EContentAdapter problemIndicationAdapter = new ProblemIndicationAdapter(problemIndication);
 
 	/**
 	 * This listens for workspace changes.
-	 * 
-	 * 
 	 */
 	protected WorkspaceResourceManager resourceManager = new WorkspaceResourceManager(this);
 	
@@ -225,10 +221,8 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	}
 
 	/**
-	 * This is called during startup. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @generated
+	 * This is called during startup.
+	 * @generated NOT
 	 * @category MultiPageEditorPart
 	 */
 	@Override
@@ -316,9 +310,7 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
+	 * @generated NOT
 	 * @category MultiPageEditorPart
 	 */
 	@Override
@@ -405,8 +397,7 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> TODO: extract class
-	 * 
+	 * TODO: extract class
 	 * @generated
 	 * @category ModelEdit
 	 */
@@ -593,6 +584,7 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	 * @category ModelEditor
 	 */
 	public IPropertySheetPage getPropertySheetPage() {
+		
 		if (propertySheetPage == null) {
 			propertySheetPage = new DataContentPropertySheetPage(modelEditingDomain, this);
 			propertySheetPage.setPropertySourceProvider(new AdapterFactoryContentProvider(modelAdapterFactory));
@@ -627,9 +619,7 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 
 
 	/**
-	 * This sets up the editing domain for the model editor. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
+	 * This sets up the editing domain for the model editor. 
 	 * @generated NOT
 	 * @category ModelEdit
 	 */
