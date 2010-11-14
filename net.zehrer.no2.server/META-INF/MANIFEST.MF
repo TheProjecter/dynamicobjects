@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Server
-Bundle-SymbolicName: net.zehrer.no2.server
-Bundle-Version: 1.0.0.qualifier
-Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.h2.jdbc;bundle-version="1.1.114",
- org.eclipse.emf.cdo.server;bundle-version="3.0.0"
