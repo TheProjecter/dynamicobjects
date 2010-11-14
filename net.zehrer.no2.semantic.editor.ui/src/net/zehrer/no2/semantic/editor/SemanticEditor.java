@@ -1,6 +1,7 @@
 package net.zehrer.no2.semantic.editor;
 
 import net.zehrer.no2.semantic.editor.coloring.ColorManager;
+import net.zehrer.no2.semantic.editor.model.provider.EditorItemProviderAdapterFactory;
 import net.zehrer.no2.semantic.editor.outline.OutlineContentProvider;
 import net.zehrer.no2.semantic.editor.outline.OutlineLabelProvider;
 import net.zehrer.no2.semantic.editor.outline.OutlineSelectionListener;
@@ -110,9 +111,7 @@ public class SemanticEditor extends TextEditor implements IEditor { // extends T
 	private void initializeEditingDomain() {
 		
 		adapterFactory = new ComposedAdapterFactory(Registry.INSTANCE);
-		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new EcoreItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new EditorItemProviderAdapterFactory());
 		
 		org.eclipse.emf.common.command.BasicCommandStack commandStack = new org.eclipse.emf.common.command.BasicCommandStack();
 		// CommandStackListeners can listen for changes. Not sure whether this is needed.
