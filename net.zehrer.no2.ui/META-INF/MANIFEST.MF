@@ -13,6 +13,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.edit
 Export-Package: net.zehrer.no2.ui.dialogs,
  net.zehrer.no2.ui.edit,
- net.zehrer.no2.ui.outline,
+ net.zehrer.no2.ui.editor,
  net.zehrer.no2.ui.provider
 Bundle-Activator: net.zehrer.no2.ui.NO2UiPlugin$Implementation
