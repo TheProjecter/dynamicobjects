@@ -55,6 +55,7 @@ public class GenericContentOutlinePage extends ContentOutlinePage {
 		editor.createContextMenuFor(viewer);
 		
 		// Handle selections 
+		// see http://wiki.eclipse.org/FAQ_How_do_I_make_a_view_respond_to_selection_changes_in_another_view%3F
 		getSite().setSelectionProvider(viewer);
 
 		// TODO: set the selection ?
