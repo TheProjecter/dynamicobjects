@@ -13,10 +13,10 @@ import org.eclipse.jface.text.source.SourceViewerConfiguration;
 public class EditorConfiguration extends SourceViewerConfiguration {
 	
 	private XMLDoubleClickStrategy doubleClickStrategy;
-	private ColorManager colorManager;
+//	private ColorManager colorManager;
 
 	public EditorConfiguration(ColorManager colorManager) {
-		this.colorManager = colorManager;
+//		this.colorManager = colorManager;
 	}
 	
 	@Override
