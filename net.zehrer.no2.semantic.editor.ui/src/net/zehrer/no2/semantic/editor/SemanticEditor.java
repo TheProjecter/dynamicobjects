@@ -1,5 +1,7 @@
 package net.zehrer.no2.semantic.editor;
 
+import java.util.EventObject;
+
 import net.zehrer.no2.semantic.editor.coloring.ColorManager;
 import net.zehrer.no2.semantic.editor.model.provider.EditorItemProviderAdapterFactory;
 import net.zehrer.no2.semantic.editor.outline.OutlineContentProvider;
@@ -11,18 +13,19 @@ import net.zehrer.no2.ui.editor.GenericContentOutlinePage;
 import net.zehrer.no2.ui.editor.IEditor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.common.command.BasicCommandStack;
+import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -56,12 +59,41 @@ public class SemanticEditor extends TextEditor implements IEditor { // extends T
 		this.outlineSelectionListener = new OutlineSelectionListener(this);
 	}
 
-
-	
+	@Override
 	public void doSave(IProgressMonitor monitor) {
+		
+		
+		
+//		if (fOutlinePage != null)
+//			fOutlinePage.update();
+		
+		
+		// Do the work within an operation because this is a long running
+		// activity that modifies the workbench.
+
+//		problemIndication.setState(false);
+
+			// This runs the options, and shows progress.
+//			new ProgressMonitorDialog(getSite().getShell()).run(true, false, this.resourceManager);
 		super.doSave(monitor);
-		if (fOutlinePage != null)
-			fOutlinePage.update();
+		
+			// Refresh the necessary state.
+		((BasicCommandStack) editingDomain.getCommandStack()).saveIsDone();
+		firePropertyChange(IEditorPart.PROP_DIRTY);
+
+		
+//		problemIndication.setState(true);
+//		problemIndication.update();
+		
+	}
+	
+
+	/*
+	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#isDirty()
+	 */
+	@Override
+	public boolean isDirty() {
+		return ((BasicCommandStack) editingDomain.getCommandStack()).isSaveNeeded();
 	}
 	
 	//TODO SourceViewerDecorationSupport
@@ -113,10 +145,38 @@ public class SemanticEditor extends TextEditor implements IEditor { // extends T
 		adapterFactory = new ComposedAdapterFactory(Registry.INSTANCE);
 		adapterFactory.addAdapterFactory(new EditorItemProviderAdapterFactory());
 		
-		org.eclipse.emf.common.command.BasicCommandStack commandStack = new org.eclipse.emf.common.command.BasicCommandStack();
+		BasicCommandStack commandStack = new BasicCommandStack();
 		// CommandStackListeners can listen for changes. Not sure whether this is needed.
 		
 		editingDomain = new AdapterFactoryEditingDomain(adapterFactory,commandStack, new java.util.LinkedHashMap<Resource, Boolean>());
+	
+		commandStack.addCommandStackListener(new CommandStackListener() {
+			
+			public void commandStackChanged(final EventObject event) {
+				
+				// TODO test
+				Display.getCurrent().asyncExec(new Runnable() {
+					public void run() {
+						firePropertyChange(IEditorPart.PROP_DIRTY);
+
+						// Try to select the affected objects.
+						//
+//						Command mostRecentCommand = ((CommandStack) event.getSource()).getMostRecentCommand();
+//						if (mostRecentCommand != null) {
+//							setSelectionToViewer(mostRecentCommand.getAffectedObjects());
+//						}
+						if (fPropertyPage != null && !fPropertyPage.getControl().isDisposed()) {
+							fPropertyPage.refresh();
+						}
+
+						if (fOutlinePage != null && !fOutlinePage.getControl().isDisposed()) {
+							fOutlinePage.refresh();
+						}
+					}
+				});
+			}
+		});
+	
 	}
 
 	// ------ IEditor  -----

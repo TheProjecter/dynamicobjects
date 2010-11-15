@@ -65,6 +65,23 @@ public class GenericContentOutlinePage extends ContentOutlinePage {
 		
 	}
 	
+    /**
+     * Updates the model for the viewer.
+     * <p>
+     * Note that this means ensuring that the model reflects the state
+     * of the current viewer input.
+     * </p>
+     */
+    public void refresh() {
+    	TreeViewer viewer = getTreeViewer();
+    	
+        if (viewer == null) {
+			return;
+		}
+        // calling setInput on the viewer will cause the model to refresh
+        viewer.setInput(viewer.getInput());
+    }
+	
 	@Override
 	public void makeContributions(IMenuManager menuManager, IToolBarManager toolBarManager, IStatusLineManager statusLineManager) {
 		super.makeContributions(menuManager, toolBarManager, statusLineManager);
