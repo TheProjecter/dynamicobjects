@@ -13,7 +13,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf,
  org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
  org.eclipse.emf.edit
-Export-Package: net.zehrer.no2.manager;uses:="org.eclipse.emf.ecore.resource,org.eclipse.core.runtime,org.eclipse.core.resources",
+Export-Package: net.zehrer.no2.edit,
+ net.zehrer.no2.manager;uses:="org.eclipse.emf.ecore.resource,org.eclipse.core.runtime,org.eclipse.core.resources",
  net.zehrer.no2.runnable;uses:="org.eclipse.core.resources",
  net.zehrer.no2.text;
   uses:="org.eclipse.jface.text,
