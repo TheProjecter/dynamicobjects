@@ -2,6 +2,7 @@ package net.zehrer.no2.semantic.editor;
 
 import java.util.EventObject;
 
+import net.zehrer.no2.edit.AsyncCommandStackListener;
 import net.zehrer.no2.semantic.editor.coloring.ColorManager;
 import net.zehrer.no2.semantic.editor.model.provider.EditorItemProviderAdapterFactory;
 import net.zehrer.no2.semantic.editor.outline.OutlineContentProvider;
@@ -23,7 +24,6 @@ import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.editors.text.TextEditor;
@@ -31,7 +31,7 @@ import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 
-public class SemanticEditor extends TextEditor implements IEditor { // extends TextEditor {
+public class SemanticEditor extends TextEditor implements IEditor, CommandStackListener { 
 
 	private ColorManager colorManager;
 	
@@ -112,6 +112,26 @@ public class SemanticEditor extends TextEditor implements IEditor { // extends T
 		}
 	}
 
+
+	@Override
+	protected void firePropertyChange(int property) {
+		super.firePropertyChange(property);
+		
+		
+		// TODO: is there a official why to do this 
+		if (fPropertyPage != null && !fPropertyPage.getControl().isDisposed()) {
+			fPropertyPage.refresh();
+		}
+
+		if (fOutlinePage != null && !fOutlinePage.getControl().isDisposed()) {
+			fOutlinePage.refresh();
+		}
+	}
+	
+	
+	// ----------
+
+
 	private IContentOutlinePage getOutlinePage() {
 		// TODO use injection to avoid singelton
 		
@@ -150,33 +170,7 @@ public class SemanticEditor extends TextEditor implements IEditor { // extends T
 		
 		editingDomain = new AdapterFactoryEditingDomain(adapterFactory,commandStack, new java.util.LinkedHashMap<Resource, Boolean>());
 	
-		commandStack.addCommandStackListener(new CommandStackListener() {
-			
-			public void commandStackChanged(final EventObject event) {
-				
-				// TODO test
-				Display.getCurrent().asyncExec(new Runnable() {
-					public void run() {
-						firePropertyChange(IEditorPart.PROP_DIRTY);
-
-						// Try to select the affected objects.
-						//
-//						Command mostRecentCommand = ((CommandStack) event.getSource()).getMostRecentCommand();
-//						if (mostRecentCommand != null) {
-//							setSelectionToViewer(mostRecentCommand.getAffectedObjects());
-//						}
-						if (fPropertyPage != null && !fPropertyPage.getControl().isDisposed()) {
-							fPropertyPage.refresh();
-						}
-
-						if (fOutlinePage != null && !fOutlinePage.getControl().isDisposed()) {
-							fOutlinePage.refresh();
-						}
-					}
-				});
-			}
-		});
-	
+		commandStack.addCommandStackListener(new AsyncCommandStackListener(this));
 	}
 
 	// ------ IEditor  -----
@@ -212,4 +206,23 @@ public class SemanticEditor extends TextEditor implements IEditor { // extends T
 		
 		super.dispose();
 	}
+
+	// --------------------
+	
+	/**
+	 * @category CommandStackListener
+	 */
+	@Override
+	public void commandStackChanged(EventObject event) {
+		firePropertyChange(IEditorPart.PROP_DIRTY);		
+		
+		// Try to select the affected objects.
+		//
+//		Command mostRecentCommand = ((CommandStack) event.getSource()).getMostRecentCommand();
+//		if (mostRecentCommand != null) {
+//			setSelectionToViewer(mostRecentCommand.getAffectedObjects());
+//		}
+	}
+
+
 }
