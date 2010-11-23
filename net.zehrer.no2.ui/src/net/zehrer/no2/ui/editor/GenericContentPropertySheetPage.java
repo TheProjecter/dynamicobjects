@@ -16,11 +16,11 @@ import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.ui.IActionBars;
 
-public class GeneriContentPropertySheetPage extends ExtendedPropertySheetPage {
+public class GenericContentPropertySheetPage extends ExtendedPropertySheetPage {
 	
 	protected IEditor editor;
 
-	public GeneriContentPropertySheetPage(AdapterFactoryEditingDomain editingDomain,  IEditor editor) {
+	public GenericContentPropertySheetPage(AdapterFactoryEditingDomain editingDomain,  IEditor editor) {
 		super(editingDomain);
 		
 		this.editor = editor;
