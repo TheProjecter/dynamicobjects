@@ -9,7 +9,7 @@ import net.zehrer.no2.semantic.editor.outline.OutlineContentProvider;
 import net.zehrer.no2.semantic.editor.outline.OutlineLabelProvider;
 import net.zehrer.no2.semantic.editor.outline.OutlineSelectionListener;
 import net.zehrer.no2.semantic.editor.text.SemanticDocumentProvider;
-import net.zehrer.no2.ui.editor.GeneriContentPropertySheetPage;
+import net.zehrer.no2.ui.editor.GenericContentPropertySheetPage;
 import net.zehrer.no2.ui.editor.GenericContentOutlinePage;
 import net.zehrer.no2.ui.editor.IEditor;
 
@@ -36,7 +36,7 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 	private ColorManager colorManager;
 	
 	private GenericContentOutlinePage fOutlinePage;
-	private GeneriContentPropertySheetPage fPropertyPage;
+	private GenericContentPropertySheetPage fPropertyPage;
 	
 	private OutlineSelectionListener outlineSelectionListener;
 	
@@ -93,7 +93,7 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 	 */
 	@Override
 	public boolean isDirty() {
-		return ((BasicCommandStack) editingDomain.getCommandStack()).isSaveNeeded();
+		return super.isDirty() || ((BasicCommandStack) editingDomain.getCommandStack()).isSaveNeeded() ;
 	}
 	
 	//TODO SourceViewerDecorationSupport
@@ -128,6 +128,11 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 		}
 	}
 	
+	@Override
+	protected void initializeEditor() {
+		super.initializeEditor();
+		setEditorContextMenuId("#SemanticEditorContext"); //$NON-NLS-1$
+	}
 	
 	// ----------
 
@@ -153,7 +158,7 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 	private IPropertySheetPage getPropertySheetPage() {
 		
 		if (fPropertyPage == null) { 
-			fPropertyPage = new GeneriContentPropertySheetPage(editingDomain, this);
+			fPropertyPage = new GenericContentPropertySheetPage(editingDomain, this);
 			fPropertyPage.setPropertySourceProvider(new AdapterFactoryContentProvider(adapterFactory));
 		}
 		
@@ -166,10 +171,10 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 		adapterFactory.addAdapterFactory(new EditorItemProviderAdapterFactory());
 		
 		BasicCommandStack commandStack = new BasicCommandStack();
-		// CommandStackListeners can listen for changes. Not sure whether this is needed.
 		
 		editingDomain = new AdapterFactoryEditingDomain(adapterFactory,commandStack, new java.util.LinkedHashMap<Resource, Boolean>());
-	
+
+		// The editor is listen for changes 
 		commandStack.addCommandStackListener(new AsyncCommandStackListener(this));
 	}
 
