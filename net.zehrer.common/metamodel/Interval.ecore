@@ -67,7 +67,7 @@
     </eGenericSuperTypes>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IComparable" instanceClassName="java.lang.Comparable"
-      interface="true">
+      abstract="true" interface="true">
     <eTypeParameters name="T"/>
   </eClassifiers>
 </ecore:EPackage>
