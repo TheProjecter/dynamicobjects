@@ -11,7 +11,7 @@
  * 
  *
  *******************************************************************************/
-package net.zehrer.no2.semantic.editor.model.impl;
+package net.zehrer.no2.semantic.editor.model.java;
 
 import java.util.List;
 
@@ -21,6 +21,8 @@ import net.zehrer.no2.semantic.editor.model.EditorFactory;
 import net.zehrer.no2.semantic.editor.model.EditorPackage;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
 import net.zehrer.no2.semantic.editor.model.SyntaxError;
+import net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl;
+import net.zehrer.no2.semantic.editor.model.impl.LeafNodeImpl;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
