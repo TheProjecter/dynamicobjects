@@ -1,4 +1,6 @@
-package net.zehrer.common.interval;
+package com.domainlanguage.interval;
+
+import com.domainlanguage.interval.IntervalLimit;
 
 import junit.framework.TestCase;
 

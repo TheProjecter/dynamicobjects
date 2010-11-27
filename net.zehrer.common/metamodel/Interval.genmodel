@@ -7,12 +7,12 @@
     complianceLevel="6.0" copyrightFields="false" publicConstructors="true" editorPluginID="net.zehrer.common.editor"
     interfaceNamePattern="">
   <foreignModel>Interval.ecore</foreignModel>
-  <genPackages prefix="Interval" basePackage="net.zehrer.common" disposableProviderFactory="true"
+  <genPackages prefix="interval" basePackage="net.zehrer.common" disposableProviderFactory="true"
       contentTypeIdentifier="" ecorePackage="Interval.ecore#/">
     <genClasses ecoreClass="Interval.ecore#//EInterval">
       <genTypeParameters ecoreTypeParameter="Interval.ecore#//EInterval/T"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Interval.ecore#//EInterval/lowerLimitObject"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Interval.ecore#//EInterval/upperLimitObject"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Interval.ecore#//EInterval/lowerLimit"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Interval.ecore#//EInterval/upperLimit"/>
       <genOperations ecoreOperation="Interval.ecore#//EInterval/intersects">
         <genParameters ecoreParameter="Interval.ecore#//EInterval/intersects/other"/>
       </genOperations>
@@ -32,6 +32,9 @@
         <genParameters ecoreParameter="Interval.ecore#//EInterval/equals.1/other"/>
       </genOperations>
       <genOperations ecoreOperation="Interval.ecore#//EInterval/hashCode"/>
+      <genOperations ecoreOperation="Interval.ecore#//EInterval/includes">
+        <genParameters ecoreParameter="Interval.ecore#//EInterval/includes/value"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="Interval.ecore#//IComparable">
       <genTypeParameters ecoreTypeParameter="Interval.ecore#//IComparable/T"/>

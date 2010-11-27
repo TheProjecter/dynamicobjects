@@ -4,11 +4,12 @@
  * For more information, see http://timeandmoney.sourceforge.net.
  */
 
-package net.zehrer.common.interval;
+package com.domainlanguage.interval;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * The rules of this class are consistent with the common mathematical
