@@ -35,7 +35,7 @@ public class TextModelUtil {
 	
 	private static final char[] separator = System.getProperty("line.separator").toCharArray();
 
-	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
+	private static void checkArgument(AbstractNode abstractParserNode) {
 		int classifierID = abstractParserNode.eClass().getClassifierID();
 		if (classifierID != EditorPackage.COMPOSITE_NODE && classifierID != EditorPackage.LEAF_NODE) {
 			throw new IllegalArgumentException("Illegal subtype of AbstarctParserNode "
@@ -43,7 +43,7 @@ public class TextModelUtil {
 		}
 	}
 
-	public static int line(AbstractNodeImpl _this) {
+	public static int line(AbstractNode _this) {
 		checkArgument(_this);
 		AbstractNode rootContainer = (AbstractNode) EcoreUtil.getRootContainer(_this);
 		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(_this);
@@ -90,7 +90,7 @@ public class TextModelUtil {
 		return line;
 	}
 
-	public static String serialize(AbstractNodeImpl _this) {
+	public static String serialize(AbstractNode _this) {
 		if (_this instanceof LeafNodeImpl)
 			return serialize((LeafNodeImpl)_this);
 		checkArgument(_this);
@@ -119,11 +119,11 @@ public class TextModelUtil {
 		return _this.getText();
 	}
 
-	public static EList<LeafNode> getLeafNodes(AbstractNodeImpl _this) {
+	public static EList<LeafNode> getLeafNodes(AbstractNode _this) {
 		return getLeafNodes(_this, null);
 	}
 
-	public static EList<LeafNode> getLeafNodes(AbstractNodeImpl _this, AbstractNode to) {
+	public static EList<LeafNode> getLeafNodes(AbstractNode _this, AbstractNode to) {
 		checkArgument(_this);
 		BasicEList<LeafNode> result = new BasicEList<LeafNode>();
 		TreeIterator<EObject> allContents = _this.eAllContents();
@@ -138,7 +138,7 @@ public class TextModelUtil {
 		return result;
 	}
 
-	public static EList<SyntaxError> allSyntaxErrors(CompositeNodeImpl compositeNodeImpl) {
+	public static EList<SyntaxError> allSyntaxErrors(CompositeNode compositeNodeImpl) {
 		BasicEList<SyntaxError> basicEList = new BasicEList<SyntaxError>();
 		addAllSyntaxErrors(compositeNodeImpl, basicEList);
 		return basicEList;
@@ -159,14 +159,14 @@ public class TextModelUtil {
 		}
 	}
 
-	public static EList<SyntaxError> allSyntaxErrors(LeafNodeImpl leafNodeImpl) {
+	public static EList<SyntaxError> allSyntaxErrors(LeafNode leafNodeImpl) {
 		BasicEList<SyntaxError> basicEList = new BasicEList<SyntaxError>();
 		if (leafNodeImpl.getSyntaxError() != null)
 			basicEList.add(leafNodeImpl.getSyntaxError());
 		return basicEList;
 	}
 
-	public static EList<SyntaxError> allSyntaxErrors(AbstractNodeImpl abstractNodeImpl) {
+	public static EList<SyntaxError> allSyntaxErrors(AbstractNode abstractNodeImpl) {
 		return null;
 	}
 
@@ -349,6 +349,11 @@ public class TextModelUtil {
 
 	
 	
+	/**
+	 * Return true if offset within _this node
+	 * @param _this
+	 * @param offset
+	 */
 	public static boolean checkNodeOffset (AbstractNode _this, int offset) {
 		
 		int fOffset = _this.getOffset();
@@ -439,6 +444,47 @@ public class TextModelUtil {
 
 	public static TypedRegion createTypedRegion(AbstractNode _this, String type) {
 		return new TypedRegion(_this.getOffset(), _this.getLength(), type);
+	}
+	
+	// the set theory
+	
+	/**
+	 * Return the intersection of A & B (A n B) based on the size (offset and length)
+	 * It will return null for the following conditions
+	 *  - the length of a or b is 0
+	 *  - the intersection is an "empty set" 
+	 * @return a new LeafNode  or null
+	 */
+	public static LeafNode intersect ( LeafNode a, LeafNode b) {
+
+		int aLenght = a.getTotalLength();
+		int aOffsetStart = a.getTotalOffset();
+		int aOffsetEnd = aOffsetStart + aLenght -1;
+		
+		int bLenght = b.getTotalLength();
+		int bOffsetStart = b.getTotalOffset();
+		int bOffsetEnd = bOffsetStart + bLenght -1;
+		
+		int start = Math.max(aOffsetStart, bOffsetStart);
+		int end = Math.min(aOffsetEnd, bOffsetEnd);
+		
+		if (start > end)
+			return null;
+		
+		LeafNode result = EditorFactory.eINSTANCE.createLeafNode();
+		
+//		result.setTotalLength(value)
+
+		
+		return result;
+	}
+
+	/**
+	 * Return true if a ends before b starts 
+	 */
+	public static boolean isAsmallerB (AbstractNode a, AbstractNode b) {
+		int aOffsetEnd = a.getOffset() + a.getLength() -1;
+		return (aOffsetEnd < b.getOffset());
 	}
 	
 }
