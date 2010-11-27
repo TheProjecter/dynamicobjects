@@ -13,6 +13,7 @@ import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.EditorPackage;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
 import net.zehrer.no2.semantic.editor.model.SyntaxError;
+import net.zehrer.no2.semantic.editor.model.java.TextModelUtil;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
