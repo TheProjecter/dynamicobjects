@@ -21,11 +21,11 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see net.zehrer.common.interval.IntervalPackage#getEInterval()
- * @model abstract="true" superTypes="net.zehrer.common.interval.IComparable<net.zehrer.common.interval.EInterval<?>>" TBounds="net.zehrer.common.interval.IComparable<T>"
+ * @see net.zehrer.common.interval.intervalPackage#getEInterval()
+ * @model abstract="true" superTypes="net.zehrer.common.interval.IComparable<net.zehrer.common.interval.EInterval<T>>" TBounds="net.zehrer.common.interval.IComparable<T>"
  * @generated
  */
-public interface EInterval<T extends Comparable<T>> extends EObject, Comparable<EInterval<?>> {
+public interface EInterval<T extends Comparable<T>> extends EObject, Comparable<EInterval<T>> {
 	/**
 	 * Returns the value of the '<em><b>Lower Limit</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -36,7 +36,7 @@ public interface EInterval<T extends Comparable<T>> extends EObject, Comparable<
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Lower Limit</em>' reference.
 	 * @see #setLowerLimit(Comparable)
-	 * @see net.zehrer.common.interval.IntervalPackage#getEInterval_LowerLimit()
+	 * @see net.zehrer.common.interval.intervalPackage#getEInterval_LowerLimit()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -62,7 +62,7 @@ public interface EInterval<T extends Comparable<T>> extends EObject, Comparable<
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Upper Limit</em>' reference.
 	 * @see #setUpperLimit(Comparable)
-	 * @see net.zehrer.common.interval.IntervalPackage#getEInterval_UpperLimit()
+	 * @see net.zehrer.common.interval.intervalPackage#getEInterval_UpperLimit()
 	 * @model required="true"
 	 * @generated
 	 */

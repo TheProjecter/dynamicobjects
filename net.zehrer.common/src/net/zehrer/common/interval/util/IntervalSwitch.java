@@ -9,9 +9,13 @@ package net.zehrer.common.interval.util;
 import java.util.List;
 
 import net.zehrer.common.interval.*;
+import net.zehrer.common.interval.EInterval;
+import net.zehrer.common.interval.intervalPackage;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import com.domainlanguage.interval.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,17 +27,17 @@ import org.eclipse.emf.ecore.EObject;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see net.zehrer.common.interval.IntervalPackage
+ * @see net.zehrer.common.interval.intervalPackage
  * @generated
  */
-public class IntervalSwitch<T1> {
+public class intervalSwitch<T1> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static IntervalPackage modelPackage;
+	protected static intervalPackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -41,9 +45,9 @@ public class IntervalSwitch<T1> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IntervalSwitch() {
+	public intervalSwitch() {
 		if (modelPackage == null) {
-			modelPackage = IntervalPackage.eINSTANCE;
+			modelPackage = intervalPackage.eINSTANCE;
 		}
 	}
 
@@ -87,7 +91,7 @@ public class IntervalSwitch<T1> {
 	 */
 	protected T1 doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case IntervalPackage.EINTERVAL: {
+			case intervalPackage.EINTERVAL: {
 				EInterval<?> eInterval = (EInterval<?>)theEObject;
 				T1 result = caseEInterval(eInterval);
 				if (result == null) result = caseIComparable(eInterval);
@@ -143,4 +147,4 @@ public class IntervalSwitch<T1> {
 		return null;
 	}
 
-} //IntervalSwitch
+} //intervalSwitch

@@ -7,6 +7,8 @@
 package net.zehrer.common.interval.util;
 
 import net.zehrer.common.interval.*;
+import net.zehrer.common.interval.EInterval;
+import net.zehrer.common.interval.intervalPackage;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -15,22 +17,24 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import com.domainlanguage.interval.*;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see net.zehrer.common.interval.IntervalPackage
+ * @see net.zehrer.common.interval.intervalPackage
  * @generated
  */
-public class IntervalAdapterFactory extends AdapterFactoryImpl {
+public class intervalAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static IntervalPackage modelPackage;
+	protected static intervalPackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -38,9 +42,9 @@ public class IntervalAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IntervalAdapterFactory() {
+	public intervalAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = IntervalPackage.eINSTANCE;
+			modelPackage = intervalPackage.eINSTANCE;
 		}
 	}
 
@@ -69,8 +73,8 @@ public class IntervalAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected IntervalSwitch<Adapter> modelSwitch =
-		new IntervalSwitch<Adapter>() {
+	protected intervalSwitch<Adapter> modelSwitch =
+		new intervalSwitch<Adapter>() {
 			@Override
 			public <T extends Comparable<T>> Adapter caseEInterval(EInterval<T> object) {
 				return createEIntervalAdapter();
@@ -139,4 +143,4 @@ public class IntervalAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //IntervalAdapterFactory
+} //intervalAdapterFactory

@@ -7,8 +7,7 @@
 package net.zehrer.common.interval.impl;
 
 import net.zehrer.common.interval.EInterval;
-import net.zehrer.common.interval.IntervalPackage;
-
+import net.zehrer.common.interval.intervalPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -73,7 +72,7 @@ public abstract class EIntervalImpl<T extends Comparable<T>> extends EObjectImpl
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return IntervalPackage.Literals.EINTERVAL;
+		return intervalPackage.Literals.EINTERVAL;
 	}
 
 	/**
@@ -88,7 +87,7 @@ public abstract class EIntervalImpl<T extends Comparable<T>> extends EObjectImpl
 			lowerLimit = (T)eResolveProxy(oldLowerLimit);
 			if (lowerLimit != oldLowerLimit) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, IntervalPackage.EINTERVAL__LOWER_LIMIT, oldLowerLimit, lowerLimit));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, intervalPackage.EINTERVAL__LOWER_LIMIT, oldLowerLimit, lowerLimit));
 			}
 		}
 		return lowerLimit;
@@ -112,7 +111,7 @@ public abstract class EIntervalImpl<T extends Comparable<T>> extends EObjectImpl
 		T oldLowerLimit = lowerLimit;
 		lowerLimit = newLowerLimit;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, IntervalPackage.EINTERVAL__LOWER_LIMIT, oldLowerLimit, lowerLimit));
+			eNotify(new ENotificationImpl(this, Notification.SET, intervalPackage.EINTERVAL__LOWER_LIMIT, oldLowerLimit, lowerLimit));
 	}
 
 	/**
@@ -127,7 +126,7 @@ public abstract class EIntervalImpl<T extends Comparable<T>> extends EObjectImpl
 			upperLimit = (T)eResolveProxy(oldUpperLimit);
 			if (upperLimit != oldUpperLimit) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, IntervalPackage.EINTERVAL__UPPER_LIMIT, oldUpperLimit, upperLimit));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, intervalPackage.EINTERVAL__UPPER_LIMIT, oldUpperLimit, upperLimit));
 			}
 		}
 		return upperLimit;
@@ -151,7 +150,7 @@ public abstract class EIntervalImpl<T extends Comparable<T>> extends EObjectImpl
 		T oldUpperLimit = upperLimit;
 		upperLimit = newUpperLimit;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, IntervalPackage.EINTERVAL__UPPER_LIMIT, oldUpperLimit, upperLimit));
+			eNotify(new ENotificationImpl(this, Notification.SET, intervalPackage.EINTERVAL__UPPER_LIMIT, oldUpperLimit, upperLimit));
 	}
 
 	/**
@@ -264,18 +263,16 @@ public abstract class EIntervalImpl<T extends Comparable<T>> extends EObjectImpl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public int compareTo(EInterval<T> other) {
-        if (!getUpperLimit().equals(other.getUpperLimit()))
-            return getUpperLimit().compareTo(other.getUpperLimit());
-//        if (includesLowerLimit() && !other.includesLowerLimit())
-//            return -1;
-//        if (!includesLowerLimit() && other.includesLowerLimit())
-//            return 1;
-        return getLowerLimit().compareTo(other.getLowerLimit());
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
+
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -284,10 +281,10 @@ public abstract class EIntervalImpl<T extends Comparable<T>> extends EObjectImpl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case IntervalPackage.EINTERVAL__LOWER_LIMIT:
+			case intervalPackage.EINTERVAL__LOWER_LIMIT:
 				if (resolve) return getLowerLimit();
 				return basicGetLowerLimit();
-			case IntervalPackage.EINTERVAL__UPPER_LIMIT:
+			case intervalPackage.EINTERVAL__UPPER_LIMIT:
 				if (resolve) return getUpperLimit();
 				return basicGetUpperLimit();
 		}
@@ -303,10 +300,10 @@ public abstract class EIntervalImpl<T extends Comparable<T>> extends EObjectImpl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case IntervalPackage.EINTERVAL__LOWER_LIMIT:
+			case intervalPackage.EINTERVAL__LOWER_LIMIT:
 				setLowerLimit((T)newValue);
 				return;
-			case IntervalPackage.EINTERVAL__UPPER_LIMIT:
+			case intervalPackage.EINTERVAL__UPPER_LIMIT:
 				setUpperLimit((T)newValue);
 				return;
 		}
@@ -321,10 +318,10 @@ public abstract class EIntervalImpl<T extends Comparable<T>> extends EObjectImpl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case IntervalPackage.EINTERVAL__LOWER_LIMIT:
+			case intervalPackage.EINTERVAL__LOWER_LIMIT:
 				setLowerLimit((T)null);
 				return;
-			case IntervalPackage.EINTERVAL__UPPER_LIMIT:
+			case intervalPackage.EINTERVAL__UPPER_LIMIT:
 				setUpperLimit((T)null);
 				return;
 		}
@@ -339,9 +336,9 @@ public abstract class EIntervalImpl<T extends Comparable<T>> extends EObjectImpl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case IntervalPackage.EINTERVAL__LOWER_LIMIT:
+			case intervalPackage.EINTERVAL__LOWER_LIMIT:
 				return lowerLimit != null;
-			case IntervalPackage.EINTERVAL__UPPER_LIMIT:
+			case intervalPackage.EINTERVAL__UPPER_LIMIT:
 				return upperLimit != null;
 		}
 		return super.eIsSet(featureID);

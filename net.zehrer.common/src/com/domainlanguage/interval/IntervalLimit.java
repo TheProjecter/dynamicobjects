@@ -3,7 +3,7 @@
  * free software is distributed under the "MIT" licence. See file licence.txt.
  * For more information, see http://timeandmoney.sourceforge.net.
  */
-package net.zehrer.common.interval;
+package com.domainlanguage.interval;
 
 import java.io.*;
 

@@ -7,8 +7,8 @@
 package net.zehrer.common.interval.impl;
 
 import net.zehrer.common.interval.EInterval;
-import net.zehrer.common.interval.IntervalFactory;
-import net.zehrer.common.interval.IntervalPackage;
+import net.zehrer.common.interval.intervalFactory;
+import net.zehrer.common.interval.intervalPackage;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage {
+public class intervalPackageImpl extends EPackageImpl implements intervalPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -51,12 +51,12 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see net.zehrer.common.interval.IntervalPackage#eNS_URI
+	 * @see net.zehrer.common.interval.intervalPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private IntervalPackageImpl() {
-		super(eNS_URI, IntervalFactory.eINSTANCE);
+	private intervalPackageImpl() {
+		super(eNS_URI, intervalFactory.eINSTANCE);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>This method is used to initialize {@link IntervalPackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link intervalPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,27 +78,27 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static IntervalPackage init() {
-		if (isInited) return (IntervalPackage)EPackage.Registry.INSTANCE.getEPackage(IntervalPackage.eNS_URI);
+	public static intervalPackage init() {
+		if (isInited) return (intervalPackage)EPackage.Registry.INSTANCE.getEPackage(intervalPackage.eNS_URI);
 
 		// Obtain or create and register package
-		IntervalPackageImpl theIntervalPackage = (IntervalPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof IntervalPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new IntervalPackageImpl());
+		intervalPackageImpl theintervalPackage = (intervalPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof intervalPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new intervalPackageImpl());
 
 		isInited = true;
 
 		// Create package meta-data objects
-		theIntervalPackage.createPackageContents();
+		theintervalPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theIntervalPackage.initializePackageContents();
+		theintervalPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theIntervalPackage.freeze();
+		theintervalPackage.freeze();
 
   
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(IntervalPackage.eNS_URI, theIntervalPackage);
-		return theIntervalPackage;
+		EPackage.Registry.INSTANCE.put(intervalPackage.eNS_URI, theintervalPackage);
+		return theintervalPackage;
 	}
 
 	/**
@@ -142,8 +142,8 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IntervalFactory getIntervalFactory() {
-		return (IntervalFactory)getEFactoryInstance();
+	public intervalFactory getintervalFactory() {
+		return (intervalFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -209,7 +209,7 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 		g1 = createEGenericType(this.getIComparable());
 		g2 = createEGenericType(this.getEInterval());
 		g1.getETypeArguments().add(g2);
-		EGenericType g3 = createEGenericType();
+		EGenericType g3 = createEGenericType(eIntervalEClass_T);
 		g2.getETypeArguments().add(g3);
 		eIntervalEClass.getEGenericSuperTypes().add(g1);
 
@@ -269,4 +269,4 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 		createResource(eNS_URI);
 	}
 
-} //IntervalPackageImpl
+} //intervalPackageImpl

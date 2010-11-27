@@ -60,7 +60,7 @@
     </eStructuralFeatures>
     <eGenericSuperTypes eClassifier="#//IComparable">
       <eTypeArguments eClassifier="#//EInterval">
-        <eTypeArguments/>
+        <eTypeArguments eTypeParameter="#//EInterval/T"/>
       </eTypeArguments>
     </eGenericSuperTypes>
   </eClassifiers>

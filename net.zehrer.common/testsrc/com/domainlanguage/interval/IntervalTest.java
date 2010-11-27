@@ -4,10 +4,14 @@
  * For more information, see http://timeandmoney.sourceforge.net.
  */
 
-package net.zehrer.common.interval;
+package com.domainlanguage.interval;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import com.domainlanguage.interval.Interval;
+import com.domainlanguage.interval.IntervalLimit;
+
 import junit.framework.TestCase;
 //import com.domainlanguage.tests.SerializationTester;
 
