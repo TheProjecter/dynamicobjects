@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="interval"
+    nsURI="http://zehrer.net/common/interval/1.0" nsPrefix="">
+  <eClassifiers xsi:type="ecore:EClass" name="EInterval">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="#//IComparable">
+        <eTypeArguments eTypeParameter="#//EInterval/T"/>
+      </eBounds>
+    </eTypeParameters>
+    <eOperations name="intersects" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="other">
+        <eGenericType eClassifier="#//EInterval">
+          <eTypeArguments eTypeParameter="#//EInterval/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="intersect">
+      <eGenericType eClassifier="#//EInterval">
+        <eTypeArguments eTypeParameter="#//EInterval/T"/>
+      </eGenericType>
+      <eParameters name="other">
+        <eGenericType eClassifier="#//EInterval">
+          <eTypeArguments eTypeParameter="#//EInterval/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="isBelow" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="value">
+        <eGenericType eTypeParameter="#//EInterval/T"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="isAbove" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="value">
+        <eGenericType eTypeParameter="#//EInterval/T"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="equals" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="other" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="equals" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="other">
+        <eGenericType eClassifier="#//EInterval">
+          <eTypeArguments eTypeParameter="#//EInterval/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="hashCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="compareTo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="other">
+        <eGenericType eClassifier="#//EInterval">
+          <eTypeArguments eTypeParameter="#//EInterval/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lowerLimitObject" lowerBound="1">
+      <eGenericType eTypeParameter="#//EInterval/T"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upperLimitObject" lowerBound="1">
+      <eGenericType eTypeParameter="#//EInterval/T"/>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="#//IComparable">
+      <eTypeArguments eClassifier="#//EInterval">
+        <eTypeArguments/>
+      </eTypeArguments>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IComparable" instanceClassName="java.lang.Comparable"
+      interface="true">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+</ecore:EPackage>
