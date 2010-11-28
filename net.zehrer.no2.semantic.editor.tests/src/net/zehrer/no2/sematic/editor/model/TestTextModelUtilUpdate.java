@@ -15,7 +15,7 @@ import junit.framework.TestCase;
 import net.zehrer.no2.semantic.editor.TextModelManager;
 import net.zehrer.no2.semantic.editor.adapter.NodeContentAdapter;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
-import net.zehrer.no2.semantic.editor.model.impl.TextModelUtil;
+import net.zehrer.no2.semantic.editor.model.java.TextModelUtil;
 
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
