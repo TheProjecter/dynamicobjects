@@ -57,7 +57,7 @@ public class TextModelUtil {
 		return line;
 	}
 
-	public static int totalEndLine(AbstractNodeImpl _this) {
+	public static int totalEndLine(AbstractNode _this) {
 		int line = _this.getTotalLine();
 		String text = _this.serialize();
 		line += countLines(text);

@@ -35,7 +35,7 @@ import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.EditorPackage;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
-import net.zehrer.no2.semantic.editor.model.impl.TextModelUtil;
+import net.zehrer.no2.semantic.editor.model.java.TextModelUtil;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
