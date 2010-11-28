@@ -7,7 +7,7 @@
     complianceLevel="6.0" copyrightFields="false" publicConstructors="true" editorPluginID="net.zehrer.common.editor"
     interfaceNamePattern="">
   <foreignModel>Interval.ecore</foreignModel>
-  <genPackages prefix="interval" basePackage="net.zehrer.common" disposableProviderFactory="true"
+  <genPackages prefix="Interval" basePackage="net.zehrer.common" disposableProviderFactory="true"
       contentTypeIdentifier="" ecorePackage="Interval.ecore#/">
     <genClasses ecoreClass="Interval.ecore#//EInterval">
       <genTypeParameters ecoreTypeParameter="Interval.ecore#//EInterval/T"/>

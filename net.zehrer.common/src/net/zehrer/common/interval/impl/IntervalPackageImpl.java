@@ -7,8 +7,8 @@
 package net.zehrer.common.interval.impl;
 
 import net.zehrer.common.interval.EInterval;
-import net.zehrer.common.interval.intervalFactory;
-import net.zehrer.common.interval.intervalPackage;
+import net.zehrer.common.interval.IntervalFactory;
+import net.zehrer.common.interval.IntervalPackage;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class intervalPackageImpl extends EPackageImpl implements intervalPackage {
+public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -51,12 +51,12 @@ public class intervalPackageImpl extends EPackageImpl implements intervalPackage
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see net.zehrer.common.interval.intervalPackage#eNS_URI
+	 * @see net.zehrer.common.interval.IntervalPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private intervalPackageImpl() {
-		super(eNS_URI, intervalFactory.eINSTANCE);
+	private IntervalPackageImpl() {
+		super(eNS_URI, IntervalFactory.eINSTANCE);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class intervalPackageImpl extends EPackageImpl implements intervalPackage
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>This method is used to initialize {@link intervalPackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link IntervalPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,27 +78,27 @@ public class intervalPackageImpl extends EPackageImpl implements intervalPackage
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static intervalPackage init() {
-		if (isInited) return (intervalPackage)EPackage.Registry.INSTANCE.getEPackage(intervalPackage.eNS_URI);
+	public static IntervalPackage init() {
+		if (isInited) return (IntervalPackage)EPackage.Registry.INSTANCE.getEPackage(IntervalPackage.eNS_URI);
 
 		// Obtain or create and register package
-		intervalPackageImpl theintervalPackage = (intervalPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof intervalPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new intervalPackageImpl());
+		IntervalPackageImpl theIntervalPackage = (IntervalPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof IntervalPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new IntervalPackageImpl());
 
 		isInited = true;
 
 		// Create package meta-data objects
-		theintervalPackage.createPackageContents();
+		theIntervalPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theintervalPackage.initializePackageContents();
+		theIntervalPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theintervalPackage.freeze();
+		theIntervalPackage.freeze();
 
   
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(intervalPackage.eNS_URI, theintervalPackage);
-		return theintervalPackage;
+		EPackage.Registry.INSTANCE.put(IntervalPackage.eNS_URI, theIntervalPackage);
+		return theIntervalPackage;
 	}
 
 	/**
@@ -142,8 +142,8 @@ public class intervalPackageImpl extends EPackageImpl implements intervalPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public intervalFactory getintervalFactory() {
-		return (intervalFactory)getEFactoryInstance();
+	public IntervalFactory getIntervalFactory() {
+		return (IntervalFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -269,4 +269,4 @@ public class intervalPackageImpl extends EPackageImpl implements intervalPackage
 		createResource(eNS_URI);
 	}
 
-} //intervalPackageImpl
+} //IntervalPackageImpl
