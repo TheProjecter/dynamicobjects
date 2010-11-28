@@ -3,7 +3,8 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/net.zehrer.test/src"
     modelPluginID="net.zehrer.test" modelName="Generics" editPluginClass="" editorPluginClass=""
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false">
+    rootImplementsInterface="" testsDirectory="/net.zehrer.test/src" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" testsPluginID="net.zehrer.test">
   <foreignModel>generics.ecore</foreignModel>
   <genPackages prefix="Test" basePackage="net.zehrer" disposableProviderFactory="true"
       ecorePackage="generics.ecore#/">
@@ -21,12 +22,23 @@
     <nestedGenPackages prefix="Lang" disposableProviderFactory="true" adapterFactory="false"
         multipleEditorPages="false" generateModelWizard="false" ecorePackage="generics.ecore#//lang">
       <genDataTypes ecoreDataType="generics.ecore#//lang/Interger"/>
+      <genDataTypes ecoreDataType="generics.ecore#//lang/IComparable">
+        <genTypeParameters ecoreTypeParameter="generics.ecore#//lang/IComparable/T"/>
+      </genDataTypes>
       <genClasses image="false" ecoreClass="generics.ecore#//lang/Comparable">
         <genTypeParameters ecoreTypeParameter="generics.ecore#//lang/Comparable/T"/>
         <genOperations ecoreOperation="generics.ecore#//lang/Comparable/compareTo">
           <genParameters ecoreParameter="generics.ecore#//lang/Comparable/compareTo/other"/>
         </genOperations>
       </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Generics2" disposableProviderFactory="true" ecorePackage="generics.ecore#//generics2">
+      <genClasses ecoreClass="generics.ecore#//generics2/AElement">
+        <genTypeParameters ecoreTypeParameter="generics.ecore#//generics2/AElement/T"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference generics.ecore#//generics2/AElement/value"/>
+      </genClasses>
+      <genClasses ecoreClass="generics.ecore#//generics2/BClass"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

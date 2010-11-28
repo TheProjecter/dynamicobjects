@@ -30,7 +30,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IntBasicElement">
       <eGenericSuperTypes eClassifier="#//generic/BasicElement">
-        <eTypeArguments eClassifier="#//lang/Interger"/>
+        <eTypeArguments eClassifier="#//lang2/Interger"/>
       </eGenericSuperTypes>
     </eClassifiers>
   </eSubpackages>
@@ -44,6 +44,28 @@
         </eParameters>
       </eOperations>
     </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="generics2" nsURI="http://zehrer.net/test/generics2" nsPrefix="ztg2">
+    <eClassifiers xsi:type="ecore:EClass" name="AElement">
+      <eTypeParameters name="T">
+        <eBounds eClassifier="#//lang2/IComparable">
+          <eTypeArguments eTypeParameter="#//generics2/AElement/T"/>
+        </eBounds>
+      </eTypeParameters>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value">
+        <eGenericType eTypeParameter="#//generics2/AElement/T"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BClass">
+      <eGenericSuperTypes eClassifier="#//generics2/AElement">
+        <eTypeArguments eClassifier="#//lang2/Interger"/>
+      </eGenericSuperTypes>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="lang2" nsURI="http://zehrer.net/test/lang2" nsPrefix="ztl2">
     <eClassifiers xsi:type="ecore:EDataType" name="Interger" instanceClassName="java.lang.Integer"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="IComparable" instanceClassName="java.lang.Comparable">
+      <eTypeParameters name="T"/>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>
