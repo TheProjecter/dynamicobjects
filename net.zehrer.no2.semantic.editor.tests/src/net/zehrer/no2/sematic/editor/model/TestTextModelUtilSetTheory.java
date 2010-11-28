@@ -14,18 +14,18 @@ package net.zehrer.no2.sematic.editor.model;
 import junit.framework.TestCase;
 import net.zehrer.no2.semantic.editor.TextModelManager;
 import net.zehrer.no2.semantic.editor.adapter.NodeContentAdapter;
-import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
 import net.zehrer.no2.semantic.editor.model.java.TextModelUtil;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.DocumentEvent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestTextModelUtil extends TestCase{
-
+public class TestTextModelUtilSetTheory extends TestCase{
 
 	/**
 	 * The fixture for this model test case.
@@ -35,7 +35,7 @@ public class TestTextModelUtil extends TestCase{
 	/**
 	 * Constructs a new test case with the given name.
 	 */
-	public TestTextModelUtil(String name) {
+	public TestTextModelUtilSetTheory(String name) {
 		super(name);
 	}
 
@@ -61,16 +61,14 @@ public class TestTextModelUtil extends TestCase{
 		
 		// 01234567890
 		// 01        890   <- node1
-		//   23    67      <- node2 
-		//      45         <- node3
+		//   23 45 67      <- node2 
 		
 		CompositeNode node1 = TextModelManager.createCompositeNode("01");
 		
 		CompositeNode node2 = TextModelManager.createCompositeNode("23");
 		node1.getChildren().add(node2);
 		
-		CompositeNode node3 = TextModelManager.createCompositeNode("45");
-		node2.getChildren().add(node3);
+		TextModelManager.createLeafeNode("45",node2);
 		TextModelManager.createLeafeNode("67",node2);
 		
 		TextModelManager.createLeafeNode("890",node1);
@@ -224,6 +222,6 @@ public class TestTextModelUtil extends TestCase{
 	
 	// 01234567890
 	// 01        890   <- node1
-	//   23    67      <- node2 
-	//      45         <- node3
+	//   23 45 67      <- node2 
 }
+
