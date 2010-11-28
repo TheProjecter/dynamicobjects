@@ -14,6 +14,7 @@ import net.zehrer.common.interval.IntervalPackage;
 import net.zehrer.common.interval.impl.IntervalPackageImpl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -34,6 +35,13 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage {
 	 * @generated
 	 */
 	private EClass iComparableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType integerEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -115,6 +123,15 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getInteger() {
+		return integerEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public LangFactory getLangFactory() {
 		return (LangFactory)getEFactoryInstance();
 	}
@@ -139,6 +156,9 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage {
 
 		// Create classes and their features
 		iComparableEClass = createEClass(ICOMPARABLE);
+
+		// Create data types
+		integerEDataType = createEDataType(INTEGER);
 	}
 
 	/**
@@ -177,6 +197,9 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage {
 		EOperation op = addEOperation(iComparableEClass, ecorePackage.getEInt(), "compareTo", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(iComparableEClass_T);
 		addEParameter(op, g1, "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		// Initialize data types
+		initEDataType(integerEDataType, Integer.class, "Integer", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
