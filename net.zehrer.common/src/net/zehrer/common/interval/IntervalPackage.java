@@ -21,11 +21,11 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see net.zehrer.common.interval.intervalFactory
+ * @see net.zehrer.common.interval.IntervalFactory
  * @model kind="package"
  * @generated
  */
-public interface intervalPackage extends EPackage {
+public interface IntervalPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -56,14 +56,14 @@ public interface intervalPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	intervalPackage eINSTANCE = net.zehrer.common.interval.impl.intervalPackageImpl.init();
+	IntervalPackage eINSTANCE = net.zehrer.common.interval.impl.IntervalPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link java.lang.Comparable <em>IComparable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see java.lang.Comparable
-	 * @see net.zehrer.common.interval.impl.intervalPackageImpl#getIComparable()
+	 * @see net.zehrer.common.interval.impl.IntervalPackageImpl#getIComparable()
 	 * @generated
 	 */
 	int ICOMPARABLE = 1;
@@ -82,7 +82,7 @@ public interface intervalPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see net.zehrer.common.interval.impl.EIntervalImpl
-	 * @see net.zehrer.common.interval.impl.intervalPackageImpl#getEInterval()
+	 * @see net.zehrer.common.interval.impl.IntervalPackageImpl#getEInterval()
 	 * @generated
 	 */
 	int EINTERVAL = 0;
@@ -165,7 +165,7 @@ public interface intervalPackage extends EPackage {
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	intervalFactory getintervalFactory();
+	IntervalFactory getIntervalFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -185,7 +185,7 @@ public interface intervalPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see net.zehrer.common.interval.impl.EIntervalImpl
-		 * @see net.zehrer.common.interval.impl.intervalPackageImpl#getEInterval()
+		 * @see net.zehrer.common.interval.impl.IntervalPackageImpl#getEInterval()
 		 * @generated
 		 */
 		EClass EINTERVAL = eINSTANCE.getEInterval();
@@ -211,11 +211,11 @@ public interface intervalPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see java.lang.Comparable
-		 * @see net.zehrer.common.interval.impl.intervalPackageImpl#getIComparable()
+		 * @see net.zehrer.common.interval.impl.IntervalPackageImpl#getIComparable()
 		 * @generated
 		 */
 		EClass ICOMPARABLE = eINSTANCE.getIComparable();
 
 	}
 
-} //intervalPackage
+} //IntervalPackage

@@ -13,17 +13,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see net.zehrer.common.interval.intervalPackage
+ * @see net.zehrer.common.interval.IntervalPackage
  * @generated
  */
-public interface intervalFactory extends EFactory {
+public interface IntervalFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	intervalFactory eINSTANCE = net.zehrer.common.interval.impl.intervalFactoryImpl.init();
+	IntervalFactory eINSTANCE = net.zehrer.common.interval.impl.IntervalFactoryImpl.init();
 
 	/**
 	 * Returns the package supported by this factory.
@@ -32,6 +32,6 @@ public interface intervalFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	intervalPackage getintervalPackage();
+	IntervalPackage getIntervalPackage();
 
-} //intervalFactory
+} //IntervalFactory
