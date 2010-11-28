@@ -17,7 +17,7 @@ import java.util.List;
 import net.zehrer.no2.semantic.editor.adapter.NodeContentAdapter;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
-import net.zehrer.no2.semantic.editor.model.impl.TextModelUtil;
+import net.zehrer.no2.semantic.editor.model.java.TextModelUtil;
 import net.zehrer.no2.text.IResourceDocument;
 
 import org.eclipse.core.runtime.Assert;
