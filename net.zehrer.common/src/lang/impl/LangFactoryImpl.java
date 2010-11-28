@@ -31,7 +31,7 @@ public class LangFactoryImpl extends EFactoryImpl implements LangFactory {
 	 */
 	public static LangFactory init() {
 		try {
-			LangFactory theLangFactory = (LangFactory)EPackage.Registry.INSTANCE.getEFactory("http://java.com/lang/"); 
+			LangFactory theLangFactory = (LangFactory)EPackage.Registry.INSTANCE.getEFactory("http://java.com/lang"); 
 			if (theLangFactory != null) {
 				return theLangFactory;
 			}

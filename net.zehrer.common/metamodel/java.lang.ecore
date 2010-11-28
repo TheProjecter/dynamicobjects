@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="java"
     nsURI="http://java.com" nsPrefix="">
-  <eSubpackages name="lang" nsURI="http://java.com/lang/" nsPrefix="">
+  <eSubpackages name="lang" nsURI="http://java.com/lang" nsPrefix="">
     <eClassifiers xsi:type="ecore:EClass" name="IComparable" instanceClassName="java.lang.Comparable"
         abstract="true" interface="true">
       <eTypeParameters name="T"/>
