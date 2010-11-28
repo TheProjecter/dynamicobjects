@@ -16,9 +16,11 @@
         <genTypeParameters ecoreTypeParameter="generics.ecore#//generic/Element/T"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generics.ecore#//generic/Element/value"/>
       </genClasses>
+      <genClasses ecoreClass="generics.ecore#//generic/IntBasicElement"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Lang" disposableProviderFactory="true" adapterFactory="false"
-        ecorePackage="generics.ecore#//lang">
+        multipleEditorPages="false" generateModelWizard="false" ecorePackage="generics.ecore#//lang">
+      <genDataTypes ecoreDataType="generics.ecore#//lang/Interger"/>
       <genClasses image="false" ecoreClass="generics.ecore#//lang/Comparable">
         <genTypeParameters ecoreTypeParameter="generics.ecore#//lang/Comparable/T"/>
         <genOperations ecoreOperation="generics.ecore#//lang/Comparable/compareTo">

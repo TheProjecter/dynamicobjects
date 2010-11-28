@@ -28,6 +28,11 @@
         </eTypeArguments>
       </eGenericSuperTypes>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IntBasicElement">
+      <eGenericSuperTypes eClassifier="#//generic/BasicElement">
+        <eTypeArguments eClassifier="#//lang/Interger"/>
+      </eGenericSuperTypes>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="lang" nsURI="http://zehrer.net/test/lang" nsPrefix="ztl">
     <eClassifiers xsi:type="ecore:EClass" name="Comparable" instanceClassName="java.lang.Comparable"
@@ -39,5 +44,6 @@
         </eParameters>
       </eOperations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Interger" instanceClassName="java.lang.Integer"/>
   </eSubpackages>
 </ecore:EPackage>
