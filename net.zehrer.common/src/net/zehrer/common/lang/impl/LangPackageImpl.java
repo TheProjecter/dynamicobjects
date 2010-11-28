@@ -4,14 +4,14 @@
  *
  * $Id$
  */
-package lang.impl;
-
-import lang.LangFactory;
-import lang.LangPackage;
+package net.zehrer.common.lang.impl;
 
 import net.zehrer.common.interval.IntervalPackage;
 
 import net.zehrer.common.interval.impl.IntervalPackageImpl;
+
+import net.zehrer.common.lang.LangFactory;
+import net.zehrer.common.lang.LangPackage;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -54,7 +54,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see lang.LangPackage#eNS_URI
+	 * @see net.zehrer.common.lang.LangPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

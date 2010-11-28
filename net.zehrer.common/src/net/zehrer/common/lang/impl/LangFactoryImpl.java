@@ -4,9 +4,9 @@
  *
  * $Id$
  */
-package lang.impl;
+package net.zehrer.common.lang.impl;
 
-import lang.*;
+import net.zehrer.common.lang.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;

@@ -6,7 +6,7 @@
  */
 package net.zehrer.common.interval;
 
-import lang.LangPackage;
+import net.zehrer.common.lang.LangPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;

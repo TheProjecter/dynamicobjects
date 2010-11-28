@@ -7,13 +7,13 @@
 package net.zehrer.common.interval.impl;
 
 
-import lang.LangPackage;
-import lang.impl.LangPackageImpl;
 import net.zehrer.common.interval.EIntInterval;
 import net.zehrer.common.interval.EInterval;
 import net.zehrer.common.interval.IntervalFactory;
 import net.zehrer.common.interval.IntervalPackage;
 
+import net.zehrer.common.lang.LangPackage;
+import net.zehrer.common.lang.impl.LangPackageImpl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;

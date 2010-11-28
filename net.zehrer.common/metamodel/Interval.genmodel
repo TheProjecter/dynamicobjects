@@ -36,9 +36,37 @@
         <genParameters ecoreParameter="Interval.ecore#//EInterval/includes/value"/>
       </genOperations>
     </genClasses>
+    <genClasses ecoreClass="Interval.ecore#//EIntInterval">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Interval.ecore#//EIntInterval/lowerLimit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Interval.ecore#//EIntInterval/upperLimit"/>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/intersects">
+        <genParameters ecoreParameter="Interval.ecore#//EIntInterval/intersects/other"/>
+      </genOperations>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/intersect">
+        <genParameters ecoreParameter="Interval.ecore#//EIntInterval/intersect/other"/>
+      </genOperations>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/isBelow">
+        <genParameters ecoreParameter="Interval.ecore#//EIntInterval/isBelow/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/isAbove">
+        <genParameters ecoreParameter="Interval.ecore#//EIntInterval/isAbove/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/equals">
+        <genParameters ecoreParameter="Interval.ecore#//EIntInterval/equals/other"/>
+      </genOperations>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/equals.1">
+        <genParameters ecoreParameter="Interval.ecore#//EIntInterval/equals.1/other"/>
+      </genOperations>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/hashCode"/>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/includes">
+        <genParameters ecoreParameter="Interval.ecore#//EIntInterval/includes/value"/>
+      </genOperations>
+    </genClasses>
   </genPackages>
-  <genPackages prefix="Lang" adapterFactory="false" literalsInterface="false" multipleEditorPages="false"
-      generateModelWizard="false" contentTypeIdentifier="" ecorePackage="java.lang.ecore#//lang">
+  <genPackages prefix="Lang" basePackage="net.zehrer.common" adapterFactory="false"
+      literalsInterface="false" multipleEditorPages="false" generateModelWizard="false"
+      contentTypeIdentifier="" ecorePackage="java.lang.ecore#//lang">
+    <genDataTypes ecoreDataType="java.lang.ecore#//lang/Integer"/>
     <genClasses image="false" ecoreClass="java.lang.ecore#//lang/IComparable">
       <genTypeParameters ecoreTypeParameter="java.lang.ecore#//lang/IComparable/T"/>
       <genOperations ecoreOperation="java.lang.ecore#//lang/IComparable/compareTo">

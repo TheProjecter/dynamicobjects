@@ -9,7 +9,9 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: net.zehrer.common.interval,
  net.zehrer.common.interval.impl,
- net.zehrer.common.interval.util
+ net.zehrer.common.interval.util,
+ net.zehrer.common.lang,
+ net.zehrer.common.lang.impl
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.junit4;bundle-version="4.8.1"
