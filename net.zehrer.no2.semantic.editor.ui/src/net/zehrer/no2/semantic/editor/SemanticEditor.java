@@ -43,6 +43,7 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 	private AdapterFactoryEditingDomain editingDomain;
 	private ComposedAdapterFactory adapterFactory;
 
+
 	public SemanticEditor() {
 		super();
 		colorManager = new ColorManager();
@@ -59,14 +60,14 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 		this.outlineSelectionListener = new OutlineSelectionListener(this);
 	}
 
+	/*
+	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#doSave(IProgressMonitor)
+	 */
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		
-		
-		
 //		if (fOutlinePage != null)
 //			fOutlinePage.update();
-		
 		
 		// Do the work within an operation because this is a long running
 		// activity that modifies the workbench.
@@ -113,10 +114,12 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 	}
 
 
+	/*
+	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#firePropertyChange(int)
+	 */
 	@Override
 	protected void firePropertyChange(int property) {
 		super.firePropertyChange(property);
-		
 		
 		// TODO: is there a official why to do this 
 		if (fPropertyPage != null && !fPropertyPage.getControl().isDisposed()) {
@@ -128,6 +131,9 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 		}
 	}
 	
+	/*
+	 * @see org.eclipse.ui.editors.text.TextEditor#initializeEditor()
+	 */
 	@Override
 	protected void initializeEditor() {
 		super.initializeEditor();
@@ -136,7 +142,19 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 	
 	// ----------
 
+	private void initializeEditingDomain() {
+		
+		adapterFactory = new ComposedAdapterFactory(Registry.INSTANCE);
+		adapterFactory.addAdapterFactory(new EditorItemProviderAdapterFactory());
+		
+		BasicCommandStack commandStack = new BasicCommandStack();
+		
+		editingDomain = new AdapterFactoryEditingDomain(adapterFactory,commandStack, new java.util.LinkedHashMap<Resource, Boolean>());
 
+		// The editor is listen for changes 
+		commandStack.addCommandStackListener(new AsyncCommandStackListener(this));
+	}
+	
 	private IContentOutlinePage getOutlinePage() {
 		// TODO use injection to avoid singelton
 		
@@ -165,19 +183,6 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 		return fPropertyPage;
 	}
 	
-	private void initializeEditingDomain() {
-		
-		adapterFactory = new ComposedAdapterFactory(Registry.INSTANCE);
-		adapterFactory.addAdapterFactory(new EditorItemProviderAdapterFactory());
-		
-		BasicCommandStack commandStack = new BasicCommandStack();
-		
-		editingDomain = new AdapterFactoryEditingDomain(adapterFactory,commandStack, new java.util.LinkedHashMap<Resource, Boolean>());
-
-		// The editor is listen for changes 
-		commandStack.addCommandStackListener(new AsyncCommandStackListener(this));
-	}
-
 	// ------ IEditor  -----
 	
 	@Override
@@ -189,7 +194,6 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 	public void createContextMenuFor(StructuredViewer viewer) {
 		
 	}
-	
 	
 	// --------------------
 	
@@ -212,7 +216,7 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 		super.dispose();
 	}
 
-	// --------------------
+	// ------ CommandStackListener
 	
 	/**
 	 * @category CommandStackListener
