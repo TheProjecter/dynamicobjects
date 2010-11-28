@@ -6,6 +6,7 @@
  */
 package net.zehrer.no2.semantic.editor.model.util;
 
+import net.zehrer.common.interval.EIntInterval;
 import net.zehrer.no2.semantic.editor.model.*;
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
@@ -92,6 +93,14 @@ public class EditorAdapterFactory extends AdapterFactoryImpl {
 				return createSyntaxErrorAdapter();
 			}
 			@Override
+			public <T> Adapter caseIComparable(Comparable<T> object) {
+				return createIComparableAdapter();
+			}
+			@Override
+			public Adapter caseEIntInterval(EIntInterval object) {
+				return createEIntIntervalAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -164,6 +173,34 @@ public class EditorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSyntaxErrorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.lang.Comparable <em>IComparable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.lang.Comparable
+	 * @generated
+	 */
+	public Adapter createIComparableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link net.zehrer.common.interval.EIntInterval <em>EInt Interval</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see net.zehrer.common.interval.EIntInterval
+	 * @generated
+	 */
+	public Adapter createEIntIntervalAdapter() {
 		return null;
 	}
 

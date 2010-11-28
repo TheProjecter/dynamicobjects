@@ -6,6 +6,8 @@
  */
 package net.zehrer.no2.semantic.editor.model;
 
+import net.zehrer.common.interval.IntervalPackage;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -73,22 +75,31 @@ public interface EditorPackage extends EPackage {
 	int ABSTRACT_NODE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Lower Limit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__LOWER_LIMIT = IntervalPackage.EINT_INTERVAL__LOWER_LIMIT;
+
+	/**
+	 * The feature id for the '<em><b>Upper Limit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__UPPER_LIMIT = IntervalPackage.EINT_INTERVAL__UPPER_LIMIT;
+
+	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__PARENT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE__GRAMMAR_ELEMENT = 1;
+	int ABSTRACT_NODE__PARENT = IntervalPackage.EINT_INTERVAL_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Element</b></em>' reference.
@@ -97,7 +108,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__ELEMENT = 2;
+	int ABSTRACT_NODE__ELEMENT = IntervalPackage.EINT_INTERVAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Syntax Error</b></em>' containment reference.
@@ -106,16 +117,16 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__SYNTAX_ERROR = 3;
+	int ABSTRACT_NODE__SYNTAX_ERROR = IntervalPackage.EINT_INTERVAL_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Total Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__TOTAL_OFFSET = 4;
+	int ABSTRACT_NODE__OFFSET = IntervalPackage.EINT_INTERVAL_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Total Line</b></em>' attribute.
@@ -124,16 +135,16 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__TOTAL_LINE = 5;
+	int ABSTRACT_NODE__TOTAL_LINE = IntervalPackage.EINT_INTERVAL_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Total Length</b></em>' attribute.
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__TOTAL_LENGTH = 6;
+	int ABSTRACT_NODE__LENGTH = IntervalPackage.EINT_INTERVAL_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -142,7 +153,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__NAME = 7;
+	int ABSTRACT_NODE__NAME = IntervalPackage.EINT_INTERVAL_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Node</em>' class.
@@ -151,106 +162,7 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE_FEATURE_COUNT = 8;
-
-	/**
-	 * The operation id for the '<em>Serialize</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE___SERIALIZE = 0;
-
-	/**
-	 * The operation id for the '<em>Get Leaf Nodes</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE___GET_LEAF_NODES = 1;
-
-	/**
-	 * The operation id for the '<em>Get Leaf Nodes</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE___GET_LEAF_NODES__ABSTRACTNODE = 2;
-
-	/**
-	 * The operation id for the '<em>All Syntax Errors</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE___ALL_SYNTAX_ERRORS = 3;
-
-	/**
-	 * The operation id for the '<em>Total End Line</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE___TOTAL_END_LINE = 4;
-
-	/**
-	 * The operation id for the '<em>Get Offset</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE___GET_OFFSET = 5;
-
-	/**
-	 * The operation id for the '<em>Get Line</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE___GET_LINE = 6;
-
-	/**
-	 * The operation id for the '<em>Get Length</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE___GET_LENGTH = 7;
-
-	/**
-	 * The operation id for the '<em>End Line</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE___END_LINE = 8;
-
-	/**
-	 * The operation id for the '<em>Update</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE___UPDATE__DOCUMENTEVENT = 9;
-
-	/**
-	 * The number of operations of the '<em>Abstract Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE_OPERATION_COUNT = 10;
+	int ABSTRACT_NODE_FEATURE_COUNT = IntervalPackage.EINT_INTERVAL_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link net.zehrer.no2.semantic.editor.model.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
@@ -263,6 +175,24 @@ public interface EditorPackage extends EPackage {
 	int COMPOSITE_NODE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Lower Limit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__LOWER_LIMIT = ABSTRACT_NODE__LOWER_LIMIT;
+
+	/**
+	 * The feature id for the '<em><b>Upper Limit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__UPPER_LIMIT = ABSTRACT_NODE__UPPER_LIMIT;
+
+	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -270,15 +200,6 @@ public interface EditorPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_NODE__PARENT = ABSTRACT_NODE__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE__GRAMMAR_ELEMENT = ABSTRACT_NODE__GRAMMAR_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Element</b></em>' reference.
@@ -299,13 +220,13 @@ public interface EditorPackage extends EPackage {
 	int COMPOSITE_NODE__SYNTAX_ERROR = ABSTRACT_NODE__SYNTAX_ERROR;
 
 	/**
-	 * The feature id for the '<em><b>Total Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__TOTAL_OFFSET = ABSTRACT_NODE__TOTAL_OFFSET;
+	int COMPOSITE_NODE__OFFSET = ABSTRACT_NODE__OFFSET;
 
 	/**
 	 * The feature id for the '<em><b>Total Line</b></em>' attribute.
@@ -317,13 +238,13 @@ public interface EditorPackage extends EPackage {
 	int COMPOSITE_NODE__TOTAL_LINE = ABSTRACT_NODE__TOTAL_LINE;
 
 	/**
-	 * The feature id for the '<em><b>Total Length</b></em>' attribute.
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__TOTAL_LENGTH = ABSTRACT_NODE__TOTAL_LENGTH;
+	int COMPOSITE_NODE__LENGTH = ABSTRACT_NODE__LENGTH;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -362,105 +283,6 @@ public interface EditorPackage extends EPackage {
 	int COMPOSITE_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Serialize</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE___SERIALIZE = ABSTRACT_NODE___SERIALIZE;
-
-	/**
-	 * The operation id for the '<em>Get Leaf Nodes</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE___GET_LEAF_NODES = ABSTRACT_NODE___GET_LEAF_NODES;
-
-	/**
-	 * The operation id for the '<em>Get Leaf Nodes</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE___GET_LEAF_NODES__ABSTRACTNODE = ABSTRACT_NODE___GET_LEAF_NODES__ABSTRACTNODE;
-
-	/**
-	 * The operation id for the '<em>All Syntax Errors</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE___ALL_SYNTAX_ERRORS = ABSTRACT_NODE___ALL_SYNTAX_ERRORS;
-
-	/**
-	 * The operation id for the '<em>Total End Line</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE___TOTAL_END_LINE = ABSTRACT_NODE___TOTAL_END_LINE;
-
-	/**
-	 * The operation id for the '<em>Get Offset</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE___GET_OFFSET = ABSTRACT_NODE___GET_OFFSET;
-
-	/**
-	 * The operation id for the '<em>Get Line</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE___GET_LINE = ABSTRACT_NODE___GET_LINE;
-
-	/**
-	 * The operation id for the '<em>Get Length</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE___GET_LENGTH = ABSTRACT_NODE___GET_LENGTH;
-
-	/**
-	 * The operation id for the '<em>End Line</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE___END_LINE = ABSTRACT_NODE___END_LINE;
-
-	/**
-	 * The operation id for the '<em>Update</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE___UPDATE__DOCUMENTEVENT = ABSTRACT_NODE___UPDATE__DOCUMENTEVENT;
-
-	/**
-	 * The number of operations of the '<em>Composite Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE_OPERATION_COUNT = ABSTRACT_NODE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link net.zehrer.no2.semantic.editor.model.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -471,6 +293,24 @@ public interface EditorPackage extends EPackage {
 	int LEAF_NODE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Lower Limit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE__LOWER_LIMIT = ABSTRACT_NODE__LOWER_LIMIT;
+
+	/**
+	 * The feature id for the '<em><b>Upper Limit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE__UPPER_LIMIT = ABSTRACT_NODE__UPPER_LIMIT;
+
+	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -478,15 +318,6 @@ public interface EditorPackage extends EPackage {
 	 * @ordered
 	 */
 	int LEAF_NODE__PARENT = ABSTRACT_NODE__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE__GRAMMAR_ELEMENT = ABSTRACT_NODE__GRAMMAR_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Element</b></em>' reference.
@@ -507,13 +338,13 @@ public interface EditorPackage extends EPackage {
 	int LEAF_NODE__SYNTAX_ERROR = ABSTRACT_NODE__SYNTAX_ERROR;
 
 	/**
-	 * The feature id for the '<em><b>Total Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__TOTAL_OFFSET = ABSTRACT_NODE__TOTAL_OFFSET;
+	int LEAF_NODE__OFFSET = ABSTRACT_NODE__OFFSET;
 
 	/**
 	 * The feature id for the '<em><b>Total Line</b></em>' attribute.
@@ -525,13 +356,13 @@ public interface EditorPackage extends EPackage {
 	int LEAF_NODE__TOTAL_LINE = ABSTRACT_NODE__TOTAL_LINE;
 
 	/**
-	 * The feature id for the '<em><b>Total Length</b></em>' attribute.
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__TOTAL_LENGTH = ABSTRACT_NODE__TOTAL_LENGTH;
+	int LEAF_NODE__LENGTH = ABSTRACT_NODE__LENGTH;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -552,130 +383,13 @@ public interface EditorPackage extends EPackage {
 	int LEAF_NODE__TEXT = ABSTRACT_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Feature</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE__FEATURE = ABSTRACT_NODE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE__HIDDEN = ABSTRACT_NODE_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Leaf Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Serialize</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE___SERIALIZE = ABSTRACT_NODE___SERIALIZE;
-
-	/**
-	 * The operation id for the '<em>Get Leaf Nodes</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE___GET_LEAF_NODES = ABSTRACT_NODE___GET_LEAF_NODES;
-
-	/**
-	 * The operation id for the '<em>Get Leaf Nodes</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE___GET_LEAF_NODES__ABSTRACTNODE = ABSTRACT_NODE___GET_LEAF_NODES__ABSTRACTNODE;
-
-	/**
-	 * The operation id for the '<em>All Syntax Errors</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE___ALL_SYNTAX_ERRORS = ABSTRACT_NODE___ALL_SYNTAX_ERRORS;
-
-	/**
-	 * The operation id for the '<em>Total End Line</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE___TOTAL_END_LINE = ABSTRACT_NODE___TOTAL_END_LINE;
-
-	/**
-	 * The operation id for the '<em>Get Offset</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE___GET_OFFSET = ABSTRACT_NODE___GET_OFFSET;
-
-	/**
-	 * The operation id for the '<em>Get Line</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE___GET_LINE = ABSTRACT_NODE___GET_LINE;
-
-	/**
-	 * The operation id for the '<em>Get Length</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE___GET_LENGTH = ABSTRACT_NODE___GET_LENGTH;
-
-	/**
-	 * The operation id for the '<em>End Line</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE___END_LINE = ABSTRACT_NODE___END_LINE;
-
-	/**
-	 * The operation id for the '<em>Update</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE___UPDATE__DOCUMENTEVENT = ABSTRACT_NODE___UPDATE__DOCUMENTEVENT;
-
-	/**
-	 * The number of operations of the '<em>Leaf Node</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE_OPERATION_COUNT = ABSTRACT_NODE_OPERATION_COUNT + 0;
+	int LEAF_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link net.zehrer.no2.semantic.editor.model.impl.SyntaxErrorImpl <em>Syntax Error</em>}' class.
@@ -722,16 +436,6 @@ public interface EditorPackage extends EPackage {
 	 * @ordered
 	 */
 	int SYNTAX_ERROR_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Syntax Error</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SYNTAX_ERROR_OPERATION_COUNT = 0;
-
 
 	/**
 	 * The meta object id for the '<em>Document Event</em>' data type.
@@ -798,17 +502,6 @@ public interface EditorPackage extends EPackage {
 	EReference getAbstractNode_Parent();
 
 	/**
-	 * Returns the meta object for the reference '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getGrammarElement <em>Grammar Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Grammar Element</em>'.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getGrammarElement()
-	 * @see #getAbstractNode()
-	 * @generated
-	 */
-	EReference getAbstractNode_GrammarElement();
-
-	/**
 	 * Returns the meta object for the reference '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getElement <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -831,15 +524,15 @@ public interface EditorPackage extends EPackage {
 	EReference getAbstractNode_SyntaxError();
 
 	/**
-	 * Returns the meta object for the attribute '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalOffset <em>Total Offset</em>}'.
+	 * Returns the meta object for the attribute '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getOffset <em>Offset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Total Offset</em>'.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalOffset()
+	 * @return the meta object for the attribute '<em>Offset</em>'.
+	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getOffset()
 	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EAttribute getAbstractNode_TotalOffset();
+	EAttribute getAbstractNode_Offset();
 
 	/**
 	 * Returns the meta object for the attribute '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalLine <em>Total Line</em>}'.
@@ -853,15 +546,15 @@ public interface EditorPackage extends EPackage {
 	EAttribute getAbstractNode_TotalLine();
 
 	/**
-	 * Returns the meta object for the attribute '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalLength <em>Total Length</em>}'.
+	 * Returns the meta object for the attribute '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getLength <em>Length</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Total Length</em>'.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalLength()
+	 * @return the meta object for the attribute '<em>Length</em>'.
+	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getLength()
 	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EAttribute getAbstractNode_TotalLength();
+	EAttribute getAbstractNode_Length();
 
 	/**
 	 * Returns the meta object for the attribute '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getName <em>Name</em>}'.
@@ -873,106 +566,6 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAbstractNode_Name();
-
-	/**
-	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#serialize() <em>Serialize</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Serialize</em>' operation.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#serialize()
-	 * @generated
-	 */
-	EOperation getAbstractNode__Serialize();
-
-	/**
-	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getLeafNodes() <em>Get Leaf Nodes</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Leaf Nodes</em>' operation.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getLeafNodes()
-	 * @generated
-	 */
-	EOperation getAbstractNode__GetLeafNodes();
-
-	/**
-	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getLeafNodes(net.zehrer.no2.semantic.editor.model.AbstractNode) <em>Get Leaf Nodes</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Leaf Nodes</em>' operation.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getLeafNodes(net.zehrer.no2.semantic.editor.model.AbstractNode)
-	 * @generated
-	 */
-	EOperation getAbstractNode__GetLeafNodes__AbstractNode();
-
-	/**
-	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#allSyntaxErrors() <em>All Syntax Errors</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>All Syntax Errors</em>' operation.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#allSyntaxErrors()
-	 * @generated
-	 */
-	EOperation getAbstractNode__AllSyntaxErrors();
-
-	/**
-	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#totalEndLine() <em>Total End Line</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Total End Line</em>' operation.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#totalEndLine()
-	 * @generated
-	 */
-	EOperation getAbstractNode__TotalEndLine();
-
-	/**
-	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getOffset() <em>Get Offset</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Offset</em>' operation.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getOffset()
-	 * @generated
-	 */
-	EOperation getAbstractNode__GetOffset();
-
-	/**
-	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getLine() <em>Get Line</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Line</em>' operation.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getLine()
-	 * @generated
-	 */
-	EOperation getAbstractNode__GetLine();
-
-	/**
-	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getLength() <em>Get Length</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Length</em>' operation.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#getLength()
-	 * @generated
-	 */
-	EOperation getAbstractNode__GetLength();
-
-	/**
-	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#endLine() <em>End Line</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>End Line</em>' operation.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#endLine()
-	 * @generated
-	 */
-	EOperation getAbstractNode__EndLine();
-
-	/**
-	 * Returns the meta object for the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#update(org.eclipse.jface.text.DocumentEvent) <em>Update</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Update</em>' operation.
-	 * @see net.zehrer.no2.semantic.editor.model.AbstractNode#update(org.eclipse.jface.text.DocumentEvent)
-	 * @generated
-	 */
-	EOperation getAbstractNode__Update__DocumentEvent();
 
 	/**
 	 * Returns the meta object for class '{@link net.zehrer.no2.semantic.editor.model.LeafNode <em>Leaf Node</em>}'.
@@ -994,28 +587,6 @@ public interface EditorPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getLeafNode_Text();
-
-	/**
-	 * Returns the meta object for the attribute '{@link net.zehrer.no2.semantic.editor.model.LeafNode#getFeature <em>Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Feature</em>'.
-	 * @see net.zehrer.no2.semantic.editor.model.LeafNode#getFeature()
-	 * @see #getLeafNode()
-	 * @generated
-	 */
-	EAttribute getLeafNode_Feature();
-
-	/**
-	 * Returns the meta object for the attribute '{@link net.zehrer.no2.semantic.editor.model.LeafNode#isHidden <em>Hidden</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Hidden</em>'.
-	 * @see net.zehrer.no2.semantic.editor.model.LeafNode#isHidden()
-	 * @see #getLeafNode()
-	 * @generated
-	 */
-	EAttribute getLeafNode_Hidden();
 
 	/**
 	 * Returns the meta object for class '{@link net.zehrer.no2.semantic.editor.model.SyntaxError <em>Syntax Error</em>}'.
@@ -1139,14 +710,6 @@ public interface EditorPackage extends EPackage {
 		EReference ABSTRACT_NODE__PARENT = eINSTANCE.getAbstractNode_Parent();
 
 		/**
-		 * The meta object literal for the '<em><b>Grammar Element</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_NODE__GRAMMAR_ELEMENT = eINSTANCE.getAbstractNode_GrammarElement();
-
-		/**
 		 * The meta object literal for the '<em><b>Element</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1163,12 +726,12 @@ public interface EditorPackage extends EPackage {
 		EReference ABSTRACT_NODE__SYNTAX_ERROR = eINSTANCE.getAbstractNode_SyntaxError();
 
 		/**
-		 * The meta object literal for the '<em><b>Total Offset</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Offset</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_NODE__TOTAL_OFFSET = eINSTANCE.getAbstractNode_TotalOffset();
+		EAttribute ABSTRACT_NODE__OFFSET = eINSTANCE.getAbstractNode_Offset();
 
 		/**
 		 * The meta object literal for the '<em><b>Total Line</b></em>' attribute feature.
@@ -1179,12 +742,12 @@ public interface EditorPackage extends EPackage {
 		EAttribute ABSTRACT_NODE__TOTAL_LINE = eINSTANCE.getAbstractNode_TotalLine();
 
 		/**
-		 * The meta object literal for the '<em><b>Total Length</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Length</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_NODE__TOTAL_LENGTH = eINSTANCE.getAbstractNode_TotalLength();
+		EAttribute ABSTRACT_NODE__LENGTH = eINSTANCE.getAbstractNode_Length();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1193,86 +756,6 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACT_NODE__NAME = eINSTANCE.getAbstractNode_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Serialize</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_NODE___SERIALIZE = eINSTANCE.getAbstractNode__Serialize();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Leaf Nodes</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_NODE___GET_LEAF_NODES = eINSTANCE.getAbstractNode__GetLeafNodes();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Leaf Nodes</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_NODE___GET_LEAF_NODES__ABSTRACTNODE = eINSTANCE.getAbstractNode__GetLeafNodes__AbstractNode();
-
-		/**
-		 * The meta object literal for the '<em><b>All Syntax Errors</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_NODE___ALL_SYNTAX_ERRORS = eINSTANCE.getAbstractNode__AllSyntaxErrors();
-
-		/**
-		 * The meta object literal for the '<em><b>Total End Line</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_NODE___TOTAL_END_LINE = eINSTANCE.getAbstractNode__TotalEndLine();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Offset</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_NODE___GET_OFFSET = eINSTANCE.getAbstractNode__GetOffset();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Line</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_NODE___GET_LINE = eINSTANCE.getAbstractNode__GetLine();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Length</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_NODE___GET_LENGTH = eINSTANCE.getAbstractNode__GetLength();
-
-		/**
-		 * The meta object literal for the '<em><b>End Line</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_NODE___END_LINE = eINSTANCE.getAbstractNode__EndLine();
-
-		/**
-		 * The meta object literal for the '<em><b>Update</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ABSTRACT_NODE___UPDATE__DOCUMENTEVENT = eINSTANCE.getAbstractNode__Update__DocumentEvent();
 
 		/**
 		 * The meta object literal for the '{@link net.zehrer.no2.semantic.editor.model.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
@@ -1291,22 +774,6 @@ public interface EditorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LEAF_NODE__TEXT = eINSTANCE.getLeafNode_Text();
-
-		/**
-		 * The meta object literal for the '<em><b>Feature</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LEAF_NODE__FEATURE = eINSTANCE.getLeafNode_Feature();
-
-		/**
-		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LEAF_NODE__HIDDEN = eINSTANCE.getLeafNode_Hidden();
 
 		/**
 		 * The meta object literal for the '{@link net.zehrer.no2.semantic.editor.model.impl.SyntaxErrorImpl <em>Syntax Error</em>}' class.

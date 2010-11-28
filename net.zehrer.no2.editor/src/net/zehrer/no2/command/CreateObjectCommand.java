@@ -172,17 +172,17 @@ public class CreateObjectCommand extends CommandWrapper implements CommandAction
 
 	// ---- CommandActionDelegate ---
 
-	//@Override  TODO: enable in Java SE6
+	@Override  
 	public String getText() {
 		 return Messages._UI_CreateObjectCommand_Text; 
 	}
 
-	//@Override  TODO: enable in Java SE6
+	@Override 
 	public String getToolTipText() {
 		return Messages._UI_CreateObjectCommand_ToolTip; 
 	}
 	
-	//@Override  TODO: enable in Java SE6
+	@Override 
 	public Object getImage() {
 		return null;  // no image
 	}
