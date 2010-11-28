@@ -80,21 +80,21 @@ public class NodeContentAdapter extends EContentAdapter {
 						{
 							int idx = notification.getPosition();
 							int startIndex = idx < 1 ? 
-								parent.getTotalOffset() - 1:
+								parent.getOffset() - 1:
 								getOffsetOfNextLeaf(parent.getChildren().get(idx - 1)) - 1;
 							updateCompositeNode(getRootNode(parent), startIndex, createWorkingNodeInfo());
 						}
 						break;
 					case Notification.REMOVE:
 					case Notification.SET:
-						updateCompositeNode(getRootNode(parent), ((AbstractNode) notification.getOldValue()).getTotalOffset() - 1, 
+						updateCompositeNode(getRootNode(parent), ((AbstractNode) notification.getOldValue()).getOffset() - 1, 
 								createWorkingNodeInfo());
 						break;
 					case Notification.MOVE:
 						{
 							int leftPos = Math.min(notification.getPosition(), (Integer)notification.getOldValue());
 							int startIndex = leftPos < 1 ? 
-								parent.getTotalOffset() - 1:
+								parent.getOffset() - 1:
 								getOffsetOfNextLeaf(parent.getChildren().get(leftPos - 1)) - 1;
 							updateCompositeNode(getRootNode(parent), startIndex, createWorkingNodeInfo());
 						}
@@ -107,7 +107,7 @@ public class NodeContentAdapter extends EContentAdapter {
 	}
 
 	private int getOffsetOfNextLeaf(AbstractNode node) {
-		return node.getTotalOffset() + node.getTotalLength();
+		return node.getOffset() + node.getLength();
 	}
 
 	private NodeInfo createWorkingNodeInfo() {
@@ -119,7 +119,7 @@ public class NodeContentAdapter extends EContentAdapter {
 	}
 
 	private boolean isUpdateRequired(AbstractNode node, int updateFromOffset, int lastOffset) {
-		return node.getTotalOffset() >= updateFromOffset || 
+		return node.getOffset() >= updateFromOffset || 
 			getOffsetOfNextLeaf(node) > updateFromOffset;
 	}
 	
@@ -132,12 +132,12 @@ public class NodeContentAdapter extends EContentAdapter {
 	 */
 	protected void updateCompositeNode(CompositeNode nodeToUpdate, int startAtOffset, NodeInfo workingInfo) {
 		if (workingInfo.totalOffset < startAtOffset && !isUpdateRequired(nodeToUpdate, startAtOffset, workingInfo.totalOffset)) {
-			workingInfo.totalOffset += nodeToUpdate.getTotalLength();
+			workingInfo.totalOffset += nodeToUpdate.getLength();
 //			workingInfo.line = nodeToUpdate.getLine();		
 			return;
 		}
-		if (workingInfo.totalOffset >= startAtOffset || nodeToUpdate.getTotalOffset() >= startAtOffset) {
-			nodeToUpdate.setTotalOffset(workingInfo.totalOffset);
+		if (workingInfo.totalOffset >= startAtOffset || nodeToUpdate.getOffset() >= startAtOffset) {
+			nodeToUpdate.setOffset(workingInfo.totalOffset);
 			nodeToUpdate.setTotalLine(workingInfo.totalLine);
 		} else {
 			workingInfo.totalLine = nodeToUpdate.getTotalLine();
@@ -151,15 +151,15 @@ public class NodeContentAdapter extends EContentAdapter {
 				updateCompositeNode((CompositeNode) child, startAtOffset, workingInfo);
 			} else {
 				if (firstVisibleChild) {
-					if (!((LeafNode) child).isHidden()) {
-						
-					}
+//					if (!((LeafNode) child).isHidden()) {
+//						
+//					}
 					firstVisibleChild = false;
 				}
 				updateLeafNode((LeafNode) child, workingInfo);
 			}
 		}
-		nodeToUpdate.setTotalLength(workingInfo.totalOffset - nodeToUpdate.getTotalOffset());
+		nodeToUpdate.setLength(workingInfo.totalOffset - nodeToUpdate.getOffset());
 	}
 
 	/**
@@ -168,11 +168,11 @@ public class NodeContentAdapter extends EContentAdapter {
 	 * @param workingInfo
 	 */
 	protected void updateLeafNode(LeafNode node, NodeInfo workingInfo) {
-		node.setTotalLength(node.getText().length());
-		node.setTotalOffset(workingInfo.totalOffset);
+		node.setLength(node.getText().length());
+		node.setOffset(workingInfo.totalOffset);
 		node.setTotalLine(workingInfo.totalLine);
 		
-		workingInfo.totalOffset += node.getTotalLength();
+		workingInfo.totalOffset += node.getLength();
 		workingInfo.totalLine += TextModelUtil.countLines(node.getText());
 	}
 	

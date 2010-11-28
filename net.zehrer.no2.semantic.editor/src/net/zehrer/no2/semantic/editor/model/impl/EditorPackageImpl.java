@@ -6,6 +6,11 @@
  */
 package net.zehrer.no2.semantic.editor.model.impl;
 
+
+import net.zehrer.common.interval.IntervalPackage;
+import net.zehrer.common.interval.impl.IntervalPackageImpl;
+import net.zehrer.common.lang.LangPackage;
+import net.zehrer.common.lang.impl.LangPackageImpl;
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.EditorFactory;
@@ -111,11 +116,19 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		isInited = true;
 
+		// Obtain or create and register interdependencies
+		LangPackageImpl theLangPackage = (LangPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LangPackage.eNS_URI) instanceof LangPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LangPackage.eNS_URI) : LangPackage.eINSTANCE);
+		IntervalPackageImpl theIntervalPackage = (IntervalPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(IntervalPackage.eNS_URI) instanceof IntervalPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(IntervalPackage.eNS_URI) : IntervalPackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theEditorPackage.createPackageContents();
+		theLangPackage.createPackageContents();
+		theIntervalPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theEditorPackage.initializePackageContents();
+		theLangPackage.initializePackageContents();
+		theIntervalPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theEditorPackage.freeze();
@@ -176,7 +189,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractNode_GrammarElement() {
+	public EReference getAbstractNode_Element() {
 		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -185,7 +198,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractNode_Element() {
+	public EReference getAbstractNode_SyntaxError() {
 		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -194,17 +207,8 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractNode_SyntaxError() {
-		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getAbstractNode_TotalOffset() {
-		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(4);
+	public EAttribute getAbstractNode_Offset() {
+		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -213,6 +217,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * @generated
 	 */
 	public EAttribute getAbstractNode_TotalLine() {
+		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractNode_Length() {
 		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -221,107 +234,8 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractNode_TotalLength() {
-		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getAbstractNode_Name() {
-		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractNode__Serialize() {
-		return abstractNodeEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractNode__GetLeafNodes() {
-		return abstractNodeEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractNode__GetLeafNodes__AbstractNode() {
-		return abstractNodeEClass.getEOperations().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractNode__AllSyntaxErrors() {
-		return abstractNodeEClass.getEOperations().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractNode__TotalEndLine() {
-		return abstractNodeEClass.getEOperations().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractNode__GetOffset() {
-		return abstractNodeEClass.getEOperations().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractNode__GetLine() {
-		return abstractNodeEClass.getEOperations().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractNode__GetLength() {
-		return abstractNodeEClass.getEOperations().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractNode__EndLine() {
-		return abstractNodeEClass.getEOperations().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getAbstractNode__Update__DocumentEvent() {
-		return abstractNodeEClass.getEOperations().get(9);
+		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -340,24 +254,6 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 	 */
 	public EAttribute getLeafNode_Text() {
 		return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLeafNode_Feature() {
-		return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLeafNode_Hidden() {
-		return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -439,28 +335,15 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		abstractNodeEClass = createEClass(ABSTRACT_NODE);
 		createEReference(abstractNodeEClass, ABSTRACT_NODE__PARENT);
-		createEReference(abstractNodeEClass, ABSTRACT_NODE__GRAMMAR_ELEMENT);
 		createEReference(abstractNodeEClass, ABSTRACT_NODE__ELEMENT);
 		createEReference(abstractNodeEClass, ABSTRACT_NODE__SYNTAX_ERROR);
-		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_OFFSET);
+		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__OFFSET);
 		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_LINE);
-		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__TOTAL_LENGTH);
+		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__LENGTH);
 		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__NAME);
-		createEOperation(abstractNodeEClass, ABSTRACT_NODE___SERIALIZE);
-		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_LEAF_NODES);
-		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_LEAF_NODES__ABSTRACTNODE);
-		createEOperation(abstractNodeEClass, ABSTRACT_NODE___ALL_SYNTAX_ERRORS);
-		createEOperation(abstractNodeEClass, ABSTRACT_NODE___TOTAL_END_LINE);
-		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_OFFSET);
-		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_LINE);
-		createEOperation(abstractNodeEClass, ABSTRACT_NODE___GET_LENGTH);
-		createEOperation(abstractNodeEClass, ABSTRACT_NODE___END_LINE);
-		createEOperation(abstractNodeEClass, ABSTRACT_NODE___UPDATE__DOCUMENTEVENT);
 
 		leafNodeEClass = createEClass(LEAF_NODE);
 		createEAttribute(leafNodeEClass, LEAF_NODE__TEXT);
-		createEAttribute(leafNodeEClass, LEAF_NODE__FEATURE);
-		createEAttribute(leafNodeEClass, LEAF_NODE__HIDDEN);
 
 		syntaxErrorEClass = createEClass(SYNTAX_ERROR);
 		createEAttribute(syntaxErrorEClass, SYNTAX_ERROR__MESSAGE);
@@ -494,55 +377,52 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		IntervalPackage theIntervalPackage = (IntervalPackage)EPackage.Registry.INSTANCE.getEPackage(IntervalPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
 		compositeNodeEClass.getESuperTypes().add(this.getAbstractNode());
+		abstractNodeEClass.getESuperTypes().add(theIntervalPackage.getEIntInterval());
 		leafNodeEClass.getESuperTypes().add(this.getAbstractNode());
 
-		// Initialize classes, features, and operations; add parameters
+		// Initialize classes and features; add operations and parameters
 		initEClass(compositeNodeEClass, CompositeNode.class, "CompositeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeNode_Children(), this.getAbstractNode(), this.getAbstractNode_Parent(), "children", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeNode_LookaheadLeafNodes(), this.getLeafNode(), null, "lookaheadLeafNodes", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractNodeEClass, AbstractNode.class, "AbstractNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractNode_Parent(), this.getCompositeNode(), this.getCompositeNode_Children(), "parent", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractNode_GrammarElement(), ecorePackage.getEObject(), null, "grammarElement", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractNode_Element(), ecorePackage.getEObject(), null, "element", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractNode_SyntaxError(), this.getSyntaxError(), this.getSyntaxError_Node(), "syntaxError", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractNode_TotalOffset(), ecorePackage.getEInt(), "totalOffset", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractNode_Offset(), ecorePackage.getEInt(), "offset", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractNode_TotalLine(), ecorePackage.getEInt(), "totalLine", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractNode_TotalLength(), ecorePackage.getEInt(), "totalLength", "-1", 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getAbstractNode_Length(), ecorePackage.getEInt(), "length", "-1", 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getAbstractNode_Name(), ecorePackage.getEString(), "Name", "", 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getAbstractNode__Serialize(), ecorePackage.getEString(), "serialize", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(abstractNodeEClass, ecorePackage.getEString(), "serialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getAbstractNode__GetLeafNodes(), this.getLeafNode(), "getLeafNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(abstractNodeEClass, this.getLeafNode(), "getLeafNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		EOperation op = initEOperation(getAbstractNode__GetLeafNodes__AbstractNode(), this.getLeafNode(), "getLeafNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(abstractNodeEClass, this.getLeafNode(), "getLeafNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAbstractNode(), "to", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getAbstractNode__AllSyntaxErrors(), this.getSyntaxError(), "allSyntaxErrors", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(abstractNodeEClass, this.getSyntaxError(), "allSyntaxErrors", 0, -1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getAbstractNode__TotalEndLine(), ecorePackage.getEInt(), "totalEndLine", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "totalEndLine", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getAbstractNode__GetOffset(), ecorePackage.getEInt(), "getOffset", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "getLine", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getAbstractNode__GetLine(), ecorePackage.getEInt(), "getLine", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "endLine", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getAbstractNode__GetLength(), ecorePackage.getEInt(), "getLength", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEOperation(getAbstractNode__EndLine(), ecorePackage.getEInt(), "endLine", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = initEOperation(getAbstractNode__Update__DocumentEvent(), null, "update", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(abstractNodeEClass, null, "update", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getDocumentEvent(), "event", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(leafNodeEClass, LeafNode.class, "LeafNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLeafNode_Text(), ecorePackage.getEString(), "text", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLeafNode_Feature(), ecorePackage.getEString(), "feature", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLeafNode_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(syntaxErrorEClass, SyntaxError.class, "SyntaxError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSyntaxError_Message(), ecorePackage.getEString(), "message", null, 0, 1, SyntaxError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

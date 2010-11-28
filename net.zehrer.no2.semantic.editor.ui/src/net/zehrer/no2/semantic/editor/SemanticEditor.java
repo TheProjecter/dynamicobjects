@@ -4,13 +4,12 @@ import java.util.EventObject;
 
 import net.zehrer.no2.edit.AsyncCommandStackListener;
 import net.zehrer.no2.semantic.editor.coloring.ColorManager;
-import net.zehrer.no2.semantic.editor.model.provider.EditorItemProviderAdapterFactory;
 import net.zehrer.no2.semantic.editor.outline.OutlineContentProvider;
 import net.zehrer.no2.semantic.editor.outline.OutlineLabelProvider;
 import net.zehrer.no2.semantic.editor.outline.OutlineSelectionListener;
 import net.zehrer.no2.semantic.editor.text.SemanticDocumentProvider;
-import net.zehrer.no2.ui.editor.GenericContentPropertySheetPage;
 import net.zehrer.no2.ui.editor.GenericContentOutlinePage;
+import net.zehrer.no2.ui.editor.GenericContentPropertySheetPage;
 import net.zehrer.no2.ui.editor.IEditor;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -20,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry;
+import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.jface.viewers.StructuredViewer;
@@ -145,7 +145,9 @@ public class SemanticEditor extends TextEditor implements IEditor, CommandStackL
 	private void initializeEditingDomain() {
 		
 		adapterFactory = new ComposedAdapterFactory(Registry.INSTANCE);
-		adapterFactory.addAdapterFactory(new EditorItemProviderAdapterFactory());
+//		adapterFactory.addAdapterFactory(new EditorItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+
 		
 		BasicCommandStack commandStack = new BasicCommandStack();
 		

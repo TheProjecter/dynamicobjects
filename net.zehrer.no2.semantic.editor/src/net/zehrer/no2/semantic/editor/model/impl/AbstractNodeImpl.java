@@ -6,8 +6,7 @@
  */
 package net.zehrer.no2.semantic.editor.model.impl;
 
-import java.lang.reflect.InvocationTargetException;
-
+import net.zehrer.common.interval.impl.EIntIntervalImpl;
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.EditorPackage;
@@ -17,17 +16,11 @@ import net.zehrer.no2.semantic.editor.model.java.TextModelUtil;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.DocumentEvent;
 
@@ -39,29 +32,18 @@ import org.eclipse.jface.text.DocumentEvent;
  * The following features are implemented:
  * <ul>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getGrammarElement <em>Grammar Element</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getElement <em>Element</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getSyntaxError <em>Syntax Error</em>}</li>
- *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getTotalOffset <em>Total Offset</em>}</li>
+ *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getOffset <em>Offset</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getTotalLine <em>Total Line</em>}</li>
- *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getTotalLength <em>Total Length</em>}</li>
+ *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getLength <em>Length</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNode {
-	/**
-	 * The cached value of the '{@link #getGrammarElement() <em>Grammar Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getGrammarElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected EObject grammarElement;
-
+public abstract class AbstractNodeImpl extends EIntIntervalImpl implements AbstractNode {
 	/**
 	 * The cached value of the '{@link #getElement() <em>Element</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -83,24 +65,24 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	protected SyntaxError syntaxError;
 
 	/**
-	 * The default value of the '{@link #getTotalOffset() <em>Total Offset</em>}' attribute.
+	 * The default value of the '{@link #getOffset() <em>Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTotalOffset()
+	 * @see #getOffset()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int TOTAL_OFFSET_EDEFAULT = 0;
+	protected static final int OFFSET_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getTotalOffset() <em>Total Offset</em>}' attribute.
+	 * The cached value of the '{@link #getOffset() <em>Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTotalOffset()
+	 * @see #getOffset()
 	 * @generated
 	 * @ordered
 	 */
-	protected int totalOffset = TOTAL_OFFSET_EDEFAULT;
+	protected int offset = OFFSET_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getTotalLine() <em>Total Line</em>}' attribute.
@@ -123,24 +105,24 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	protected int totalLine = TOTAL_LINE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getTotalLength() <em>Total Length</em>}' attribute.
+	 * The default value of the '{@link #getLength() <em>Length</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTotalLength()
+	 * @see #getLength()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int TOTAL_LENGTH_EDEFAULT = -1;
+	protected static final int LENGTH_EDEFAULT = -1;
 
 	/**
-	 * The cached value of the '{@link #getTotalLength() <em>Total Length</em>}' attribute.
+	 * The cached value of the '{@link #getLength() <em>Length</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTotalLength()
+	 * @see #getLength()
 	 * @generated
 	 * @ordered
 	 */
-	protected int totalLength = TOTAL_LENGTH_EDEFAULT;
+	protected int length = LENGTH_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -171,6 +153,9 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 		super();
 	}
 
+	protected AbstractNodeImpl(Integer lower, Integer upper) {
+		super(lower,upper);
+	}	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -220,44 +205,6 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ABSTRACT_NODE__PARENT, newParent, newParent));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EObject getGrammarElement() {
-		if (grammarElement != null && grammarElement.eIsProxy()) {
-			InternalEObject oldGrammarElement = (InternalEObject)grammarElement;
-			grammarElement = eResolveProxy(oldGrammarElement);
-			if (grammarElement != oldGrammarElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EditorPackage.ABSTRACT_NODE__GRAMMAR_ELEMENT, oldGrammarElement, grammarElement));
-			}
-		}
-		return grammarElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EObject basicGetGrammarElement() {
-		return grammarElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setGrammarElement(EObject newGrammarElement) {
-		EObject oldGrammarElement = grammarElement;
-		grammarElement = newGrammarElement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ABSTRACT_NODE__GRAMMAR_ELEMENT, oldGrammarElement, grammarElement));
 	}
 
 	/**
@@ -346,27 +293,6 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getTotalOffset() {
-		return totalOffset;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTotalOffset(int newTotalOffset) {
-		int oldTotalOffset = totalOffset;
-		totalOffset = newTotalOffset;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ABSTRACT_NODE__TOTAL_OFFSET, oldTotalOffset, totalOffset));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public int getTotalLine() {
 		return totalLine;
 	}
@@ -383,26 +309,7 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ABSTRACT_NODE__TOTAL_LINE, oldTotalLine, totalLine));
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public int getTotalLength() {
-		return totalLength;
-	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTotalLength(int newTotalLength) {
-		int oldTotalLength = totalLength;
-		totalLength = newTotalLength;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ABSTRACT_NODE__TOTAL_LENGTH, oldTotalLength, totalLength));
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -482,7 +389,22 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @generated
 	 */
 	public int getOffset() {
-		return TextModelUtil.getOffset(this);
+		return offset;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void setOffset(int newOffset) {
+		// offset = lower limit 
+		setLowerLimit(newOffset);
+		
+		int oldOffset = offset;
+		offset = newOffset;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ABSTRACT_NODE__OFFSET, oldOffset, offset));
 	}
 
 	/**
@@ -500,7 +422,25 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @generated
 	 */
 	public int getLength() {
-		return TextModelUtil.getLength(this);
+		return length;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * At the moment only leafs with the length >= 1 supported !!!
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void setLength(int newLength) {
+		
+		// upper limit = offset + length -1 
+		int offset = getOffset();
+		setUpperLimit(offset + newLength -1);
+		
+		int oldLength = length;
+		length = newLength;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EditorPackage.ABSTRACT_NODE__LENGTH, oldLength, length));
 	}
 
 	/**
@@ -581,20 +521,17 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 		switch (featureID) {
 			case EditorPackage.ABSTRACT_NODE__PARENT:
 				return getParent();
-			case EditorPackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
-				if (resolve) return getGrammarElement();
-				return basicGetGrammarElement();
 			case EditorPackage.ABSTRACT_NODE__ELEMENT:
 				if (resolve) return getElement();
 				return basicGetElement();
 			case EditorPackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				return getSyntaxError();
-			case EditorPackage.ABSTRACT_NODE__TOTAL_OFFSET:
-				return getTotalOffset();
+			case EditorPackage.ABSTRACT_NODE__OFFSET:
+				return getOffset();
 			case EditorPackage.ABSTRACT_NODE__TOTAL_LINE:
 				return getTotalLine();
-			case EditorPackage.ABSTRACT_NODE__TOTAL_LENGTH:
-				return getTotalLength();
+			case EditorPackage.ABSTRACT_NODE__LENGTH:
+				return getLength();
 			case EditorPackage.ABSTRACT_NODE__NAME:
 				return getName();
 		}
@@ -612,23 +549,20 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 			case EditorPackage.ABSTRACT_NODE__PARENT:
 				setParent((CompositeNode)newValue);
 				return;
-			case EditorPackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
-				setGrammarElement((EObject)newValue);
-				return;
 			case EditorPackage.ABSTRACT_NODE__ELEMENT:
 				setElement((EObject)newValue);
 				return;
 			case EditorPackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				setSyntaxError((SyntaxError)newValue);
 				return;
-			case EditorPackage.ABSTRACT_NODE__TOTAL_OFFSET:
-				setTotalOffset((Integer)newValue);
+			case EditorPackage.ABSTRACT_NODE__OFFSET:
+				setOffset((Integer)newValue);
 				return;
 			case EditorPackage.ABSTRACT_NODE__TOTAL_LINE:
 				setTotalLine((Integer)newValue);
 				return;
-			case EditorPackage.ABSTRACT_NODE__TOTAL_LENGTH:
-				setTotalLength((Integer)newValue);
+			case EditorPackage.ABSTRACT_NODE__LENGTH:
+				setLength((Integer)newValue);
 				return;
 			case EditorPackage.ABSTRACT_NODE__NAME:
 				setName((String)newValue);
@@ -648,23 +582,20 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 			case EditorPackage.ABSTRACT_NODE__PARENT:
 				setParent((CompositeNode)null);
 				return;
-			case EditorPackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
-				setGrammarElement((EObject)null);
-				return;
 			case EditorPackage.ABSTRACT_NODE__ELEMENT:
 				setElement((EObject)null);
 				return;
 			case EditorPackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				setSyntaxError((SyntaxError)null);
 				return;
-			case EditorPackage.ABSTRACT_NODE__TOTAL_OFFSET:
-				setTotalOffset(TOTAL_OFFSET_EDEFAULT);
+			case EditorPackage.ABSTRACT_NODE__OFFSET:
+				setOffset(OFFSET_EDEFAULT);
 				return;
 			case EditorPackage.ABSTRACT_NODE__TOTAL_LINE:
 				setTotalLine(TOTAL_LINE_EDEFAULT);
 				return;
-			case EditorPackage.ABSTRACT_NODE__TOTAL_LENGTH:
-				setTotalLength(TOTAL_LENGTH_EDEFAULT);
+			case EditorPackage.ABSTRACT_NODE__LENGTH:
+				setLength(LENGTH_EDEFAULT);
 				return;
 			case EditorPackage.ABSTRACT_NODE__NAME:
 				setName(NAME_EDEFAULT);
@@ -683,55 +614,20 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 		switch (featureID) {
 			case EditorPackage.ABSTRACT_NODE__PARENT:
 				return getParent() != null;
-			case EditorPackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
-				return grammarElement != null;
 			case EditorPackage.ABSTRACT_NODE__ELEMENT:
 				return element != null;
 			case EditorPackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				return syntaxError != null;
-			case EditorPackage.ABSTRACT_NODE__TOTAL_OFFSET:
-				return totalOffset != TOTAL_OFFSET_EDEFAULT;
+			case EditorPackage.ABSTRACT_NODE__OFFSET:
+				return offset != OFFSET_EDEFAULT;
 			case EditorPackage.ABSTRACT_NODE__TOTAL_LINE:
 				return totalLine != TOTAL_LINE_EDEFAULT;
-			case EditorPackage.ABSTRACT_NODE__TOTAL_LENGTH:
-				return totalLength != TOTAL_LENGTH_EDEFAULT;
+			case EditorPackage.ABSTRACT_NODE__LENGTH:
+				return length != LENGTH_EDEFAULT;
 			case EditorPackage.ABSTRACT_NODE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case EditorPackage.ABSTRACT_NODE___SERIALIZE:
-				return serialize();
-			case EditorPackage.ABSTRACT_NODE___GET_LEAF_NODES:
-				return getLeafNodes();
-			case EditorPackage.ABSTRACT_NODE___GET_LEAF_NODES__ABSTRACTNODE:
-				return getLeafNodes((AbstractNode)arguments.get(0));
-			case EditorPackage.ABSTRACT_NODE___ALL_SYNTAX_ERRORS:
-				return allSyntaxErrors();
-			case EditorPackage.ABSTRACT_NODE___TOTAL_END_LINE:
-				return totalEndLine();
-			case EditorPackage.ABSTRACT_NODE___GET_OFFSET:
-				return getOffset();
-			case EditorPackage.ABSTRACT_NODE___GET_LINE:
-				return getLine();
-			case EditorPackage.ABSTRACT_NODE___GET_LENGTH:
-				return getLength();
-			case EditorPackage.ABSTRACT_NODE___END_LINE:
-				return endLine();
-			case EditorPackage.ABSTRACT_NODE___UPDATE__DOCUMENTEVENT:
-				update((DocumentEvent)arguments.get(0));
-				return null;
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -746,4 +642,8 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 		return name;
 	}
 
+    // ------
+   
+	
+	
 } //AbstractNodeImpl

@@ -6,6 +6,7 @@
  */
 package net.zehrer.no2.semantic.editor.model;
 
+import net.zehrer.common.interval.EIntInterval;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -20,12 +21,11 @@ import org.eclipse.jface.text.DocumentEvent;
  * The following features are supported:
  * <ul>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getParent <em>Parent</em>}</li>
- *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getGrammarElement <em>Grammar Element</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getElement <em>Element</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getSyntaxError <em>Syntax Error</em>}</li>
- *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalOffset <em>Total Offset</em>}</li>
+ *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getOffset <em>Offset</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalLine <em>Total Line</em>}</li>
- *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalLength <em>Total Length</em>}</li>
+ *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getLength <em>Length</em>}</li>
  *   <li>{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -34,7 +34,7 @@ import org.eclipse.jface.text.DocumentEvent;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractNode extends EObject {
+public interface AbstractNode extends EIntInterval {
 	/**
 	 * Returns the value of the '<em><b>Parent</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link net.zehrer.no2.semantic.editor.model.CompositeNode#getChildren <em>Children</em>}'.
@@ -62,32 +62,6 @@ public interface AbstractNode extends EObject {
 	 * @generated
 	 */
 	void setParent(CompositeNode value);
-
-	/**
-	 * Returns the value of the '<em><b>Grammar Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Grammar Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Grammar Element</em>' reference.
-	 * @see #setGrammarElement(EObject)
-	 * @see net.zehrer.no2.semantic.editor.model.EditorPackage#getAbstractNode_GrammarElement()
-	 * @model
-	 * @generated
-	 */
-	EObject getGrammarElement();
-
-	/**
-	 * Sets the value of the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getGrammarElement <em>Grammar Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Grammar Element</em>' reference.
-	 * @see #getGrammarElement()
-	 * @generated
-	 */
-	void setGrammarElement(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Element</b></em>' reference.
@@ -144,32 +118,6 @@ public interface AbstractNode extends EObject {
 	void setSyntaxError(SyntaxError value);
 
 	/**
-	 * Returns the value of the '<em><b>Total Offset</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Total Offset</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Total Offset</em>' attribute.
-	 * @see #setTotalOffset(int)
-	 * @see net.zehrer.no2.semantic.editor.model.EditorPackage#getAbstractNode_TotalOffset()
-	 * @model
-	 * @generated
-	 */
-	int getTotalOffset();
-
-	/**
-	 * Sets the value of the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalOffset <em>Total Offset</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Total Offset</em>' attribute.
-	 * @see #getTotalOffset()
-	 * @generated
-	 */
-	void setTotalOffset(int value);
-
-	/**
 	 * Returns the value of the '<em><b>Total Line</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -194,33 +142,6 @@ public interface AbstractNode extends EObject {
 	 * @generated
 	 */
 	void setTotalLine(int value);
-
-	/**
-	 * Returns the value of the '<em><b>Total Length</b></em>' attribute.
-	 * The default value is <code>"-1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Total Length</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Total Length</em>' attribute.
-	 * @see #setTotalLength(int)
-	 * @see net.zehrer.no2.semantic.editor.model.EditorPackage#getAbstractNode_TotalLength()
-	 * @model default="-1" ordered="false"
-	 * @generated
-	 */
-	int getTotalLength();
-
-	/**
-	 * Sets the value of the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getTotalLength <em>Total Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Total Length</em>' attribute.
-	 * @see #getTotalLength()
-	 * @generated
-	 */
-	void setTotalLength(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -292,13 +213,26 @@ public interface AbstractNode extends EObject {
 	int totalEndLine();
 
 	/**
+	 * Returns the value of the '<em><b>Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.getOffset(this);'"
+	 * @return the value of the '<em>Offset</em>' attribute.
+	 * @see #setOffset(int)
+	 * @see net.zehrer.no2.semantic.editor.model.EditorPackage#getAbstractNode_Offset()
+	 * @model
 	 * @generated
 	 */
 	int getOffset();
+
+	/**
+	 * Sets the value of the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getOffset <em>Offset</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Offset</em>' attribute.
+	 * @see #getOffset()
+	 * @generated
+	 */
+	void setOffset(int value);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -310,13 +244,27 @@ public interface AbstractNode extends EObject {
 	int getLine();
 
 	/**
+	 * Returns the value of the '<em><b>Length</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.getLength(this);'"
+	 * @return the value of the '<em>Length</em>' attribute.
+	 * @see #setLength(int)
+	 * @see net.zehrer.no2.semantic.editor.model.EditorPackage#getAbstractNode_Length()
+	 * @model default="-1" ordered="false"
 	 * @generated
 	 */
 	int getLength();
+
+	/**
+	 * Sets the value of the '{@link net.zehrer.no2.semantic.editor.model.AbstractNode#getLength <em>Length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Length</em>' attribute.
+	 * @see #getLength()
+	 * @generated
+	 */
+	void setLength(int value);
 
 	/**
 	 * <!-- begin-user-doc -->

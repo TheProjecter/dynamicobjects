@@ -21,7 +21,7 @@ public class EditorUtil {
 	
 	public static String logGraph (CompositeNode node) {
 		
-		StringBuilder buffer = new StringBuilder(Math.max(16, node.getTotalLength()));
+		StringBuilder buffer = new StringBuilder(Math.max(16, node.getLength()));
 
 		logGraph(node, buffer);
 		return buffer.toString();

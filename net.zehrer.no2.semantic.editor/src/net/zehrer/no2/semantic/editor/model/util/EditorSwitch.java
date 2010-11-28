@@ -8,6 +8,7 @@ package net.zehrer.no2.semantic.editor.model.util;
 
 import java.util.List;
 
+import net.zehrer.common.interval.EIntInterval;
 import net.zehrer.no2.semantic.editor.model.*;
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
@@ -30,7 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  * @see net.zehrer.no2.semantic.editor.model.EditorPackage
  * @generated
  */
-public class EditorSwitch<T> {
+public class EditorSwitch<T1> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -58,7 +59,7 @@ public class EditorSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject) {
+	public T1 doSwitch(EObject theEObject) {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
@@ -69,7 +70,7 @@ public class EditorSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
+	protected T1 doSwitch(EClass theEClass, EObject theEObject) {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
@@ -89,31 +90,37 @@ public class EditorSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(int classifierID, EObject theEObject) {
+	protected T1 doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case EditorPackage.COMPOSITE_NODE: {
 				CompositeNode compositeNode = (CompositeNode)theEObject;
-				T result = caseCompositeNode(compositeNode);
+				T1 result = caseCompositeNode(compositeNode);
 				if (result == null) result = caseAbstractNode(compositeNode);
+				if (result == null) result = caseEIntInterval(compositeNode);
+				if (result == null) result = caseIComparable(compositeNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case EditorPackage.ABSTRACT_NODE: {
 				AbstractNode abstractNode = (AbstractNode)theEObject;
-				T result = caseAbstractNode(abstractNode);
+				T1 result = caseAbstractNode(abstractNode);
+				if (result == null) result = caseEIntInterval(abstractNode);
+				if (result == null) result = caseIComparable(abstractNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case EditorPackage.LEAF_NODE: {
 				LeafNode leafNode = (LeafNode)theEObject;
-				T result = caseLeafNode(leafNode);
+				T1 result = caseLeafNode(leafNode);
 				if (result == null) result = caseAbstractNode(leafNode);
+				if (result == null) result = caseEIntInterval(leafNode);
+				if (result == null) result = caseIComparable(leafNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case EditorPackage.SYNTAX_ERROR: {
 				SyntaxError syntaxError = (SyntaxError)theEObject;
-				T result = caseSyntaxError(syntaxError);
+				T1 result = caseSyntaxError(syntaxError);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -132,7 +139,7 @@ public class EditorSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCompositeNode(CompositeNode object) {
+	public T1 caseCompositeNode(CompositeNode object) {
 		return null;
 	}
 
@@ -147,7 +154,7 @@ public class EditorSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractNode(AbstractNode object) {
+	public T1 caseAbstractNode(AbstractNode object) {
 		return null;
 	}
 
@@ -162,7 +169,7 @@ public class EditorSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLeafNode(LeafNode object) {
+	public T1 caseLeafNode(LeafNode object) {
 		return null;
 	}
 
@@ -177,7 +184,37 @@ public class EditorSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSyntaxError(SyntaxError object) {
+	public T1 caseSyntaxError(SyntaxError object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>IComparable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>IComparable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <T> T1 caseIComparable(Comparable<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EInt Interval</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EInt Interval</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseEIntInterval(EIntInterval object) {
 		return null;
 	}
 
@@ -192,7 +229,7 @@ public class EditorSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public T defaultCase(EObject object) {
+	public T1 defaultCase(EObject object) {
 		return null;
 	}
 

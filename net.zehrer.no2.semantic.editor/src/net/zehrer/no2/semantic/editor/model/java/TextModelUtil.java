@@ -96,7 +96,7 @@ public class TextModelUtil {
 		if (_this instanceof LeafNodeImpl)
 			return serialize((LeafNodeImpl)_this);
 		checkArgument(_this);
-		StringBuilder buffer = new StringBuilder(Math.max(16, _this.getTotalLength()));
+		StringBuilder buffer = new StringBuilder(Math.max(16, _this.getLength()));
 //		EList<LeafNode> leafNodes = _this.getLeafNodes();
 //		for (LeafNode leafNode : leafNodes) {
 //			buff.append(leafNode.getText());
@@ -176,24 +176,29 @@ public class TextModelUtil {
 	 * @param abstractNode
 	 * @return
 	 */
-	public static int getOffset(AbstractNode abstractNode) {
-		if (abstractNode instanceof LeafNode)
-			return abstractNode.getTotalOffset();
-		final CompositeNode node = (CompositeNode) abstractNode;
-		for (int i = 0; i < node.getChildren().size(); i++) {
-			final AbstractNode child = node.getChildren().get(i);
-			if (child instanceof CompositeNode) {
-				if (hasLeafNodes((CompositeNode) child))
-					return getOffset(child);
-			} else {
-				final LeafNode leaf = (LeafNode) child;
-				if (!leaf.isHidden())
-					return leaf.getTotalOffset();
-			}
-		}
-		// every child node is a hidden node, return total offset
-		return abstractNode.getTotalOffset();
-	}
+//	public static int getOffset(AbstractNode abstractNode) {
+//		
+//		if (abstractNode instanceof LeafNode)
+//			return abstractNode.getTotalOffset();
+//	
+//		final CompositeNode node = (CompositeNode) abstractNode;
+//		
+//		for (int i = 0; i < node.getChildren().size(); i++) {	
+//			final AbstractNode child = node.getChildren().get(i);
+//			
+//			if (child instanceof CompositeNode) {
+//				if (hasLeafNodes((CompositeNode) child))
+//					return getOffset(child);
+//			} else {
+//				final LeafNode leaf = (LeafNode) child;
+//				if (!leaf.isHidden())
+//					return leaf.getTotalOffset();
+//			}
+//		}
+//		
+//		// every child node is a hidden node, return total offset
+//		return abstractNode.getTotalOffset();
+//	}
 
 	private static boolean hasLeafNodes(CompositeNode child) {
 		for (AbstractNode node : child.getChildren()) {
@@ -220,7 +225,7 @@ public class TextModelUtil {
 			if (child instanceof CompositeNode)
 				return getLine(child);
 			final LeafNode leaf = (LeafNode) child;
-			if (!leaf.isHidden())
+//			if (!leaf.isHidden())
 				return leaf.getTotalLine();
 		}
 		// every child node is a hidden node, return total line
@@ -231,20 +236,24 @@ public class TextModelUtil {
 	 * @param abstractNode
 	 * @return
 	 */
-	public static int getLength(AbstractNode abstractNode) {
-		if (abstractNode instanceof LeafNode)
-			return abstractNode.getTotalLength();
-		final CompositeNode node = (CompositeNode) abstractNode;
-		for (int i = node.getChildren().size() - 1; i >= 0; i--) {
-			final AbstractNode child = node.getChildren().get(i);
-			if (child instanceof CompositeNode)
-				return child.getOffset() - abstractNode.getOffset() + child.getLength();
-			if (!((LeafNode) child).isHidden())
-				return child.getTotalOffset() - abstractNode.getOffset() + child.getTotalLength();
-		}
-		// every child node is a hidden node, return total length
-		return abstractNode.getTotalLength();
-	}
+//	public static int getLength(AbstractNode abstractNode) {
+//		
+//		if (abstractNode instanceof LeafNode)
+//			return abstractNode.getTotalLength();
+//		
+//		final CompositeNode node = (CompositeNode) abstractNode;
+//		for (int i = node.getChildren().size() - 1; i >= 0; i--) {
+//			
+//			final AbstractNode child = node.getChildren().get(i);
+//			if (child instanceof CompositeNode)
+//				return child.getOffset() - abstractNode.getOffset() + child.getLength();
+//			
+//			if (!((LeafNode) child).isHidden())
+//				return child.getTotalOffset() - abstractNode.getOffset() + child.getTotalLength();
+//		}
+//		// every child node is a hidden node, return total length
+//		return abstractNode.getTotalLength();
+//	}
 
 	/**
 	 * @param abstractNode
@@ -258,7 +267,7 @@ public class TextModelUtil {
 			final AbstractNode child = node.getChildren().get(i);
 			if (child instanceof CompositeNode)
 				return endLine(child);
-			if (!((LeafNode) child).isHidden())
+//			if (!((LeafNode) child).isHidden())
 				return child.totalEndLine();
 		}
 		// every child node is a hidden node, return total endLine
@@ -459,12 +468,12 @@ public class TextModelUtil {
 	 */
 	public static LeafNode intersect ( LeafNode a, LeafNode b) {
 
-		int aLenght = a.getTotalLength();
-		int aOffsetStart = a.getTotalOffset();
+		int aLenght = a.getLength();
+		int aOffsetStart = a.getOffset();
 		int aOffsetEnd = aOffsetStart + aLenght -1;
 		
-		int bLenght = b.getTotalLength();
-		int bOffsetStart = b.getTotalOffset();
+		int bLenght = b.getLength();
+		int bOffsetStart = b.getOffset();
 		int bOffsetEnd = bOffsetStart + bLenght -1;
 		
 		int start = Math.max(aOffsetStart, bOffsetStart);

@@ -161,10 +161,11 @@ public class TestTextModelUtilUpdate extends TestCase{
 		
 		DocumentEvent event = new DocumentEvent(new Document(), 6, 2, "XX");
 		
+		
 		TextModelUtil.update(node, event);
 		
 		assertEquals("012345XX89", node.serialize());
-		assertEquals(11, node.getLength());  // test if the node paramater are updated
+		assertEquals(10, node.getLength());  // test if the node paramater are updated
 	}
 }
 
