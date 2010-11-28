@@ -7,6 +7,7 @@
 package lang;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 
 /**
@@ -78,6 +79,17 @@ public interface LangPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Integer</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Integer
+	 * @see lang.impl.LangPackageImpl#getInteger()
+	 * @generated
+	 */
+	int INTEGER = 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link java.lang.Comparable <em>IComparable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,6 +99,17 @@ public interface LangPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getIComparable();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.Integer <em>Integer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Integer</em>'.
+	 * @see java.lang.Integer
+	 * @model instanceClass="java.lang.Integer"
+	 * @generated
+	 */
+	EDataType getInteger();
 
 	/**
 	 * Returns the factory that creates the instances of the model.

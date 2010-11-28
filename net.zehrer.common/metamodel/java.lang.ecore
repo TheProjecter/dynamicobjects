@@ -13,5 +13,6 @@
         </eParameters>
       </eOperations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
   </eSubpackages>
 </ecore:EPackage>
