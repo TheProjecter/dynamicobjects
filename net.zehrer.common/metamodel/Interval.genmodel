@@ -8,8 +8,9 @@
     interfaceNamePattern="">
   <foreignModel>Interval.ecore</foreignModel>
   <genPackages prefix="Interval" basePackage="net.zehrer.common" disposableProviderFactory="true"
+      multipleEditorPages="false" generateModelWizard="false" extensibleProviderFactory="true"
       contentTypeIdentifier="" ecorePackage="Interval.ecore#/">
-    <genClasses ecoreClass="Interval.ecore#//EInterval">
+    <genClasses image="false" ecoreClass="Interval.ecore#//EInterval">
       <genTypeParameters ecoreTypeParameter="Interval.ecore#//EInterval/T"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Interval.ecore#//EInterval/lowerLimit"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Interval.ecore#//EInterval/upperLimit"/>
