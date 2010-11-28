@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package lang;
+package net.zehrer.common.lang;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see lang.LangFactory
+ * @see net.zehrer.common.lang.LangFactory
  * @model kind="package"
  * @generated
  */
@@ -56,14 +56,14 @@ public interface LangPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	LangPackage eINSTANCE = lang.impl.LangPackageImpl.init();
+	LangPackage eINSTANCE = net.zehrer.common.lang.impl.LangPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link java.lang.Comparable <em>IComparable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see java.lang.Comparable
-	 * @see lang.impl.LangPackageImpl#getIComparable()
+	 * @see net.zehrer.common.lang.impl.LangPackageImpl#getIComparable()
 	 * @generated
 	 */
 	int ICOMPARABLE = 0;
@@ -77,13 +77,12 @@ public interface LangPackage extends EPackage {
 	 */
 	int ICOMPARABLE_FEATURE_COUNT = 0;
 
-
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see java.lang.Integer
-	 * @see lang.impl.LangPackageImpl#getInteger()
+	 * @see net.zehrer.common.lang.impl.LangPackageImpl#getInteger()
 	 * @generated
 	 */
 	int INTEGER = 1;
