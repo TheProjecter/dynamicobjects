@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="test"
+    nsURI="http://zehrer.net/test" nsPrefix="zt">
+  <eSubpackages name="generic" nsURI="http://zehrer.net/test/generics" nsPrefix="ztg">
+    <eClassifiers xsi:type="ecore:EClass" name="BasicElement">
+      <eTypeParameters name="T"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
+        <eGenericType eTypeParameter="#//generic/BasicElement/T"/>
+      </eStructuralFeatures>
+      <eGenericSuperTypes eClassifier="#//lang/Comparable">
+        <eTypeArguments eClassifier="#//generic/BasicElement"/>
+      </eGenericSuperTypes>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Element">
+      <eTypeParameters name="T">
+        <eBounds eClassifier="#//lang/Comparable">
+          <eTypeArguments eTypeParameter="#//generic/Element/T"/>
+        </eBounds>
+      </eTypeParameters>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
+        <eGenericType eTypeParameter="#//generic/Element/T"/>
+      </eStructuralFeatures>
+      <eGenericSuperTypes eClassifier="#//lang/Comparable">
+        <eTypeArguments eClassifier="#//generic/Element">
+          <eTypeArguments eTypeParameter="#//generic/Element/T"/>
+        </eTypeArguments>
+      </eGenericSuperTypes>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="lang" nsURI="http://zehrer.net/test/lang" nsPrefix="ztl">
+    <eClassifiers xsi:type="ecore:EClass" name="Comparable" instanceClassName="java.lang.Comparable"
+        abstract="true" interface="true">
+      <eTypeParameters name="T"/>
+      <eOperations name="compareTo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eParameters name="other">
+          <eGenericType eTypeParameter="#//lang/Comparable/T"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
