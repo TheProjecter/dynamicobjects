@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -50,7 +51,7 @@ import org.eclipse.jface.text.DocumentEvent;
  *
  * @generated
  */
-public abstract class AbstractNodeImpl extends MinimalEObjectImpl.Container implements AbstractNode {
+public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNode {
 	/**
 	 * The cached value of the '{@link #getGrammarElement() <em>Grammar Element</em>}' reference.
 	 * <!-- begin-user-doc -->
