@@ -39,7 +39,7 @@ public interface LangPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://java.com/lang/";
+	String eNS_URI = "http://java.com/lang";
 
 	/**
 	 * The package namespace name.
