@@ -36,10 +36,13 @@
         <genParameters ecoreParameter="Interval.ecore#//EInterval/includes/value"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="Interval.ecore#//IComparable">
-      <genTypeParameters ecoreTypeParameter="Interval.ecore#//IComparable/T"/>
-      <genOperations ecoreOperation="Interval.ecore#//IComparable/compareTo">
-        <genParameters ecoreParameter="Interval.ecore#//IComparable/compareTo/other"/>
+  </genPackages>
+  <genPackages prefix="Lang" adapterFactory="false" literalsInterface="false" multipleEditorPages="false"
+      generateModelWizard="false" contentTypeIdentifier="" ecorePackage="java.lang.ecore#//lang">
+    <genClasses image="false" ecoreClass="java.lang.ecore#//lang/IComparable">
+      <genTypeParameters ecoreTypeParameter="java.lang.ecore#//lang/IComparable/T"/>
+      <genOperations ecoreOperation="java.lang.ecore#//lang/IComparable/compareTo">
+        <genParameters ecoreParameter="java.lang.ecore#//lang/IComparable/compareTo/other"/>
       </genOperations>
     </genClasses>
   </genPackages>

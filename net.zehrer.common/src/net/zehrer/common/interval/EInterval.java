@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see net.zehrer.common.interval.IntervalPackage#getEInterval()
- * @model abstract="true" superTypes="net.zehrer.common.interval.IComparable<net.zehrer.common.interval.EInterval<T>>" TBounds="net.zehrer.common.interval.IComparable<T>"
+ * @model abstract="true" superTypes="lang.IComparable<net.zehrer.common.interval.EInterval<T>>" TBounds="lang.IComparable<T>"
  * @generated
  */
 public interface EInterval<T extends Comparable<T>> extends EObject, Comparable<EInterval<T>> {

@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_pzMaEPmdEd-vGahm2xPOow" type="EcoreTools" name="Interval.ecorediag" measurementUnit="Pixel">
-  <children xmi:type="notation:Node" xmi:id="_p4o6wPmdEd-vGahm2xPOow" type="1001">
-    <children xmi:type="notation:Node" xmi:id="_p4ph0PmdEd-vGahm2xPOow" type="4001"/>
-    <children xmi:type="notation:Node" xmi:id="_p4ph0fmdEd-vGahm2xPOow" type="5001">
-      <styles xmi:type="notation:DrawerStyle" xmi:id="_p4ph0vmdEd-vGahm2xPOow" collapsed="true"/>
-      <styles xmi:type="notation:SortingStyle" xmi:id="_p4ph0_mdEd-vGahm2xPOow"/>
-      <styles xmi:type="notation:FilteringStyle" xmi:id="_p4ph1PmdEd-vGahm2xPOow"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_p4ph1fmdEd-vGahm2xPOow" type="5002">
-      <styles xmi:type="notation:DrawerStyle" xmi:id="_p4ph1vmdEd-vGahm2xPOow" collapsed="true"/>
-      <styles xmi:type="notation:SortingStyle" xmi:id="_p4ph1_mdEd-vGahm2xPOow"/>
-      <styles xmi:type="notation:FilteringStyle" xmi:id="_p4ph2PmdEd-vGahm2xPOow"/>
-    </children>
-    <styles xmi:type="notation:ShapeStyle" xmi:id="_p4o6wfmdEd-vGahm2xPOow" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="Interval.ecore#//IComparable"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_p4o6wvmdEd-vGahm2xPOow" x="171" y="18" height="75"/>
-  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_pzMaEfmdEd-vGahm2xPOow"/>
   <element xmi:type="ecore:EPackage" href="Interval.ecore#/"/>
 </notation:Diagram>
