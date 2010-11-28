@@ -5,7 +5,7 @@
     nsURI="http://zehrer.net/common/interval/1.0" nsPrefix="">
   <eClassifiers xsi:type="ecore:EClass" name="EInterval" abstract="true">
     <eTypeParameters name="T">
-      <eBounds eClassifier="#//IComparable">
+      <eBounds eClassifier="ecore:EClass java.lang.ecore#//lang/IComparable">
         <eTypeArguments eTypeParameter="#//EInterval/T"/>
       </eBounds>
     </eTypeParameters>
@@ -58,19 +58,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="upperLimit" lowerBound="1">
       <eGenericType eTypeParameter="#//EInterval/T"/>
     </eStructuralFeatures>
-    <eGenericSuperTypes eClassifier="#//IComparable">
+    <eGenericSuperTypes eClassifier="ecore:EClass java.lang.ecore#//lang/IComparable">
       <eTypeArguments eClassifier="#//EInterval">
         <eTypeArguments eTypeParameter="#//EInterval/T"/>
       </eTypeArguments>
     </eGenericSuperTypes>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IComparable" instanceClassName="java.lang.Comparable"
-      abstract="true" interface="true">
-    <eTypeParameters name="T"/>
-    <eOperations name="compareTo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
-      <eParameters name="other">
-        <eGenericType eTypeParameter="#//IComparable/T"/>
-      </eParameters>
-    </eOperations>
   </eClassifiers>
 </ecore:EPackage>

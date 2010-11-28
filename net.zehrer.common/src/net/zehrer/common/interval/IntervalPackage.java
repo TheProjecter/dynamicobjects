@@ -6,6 +6,7 @@
  */
 package net.zehrer.common.interval;
 
+import lang.LangPackage;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -59,25 +60,6 @@ public interface IntervalPackage extends EPackage {
 	IntervalPackage eINSTANCE = net.zehrer.common.interval.impl.IntervalPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link java.lang.Comparable <em>IComparable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.Comparable
-	 * @see net.zehrer.common.interval.impl.IntervalPackageImpl#getIComparable()
-	 * @generated
-	 */
-	int ICOMPARABLE = 1;
-
-	/**
-	 * The number of structural features of the '<em>IComparable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ICOMPARABLE_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link net.zehrer.common.interval.impl.EIntervalImpl <em>EInterval</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -94,7 +76,7 @@ public interface IntervalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EINTERVAL__LOWER_LIMIT = ICOMPARABLE_FEATURE_COUNT + 0;
+	int EINTERVAL__LOWER_LIMIT = LangPackage.ICOMPARABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Upper Limit</b></em>' reference.
@@ -103,7 +85,7 @@ public interface IntervalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EINTERVAL__UPPER_LIMIT = ICOMPARABLE_FEATURE_COUNT + 1;
+	int EINTERVAL__UPPER_LIMIT = LangPackage.ICOMPARABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>EInterval</em>' class.
@@ -112,7 +94,7 @@ public interface IntervalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EINTERVAL_FEATURE_COUNT = ICOMPARABLE_FEATURE_COUNT + 2;
+	int EINTERVAL_FEATURE_COUNT = LangPackage.ICOMPARABLE_FEATURE_COUNT + 2;
 
 
 	/**
@@ -146,17 +128,6 @@ public interface IntervalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEInterval_UpperLimit();
-
-	/**
-	 * Returns the meta object for class '{@link java.lang.Comparable <em>IComparable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>IComparable</em>'.
-	 * @see java.lang.Comparable
-	 * @model instanceClass="java.lang.Comparable" typeParameters="T"
-	 * @generated
-	 */
-	EClass getIComparable();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -205,16 +176,6 @@ public interface IntervalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EINTERVAL__UPPER_LIMIT = eINSTANCE.getEInterval_UpperLimit();
-
-		/**
-		 * The meta object literal for the '{@link java.lang.Comparable <em>IComparable</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.lang.Comparable
-		 * @see net.zehrer.common.interval.impl.IntervalPackageImpl#getIComparable()
-		 * @generated
-		 */
-		EClass ICOMPARABLE = eINSTANCE.getIComparable();
 
 	}
 

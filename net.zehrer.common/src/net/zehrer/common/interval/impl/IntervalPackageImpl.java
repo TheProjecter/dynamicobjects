@@ -6,6 +6,9 @@
  */
 package net.zehrer.common.interval.impl;
 
+
+import lang.LangPackage;
+import lang.impl.LangPackageImpl;
 import net.zehrer.common.interval.EInterval;
 import net.zehrer.common.interval.IntervalFactory;
 import net.zehrer.common.interval.IntervalPackage;
@@ -32,13 +35,6 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 	 * @generated
 	 */
 	private EClass eIntervalEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass iComparableEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -86,11 +82,16 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 
 		isInited = true;
 
+		// Obtain or create and register interdependencies
+		LangPackageImpl theLangPackage = (LangPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LangPackage.eNS_URI) instanceof LangPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LangPackage.eNS_URI) : LangPackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theIntervalPackage.createPackageContents();
+		theLangPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theIntervalPackage.initializePackageContents();
+		theLangPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theIntervalPackage.freeze();
@@ -133,15 +134,6 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getIComparable() {
-		return iComparableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public IntervalFactory getIntervalFactory() {
 		return (IntervalFactory)getEFactoryInstance();
 	}
@@ -168,8 +160,6 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 		eIntervalEClass = createEClass(EINTERVAL);
 		createEReference(eIntervalEClass, EINTERVAL__LOWER_LIMIT);
 		createEReference(eIntervalEClass, EINTERVAL__UPPER_LIMIT);
-
-		iComparableEClass = createEClass(ICOMPARABLE);
 	}
 
 	/**
@@ -195,18 +185,20 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		LangPackage theLangPackage = (LangPackage)EPackage.Registry.INSTANCE.getEPackage(LangPackage.eNS_URI);
+
 		// Create type parameters
 		ETypeParameter eIntervalEClass_T = addETypeParameter(eIntervalEClass, "T");
-		ETypeParameter iComparableEClass_T = addETypeParameter(iComparableEClass, "T");
 
 		// Set bounds for type parameters
-		EGenericType g1 = createEGenericType(this.getIComparable());
+		EGenericType g1 = createEGenericType(theLangPackage.getIComparable());
 		EGenericType g2 = createEGenericType(eIntervalEClass_T);
 		g1.getETypeArguments().add(g2);
 		eIntervalEClass_T.getEBounds().add(g1);
 
 		// Add supertypes to classes
-		g1 = createEGenericType(this.getIComparable());
+		g1 = createEGenericType(theLangPackage.getIComparable());
 		g2 = createEGenericType(this.getEInterval());
 		g1.getETypeArguments().add(g2);
 		EGenericType g3 = createEGenericType(eIntervalEClass_T);
@@ -258,12 +250,6 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 		op = addEOperation(eIntervalEClass, ecorePackage.getEBoolean(), "includes", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(eIntervalEClass_T);
 		addEParameter(op, g1, "value", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(iComparableEClass, Comparable.class, "IComparable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-
-		op = addEOperation(iComparableEClass, ecorePackage.getEInt(), "compareTo", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(iComparableEClass_T);
-		addEParameter(op, g1, "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
