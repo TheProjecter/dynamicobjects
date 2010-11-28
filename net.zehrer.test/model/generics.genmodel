@@ -8,12 +8,17 @@
   <genPackages prefix="Test" basePackage="net.zehrer" disposableProviderFactory="true"
       ecorePackage="generics.ecore#/">
     <nestedGenPackages prefix="Generic" disposableProviderFactory="true" ecorePackage="generics.ecore#//generic">
+      <genClasses ecoreClass="generics.ecore#//generic/BasicElement">
+        <genTypeParameters ecoreTypeParameter="generics.ecore#//generic/BasicElement/T"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generics.ecore#//generic/BasicElement/value"/>
+      </genClasses>
       <genClasses ecoreClass="generics.ecore#//generic/Element">
         <genTypeParameters ecoreTypeParameter="generics.ecore#//generic/Element/T"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generics.ecore#//generic/Element/value"/>
       </genClasses>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Lang" disposableProviderFactory="true" ecorePackage="generics.ecore#//lang">
+    <nestedGenPackages prefix="Lang" disposableProviderFactory="true" adapterFactory="false"
+        ecorePackage="generics.ecore#//lang">
       <genClasses image="false" ecoreClass="generics.ecore#//lang/Comparable">
         <genTypeParameters ecoreTypeParameter="generics.ecore#//lang/Comparable/T"/>
         <genOperations ecoreOperation="generics.ecore#//lang/Comparable/compareTo">
