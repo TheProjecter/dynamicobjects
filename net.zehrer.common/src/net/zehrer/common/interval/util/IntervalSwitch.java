@@ -94,6 +94,13 @@ public class IntervalSwitch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case IntervalPackage.EINT_INTERVAL: {
+				EIntInterval eIntInterval = (EIntInterval)theEObject;
+				T1 result = caseEIntInterval(eIntInterval);
+				if (result == null) result = caseIComparable(eIntInterval);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -110,6 +117,21 @@ public class IntervalSwitch<T1> {
 	 * @generated
 	 */
 	public <T extends Comparable<T>> T1 caseEInterval(EInterval<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EInt Interval</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EInt Interval</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseEIntInterval(EIntInterval object) {
 		return null;
 	}
 

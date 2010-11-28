@@ -26,6 +26,15 @@ public interface IntervalFactory extends EFactory {
 	IntervalFactory eINSTANCE = net.zehrer.common.interval.impl.IntervalFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>EInt Interval</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>EInt Interval</em>'.
+	 * @generated
+	 */
+	EIntInterval createEIntInterval();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

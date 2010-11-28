@@ -76,6 +76,10 @@ public class IntervalAdapterFactory extends AdapterFactoryImpl {
 				return createEIntervalAdapter();
 			}
 			@Override
+			public Adapter caseEIntInterval(EIntInterval object) {
+				return createEIntIntervalAdapter();
+			}
+			@Override
 			public <T> Adapter caseIComparable(Comparable<T> object) {
 				return createIComparableAdapter();
 			}
@@ -110,6 +114,20 @@ public class IntervalAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEIntervalAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link net.zehrer.common.interval.EIntInterval <em>EInt Interval</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see net.zehrer.common.interval.EIntInterval
+	 * @generated
+	 */
+	public Adapter createEIntIntervalAdapter() {
 		return null;
 	}
 

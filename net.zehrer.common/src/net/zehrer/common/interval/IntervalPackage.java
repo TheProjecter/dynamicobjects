@@ -7,6 +7,7 @@
 package net.zehrer.common.interval;
 
 import lang.LangPackage;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -98,6 +99,44 @@ public interface IntervalPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link net.zehrer.common.interval.impl.EIntIntervalImpl <em>EInt Interval</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see net.zehrer.common.interval.impl.EIntIntervalImpl
+	 * @see net.zehrer.common.interval.impl.IntervalPackageImpl#getEIntInterval()
+	 * @generated
+	 */
+	int EINT_INTERVAL = 1;
+
+	/**
+	 * The feature id for the '<em><b>Lower Limit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EINT_INTERVAL__LOWER_LIMIT = LangPackage.ICOMPARABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Upper Limit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EINT_INTERVAL__UPPER_LIMIT = LangPackage.ICOMPARABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>EInt Interval</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EINT_INTERVAL_FEATURE_COUNT = LangPackage.ICOMPARABLE_FEATURE_COUNT + 2;
+
+
+	/**
 	 * Returns the meta object for class '{@link net.zehrer.common.interval.EInterval <em>EInterval</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -128,6 +167,38 @@ public interface IntervalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEInterval_UpperLimit();
+
+	/**
+	 * Returns the meta object for class '{@link net.zehrer.common.interval.EIntInterval <em>EInt Interval</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EInt Interval</em>'.
+	 * @see net.zehrer.common.interval.EIntInterval
+	 * @generated
+	 */
+	EClass getEIntInterval();
+
+	/**
+	 * Returns the meta object for the attribute '{@link net.zehrer.common.interval.EIntInterval#getLowerLimit <em>Lower Limit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lower Limit</em>'.
+	 * @see net.zehrer.common.interval.EIntInterval#getLowerLimit()
+	 * @see #getEIntInterval()
+	 * @generated
+	 */
+	EAttribute getEIntInterval_LowerLimit();
+
+	/**
+	 * Returns the meta object for the attribute '{@link net.zehrer.common.interval.EIntInterval#getUpperLimit <em>Upper Limit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Upper Limit</em>'.
+	 * @see net.zehrer.common.interval.EIntInterval#getUpperLimit()
+	 * @see #getEIntInterval()
+	 * @generated
+	 */
+	EAttribute getEIntInterval_UpperLimit();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -176,6 +247,32 @@ public interface IntervalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EINTERVAL__UPPER_LIMIT = eINSTANCE.getEInterval_UpperLimit();
+
+		/**
+		 * The meta object literal for the '{@link net.zehrer.common.interval.impl.EIntIntervalImpl <em>EInt Interval</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see net.zehrer.common.interval.impl.EIntIntervalImpl
+		 * @see net.zehrer.common.interval.impl.IntervalPackageImpl#getEIntInterval()
+		 * @generated
+		 */
+		EClass EINT_INTERVAL = eINSTANCE.getEIntInterval();
+
+		/**
+		 * The meta object literal for the '<em><b>Lower Limit</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EINT_INTERVAL__LOWER_LIMIT = eINSTANCE.getEIntInterval_LowerLimit();
+
+		/**
+		 * The meta object literal for the '<em><b>Upper Limit</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EINT_INTERVAL__UPPER_LIMIT = eINSTANCE.getEIntInterval_UpperLimit();
 
 	}
 

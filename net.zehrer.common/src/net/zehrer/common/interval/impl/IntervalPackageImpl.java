@@ -9,10 +9,12 @@ package net.zehrer.common.interval.impl;
 
 import lang.LangPackage;
 import lang.impl.LangPackageImpl;
+import net.zehrer.common.interval.EIntInterval;
 import net.zehrer.common.interval.EInterval;
 import net.zehrer.common.interval.IntervalFactory;
 import net.zehrer.common.interval.IntervalPackage;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
@@ -35,6 +37,13 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 	 * @generated
 	 */
 	private EClass eIntervalEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eIntIntervalEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -134,6 +143,33 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEIntInterval() {
+		return eIntIntervalEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEIntInterval_LowerLimit() {
+		return (EAttribute)eIntIntervalEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEIntInterval_UpperLimit() {
+		return (EAttribute)eIntIntervalEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public IntervalFactory getIntervalFactory() {
 		return (IntervalFactory)getEFactoryInstance();
 	}
@@ -160,6 +196,10 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 		eIntervalEClass = createEClass(EINTERVAL);
 		createEReference(eIntervalEClass, EINTERVAL__LOWER_LIMIT);
 		createEReference(eIntervalEClass, EINTERVAL__UPPER_LIMIT);
+
+		eIntIntervalEClass = createEClass(EINT_INTERVAL);
+		createEAttribute(eIntIntervalEClass, EINT_INTERVAL__LOWER_LIMIT);
+		createEAttribute(eIntIntervalEClass, EINT_INTERVAL__UPPER_LIMIT);
 	}
 
 	/**
@@ -204,6 +244,10 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 		EGenericType g3 = createEGenericType(eIntervalEClass_T);
 		g2.getETypeArguments().add(g3);
 		eIntervalEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(theLangPackage.getIComparable());
+		g2 = createEGenericType(this.getEIntInterval());
+		g1.getETypeArguments().add(g2);
+		eIntIntervalEClass.getEGenericSuperTypes().add(g1);
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(eIntervalEClass, EInterval.class, "EInterval", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -250,6 +294,33 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 		op = addEOperation(eIntervalEClass, ecorePackage.getEBoolean(), "includes", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(eIntervalEClass_T);
 		addEParameter(op, g1, "value", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(eIntIntervalEClass, EIntInterval.class, "EIntInterval", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEIntInterval_LowerLimit(), ecorePackage.getEIntegerObject(), "lowerLimit", null, 0, 1, EIntInterval.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEIntInterval_UpperLimit(), ecorePackage.getEIntegerObject(), "upperLimit", null, 0, 1, EIntInterval.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(eIntIntervalEClass, ecorePackage.getEBoolean(), "intersects", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEIntInterval(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(eIntIntervalEClass, this.getEIntInterval(), "intersect", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEIntInterval(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(eIntIntervalEClass, ecorePackage.getEBoolean(), "isBelow", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEIntegerObject(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(eIntIntervalEClass, ecorePackage.getEBoolean(), "isAbove", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEIntegerObject(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(eIntIntervalEClass, ecorePackage.getEBoolean(), "equals", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEJavaObject(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(eIntIntervalEClass, ecorePackage.getEBoolean(), "equals", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEIntInterval(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(eIntIntervalEClass, ecorePackage.getEInt(), "hashCode", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(eIntIntervalEClass, ecorePackage.getEBoolean(), "includes", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEIntegerObject(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
