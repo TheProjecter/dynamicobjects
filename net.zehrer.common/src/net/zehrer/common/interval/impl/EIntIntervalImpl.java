@@ -154,6 +154,7 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Returns null for an empty set 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -161,7 +162,7 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
 		Integer intersectLowerBound = greaterOfLowerLimits(other);
 		Integer intersectUpperBound = lesserOfUpperLimits(other);
         if (intersectLowerBound.compareTo(intersectUpperBound) > 0)
-            return emptyOfSameType();
+            return null; // emptyOfSameType();
         return newOfSameType(intersectLowerBound, intersectUpperBound);
 	}
 
