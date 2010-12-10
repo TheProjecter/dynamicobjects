@@ -155,6 +155,8 @@ public abstract class AbstractNodeImpl extends EIntIntervalImpl implements Abstr
 
 	protected AbstractNodeImpl(Integer lower, Integer upper) {
 		super(lower,upper);
+		setOffset(lower);
+		setLength(upper - lower +1 );
 	}	
 	/**
 	 * <!-- begin-user-doc -->
@@ -400,6 +402,7 @@ public abstract class AbstractNodeImpl extends EIntIntervalImpl implements Abstr
 	public void setOffset(int newOffset) {
 		// offset = lower limit 
 		setLowerLimit(newOffset);
+		updateUpperLimit(getLength());  
 		
 		int oldOffset = offset;
 		offset = newOffset;
@@ -433,9 +436,7 @@ public abstract class AbstractNodeImpl extends EIntIntervalImpl implements Abstr
 	 */
 	public void setLength(int newLength) {
 		
-		// upper limit = offset + length -1 
-		int offset = getOffset();
-		setUpperLimit(offset + newLength -1);
+		updateUpperLimit(newLength);
 		
 		int oldLength = length;
 		length = newLength;
@@ -643,6 +644,12 @@ public abstract class AbstractNodeImpl extends EIntIntervalImpl implements Abstr
 	}
 
     // ------
+	
+	private void updateUpperLimit(int lenght) {
+		// upper limit = offset + length -1 
+		int offset = getOffset();
+		setUpperLimit(offset + lenght -1);
+	}
    
 	
 	

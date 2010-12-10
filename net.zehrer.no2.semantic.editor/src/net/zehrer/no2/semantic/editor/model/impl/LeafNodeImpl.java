@@ -7,6 +7,7 @@
 package net.zehrer.no2.semantic.editor.model.impl;
 
 import net.zehrer.common.interval.EIntInterval;
+import net.zehrer.common.interval.EInterval;
 import net.zehrer.common.interval.impl.EIntIntervalImpl;
 import net.zehrer.no2.semantic.editor.model.EditorPackage;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
@@ -169,10 +170,32 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 		return result.toString();
 	}
 	
-    // ------
+    // -- EInterval
+	
+	// TODO: getLenght can return lenght of text
     
-    protected EIntInterval newOfSameType(Integer lower, Integer upper) {
+    @Override
+	protected LeafNode newOfSameType(Integer lower, Integer upper) {
     	return new LeafNodeImpl(lower,upper);
     }
+
+	@Override
+	public LeafNode intersect(EIntInterval other) {
+		LeafNode node = (LeafNode) super.intersect(other);
+		
+		if (node != null) {
+			StringBuilder text = new StringBuilder(getText());
+			
+			int start = node.getOffset()-getOffset();
+			int end = start + node.getLength();
+			
+			node.setText(text.substring(start, end));
+
+		}
+		
+		return node;
+	}
+    
+    
 
 } //LeafNodeImpl
