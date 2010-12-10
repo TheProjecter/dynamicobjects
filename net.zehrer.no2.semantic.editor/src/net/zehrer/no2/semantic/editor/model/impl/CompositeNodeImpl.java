@@ -8,6 +8,7 @@ package net.zehrer.no2.semantic.editor.model.impl;
 
 import java.util.Collection;
 
+import net.zehrer.common.interval.EIntInterval;
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.EditorPackage;
@@ -66,6 +67,10 @@ public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode
 	 */
 	protected CompositeNodeImpl() {
 		super();
+	}
+	
+	protected CompositeNodeImpl(Integer lower, Integer upper) {
+		super(lower,upper);
 	}
 
 	/**
@@ -201,5 +206,33 @@ public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode
 		}
 		return super.eIsSet(featureID);
 	}
+	
+	
+    // -- EInterval
+    
+    @Override
+	protected CompositeNode newOfSameType(Integer lower, Integer upper) {
+    	return new CompositeNodeImpl(lower,upper);
+    }
+
+	@Override
+	public CompositeNode intersect(EIntInterval other) {
+		
+		CompositeNode node = (CompositeNode) super.intersect(other);
+		
+		if ( node != null) {
+			AbstractNode result;
+			
+			for (AbstractNode abstractNode : getChildren()) {
+				result = (AbstractNode) abstractNode.intersect (other);
+				if (result != null)
+					node.getChildren().add(result);
+			}
+		}
+
+		
+		return node;
+	}
+    
 
 } //CompositeNodeImpl

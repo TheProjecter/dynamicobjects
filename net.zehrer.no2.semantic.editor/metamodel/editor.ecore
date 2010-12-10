@@ -52,6 +52,10 @@
       </eAnnotations>
       <eParameters name="event" eType="#//DocumentEvent"/>
     </eOperations>
+    <eOperations name="groupNodes">
+      <eParameters name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//CompositeNode"
         eOpposite="#//CompositeNode/children"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>

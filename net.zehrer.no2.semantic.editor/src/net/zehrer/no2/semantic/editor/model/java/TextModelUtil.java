@@ -457,45 +457,5 @@ public class TextModelUtil {
 		return new TypedRegion(_this.getOffset(), _this.getLength(), type);
 	}
 	
-	// the set theory
-	
-	/**
-	 * Return the intersection of A & B (A n B) based on the size (offset and length)
-	 * It will return null for the following conditions
-	 *  - the length of a or b is 0
-	 *  - the intersection is an "empty set" 
-	 * @return a new LeafNode  or null
-	 */
-	public static LeafNode intersect ( LeafNode a, LeafNode b) {
-
-		int aLenght = a.getLength();
-		int aOffsetStart = a.getOffset();
-		int aOffsetEnd = aOffsetStart + aLenght -1;
-		
-		int bLenght = b.getLength();
-		int bOffsetStart = b.getOffset();
-		int bOffsetEnd = bOffsetStart + bLenght -1;
-		
-		int start = Math.max(aOffsetStart, bOffsetStart);
-		int end = Math.min(aOffsetEnd, bOffsetEnd);
-		
-		if (start > end)
-			return null;
-		
-		LeafNode result = EditorFactory.eINSTANCE.createLeafNode();
-		
-//		result.setTotalLength(value)
-
-		
-		return result;
-	}
-
-	/**
-	 * Return true if a ends before b starts 
-	 */
-	public static boolean isAsmallerB (AbstractNode a, AbstractNode b) {
-		int aOffsetEnd = a.getOffset() + a.getLength() -1;
-		return (aOffsetEnd < b.getOffset());
-	}
 	
 }
