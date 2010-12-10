@@ -17,6 +17,7 @@ import net.zehrer.no2.semantic.editor.adapter.NodeContentAdapter;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.java.TextModelUtil;
 
+import org.eclipse.core.internal.runtime.Log;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
 import org.junit.After;
@@ -164,8 +165,30 @@ public class TestTextModelUtilUpdate extends TestCase{
 		
 		TextModelUtil.update(node, event);
 		
-		assertEquals("012345XX89", node.serialize());
+		assertEquals("012345XX89", node.serialize());  // result at the moment "012345XX789"
 		assertEquals(10, node.getLength());  // test if the node paramater are updated
 	}
+
+
+	@Test
+	public void testString() {
+		// split test
+		
+		int offset1 = 60;
+		int lenght1 = 10;
+		StringBuilder text = new StringBuilder("0123456789");
+		
+		// intersect 64 / 2
+		int offset2 = 64;
+		int lenght2 = 2;
+		
+		int start = offset2-offset1;
+		int end = start + lenght2;
+		String result = text.substring(start, end);
+		
+		assertEquals("45",result);
+		
+	}
+
 }
 

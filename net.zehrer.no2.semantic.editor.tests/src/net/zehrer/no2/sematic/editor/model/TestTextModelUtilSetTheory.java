@@ -12,8 +12,11 @@
 package net.zehrer.no2.sematic.editor.model;
 
 import junit.framework.TestCase;
+import net.zehrer.common.interval.EIntInterval;
+import net.zehrer.common.interval.impl.EIntIntervalImpl;
 import net.zehrer.no2.semantic.editor.TextModelManager;
 import net.zehrer.no2.semantic.editor.adapter.NodeContentAdapter;
+import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
 import net.zehrer.no2.semantic.editor.model.java.TextModelUtil;
@@ -61,14 +64,16 @@ public class TestTextModelUtilSetTheory extends TestCase{
 		
 		// 01234567890
 		// 01        890   <- node1
-		//   23 45 67      <- node2 
+		//   23    67      <- node2 
+		//      45         <- node3
 		
 		CompositeNode node1 = TextModelManager.createCompositeNode("01");
 		
 		CompositeNode node2 = TextModelManager.createCompositeNode("23");
 		node1.getChildren().add(node2);
 		
-		TextModelManager.createLeafeNode("45",node2);
+		CompositeNode node3 = TextModelManager.createCompositeNode("45");
+		node2.getChildren().add(node3);
 		TextModelManager.createLeafeNode("67",node2);
 		
 		TextModelManager.createLeafeNode("890",node1);
@@ -91,137 +96,47 @@ public class TestTextModelUtilSetTheory extends TestCase{
 	// --------------------
 	
 	@Test
-	public void testCheckLeafNode01() {
+	public void testintersect01() {
 		
-		CompositeNode node = TextModelManager.createCompositeNode("012345");
-		NodeContentAdapter.createAdapterAndAddToNode(node);
-
-		LeafNode leafNode =  (LeafNode) node.getChildren().get(0);
-	
-		assertTrue(TextModelUtil.checkNodeOffset(leafNode, 0));
-	}
-
-	
-	@Test
-	public void testCheckLeafNode02() {
+		EIntInterval sel = new EIntIntervalImpl(4, 5);
 		
-		CompositeNode node = TextModelManager.createCompositeNode("012345");
-		NodeContentAdapter.createAdapterAndAddToNode(node);
-
-		LeafNode leafNode =  (LeafNode) node.getChildren().get(0);
-	
-		assertFalse(TextModelUtil.checkNodeOffset(leafNode, 6));
-
-	}
-	
-	// --------------------
-	
-	
-	@Test
-	public void testCheckNode00() {
+//		CompositeNode node = getFixture();
+		LeafNode leaf = TextModelManager.createLeafeNode("01234567890");
 		
-		assertTrue(TextModelUtil.checkNodeOffset(getFixture(), 5));
+		LeafNode result = (LeafNode) leaf.intersect(sel);
+		
+		assertEquals("45", result.getText());
 	}
 	
 	@Test
-	public void testCheckNode01() {
-	
-		assertTrue(TextModelUtil.checkNodeOffset(getFixture(), 0));
-	}
-
-	
-	@Test
-	public void testCheckNode02() {
-	
-		assertFalse(TextModelUtil.checkNodeOffset(getFixture(), 11));
-
-	}
-	
-	@Test
-	public void testCheckNode03() {
-	
-		assertFalse(TextModelUtil.checkNodeOffset(getFixture(), -1));
+	public void testintersect02() {
+		
+		EIntInterval sel = new EIntIntervalImpl(4, 5);
+		
+//		CompositeNode node = getFixture();
+		LeafNode leaf = TextModelManager.createLeafeNode("01234567890");
+		
+		LeafNode result = (LeafNode) leaf.intersect(sel);
+		
+		assertEquals("45", result.getText());
 	}
 	
-	// ------------- 
-	
-	@Test
-	public void testgetLeafNode01() {
-		
-		CompositeNode node = getFixture();
-		
-		
-		LeafNode lNode = TextModelUtil.getLeafNode(node,3);
-		
-		assertEquals("23", lNode.getText());
-	}
-	
-	@Test
-	public void testgetLeafNode02() {
-		
-		CompositeNode node = getFixture();
-		
-		
-		LeafNode lNode = TextModelUtil.getLeafNode(node,8);
-		
-		assertEquals("890", lNode.getText());
-	}
-	
-	// ------------- 
-	
-	@Test
-	public void testgetLeafNodes01() {
-		
-		CompositeNode node = getFixture();
-		
-		EList<LeafNode> result = TextModelUtil.getLeafNodes(node, 1, 9);
-		
-		assertEquals(5, result.size());
-	}
-	
-	@Test
-	public void testgetLeafNodes02() {
-		
-		CompositeNode node = getFixture();
-		
-		EList<LeafNode> result = TextModelUtil.getLeafNodes(node, 0, 3);
-		
-		assertEquals(2, result.size());
-	}
-
-
-	@Test
-	public void testgetLeafNodes03() {
-		
-		CompositeNode node = getFixture();
-		
-		EList<LeafNode> result = TextModelUtil.getLeafNodes(node, 4, 5);
-		
-		assertEquals(1, result.size());
-	}
-
-	@Test
-	public void testgetLeafNodes04() {
-		
-		CompositeNode node = getFixture();
-		
-		EList<LeafNode> result = TextModelUtil.getLeafNodes(node, 6, 9);
-		
-		assertEquals(2, result.size());
-	}
-	
-	@Test
-	public void testgetLeafNodes05() {
-		
-		CompositeNode node = getFixture();
-		
-		EList<LeafNode> result = TextModelUtil.getLeafNodes(node, 6, 11);  // no error
-		
-		assertEquals(2, result.size());
-	}
-	
+	// XX 
 	// 01234567890
-	// 01        890   <- node1
-	//   23 45 67      <- node2 
+	// 01      890   <- node1
+	//   23  67      <- node2 
+	//     45        <- node3
+	
+	@Test
+	public void testintersect03() {
+		
+		EIntInterval sel = new EIntIntervalImpl(0, 1);
+		
+		CompositeNode node = getFixture();
+		
+		AbstractNode result =  (AbstractNode) node.intersect(sel);
+		
+		assertEquals("01", result.serialize());
+	}
 }
 
