@@ -7,13 +7,10 @@
 package net.zehrer.common.interval.impl;
 
 import net.zehrer.common.interval.EIntInterval;
-import net.zehrer.common.interval.EInterval;
 import net.zehrer.common.interval.IntervalPackage;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
@@ -241,6 +238,32 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public EIntInterval leftComplementRelativeTo(EIntInterval other) {
+		if (this.includes(lesserOfLowerLimits(other)))
+	            return null;
+//		if (getLowerLimit().equals(other.getLowerLimit()) && !other.includesLowerLimit())
+//	            return null;
+	    return newOfSameType(other.getLowerLimit(), this.getLowerLimit());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated not
+	 */
+	public EIntInterval rightComplementRelativeTo(EIntInterval other) {
+        if (this.includes(greaterOfUpperLimits(other)))
+            return null;
+//        if (getUpperLimit().equals(other.getUpperLimit()) && !other.includesUpperLimit())
+//            return null;
+        return newOfSameType(this.getUpperLimit(), other.getUpperLimit());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public boolean includes(Integer value) {
         return !this.isBelow(value) && !this.isAbove(value);
 	}
@@ -346,7 +369,18 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
 		result.append(')');
 		return result.toString();
 	}
+	
 	// ------
+	
+    private Integer lesserOfLowerLimits(EIntInterval other) {
+        if (getLowerLimit() == null) {
+            return null;
+        }
+        int lowerComparison = getLowerLimit().compareTo( other.getLowerLimit());
+        if (lowerComparison <= 0)
+            return this.getLowerLimit();
+        return other.getLowerLimit();
+    }
 
 	private Integer greaterOfLowerLimits(EIntInterval other) {
         if (getLowerLimit() == null) {
@@ -365,6 +399,16 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
         }
         int upperComparison = getUpperLimit().compareTo(other.getUpperLimit());
         if (upperComparison <= 0)
+            return this.getUpperLimit();
+        return other.getUpperLimit();
+    }
+    
+    private Integer greaterOfUpperLimits(EIntInterval other) {
+        if (getUpperLimit() == null) {
+            return null;
+        }
+        int upperComparison = getUpperLimit().compareTo(other.getUpperLimit());
+        if (upperComparison >= 0)
             return this.getUpperLimit();
         return other.getUpperLimit();
     }

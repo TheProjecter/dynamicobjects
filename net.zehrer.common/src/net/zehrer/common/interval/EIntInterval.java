@@ -140,6 +140,22 @@ public interface EIntInterval extends EObject, Comparable<EIntInterval> {
 	 * @model
 	 * @generated
 	 */
+	EIntInterval leftComplementRelativeTo(EIntInterval other);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EIntInterval rightComplementRelativeTo(EIntInterval other);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
 	boolean includes(Integer value);
 
 } // EIntInterval
