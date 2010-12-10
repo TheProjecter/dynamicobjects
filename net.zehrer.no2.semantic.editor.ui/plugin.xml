@@ -27,25 +27,25 @@
          point="org.eclipse.ui.commands">
       <category
             id="net.zehrer.no2.semantic.editor.ui.commands.category"
-            name="Sample Category">
+            name="Text Category">
       </category>
       <command
             categoryId="net.zehrer.no2.semantic.editor.ui.commands.category"
-            id="net.zehrer.no2.semantic.editor.ui.commands.sampleCommand"
-            name="Sample Command">
+            id="net.zehrer.no2.semantic.editor.ui.commands.GroupCommand"
+            name="Group Command">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="net.zehrer.no2.semantic.editor.handler.SampleHandler"
-            commandId="net.zehrer.no2.semantic.editor.ui.commands.sampleCommand">
+            class="net.zehrer.no2.semantic.editor.handler.GroupHandler"
+            commandId="net.zehrer.no2.semantic.editor.ui.commands.GroupCommand">
       </handler>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="net.zehrer.no2.semantic.editor.ui.commands.sampleCommand"
+            commandId="net.zehrer.no2.semantic.editor.ui.commands.GroupCommand"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+6">
@@ -60,10 +60,10 @@
                visible="true">
          </separator>
          <command
-               commandId="net.zehrer.no2.semantic.editor.ui.commands.sampleCommand"
+               commandId="net.zehrer.no2.semantic.editor.ui.commands.GroupCommand"
                icon="icons/sample.gif"
                id="net.zehrer.no2.semantic.editor.ui.toolbars.sampleCommand"
-               tooltip="Say hello world">
+               tooltip="Group the selected text">
          </command>
       </menuContribution>
    </extension>
