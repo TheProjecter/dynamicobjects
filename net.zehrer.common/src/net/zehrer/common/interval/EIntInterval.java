@@ -158,4 +158,12 @@ public interface EIntInterval extends EObject, Comparable<EIntInterval> {
 	 */
 	boolean includes(Integer value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean isSubset(EIntInterval value);
+
 } // EIntInterval

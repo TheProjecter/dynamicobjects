@@ -86,6 +86,9 @@
     <eOperations name="includes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     </eOperations>
+    <eOperations name="isSubset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="value" eType="#//EIntInterval"/>
+    </eOperations>
     <eOperations name="hashCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eOperations name="leftComplementRelativeTo" eType="#//EIntInterval">
       <eParameters name="other" eType="#//EIntInterval"/>
