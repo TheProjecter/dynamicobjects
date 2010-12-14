@@ -320,6 +320,9 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 		op = addEOperation(eIntIntervalEClass, ecorePackage.getEBoolean(), "includes", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEIntegerObject(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(eIntIntervalEClass, ecorePackage.getEBoolean(), "isSubset", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getEIntInterval(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		addEOperation(eIntIntervalEClass, ecorePackage.getEInt(), "hashCode", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(eIntIntervalEClass, this.getEIntInterval(), "leftComplementRelativeTo", 0, 1, IS_UNIQUE, IS_ORDERED);
