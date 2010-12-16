@@ -6,6 +6,7 @@
  */
 package net.zehrer.no2.semantic.editor.model.impl;
 
+import net.zehrer.common.interval.EIntInterval;
 import net.zehrer.common.interval.impl.EIntIntervalImpl;
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
@@ -460,6 +461,15 @@ public abstract class AbstractNodeImpl extends EIntIntervalImpl implements Abstr
 	 */
 	public void update(DocumentEvent event) {
 		TextModelUtil.update(this, event);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AbstractNode> groupNodes(EIntInterval selection) {
+		return TextModelUtil.group(this, selection);
 	}
 
 	/**
