@@ -18,7 +18,8 @@ import net.zehrer.common.interval.impl.EIntIntervalImpl;
 public class EIntIntervalTest extends TestCase {
 	
 	
-	private EIntInterval i5_10 = new EIntIntervalImpl(5, 10);
+	private EIntInterval i5_10 = new EIntIntervalImpl(5, 10);	
+	private EIntInterval i5_8 = new EIntIntervalImpl(5, 8);
 	private EIntInterval i1_10 = new EIntIntervalImpl(1, 10);
 	private EIntInterval i4_6 = new EIntIntervalImpl(4,6);
 	private EIntInterval i5_15 = new EIntIntervalImpl(5,15);
@@ -26,11 +27,13 @@ public class EIntIntervalTest extends TestCase {
 	
 
     public void testSubset() {
-    	EIntInterval subset = new EIntIntervalImpl(5,8);
-        EIntInterval range =  new EIntIntervalImpl(1,10);
+        assertTrue(i5_8.isSubsetOf(i1_10));
+        assertTrue(i5_10.isSubsetOf(i1_10));
+        assertTrue(i1_10.isSubsetOf(i1_10));
         
-        assertTrue(subset.isSubset(range));
-        assertFalse(range.isSubset(subset));
+        assertFalse(i1_10.isSubsetOf(i5_8));
+        assertFalse(i5_15.isSubsetOf(i12_16));
+        
     }
 
 
@@ -41,5 +44,7 @@ public class EIntIntervalTest extends TestCase {
         assertTrue("i1_10.intersects(i4_6)", i1_10.intersects(i4_6));
         assertTrue("i5_10.intersects(i5_15)", i5_10.intersects(i5_15));
         assertTrue("i5_15.intersects(i1_10)", i5_15.intersects(i1_10));
+        
+        assertFalse("i1_10.intersects(i12_16)", i1_10.intersects(i12_16));
     }
 }

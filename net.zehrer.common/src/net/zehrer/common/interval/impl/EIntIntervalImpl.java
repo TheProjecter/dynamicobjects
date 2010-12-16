@@ -272,11 +272,12 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
 	 * <!-- begin-user-doc -->
 	 * Is this subset of value?
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public boolean isSubset(EIntInterval value) {
+	public boolean isSubsetOf(EIntInterval value) {
 		return (this.getLowerLimit().compareTo(value.getLowerLimit()) >= 0 
-		&& this.getUpperLimit().compareTo(value.getUpperLimit()) <= 0);
+				&& this.getUpperLimit().compareTo(value.getUpperLimit()) <= 0);
+
 	}
 
 	/**
