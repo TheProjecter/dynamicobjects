@@ -90,10 +90,10 @@
       <eParameters name="value" eType="#//EIntInterval"/>
     </eOperations>
     <eOperations name="hashCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eOperations name="leftComplementRelativeTo" eType="#//EIntInterval">
+    <eOperations name="leftComplementTo" eType="#//EIntInterval">
       <eParameters name="other" eType="#//EIntInterval"/>
     </eOperations>
-    <eOperations name="rightComplementRelativeTo" eType="#//EIntInterval">
+    <eOperations name="rightComplementTo" eType="#//EIntInterval">
       <eParameters name="other" eType="#//EIntInterval"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>

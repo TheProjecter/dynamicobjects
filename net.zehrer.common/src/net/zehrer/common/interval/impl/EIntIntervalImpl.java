@@ -9,6 +9,7 @@ package net.zehrer.common.interval.impl;
 import net.zehrer.common.interval.EIntInterval;
 import net.zehrer.common.interval.IntervalPackage;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -79,6 +80,7 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
 	}
 
 	public EIntIntervalImpl(Integer lower, Integer upper) {
+		Assert.isTrue(lower <= upper);
 		setLowerLimit(lower);
 		setUpperLimit(upper);
 	}
@@ -235,28 +237,30 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * the left complement if "this" is intersected with "other"
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EIntInterval leftComplementRelativeTo(EIntInterval other) {
-		if (this.includes(lesserOfLowerLimits(other)))
-	            return null;
-//		if (getLowerLimit().equals(other.getLowerLimit()) && !other.includesLowerLimit())
-//	            return null;
-	    return newOfSameType(other.getLowerLimit(), this.getLowerLimit());
+	public EIntInterval leftComplementTo(EIntInterval other) {
+		if (!this.intersects(other) || other.getLowerLimit().compareTo(this.getLowerLimit()) <= 0)
+            return null;
+
+		// TODO solution works only for int :(  -> use flag 
+       return newOfSameType(this.getLowerLimit(), other.getLowerLimit()-1);  
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * the right part of  "this" ∖ "other"
 	 * <!-- end-user-doc -->
-	 * @generated not
+	 * @generated NOT
 	 */
-	public EIntInterval rightComplementRelativeTo(EIntInterval other) {
-        if (this.includes(greaterOfUpperLimits(other)))
+	public EIntInterval rightComplementTo(EIntInterval other) {
+		if (!this.intersects(other) || other.getUpperLimit().compareTo(this.getUpperLimit()) >= 0)
             return null;
-//        if (getUpperLimit().equals(other.getUpperLimit()) && !other.includesUpperLimit())
-//            return null;
-        return newOfSameType(this.getUpperLimit(), other.getUpperLimit());
+
+		// TODO solution works only for int :(  -> use flag 
+        return newOfSameType(other.getUpperLimit()+1, this.getUpperLimit());
 	}
 
 	/**
