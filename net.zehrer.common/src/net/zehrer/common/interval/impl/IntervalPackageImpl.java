@@ -325,10 +325,10 @@ public class IntervalPackageImpl extends EPackageImpl implements IntervalPackage
 
 		addEOperation(eIntIntervalEClass, ecorePackage.getEInt(), "hashCode", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(eIntIntervalEClass, this.getEIntInterval(), "leftComplementRelativeTo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(eIntIntervalEClass, this.getEIntInterval(), "leftComplementTo", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEIntInterval(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(eIntIntervalEClass, this.getEIntInterval(), "rightComplementRelativeTo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(eIntIntervalEClass, this.getEIntInterval(), "rightComplementTo", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getEIntInterval(), "other", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource

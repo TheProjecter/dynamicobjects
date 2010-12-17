@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://zehrer.net/common/interval/1.0"
-            class="com.domainlanguage.interval.IntervalPackage"
+            class="net.zehrer.common.interval.IntervalPackage"
             genModel="metamodel/Interval.genmodel"/>
    </extension>
 

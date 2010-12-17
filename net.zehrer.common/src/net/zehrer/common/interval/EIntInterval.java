@@ -140,7 +140,7 @@ public interface EIntInterval extends EObject, Comparable<EIntInterval> {
 	 * @model
 	 * @generated
 	 */
-	EIntInterval leftComplementRelativeTo(EIntInterval other);
+	EIntInterval leftComplementTo(EIntInterval other);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -148,7 +148,7 @@ public interface EIntInterval extends EObject, Comparable<EIntInterval> {
 	 * @model
 	 * @generated
 	 */
-	EIntInterval rightComplementRelativeTo(EIntInterval other);
+	EIntInterval rightComplementTo(EIntInterval other);
 
 	/**
 	 * <!-- begin-user-doc -->

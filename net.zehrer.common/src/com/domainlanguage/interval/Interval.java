@@ -312,7 +312,7 @@ public class Interval<T extends Comparable<T>> implements Comparable<Interval<T>
     }
 
     private Interval<T> leftComplementRelativeTo(Interval<T> other) {
-        if (this.includes(lesserOfLowerLimits(other)))
+        if (this.includes(lesserOfLowerLimits(other)))  // BUG: why return here null? (1,10) & (5,5) lesser is 1 
             return null;
         if (lowerLimit().equals(other.lowerLimit()) && !other.includesLowerLimit())
             return null;
