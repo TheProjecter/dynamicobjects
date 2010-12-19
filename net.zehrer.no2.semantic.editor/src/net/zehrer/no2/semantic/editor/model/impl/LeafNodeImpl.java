@@ -172,7 +172,7 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 	
     // -- EInterval
 	
-	// TODO: getLenght can return lenght of text
+	// TODO: getLenght can return length of text
     
     @Override
 	protected LeafNode newOfSameType(Integer lower, Integer upper) {
@@ -183,6 +183,31 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 	public LeafNode intersect(EIntInterval other) {
 		LeafNode node = (LeafNode) super.intersect(other);
 		
+		updateText (node);
+		
+		return node;
+	}
+    
+	@Override
+	public LeafNode leftComplementTo(EIntInterval other) {
+		LeafNode node = (LeafNode) super.leftComplementTo(other);
+		
+		updateText (node);
+		
+		return node;
+	}
+    
+	@Override
+	public LeafNode rightComplementTo(EIntInterval other) {
+		LeafNode node = (LeafNode) super.rightComplementTo(other);
+		
+		updateText (node);
+		
+		return node;
+	}
+	
+	private void updateText( LeafNode node) {
+		
 		if (node != null) {
 			StringBuilder text = new StringBuilder(getText());
 			
@@ -190,12 +215,12 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 			int end = start + node.getLength();
 			
 			node.setText(text.substring(start, end));
+			
+			node.setName("Text");
 
 		}
-		
-		return node;
 	}
     
-    
+	
 
 } //LeafNodeImpl

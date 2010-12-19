@@ -286,9 +286,9 @@ public interface AbstractNode extends EIntInterval {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return TextModelUtil.group(this, selection);'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='TextModelUtil.group(this, selection);'"
 	 * @generated
 	 */
-	EList<AbstractNode> groupNodes(EIntInterval selection);
+	void groupNodes(EIntInterval selection);
 
 } // AbstractNode

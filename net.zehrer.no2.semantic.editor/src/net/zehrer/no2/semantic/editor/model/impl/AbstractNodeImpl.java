@@ -468,8 +468,8 @@ public abstract class AbstractNodeImpl extends EIntIntervalImpl implements Abstr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractNode> groupNodes(EIntInterval selection) {
-		return TextModelUtil.group(this, selection);
+	public void groupNodes(EIntInterval selection) {
+		TextModelUtil.group(this, selection);
 	}
 
 	/**

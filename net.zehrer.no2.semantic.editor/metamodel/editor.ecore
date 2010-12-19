@@ -52,9 +52,9 @@
       </eAnnotations>
       <eParameters name="event" eType="#//DocumentEvent"/>
     </eOperations>
-    <eOperations name="groupNodes" upperBound="-1" eType="#//AbstractNode">
+    <eOperations name="groupNodes">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return TextModelUtil.group(this, selection);"/>
+        <details key="body" value="TextModelUtil.group(this, selection);"/>
       </eAnnotations>
       <eParameters name="selection" eType="ecore:EClass ../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval"/>
     </eOperations>
