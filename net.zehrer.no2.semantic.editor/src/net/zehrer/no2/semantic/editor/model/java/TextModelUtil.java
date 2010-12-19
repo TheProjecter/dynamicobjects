@@ -519,21 +519,26 @@ public class TextModelUtil {
 		AbstractNode firstNode = intersectingNodes.get(0);
 		int index = children.indexOf(firstNode);
 		
-		// replace the intersecting nodes by the group node
+		// replace the grouped nodes be the group and the complements ...
+		// ... in right order (fill from the end otherwise the order is not correct)
+		
+		// 1. remove the intersecting nodes
 		children.removeAll(intersectingNodes);
+		
+		// 2. rightComplement == last node 
+		AbstractNode lastNode = intersectingNodes.get(intersectingNodes.size()-1);
+		add(children, (AbstractNode) lastNode.rightComplementTo(selection), index);
+		
+		// 3. add the new group
 		children.add(index, groupNode);
 		
-		// leftComplement == 1st node
+		// 4. leftComplement == 1st node 
 		add(children, (AbstractNode) firstNode.leftComplementTo(selection), index);
 		
-		// intersection
+		// add intersection's to the groups
 		for (AbstractNode currentNode : intersectingNodes) {
 			add(groupNode.getChildren(),(AbstractNode) currentNode.intersect(selection));
 		}
-		
-		// rightComplement == last node
-		AbstractNode lastNode = intersectingNodes.get(intersectingNodes.size()-1);
-		add(children, (AbstractNode) lastNode.rightComplementTo(selection), index+1);
 		
 	}
 
