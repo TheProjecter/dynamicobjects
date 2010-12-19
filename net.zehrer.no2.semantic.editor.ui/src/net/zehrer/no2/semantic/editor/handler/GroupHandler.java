@@ -1,5 +1,6 @@
 package net.zehrer.no2.semantic.editor.handler;
 
+import net.zehrer.common.interval.impl.EIntIntervalImpl;
 import net.zehrer.no2.semantic.editor.SemanticEditor;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
@@ -63,7 +64,8 @@ public class GroupHandler extends AbstractHandler {
 				
 				int eOffset = sel.getOffset() + sel.getLength() -1;
 				
-//				EList<LeafNode> leafNodes = TextModelUtil.getLeafNodes(model, sel.getOffset(), eOffset);
+				model.groupNodes(new EIntIntervalImpl(sel.getOffset(),eOffset));
+				
 			}
 		}
 		

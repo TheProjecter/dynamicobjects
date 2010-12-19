@@ -22,7 +22,7 @@ import net.zehrer.no2.semantic.editor.model.EditorFactory;
 import net.zehrer.no2.semantic.editor.model.EditorPackage;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
 import net.zehrer.no2.semantic.editor.model.SyntaxError;
-import net.zehrer.no2.semantic.editor.model.impl.AbstractNodeImpl;
+import net.zehrer.no2.semantic.editor.model.impl.CompositeNodeImpl;
 import net.zehrer.no2.semantic.editor.model.impl.LeafNodeImpl;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -30,7 +30,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jdt.core.dom.ThisExpression;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.TypedRegion;
 
@@ -200,17 +199,17 @@ public class TextModelUtil {
 	// return abstractNode.getTotalOffset();
 	// }
 
-	private static boolean hasLeafNodes(CompositeNode child) {
-		for (AbstractNode node : child.getChildren()) {
-			if (node instanceof CompositeNode) {
-				if (hasLeafNodes((CompositeNode) node))
-					return true;
-			} else {
-				return true;
-			}
-		}
-		return false;
-	}
+//	private static boolean hasLeafNodes(CompositeNode child) {
+//		for (AbstractNode node : child.getChildren()) {
+//			if (node instanceof CompositeNode) {
+//				if (hasLeafNodes((CompositeNode) node))
+//					return true;
+//			} else {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 
 	/**
 	 * @param abstractNode
@@ -467,7 +466,9 @@ public class TextModelUtil {
 
 	// -----
 
-	public static EList<AbstractNode> group(AbstractNode _this, EIntInterval selection) {
+	public static boolean group(AbstractNode _this, EIntInterval selection) {
+		
+		// selection size >= 1 
 
 		if (_this instanceof CompositeNode) {
 			CompositeNode fParent = (CompositeNode) _this;
@@ -479,7 +480,6 @@ public class TextModelUtil {
 			// 1st iterate through the graph and collect intersecting nodes
 			for (AbstractNode abstractNode : children) {
 				
-				// 1st intersection / subset test
 				if (abstractNode.intersects(selection)) {
 					
 					// only of the selection intersects do ....
@@ -487,64 +487,76 @@ public class TextModelUtil {
 						if (selection.isSubsetOf(abstractNode)) {
 							// go more deeper in the graph
 							group(abstractNode,selection);
-							break;
+							return true;
 						} 
 					}
 					
 				
-					if (intersectingNodes == null)
-						intersectingNodes = new BasicEList<AbstractNode>();  // auto init???
+					if (intersectingNodes == null) {
+						intersectingNodes = new BasicEList<AbstractNode>();  // auto init? or generic init?
+					}
 					intersectingNodes.add(abstractNode);	
 				}
 			}
 			
 			// 2nd group intersecting nodes
-			// TODO: check edges and group
+			
+			group (intersectingNodes,children, selection);
 		}
 		
 
-		return null;
-		
-//		result = group((LeafNode) _this, selection);
-//		} else {
-		
-		// 1st: check of intersection
-//		if (!_this.intersects(selection))
-//			return null;
-
-//		
-//
-//		if (_this.isSubsetOf(selection)) {
-//			result.add(_this);
-//		}
-
+		return true;
 	}
 	
-	public static void group(CompositeNode _this, EIntInterval selection) {
+	
+	public static void group(BasicEList<AbstractNode> intersectingNodes,  EList<AbstractNode> children, EIntInterval selection ) {
+		// intersectingNodes.size >= 1
+		
+		CompositeNode groupNode = EditorFactory.eINSTANCE.createCompositeNode();
+		groupNode.setName("NEW");
+	
+		// get position of first intersecting node
+		AbstractNode firstNode = intersectingNodes.get(0);
+		int index = children.indexOf(firstNode);
+		
+		// replace the intersecting nodes by the group node
+		children.removeAll(intersectingNodes);
+		children.add(index, groupNode);
+		
+		// leftComplement == 1st node
+		add(children, (AbstractNode) firstNode.leftComplementTo(selection), index);
+		
+		// intersection
+		for (AbstractNode currentNode : intersectingNodes) {
+			add(groupNode.getChildren(),(AbstractNode) currentNode.intersect(selection));
+		}
+		
+		// rightComplement == last node
+		AbstractNode lastNode = intersectingNodes.get(intersectingNodes.size()-1);
+		add(children, (AbstractNode) lastNode.rightComplementTo(selection), index+1);
 		
 	}
 
-	// ***********
-	// xxx xxxxxxxxxxx xx
-	// xxx xxxxxxxxxxx xx
 
-	public static EList<AbstractNode> group(LeafNode _this, EIntInterval selection) {
-
-		BasicEList<AbstractNode> result = new BasicEList<AbstractNode>();
-
-		add(result, (LeafNode) _this.leftComplementRelativeTo(selection));
-
-		result.add((LeafNode) _this.intersect(selection));
-
-		add(result, (LeafNode) _this.rightComplementRelativeTo(selection));
-
-		return result;
-
-	}
-
-	// addes only if object is not null
 	private static <T> void add(EList<T> list, T object) {
 		if (object != null)
 			list.add(object);
 	}
+	
+	// addes only if object is not null
+	private static <T> void add(EList<T> list, T object, int pos) {
+		if (object != null)
+			list.add(pos, object);
+	}
+	
+
+	
+	// TODO: is a generic init possible?
+//	private static <T> T init(T var) {
+//		
+//		if (var == null)
+//		  return new Class<T>; //new <t> var;
+//		else
+//		  return var;	  
+//	}
 }

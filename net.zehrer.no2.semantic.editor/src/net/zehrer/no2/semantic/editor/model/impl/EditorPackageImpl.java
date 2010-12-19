@@ -421,7 +421,7 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 		op = addEOperation(abstractNodeEClass, null, "update", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getDocumentEvent(), "event", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(abstractNodeEClass, this.getAbstractNode(), "groupNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(abstractNodeEClass, null, "groupNodes", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theIntervalPackage.getEIntInterval(), "selection", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(leafNodeEClass, LeafNode.class, "LeafNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
