@@ -13,9 +13,11 @@
  *******************************************************************************/
 package net.zehrer.no2.semantic.editor.model.java;
 
+import java.awt.Event;
 import java.util.List;
 
 import net.zehrer.common.interval.EIntInterval;
+import net.zehrer.common.interval.impl.EIntIntervalImpl;
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.EditorFactory;
@@ -388,14 +390,19 @@ public class TextModelUtil {
 		return false;
 	}
 
-	public static void update(AbstractNode _this, DocumentEvent update) {
-		updateModel(_this, update, null);
+	public static void update(AbstractNode _this, DocumentEvent event) {
+		if (_this.includes(event.getOffset())) {
+			updateModel(_this, event, null);			
+		} else {
+			// check the offset??
+			appendModel(_this,event,null);
+		}
 	}
 
 	public static DocumentEvent updateModel(AbstractNode _this, DocumentEvent event, CompositeNode parent) {
 
 		// 1st: check of event starts in this node
-		if (!checkNodeOffset(_this, event.getOffset()))
+		if (!_this.includes(event.getOffset()))
 			return event;
 
 		DocumentEvent result = event;
@@ -459,6 +466,32 @@ public class TextModelUtil {
 
 		return result;
 	}
+	
+	public static void appendModel (AbstractNode _this, DocumentEvent event, CompositeNode parent) {
+		
+		// distinguish type
+		if (_this instanceof LeafNode) {
+			LeafNode fLeaf = (LeafNode) _this;
+			
+			// append text
+			StringBuffer buffer = new StringBuffer(fLeaf.getText());
+			buffer.append(event.getText());
+			fLeaf.setText(buffer.toString());
+			
+			// init model notification
+			int index = parent.getChildren().indexOf(_this);
+			parent.getChildren().set(index, _this);
+		} else {
+			CompositeNode fParent = (CompositeNode) _this;
+
+			EList<AbstractNode> children = fParent.getChildren();
+			
+			appendModel(children.get(children.size()-1), event, fParent);
+
+		}
+		
+	}
+
 
 	public static TypedRegion createTypedRegion(AbstractNode _this, String type) {
 		return new TypedRegion(_this.getOffset(), _this.getLength(), type);
@@ -554,14 +587,4 @@ public class TextModelUtil {
 			list.add(pos, object);
 	}
 	
-
-	
-	// TODO: is a generic init possible?
-//	private static <T> T init(T var) {
-//		
-//		if (var == null)
-//		  return new Class<T>; //new <t> var;
-//		else
-//		  return var;	  
-//	}
 }
