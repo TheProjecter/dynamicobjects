@@ -251,8 +251,6 @@ public class SemanticTextPartition implements IDocumentPartitioner, IDocumentPar
 	@Override
 	public Region documentChanged2(DocumentEvent e) {
 
-
-		
 		if (fDocument == null)
 			return null;
 

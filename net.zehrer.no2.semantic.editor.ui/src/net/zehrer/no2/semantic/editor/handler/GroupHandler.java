@@ -3,22 +3,15 @@ package net.zehrer.no2.semantic.editor.handler;
 import net.zehrer.common.interval.impl.EIntIntervalImpl;
 import net.zehrer.no2.semantic.editor.SemanticEditor;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
-import net.zehrer.no2.semantic.editor.model.LeafNode;
-import net.zehrer.no2.semantic.editor.model.java.TextModelUtil;
 import net.zehrer.no2.text.IResourceDocument;
-import net.zehrer.no2.ui.edit.EObjectItemProvider;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
