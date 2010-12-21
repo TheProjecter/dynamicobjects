@@ -19,17 +19,9 @@
   <children xmi:type="notation:Node" xmi:id="_HZabkMs8Ed-0gqc3eChFKQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_HZbCoMs8Ed-0gqc3eChFKQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_HZbCocs8Ed-0gqc3eChFKQ" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_HZcQwMs8Ed-0gqc3eChFKQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="editor.ecore#//AbstractNode/totalOffset"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_HZcQwcs8Ed-0gqc3eChFKQ"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_HZcQwss8Ed-0gqc3eChFKQ" type="2001">
         <element xmi:type="ecore:EAttribute" href="editor.ecore#//AbstractNode/totalLine"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_HZcQw8s8Ed-0gqc3eChFKQ"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_HZcQxMs8Ed-0gqc3eChFKQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="editor.ecore#//AbstractNode/totalLength"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_HZcQxcs8Ed-0gqc3eChFKQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_HZbCoss8Ed-0gqc3eChFKQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_HZbCo8s8Ed-0gqc3eChFKQ"/>
@@ -56,17 +48,9 @@
         <element xmi:type="ecore:EOperation" href="editor.ecore#//AbstractNode/totalEndLine"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_HZetAcs8Ed-0gqc3eChFKQ"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_HZetAss8Ed-0gqc3eChFKQ" type="2002">
-        <element xmi:type="ecore:EOperation" href="editor.ecore#//AbstractNode/getOffset"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_HZetA8s8Ed-0gqc3eChFKQ"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_HZfUEMs8Ed-0gqc3eChFKQ" type="2002">
         <element xmi:type="ecore:EOperation" href="editor.ecore#//AbstractNode/getLine"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_HZfUEcs8Ed-0gqc3eChFKQ"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_HZfUEss8Ed-0gqc3eChFKQ" type="2002">
-        <element xmi:type="ecore:EOperation" href="editor.ecore#//AbstractNode/getLength"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_HZfUE8s8Ed-0gqc3eChFKQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_HZf7IMs8Ed-0gqc3eChFKQ" type="2002">
         <element xmi:type="ecore:EOperation" href="editor.ecore#//AbstractNode/endLine"/>
@@ -86,14 +70,6 @@
       <children xmi:type="notation:Node" xmi:id="_HZgiOMs8Ed-0gqc3eChFKQ" type="2001">
         <element xmi:type="ecore:EAttribute" href="editor.ecore#//LeafNode/text"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_HZgiOcs8Ed-0gqc3eChFKQ"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_HZhJQMs8Ed-0gqc3eChFKQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="editor.ecore#//LeafNode/feature"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_HZhJQcs8Ed-0gqc3eChFKQ"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_HZhJQss8Ed-0gqc3eChFKQ" type="2001">
-        <element xmi:type="ecore:EAttribute" href="editor.ecore#//LeafNode/hidden"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_HZhJQ8s8Ed-0gqc3eChFKQ"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_HZgiMcs8Ed-0gqc3eChFKQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_HZgiMss8Ed-0gqc3eChFKQ"/>
