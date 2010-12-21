@@ -6,15 +6,17 @@
  */
 package net.zehrer.no2.semantic.editor.model.impl;
 
-import net.zehrer.no2.semantic.editor.model.*;
+import net.zehrer.no2.semantic.editor.model.CompositeNode;
+import net.zehrer.no2.semantic.editor.model.EditorFactory;
+import net.zehrer.no2.semantic.editor.model.EditorPackage;
+import net.zehrer.no2.semantic.editor.model.LeafNode;
+import net.zehrer.no2.semantic.editor.model.SyntaxError;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
