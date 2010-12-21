@@ -192,8 +192,7 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-    @SuppressWarnings("unchecked")
-	public boolean equals(Object other) {
+    public boolean equals(Object other) {
         try {
             return equals((EIntInterval)other);
         } catch(ClassCastException ex) {
@@ -388,15 +387,15 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
 	
 	// ------
 	
-    private Integer lesserOfLowerLimits(EIntInterval other) {
-        if (getLowerLimit() == null) {
-            return null;
-        }
-        int lowerComparison = getLowerLimit().compareTo( other.getLowerLimit());
-        if (lowerComparison <= 0)
-            return this.getLowerLimit();
-        return other.getLowerLimit();
-    }
+//    private Integer lesserOfLowerLimits(EIntInterval other) {
+//        if (getLowerLimit() == null) {
+//            return null;
+//        }
+//        int lowerComparison = getLowerLimit().compareTo( other.getLowerLimit());
+//        if (lowerComparison <= 0)
+//            return this.getLowerLimit();
+//        return other.getLowerLimit();
+//    }
 
 	private Integer greaterOfLowerLimits(EIntInterval other) {
         if (getLowerLimit() == null) {
@@ -419,15 +418,15 @@ public class EIntIntervalImpl extends EObjectImpl implements EIntInterval {
         return other.getUpperLimit();
     }
     
-    private Integer greaterOfUpperLimits(EIntInterval other) {
-        if (getUpperLimit() == null) {
-            return null;
-        }
-        int upperComparison = getUpperLimit().compareTo(other.getUpperLimit());
-        if (upperComparison >= 0)
-            return this.getUpperLimit();
-        return other.getUpperLimit();
-    }
+//    private Integer greaterOfUpperLimits(EIntInterval other) {
+//        if (getUpperLimit() == null) {
+//            return null;
+//        }
+//        int upperComparison = getUpperLimit().compareTo(other.getUpperLimit());
+//        if (upperComparison >= 0)
+//            return this.getUpperLimit();
+//        return other.getUpperLimit();
+//    }
 	
     private boolean greaterOfLowerIncludedInIntersection(EIntInterval other) {
         Integer limit = greaterOfLowerLimits(other);
