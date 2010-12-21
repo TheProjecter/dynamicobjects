@@ -20,12 +20,11 @@
     </genClasses>
     <genClasses image="false" ecoreClass="editor.ecore#//AbstractNode">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference editor.ecore#//AbstractNode/parent"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference editor.ecore#//AbstractNode/grammarElement"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference editor.ecore#//AbstractNode/element"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference editor.ecore#//AbstractNode/syntaxError"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//AbstractNode/totalOffset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//AbstractNode/offset"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//AbstractNode/totalLine"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//AbstractNode/totalLength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//AbstractNode/length"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//AbstractNode/Name"/>
       <genOperations ecoreOperation="editor.ecore#//AbstractNode/serialize"/>
       <genOperations ecoreOperation="editor.ecore#//AbstractNode/getLeafNodes"/>
@@ -34,18 +33,17 @@
       </genOperations>
       <genOperations ecoreOperation="editor.ecore#//AbstractNode/allSyntaxErrors"/>
       <genOperations ecoreOperation="editor.ecore#//AbstractNode/totalEndLine"/>
-      <genOperations ecoreOperation="editor.ecore#//AbstractNode/getOffset"/>
       <genOperations ecoreOperation="editor.ecore#//AbstractNode/getLine"/>
-      <genOperations ecoreOperation="editor.ecore#//AbstractNode/getLength"/>
       <genOperations ecoreOperation="editor.ecore#//AbstractNode/endLine"/>
       <genOperations ecoreOperation="editor.ecore#//AbstractNode/update">
         <genParameters ecoreParameter="editor.ecore#//AbstractNode/update/event"/>
       </genOperations>
+      <genOperations ecoreOperation="editor.ecore#//AbstractNode/groupNodes">
+        <genParameters ecoreParameter="editor.ecore#//AbstractNode/groupNodes/selection"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="editor.ecore#//LeafNode">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//LeafNode/text"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//LeafNode/feature"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//LeafNode/hidden"/>
     </genClasses>
     <genClasses ecoreClass="editor.ecore#//SyntaxError">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//SyntaxError/message"/>
@@ -53,20 +51,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//SyntaxError/issueCode"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Lang" basePackage="net.zehrer.common" adapterFactory="false"
-      literalsInterface="false" multipleEditorPages="false" generateModelWizard="false"
-      ecorePackage="../../net.zehrer.common/metamodel/java.lang.ecore#//lang">
-    <genDataTypes ecoreDataType="../../net.zehrer.common/metamodel/java.lang.ecore#//lang/Integer"/>
-    <genClasses image="false" ecoreClass="../../net.zehrer.common/metamodel/java.lang.ecore#//lang/IComparable">
-      <genTypeParameters ecoreTypeParameter="../../net.zehrer.common/metamodel/java.lang.ecore#//lang/IComparable/T"/>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/java.lang.ecore#//lang/IComparable/compareTo">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/java.lang.ecore#//lang/IComparable/compareTo/other"/>
-      </genOperations>
-    </genClasses>
-  </genPackages>
-  <genPackages prefix="Interval" basePackage="net.zehrer.common" disposableProviderFactory="true"
-      multipleEditorPages="false" generateModelWizard="false" extensibleProviderFactory="true"
-      ecorePackage="../../net.zehrer.common/metamodel/Interval.ecore#/">
+  <genPackages prefix="Interval" basePackage="net.zehrer.common" multipleEditorPages="false"
+      generateModelWizard="false" ecorePackage="../../net.zehrer.common/metamodel/Interval.ecore#/">
+    <genDataTypes ecoreDataType="../../net.zehrer.common/metamodel/Interval.ecore#//Integer"/>
     <genClasses image="false" ecoreClass="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval">
       <genTypeParameters ecoreTypeParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/T"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/lowerLimit"/>
@@ -118,8 +105,22 @@
       <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/includes">
         <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/includes/value"/>
       </genOperations>
+      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/isSubsetOf">
+        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/isSubsetOf/value"/>
+      </genOperations>
       <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/hashCode"/>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/hashCode2"/>
+      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/leftComplementTo">
+        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/leftComplementTo/other"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/rightComplementTo">
+        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/rightComplementTo/other"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../../net.zehrer.common/metamodel/Interval.ecore#//IComparable">
+      <genTypeParameters ecoreTypeParameter="../../net.zehrer.common/metamodel/Interval.ecore#//IComparable/T"/>
+      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//IComparable/compareTo">
+        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//IComparable/compareTo/other"/>
+      </genOperations>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

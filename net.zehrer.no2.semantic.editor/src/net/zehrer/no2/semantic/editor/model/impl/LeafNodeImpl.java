@@ -7,15 +7,11 @@
 package net.zehrer.no2.semantic.editor.model.impl;
 
 import net.zehrer.common.interval.EIntInterval;
-import net.zehrer.common.interval.EInterval;
-import net.zehrer.common.interval.impl.EIntIntervalImpl;
 import net.zehrer.no2.semantic.editor.model.EditorPackage;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
