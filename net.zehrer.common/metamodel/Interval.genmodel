@@ -2,14 +2,17 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/net.zehrer.common/src"
-    modelPluginID="net.zehrer.common" modelName="Interval" editPluginClass="" editorPluginClass=""
-    featureMapWrapperClass="" booleanFlagsField="" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" publicConstructors="true" editorPluginID="net.zehrer.common.editor"
+    creationCommands="false" creationIcons="false" editDirectory="/net.zehrer.common/src"
+    modelPluginID="net.zehrer.common" modelName="Interval" modelPluginClass="" editPluginClass="net.zehrer.common.PlugIn"
+    editorPluginClass="" featureMapWrapperClass="" booleanFlagsField="" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" publicConstructors="true" providerRootExtendsClass=""
+    editPluginID="net.zehrer.common" editorPluginID="net.zehrer.common.editor" fontProviders="true"
     interfaceNamePattern="">
   <foreignModel>Interval.ecore</foreignModel>
   <genPackages prefix="Interval" basePackage="net.zehrer.common" disposableProviderFactory="true"
       multipleEditorPages="false" generateModelWizard="false" extensibleProviderFactory="true"
       contentTypeIdentifier="" ecorePackage="Interval.ecore#/">
+    <genDataTypes ecoreDataType="Interval.ecore#//Integer"/>
     <genClasses image="false" ecoreClass="Interval.ecore#//EInterval">
       <genTypeParameters ecoreTypeParameter="Interval.ecore#//EInterval/T"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Interval.ecore#//EInterval/lowerLimit"/>
@@ -58,20 +61,24 @@
       <genOperations ecoreOperation="Interval.ecore#//EIntInterval/equals.1">
         <genParameters ecoreParameter="Interval.ecore#//EIntInterval/equals.1/other"/>
       </genOperations>
-      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/hashCode"/>
       <genOperations ecoreOperation="Interval.ecore#//EIntInterval/includes">
         <genParameters ecoreParameter="Interval.ecore#//EIntInterval/includes/value"/>
       </genOperations>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/isSubsetOf">
+        <genParameters ecoreParameter="Interval.ecore#//EIntInterval/isSubsetOf/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/hashCode"/>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/leftComplementTo">
+        <genParameters ecoreParameter="Interval.ecore#//EIntInterval/leftComplementTo/other"/>
+      </genOperations>
+      <genOperations ecoreOperation="Interval.ecore#//EIntInterval/rightComplementTo">
+        <genParameters ecoreParameter="Interval.ecore#//EIntInterval/rightComplementTo/other"/>
+      </genOperations>
     </genClasses>
-  </genPackages>
-  <genPackages prefix="Lang" basePackage="net.zehrer.common" adapterFactory="false"
-      literalsInterface="false" multipleEditorPages="false" generateModelWizard="false"
-      contentTypeIdentifier="" ecorePackage="java.lang.ecore#//lang">
-    <genDataTypes ecoreDataType="java.lang.ecore#//lang/Integer"/>
-    <genClasses image="false" ecoreClass="java.lang.ecore#//lang/IComparable">
-      <genTypeParameters ecoreTypeParameter="java.lang.ecore#//lang/IComparable/T"/>
-      <genOperations ecoreOperation="java.lang.ecore#//lang/IComparable/compareTo">
-        <genParameters ecoreParameter="java.lang.ecore#//lang/IComparable/compareTo/other"/>
+    <genClasses image="false" ecoreClass="Interval.ecore#//IComparable">
+      <genTypeParameters ecoreTypeParameter="Interval.ecore#//IComparable/T"/>
+      <genOperations ecoreOperation="Interval.ecore#//IComparable/compareTo">
+        <genParameters ecoreParameter="Interval.ecore#//IComparable/compareTo/other"/>
       </genOperations>
     </genClasses>
   </genPackages>

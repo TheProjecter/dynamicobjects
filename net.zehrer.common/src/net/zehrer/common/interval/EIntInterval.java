@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see net.zehrer.common.interval.IntervalPackage#getEIntInterval()
- * @model superTypes="net.zehrer.common.lang.IComparable<net.zehrer.common.interval.EIntInterval>"
+ * @model superTypes="net.zehrer.common.interval.IComparable<net.zehrer.common.interval.EIntInterval>"
  * @generated
  */
 public interface EIntInterval extends EObject, Comparable<EIntInterval> {
