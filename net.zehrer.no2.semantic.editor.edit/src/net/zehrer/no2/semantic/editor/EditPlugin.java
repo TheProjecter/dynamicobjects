@@ -6,6 +6,7 @@
  */
 package net.zehrer.no2.semantic.editor;
 
+import net.zehrer.common.PlugIn;
 import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -42,6 +43,7 @@ public final class EditPlugin extends EMFPlugin {
 	public EditPlugin() {
 		super
 		  (new ResourceLocator [] {
+		     PlugIn.INSTANCE,
 		   });
 	}
 
