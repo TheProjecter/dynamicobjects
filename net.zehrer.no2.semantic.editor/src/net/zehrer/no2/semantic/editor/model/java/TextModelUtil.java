@@ -13,18 +13,15 @@
  *******************************************************************************/
 package net.zehrer.no2.semantic.editor.model.java;
 
-import java.awt.Event;
 import java.util.List;
 
 import net.zehrer.common.interval.EIntInterval;
-import net.zehrer.common.interval.impl.EIntIntervalImpl;
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.EditorFactory;
 import net.zehrer.no2.semantic.editor.model.EditorPackage;
 import net.zehrer.no2.semantic.editor.model.LeafNode;
 import net.zehrer.no2.semantic.editor.model.SyntaxError;
-import net.zehrer.no2.semantic.editor.model.impl.CompositeNodeImpl;
 import net.zehrer.no2.semantic.editor.model.impl.LeafNodeImpl;
 
 import org.eclipse.emf.common.util.BasicEList;
