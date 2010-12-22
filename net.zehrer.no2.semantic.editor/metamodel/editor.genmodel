@@ -9,7 +9,7 @@
     testSuiteClass="net.zehrer.no2.semantic.editor.test.TestModelAllTests" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="6.0" copyrightFields="false" providerRootExtendsClass="" editPluginID="net.zehrer.no2.semantic.editor.edit"
     editorPluginID="net.zehrer.no2.semantic.editor.editor" testsPluginID="net.zehrer.no2.semantic.editor.test"
-    language="">
+    language="" usedGenPackages="../../net.zehrer.common/metamodel/Interval.genmodel#//interval">
   <foreignModel>editor.ecore</foreignModel>
   <genPackages prefix="Editor" basePackage="net.zehrer.no2.semantic.editor" disposableProviderFactory="true"
       ecorePackage="editor.ecore#/">
@@ -49,78 +49,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//SyntaxError/message"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference editor.ecore#//SyntaxError/node"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute editor.ecore#//SyntaxError/issueCode"/>
-    </genClasses>
-  </genPackages>
-  <genPackages prefix="Interval" basePackage="net.zehrer.common" multipleEditorPages="false"
-      generateModelWizard="false" ecorePackage="../../net.zehrer.common/metamodel/Interval.ecore#/">
-    <genDataTypes ecoreDataType="../../net.zehrer.common/metamodel/Interval.ecore#//Integer"/>
-    <genClasses image="false" ecoreClass="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval">
-      <genTypeParameters ecoreTypeParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/T"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/lowerLimit"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/upperLimit"/>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/intersects">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/intersects/other"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/intersect">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/intersect/other"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/isBelow">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/isBelow/value"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/isAbove">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/isAbove/value"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/equals">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/equals/other"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/equals.1">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/equals.1/other"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/hashCode"/>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/includes">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EInterval/includes/value"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/lowerLimit"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/upperLimit"/>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/intersects">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/intersects/other"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/intersect">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/intersect/other"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/isBelow">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/isBelow/value"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/isAbove">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/isAbove/value"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/equals">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/equals/other"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/equals.1">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/equals.1/other"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/includes">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/includes/value"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/isSubsetOf">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/isSubsetOf/value"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/hashCode"/>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/leftComplementTo">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/leftComplementTo/other"/>
-      </genOperations>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/rightComplementTo">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//EIntInterval/rightComplementTo/other"/>
-      </genOperations>
-    </genClasses>
-    <genClasses image="false" ecoreClass="../../net.zehrer.common/metamodel/Interval.ecore#//IComparable">
-      <genTypeParameters ecoreTypeParameter="../../net.zehrer.common/metamodel/Interval.ecore#//IComparable/T"/>
-      <genOperations ecoreOperation="../../net.zehrer.common/metamodel/Interval.ecore#//IComparable/compareTo">
-        <genParameters ecoreParameter="../../net.zehrer.common/metamodel/Interval.ecore#//IComparable/compareTo/other"/>
-      </genOperations>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
