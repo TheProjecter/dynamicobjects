@@ -1,13 +1,18 @@
 package net.zehrer.no2.semantic.editor.handler;
 
+import net.zehrer.common.interval.EIntInterval;
 import net.zehrer.common.interval.impl.EIntIntervalImpl;
 import net.zehrer.no2.semantic.editor.SemanticEditor;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
+import net.zehrer.no2.semantic.editor.model.command.GroupCommand;
 import net.zehrer.no2.text.IResourceDocument;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
@@ -56,8 +61,15 @@ public class GroupHandler extends AbstractHandler {
 				CompositeNode model = (CompositeNode) resourceDocument.getTextModel();
 				
 				int eOffset = sel.getOffset() + sel.getLength() -1;
+				EIntInterval selection = new EIntIntervalImpl(sel.getOffset(),eOffset);
 				
-				model.groupNodes(new EIntIntervalImpl(sel.getOffset(),eOffset));
+				EditingDomain editingDomain = AdapterFactoryEditingDomain.getEditingDomainFor(model);
+				
+				Command groupCommand = new GroupCommand (editingDomain, model, selection);
+				
+				editingDomain.getCommandStack().execute(groupCommand);
+				
+//				model.groupNodes(selection);
 				
 			}
 		}
