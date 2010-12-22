@@ -8,7 +8,6 @@ package net.zehrer.no2.semantic.editor.model.impl;
 
 
 import net.zehrer.common.interval.IntervalPackage;
-import net.zehrer.common.interval.impl.IntervalPackageImpl;
 import net.zehrer.no2.semantic.editor.model.AbstractNode;
 import net.zehrer.no2.semantic.editor.model.CompositeNode;
 import net.zehrer.no2.semantic.editor.model.EditorFactory;
@@ -113,16 +112,14 @@ public class EditorPackageImpl extends EPackageImpl implements EditorPackage {
 
 		isInited = true;
 
-		// Obtain or create and register interdependencies
-		IntervalPackageImpl theIntervalPackage = (IntervalPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(IntervalPackage.eNS_URI) instanceof IntervalPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(IntervalPackage.eNS_URI) : IntervalPackage.eINSTANCE);
+		// Initialize simple dependencies
+		IntervalPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theEditorPackage.createPackageContents();
-		theIntervalPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theEditorPackage.initializePackageContents();
-		theIntervalPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theEditorPackage.freeze();
