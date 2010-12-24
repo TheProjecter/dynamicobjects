@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_NTLQ4O8CEd-6X-tdg5Npfw" name="model">
+  <packagedElement xmi:type="uml:Package" xmi:id="_ZMmV8O8CEd-6X-tdg5Npfw" name="Development View" clientDependency="_xxHNkO8CEd-6X-tdg5Npfw">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_xxHNkO8CEd-6X-tdg5Npfw" name="Dependency0" supplier="_lySrIO8CEd-6X-tdg5Npfw" client="_ZMmV8O8CEd-6X-tdg5Npfw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_cXaFEO8CEd-6X-tdg5Npfw" name="Logical View" clientDependency="_pgBhIO8CEd-6X-tdg5Npfw _1xujUO8CEd-6X-tdg5Npfw">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_pgBhIO8CEd-6X-tdg5Npfw" name="Dependency0" supplier="_ZMmV8O8CEd-6X-tdg5Npfw" client="_cXaFEO8CEd-6X-tdg5Npfw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_1xujUO8CEd-6X-tdg5Npfw" name="Dependency1" supplier="_iiUIIO8CEd-6X-tdg5Npfw" client="_cXaFEO8CEd-6X-tdg5Npfw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_iiUIIO8CEd-6X-tdg5Npfw" name="Process View" clientDependency="_zzKk4O8CEd-6X-tdg5Npfw">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_zzKk4O8CEd-6X-tdg5Npfw" name="Dependency0" supplier="_lySrIO8CEd-6X-tdg5Npfw" client="_iiUIIO8CEd-6X-tdg5Npfw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_lySrIO8CEd-6X-tdg5Npfw" name="Physical View"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_syq9oO8CEd-6X-tdg5Npfw" name="Scenarios"/>
+</uml:Model>
