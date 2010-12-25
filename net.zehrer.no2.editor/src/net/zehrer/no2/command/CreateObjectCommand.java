@@ -78,7 +78,7 @@ public class CreateObjectCommand extends CommandWrapper implements CommandAction
 	protected  Collection<?> selection;
 	
 	/**
-	 * This constructor initializes an instance
+	 * This constructor initializes an instance 
 	 */
 	public CreateObjectCommand(EditingDomain domain, NO2Model model, EClass eClass) {
 		super();
