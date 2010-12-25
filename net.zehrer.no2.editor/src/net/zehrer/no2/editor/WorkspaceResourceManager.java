@@ -16,8 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.zehrer.no2.Messages;
-import net.zehrer.no2.common.AbstractWorkspaceResourceManager;
-import net.zehrer.no2.common.IEMFResourceEditor;
 import net.zehrer.no2.model.NO2Model;
 import net.zehrer.no2.model.adapter.NO2ModelAdapter;
 import net.zehrer.no2.model.impl.NO2ModelImpl;
@@ -26,6 +24,8 @@ import net.zehrer.no2.util.ResourceUtil;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.addon.editor.IEMFResourceEditor;
+import org.eclipse.emf.addon.resource.AbstractResourceManager;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
@@ -34,13 +34,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.edit.ui.util.EditUIUtil;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IEditorInput;
 
-public class WorkspaceResourceManager extends AbstractWorkspaceResourceManager {
+public class WorkspaceResourceManager extends AbstractResourceManager {
 	
 	final Map<Object, Object> saveOptions = new HashMap<Object, Object>();
-	
 	
 	/**
 	 * TODO: add comment 

@@ -17,9 +17,6 @@ import java.util.EventObject;
 import java.util.HashMap;
 
 import net.zehrer.no2.NO2EditorPlugin;
-import net.zehrer.no2.adapter.ProblemIndicationAdapter;
-import net.zehrer.no2.common.IEMFResourceEditor;
-import net.zehrer.no2.common.SelectionProviderEditorPart;
 import net.zehrer.no2.handler.OpenModelEditorHandler;
 import net.zehrer.no2.model.factory.DynamicItemProviderAdapterFactory;
 import net.zehrer.no2.model.factory.ECoreItemProviderAdapterFactory;
@@ -29,6 +26,12 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.addon.adapter.ProblemIndicationAdapter;
+import org.eclipse.emf.addon.editor.IEMFResourceEditor;
+import org.eclipse.emf.addon.editor.IEditor;
+import org.eclipse.emf.addon.editor.ProblemIndication;
+import org.eclipse.emf.addon.editor.SelectionProviderEditorPart;
+import org.eclipse.emf.addon.ui.page.GenericContentPropertySheetPage;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
@@ -58,16 +61,13 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
@@ -88,23 +88,50 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
  * 
  * @generated
  */
-public class ModelEditor extends SelectionProviderEditorPart implements IEMFResourceEditor, IMenuListener,  IGotoMarker {
+public class ModelEditor extends SelectionProviderEditorPart implements IEMFResourceEditor, IMenuListener,  IGotoMarker, IEditor {
 
 	// IViewerProvider,
 
+	/**
+	 * This keeps track of the editing domain that is used to track all changes to the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected AdapterFactoryEditingDomain modelEditingDomain;
 
+	/**
+	 * This keeps track of the editing domain that is used to track all changes to the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected ComposedAdapterFactory modelAdapterFactory;
 
-	protected TabelEditorPage tablePage;
-
+	/**
+	 * This is the content outline page.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	protected DataContentOutlinePage contentOutlinePage;
 	
-	protected PropertySheetPage propertySheetPage;
-
+	
 	/**
-	 * This keeps track of the active content viewer, which may be either one of
-	 * the viewers in the pages or the content outline viewer.
+	 * This is the property sheet page.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected GenericContentPropertySheetPage propertySheetPage;
+
+	protected TabelEditorPage tablePage;
+	
+	/**
+	 * This keeps track of the active content viewer, which may be either one of the viewers in the pages or the content outline viewer.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	protected Viewer currentViewer; // TODO check regarding OUTLINE?
 
@@ -171,8 +198,12 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	 */
 	protected WorkspaceResourceManager resourceManager = new WorkspaceResourceManager(this);
 	
+	
 	/**
-	 * This creates a model editor. 
+	 * This creates a model editor.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 * @category ModelEdit
 	 */
 	public ModelEditor() {
@@ -261,10 +292,9 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 		// This is the page for the table viewer.
 
 		// Create the table page
-		// TODO Move Adapter Factory in Page?
 		tablePage = new TabelEditorPage(this, this.modelAdapterFactory, resourceManager.getEClassResource());
 			tablePage.createControl(parent);
-			Control table = tablePage.getControl();
+//			Control table = tablePage.getControl();
 				
 		problemIndication.update();
 
@@ -284,7 +314,7 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	 * @generated NOT
 	 * @category WorkbenchPart
 	 */
-	@SuppressWarnings( { "rawtypes", "unchecked" })
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class key) {
 		if (IContentOutlinePage.class.equals(key)) {
@@ -455,56 +485,57 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 		}
 	}
 
-	/**
-	 * This makes sure that one content viewer, either for the current page or
-	 * the outline view, if it has focus, is the current one.
-	 * 
-	 * @generated
-	 * @category ModelEdit
-	 */
-	public void setCurrentViewer(Viewer viewer) {
-		// If it is changing...
-		//
-		if (currentViewer != viewer) {
-			if (selectionChangedListener == null) {
-				// Create the listener on demand.
-				//
-				selectionChangedListener = new ISelectionChangedListener() {
-					// This just notifies those things that are affected by the
-					// section.
-					//
-					public void selectionChanged(SelectionChangedEvent selectionChangedEvent) {
-						setSelection(selectionChangedEvent.getSelection());
-					}
-				};
-			}
-
-			// Stop listening to the old one.
-			//
-			if (currentViewer != null) {
-				currentViewer.removeSelectionChangedListener(selectionChangedListener);
-			}
-
-			// Start listening to the new one.
-			//
-			if (viewer != null) {
-				viewer.addSelectionChangedListener(selectionChangedListener);
-			}
-
-			// Remember it.
-			//
-			currentViewer = viewer;
-
-			// Set the editors selection based on the current viewer's
-			// selection.
-			//
-			setSelection(currentViewer == null ? StructuredSelection.EMPTY : currentViewer.getSelection());
-		}
-	}
+//	/**
+//	 * This makes sure that one content viewer, either for the current page or
+//	 * the outline view, if it has focus, is the current one.
+//	 * 
+//	 * @generated
+//	 * @category ModelEdit
+//	 */
+//	public void setCurrentViewer(Viewer viewer) {
+//		// If it is changing...
+//		//
+//		if (currentViewer != viewer) {
+//			if (selectionChangedListener == null) {
+//				// Create the listener on demand.
+//				//
+//				selectionChangedListener = new ISelectionChangedListener() {
+//					// This just notifies those things that are affected by the
+//					// section.
+//					//
+//					public void selectionChanged(SelectionChangedEvent selectionChangedEvent) {
+//						setSelection(selectionChangedEvent.getSelection());
+//					}
+//				};
+//			}
+//
+//			// Stop listening to the old one.
+//			//
+//			if (currentViewer != null) {
+//				currentViewer.removeSelectionChangedListener(selectionChangedListener);
+//			}
+//
+//			// Start listening to the new one.
+//			//
+//			if (viewer != null) {
+//				viewer.addSelectionChangedListener(selectionChangedListener);
+//			}
+//
+//			// Remember it.
+//			//
+//			currentViewer = viewer;
+//
+//			// Set the editors selection based on the current viewer's
+//			// selection.
+//			//
+//			setSelection(currentViewer == null ? StructuredSelection.EMPTY : currentViewer.getSelection());
+//		}
+//	}
 
 	/**
 	 * This sets the selection into whichever viewer is active.
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @category ModelEdit
 	 */
@@ -586,7 +617,7 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	public IPropertySheetPage getPropertySheetPage() {
 		
 		if (propertySheetPage == null) {
-			propertySheetPage = new DataContentPropertySheetPage(modelEditingDomain, this);
+			propertySheetPage = new GenericContentPropertySheetPage(modelEditingDomain, this);
 			propertySheetPage.setPropertySourceProvider(new AdapterFactoryContentProvider(modelAdapterFactory));
 		}
 
@@ -625,10 +656,10 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	 */
 	protected void initializeEditingDomain() {
 		// Create an adapter factory that yields item providers.
+		//
 		modelAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		modelAdapterFactory.addAdapterFactory(new ECoreItemProviderAdapterFactory());
-
 		modelAdapterFactory.addAdapterFactory(new DynamicItemProviderAdapterFactory());
 
 		// modelAdapterFactory.addAdapterFactory(new
@@ -698,7 +729,7 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	 * @generated NOT
 	 * @category ModelEdit
 	 */
-	protected void createContextMenuFor(StructuredViewer viewer) {
+	public void createContextMenuFor(StructuredViewer viewer) {
 		MenuManager contextMenu = new MenuManager("#PopUp");
 		contextMenu.add(new Separator("additions")); // additions
 
