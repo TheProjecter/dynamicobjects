@@ -9,15 +9,15 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon.ui.page;
+package org.eclipselabs.emf.addon.ui.page;
 
-import org.eclipse.emf.addon.editor.IEditor;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipselabs.emf.addon.editor.IEditor;
 
 public class GenericEMFContentOutlinePage extends GenericContentOutlinePage implements ISelectionChangedListener {
 	

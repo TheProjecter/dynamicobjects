@@ -9,9 +9,8 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon.editor;
+package org.eclipselabs.emf.addon.editor;
 
-import org.eclipse.emf.addon.ui.page.GenericContentPropertySheetPage;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -20,6 +19,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
+import org.eclipselabs.emf.addon.ui.page.GenericContentPropertySheetPage;
 
 public abstract class AbstractEMFEditorPart extends SelectionProviderEditorPart implements IEditingDomainProvider, IGotoMarker, IEditor {
 

@@ -9,9 +9,8 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon.ui.page;
+package org.eclipselabs.emf.addon.ui.page;
 
-import org.eclipse.emf.addon.editor.IEditor;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IStatusLineManager;
@@ -23,6 +22,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
+import org.eclipselabs.emf.addon.editor.IEditor;
 
 public class GenericContentOutlinePage extends ContentOutlinePage {
 	

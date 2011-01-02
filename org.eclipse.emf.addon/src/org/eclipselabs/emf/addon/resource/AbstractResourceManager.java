@@ -9,7 +9,7 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon.resource;
+package org.eclipselabs.emf.addon.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,9 +27,6 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.addon.Messages;
-import org.eclipse.emf.addon.editor.IEMFResourceEditor;
-import org.eclipse.emf.addon.editor.ProblemIndication;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -42,6 +39,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipselabs.emf.addon.Messages;
+import org.eclipselabs.emf.addon.editor.IEMFResourceEditor;
+import org.eclipselabs.emf.addon.editor.ProblemIndication;
 
 public abstract class AbstractResourceManager extends WorkspaceModifyOperation implements IResourceChangeListener{
  

@@ -9,18 +9,22 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon.editor;
+package org.eclipselabs.emf.addon.editor;
 
-import org.eclipse.emf.edit.domain.IEditingDomainProvider;
-import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.ui.IEditorPart;
+import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
+import org.eclipse.jface.viewers.StructuredViewer;
 
-
-/**
- * Just a combination of several standard interfaces 
- * with the option of an IResourceManagerProvider -> TODO
- */
-public interface IEMFResourceEditor extends IEditingDomainProvider, ISelectionProvider, IEditorPart {
-
+public interface IEditor {
+	
+	/**
+	 * @return return the EditingDomainActionBarContributor or null if not supported.
+	 */
+	public EditingDomainActionBarContributor getActionBarContributor();
+	
+	/**
+	 * Creates the context menu for the outline view.
+	 * @param viewer
+	 */
+	public void createContextMenuFor(StructuredViewer viewer);
 
 }

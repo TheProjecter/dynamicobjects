@@ -9,13 +9,13 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon.ui.page;
+package org.eclipselabs.emf.addon.ui.page;
 
-import org.eclipse.emf.addon.editor.IEditor;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 import org.eclipse.ui.IActionBars;
+import org.eclipselabs.emf.addon.editor.IEditor;
 
 public class GenericContentPropertySheetPage extends ExtendedPropertySheetPage {
 	
