@@ -9,7 +9,7 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon.editor;
+package org.eclipselabs.emf.addon.editor;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -9,7 +9,7 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon;
+package org.eclipselabs.emf.addon;
 
 import org.eclipse.osgi.util.NLS;
 

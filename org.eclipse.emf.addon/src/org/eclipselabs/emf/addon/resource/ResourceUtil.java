@@ -9,17 +9,17 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon.resource;
+package org.eclipselabs.emf.addon.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.eclipse.emf.addon.Messages;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.emf.addon.Messages;
 
 public class ResourceUtil {
 

@@ -9,7 +9,7 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon.edit;
+package org.eclipselabs.emf.addon.edit;
 
 import java.util.ArrayList;
 import java.util.Collection;

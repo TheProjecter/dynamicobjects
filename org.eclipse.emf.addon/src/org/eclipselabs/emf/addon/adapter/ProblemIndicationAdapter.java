@@ -9,15 +9,15 @@
  *     Stephan Zehrer - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.emf.addon.adapter;
+package org.eclipselabs.emf.addon.adapter;
 
 
-import org.eclipse.emf.addon.editor.ProblemIndication;
-import org.eclipse.emf.addon.resource.ResourceUtil;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipselabs.emf.addon.editor.ProblemIndication;
+import org.eclipselabs.emf.addon.resource.ResourceUtil;
 
 public class ProblemIndicationAdapter extends EContentAdapter {
 	
