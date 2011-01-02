@@ -11,6 +11,7 @@
  *
  * Contributors:
  *   IBM - Initial API and implementation
+ *   Stephan Zehrer - changes and cleanup of the editor class
  *
  * </copyright>
  */
@@ -84,7 +85,6 @@ import org.eclipse.jface.viewers.ColumnWeightData;
 <%}%>
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 <%if (genPackage.isMultipleEditorPages()) {%>
 import org.eclipse.jface.viewers.ListViewer;
@@ -146,7 +146,7 @@ import org.eclipse.ui.ide.IGotoMarker;
 <%if (!genModel.isRichClientPlatform()) {%>
 import org.eclipse.ui.part.FileEditorInput;
 <%}%>
-import org.eclipse.ui.part.MultiPageEditorPart;
+import org.eclipse.emf.addon.editor.SelectionProviderEditorPart;
 
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
@@ -238,7 +238,7 @@ import <%=genPackage.getQualifiedItemProviderAdapterFactoryClassName()%>;
  */
 public class <%=genPackage.getEditorClassName()%>
 	extends MultiPageEditorPart
-	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider<%if (!genModel.isRichClientPlatform()) {%>, IGotoMarker<%}%>
+	implements IEditingDomainProvider,  IMenuListener, IViewerProvider<%if (!genModel.isRichClientPlatform()) {%>, IGotoMarker<%}%>
 {
 <%if (genModel.hasCopyrightField()) {%>
 	/**
@@ -2182,63 +2182,6 @@ public class <%=genPackage.getEditorClassName()%>
 <%}%>
 	}
 
-	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void addSelectionChangedListener(ISelectionChangedListener listener)
-	{
-		selectionChangedListeners.add(listener);
-	}
-
-	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void removeSelectionChangedListener(ISelectionChangedListener listener)
-	{
-		selectionChangedListeners.remove(listener);
-	}
-
-	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to return this editor's overall selection.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ISelection getSelection()
-	{
-		return editorSelection;
-	}
-
-	/**
-	 * This implements {@link org.eclipse.jface.viewers.ISelectionProvider} to set this editor's overall selection.
-	 * Calling this result will notify the listeners.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSelection(ISelection selection)
-	{
-		editorSelection = selection;
-
-<%if (genModel.useGenerics()) {%>
-		for (ISelectionChangedListener listener : selectionChangedListeners)
-<%} else {%>
-		for (Iterator listeners = selectionChangedListeners.iterator(); listeners.hasNext(); )
-<%}%>
-		{
-<%if (!genModel.useGenerics()) {%>
-			ISelectionChangedListener listener = (ISelectionChangedListener)listeners.next();
-<%}%>
-			listener.selectionChanged(new SelectionChangedEvent(this, selection));
-		}
-		setStatusLineManager(selection);
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
