@@ -18,3 +18,7 @@ syntax: glob
 src-gen/*
 syntax: glob
 src-gen/*
+syntax: regexp
+^org\.eclipse\.emf\.addon/src-jet$
+syntax: regexp
+^org\.eclipse\.emf\.addon/srcjet$
