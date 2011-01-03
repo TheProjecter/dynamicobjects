@@ -11,7 +11,7 @@
 
 package net.zehrer.no2.semantic.editor.edit;
 
-import org.eclipse.emf.addon.edit.AbstractModelAdapterFactory;
+import org.eclipselabs.emf.addon.edit.AbstractModelAdapterFactory;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notifier;

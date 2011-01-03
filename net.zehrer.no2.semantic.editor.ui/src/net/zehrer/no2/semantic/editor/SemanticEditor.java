@@ -11,9 +11,9 @@ import net.zehrer.no2.semantic.editor.text.SemanticDocumentProvider;
 
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.addon.editor.IEditor;
-import org.eclipse.emf.addon.ui.page.GenericContentOutlinePage;
-import org.eclipse.emf.addon.ui.page.GenericContentPropertySheetPage;
+import org.eclipselabs.emf.addon.editor.IEditor;
+import org.eclipselabs.emf.addon.ui.page.GenericContentOutlinePage;
+import org.eclipselabs.emf.addon.ui.page.GenericContentPropertySheetPage;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.ecore.resource.Resource;
