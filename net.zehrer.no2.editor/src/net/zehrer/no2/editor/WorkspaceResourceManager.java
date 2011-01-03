@@ -24,8 +24,8 @@ import net.zehrer.no2.util.ResourceUtil;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.addon.editor.IEMFResourceEditor;
-import org.eclipse.emf.addon.resource.AbstractResourceManager;
+import org.eclipselabs.emf.addon.editor.IEMFResourceEditor;
+import org.eclipselabs.emf.addon.resource.AbstractResourceManager;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;

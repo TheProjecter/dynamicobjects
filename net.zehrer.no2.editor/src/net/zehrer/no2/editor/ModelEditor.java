@@ -26,12 +26,6 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.addon.adapter.ProblemIndicationAdapter;
-import org.eclipse.emf.addon.editor.IEMFResourceEditor;
-import org.eclipse.emf.addon.editor.IEditor;
-import org.eclipse.emf.addon.editor.ProblemIndication;
-import org.eclipse.emf.addon.editor.SelectionProviderEditorPart;
-import org.eclipse.emf.addon.ui.page.GenericContentPropertySheetPage;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
@@ -67,7 +61,6 @@ import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.Transfer;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IActionBars;
@@ -80,7 +73,12 @@ import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
-import org.eclipse.ui.views.properties.PropertySheetPage;
+import org.eclipselabs.emf.addon.adapter.ProblemIndicationAdapter;
+import org.eclipselabs.emf.addon.editor.IEMFResourceEditor;
+import org.eclipselabs.emf.addon.editor.IEditor;
+import org.eclipselabs.emf.addon.editor.ProblemIndication;
+import org.eclipselabs.emf.addon.editor.SelectionProviderEditorPart;
+import org.eclipselabs.emf.addon.ui.page.GenericContentPropertySheetPage;
 
 /**
  * This is an example of a Model model editor. <!-- begin-user-doc --> <!--
@@ -272,15 +270,11 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceManager, IResourceChangeEvent.POST_CHANGE);
 	}
 
-	/**
-	 * This is the method used by the framework to install your own controls.
-	 * 
-	 * @generated NOT
-	 * @category EditorPart
-	 */
 	@Override
-	public void createPartControl(Composite parent) {
-
+	protected void createPages() {
+		
+		// TODO: migrate to MultiPage !!!
+		
 		// Creates the model from the editor input
 		resourceManager.createModel(getEditorInput());
 
@@ -293,13 +287,26 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 
 		// Create the table page
 		tablePage = new TabelEditorPage(this, this.modelAdapterFactory, resourceManager.getEClassResource());
-			tablePage.createControl(parent);
-//			Control table = tablePage.getControl();
+//		tablePage.createControl(parent);
+//		Control table = tablePage.getControl();
 				
 		problemIndication.update();
 
 		createHandlers();
+		
 	}
+	
+//	/**
+//	 * This is the method used by the framework to install your own controls.
+//	 * 
+//	 * @generated NOT
+//	 * @category EditorPart
+//	 */
+//	@Override
+//	public void createPartControl(Composite parent) {
+//
+//
+//	}
 
 	/**
 	 * @category WorkbenchPart
@@ -800,6 +807,8 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 		// TODO: why is status line not an usual listener?
 		setStatusLineManager(selection);
 	}
+
+
 
 	
 
