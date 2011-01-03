@@ -8,37 +8,40 @@
   <foreignModel>generics.ecore</foreignModel>
   <genPackages prefix="Test" basePackage="net.zehrer" disposableProviderFactory="true"
       ecorePackage="generics.ecore#/">
-    <nestedGenPackages prefix="Generic" disposableProviderFactory="true" ecorePackage="generics.ecore#//generic">
-      <genClasses ecoreClass="generics.ecore#//generic/BasicElement">
-        <genTypeParameters ecoreTypeParameter="generics.ecore#//generic/BasicElement/T"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generics.ecore#//generic/BasicElement/value"/>
+    <nestedGenPackages prefix="Generic1" disposableProviderFactory="true" ecorePackage="generics.ecore#//generic1">
+      <genClasses ecoreClass="generics.ecore#//generic1/BasicElement">
+        <genTypeParameters ecoreTypeParameter="generics.ecore#//generic1/BasicElement/T"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generics.ecore#//generic1/BasicElement/value"/>
       </genClasses>
-      <genClasses ecoreClass="generics.ecore#//generic/Element">
-        <genTypeParameters ecoreTypeParameter="generics.ecore#//generic/Element/T"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generics.ecore#//generic/Element/value"/>
-      </genClasses>
-      <genClasses ecoreClass="generics.ecore#//generic/IntBasicElement"/>
+      <genClasses ecoreClass="generics.ecore#//generic1/IntBasicElement"/>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Lang" disposableProviderFactory="true" adapterFactory="false"
-        multipleEditorPages="false" generateModelWizard="false" ecorePackage="generics.ecore#//lang">
-      <genDataTypes ecoreDataType="generics.ecore#//lang/Interger"/>
-      <genDataTypes ecoreDataType="generics.ecore#//lang/IComparable">
-        <genTypeParameters ecoreTypeParameter="generics.ecore#//lang/IComparable/T"/>
-      </genDataTypes>
-      <genClasses image="false" ecoreClass="generics.ecore#//lang/Comparable">
-        <genTypeParameters ecoreTypeParameter="generics.ecore#//lang/Comparable/T"/>
-        <genOperations ecoreOperation="generics.ecore#//lang/Comparable/compareTo">
-          <genParameters ecoreParameter="generics.ecore#//lang/Comparable/compareTo/other"/>
-        </genOperations>
-      </genClasses>
-    </nestedGenPackages>
-    <nestedGenPackages prefix="Generics2" disposableProviderFactory="true" ecorePackage="generics.ecore#//generics2">
-      <genClasses ecoreClass="generics.ecore#//generics2/AElement">
-        <genTypeParameters ecoreTypeParameter="generics.ecore#//generics2/AElement/T"/>
+    <nestedGenPackages prefix="Generic2" disposableProviderFactory="true" ecorePackage="generics.ecore#//generic2">
+      <genClasses ecoreClass="generics.ecore#//generic2/AElement">
+        <genTypeParameters ecoreTypeParameter="generics.ecore#//generic2/AElement/T"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference generics.ecore#//generics2/AElement/value"/>
+            ecoreFeature="ecore:EReference generics.ecore#//generic2/AElement/value"/>
       </genClasses>
-      <genClasses ecoreClass="generics.ecore#//generics2/BClass"/>
+      <genClasses ecoreClass="generics.ecore#//generic2/BClass"/>
     </nestedGenPackages>
+    <nestedGenPackages prefix="Generic3" disposableProviderFactory="true" ecorePackage="generics.ecore#//generic3">
+      <genClasses ecoreClass="generics.ecore#//generic3/Element">
+        <genTypeParameters ecoreTypeParameter="generics.ecore#//generic3/Element/T"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute generics.ecore#//generic3/Element/value"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Lang2" disposableProviderFactory="true" ecorePackage="generics.ecore#//lang2">
+      <genDataTypes ecoreDataType="generics.ecore#//lang2/Interger"/>
+      <genDataTypes ecoreDataType="generics.ecore#//lang2/IComparable">
+        <genTypeParameters ecoreTypeParameter="generics.ecore#//lang2/IComparable/T"/>
+      </genDataTypes>
+    </nestedGenPackages>
+  </genPackages>
+  <genPackages prefix="Lang" basePackage="java" ecorePackage="java.ecore#//lang">
+    <genClasses image="false" ecoreClass="java.ecore#//lang/Comparable">
+      <genTypeParameters ecoreTypeParameter="java.ecore#//lang/Comparable/T"/>
+      <genOperations ecoreOperation="java.ecore#//lang/Comparable/compareTo">
+        <genParameters ecoreParameter="java.ecore#//lang/Comparable/compareTo/other"/>
+      </genOperations>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
