@@ -24,6 +24,7 @@ import net.zehrer.no2.util.ResourceUtil;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipselabs.emf.addon.editor.IEMFEditor;
 import org.eclipselabs.emf.addon.editor.IEMFResourceEditor;
 import org.eclipselabs.emf.addon.resource.AbstractResourceManager;
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -53,7 +54,7 @@ public class WorkspaceResourceManager extends AbstractResourceManager {
 	private URI metaModelURI;
 	
 
-	public WorkspaceResourceManager (IEMFResourceEditor editor) {
+	public WorkspaceResourceManager (IEMFEditor editor) {
 		super();
 		
 		setEditor(editor);
