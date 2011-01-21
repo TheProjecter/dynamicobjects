@@ -74,8 +74,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipselabs.emf.addon.adapter.ProblemIndicationAdapter;
-import org.eclipselabs.emf.addon.editor.IEMFResourceEditor;
-import org.eclipselabs.emf.addon.editor.IEditor;
+import org.eclipselabs.emf.addon.editor.IEMFEditor;
 import org.eclipselabs.emf.addon.editor.ProblemIndication;
 import org.eclipselabs.emf.addon.editor.SelectionProviderEditorPart;
 import org.eclipselabs.emf.addon.ui.page.GenericContentPropertySheetPage;
@@ -86,7 +85,7 @@ import org.eclipselabs.emf.addon.ui.page.GenericContentPropertySheetPage;
  * 
  * @generated
  */
-public class ModelEditor extends SelectionProviderEditorPart implements IEMFResourceEditor, IMenuListener,  IGotoMarker, IEditor {
+public class ModelEditor extends SelectionProviderEditorPart implements IMenuListener,  IGotoMarker, IEMFEditor {
 
 	// IViewerProvider,
 
@@ -181,7 +180,8 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 	/**
 	 * Map to store the diagnostic associated with a resource.
 	 */
-	protected ProblemIndication problemIndication = new ProblemIndication();
+	// TODO: FIX 
+	protected ProblemIndication problemIndication = new ProblemIndication(null, null);
 	
 	
 	/**
@@ -280,7 +280,6 @@ public class ModelEditor extends SelectionProviderEditorPart implements IEMFReso
 
 		// --------- problemIndicationAdapter ------------
 
-		problemIndication.setSource(getEditingDomain().getResourceSet()); 
 		modelEditingDomain.getResourceSet().eAdapters().add(problemIndicationAdapter);
 
 		// This is the page for the table viewer.

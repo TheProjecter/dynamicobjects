@@ -32,7 +32,6 @@ public class AsyncCommandStackListener implements CommandStackListener {
 		Display.getCurrent().asyncExec(new Runnable() {
 			public void run() {
 				listner.commandStackChanged(event);
-
 			}
 		});
 	}
